@@ -48,7 +48,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "docs/**"
+      - "docs/public/**"
 
 jobs:
   publish:
@@ -59,42 +59,43 @@ jobs:
       - name: Push docs
         uses: your-org/docs-site/.github/actions/push-docs@main
         with:
-          component-slug: "my-component"        # Unique identifier
-          docs-source-dir: "docs"                # Where markdown lives
-          media-source-dir: "docs/media"         # Where images/media live
+          component-slug: "my-component"
+          public-docs-dir: "docs/public"
+          public-media-dir: "docs/public/media"
           docs-target-repo: "https://github.com/your-org/docs-site"
           app-id: ${{ secrets.DOCS_APP_ID }}
           app-private-key: ${{ secrets.DOCS_APP_PRIVATE_KEY }}
-          pr-enabled: "false"                    # Or "true" for PR-based review
+          pr-enabled: "false"
 ```
 
 ## Step 4: Organize Your Docs
 
-Structure your `docs/` directory with markdown files. Any `.md` files will be published. Media files referenced in markdown should be in the `media/` subdirectory.
+Only files under `docs/public/` are published. Keep private or internal docs elsewhere (e.g., `docs/internal/`).
 
 ```
 docs/
-├── getting-started.md
-├── api-reference.md
-├── media/
-│   ├── screenshot-1.png
-│   └── diagram.svg
-└── advanced/
-    ├── configuration.md
-    └── media/
-        └── flow.png
+├── public/                    # Published to docs-site
+│   ├── getting-started.md
+│   ├── api-reference.md
+│   └── media/
+│       ├── screenshot-1.png
+│       └── diagram.svg
+└── internal/                  # Never published
+    ├── architecture-notes.md
+    └── runbook.md
 ```
 
-In markdown, reference media like this:
+In markdown, reference media with relative paths from the doc file:
 
 ```markdown
 ![Screenshot](./media/screenshot-1.png)
 ```
 
-The action copies `.md` files to `docs/components/<slug>/` and media files to `public/media/<slug>/`, preserving subdirectory structure.
+The action copies `.md` files from `docs/public/` to `docs/components/<slug>/` and media files to `public/media/<slug>/`, preserving subdirectory structure.
 
 ## Notes
 
 - **`component-slug`**: Must be unique across all component repos (kebab-case recommended, e.g., `auth-service`, `ui-button`)
 - **`pr-enabled`**: Set to `"true"` if you want the action to open a PR for review instead of pushing directly to `main`
+- **Only `docs/public/` is published** — anything outside that directory stays private in your repo
 - Changes are pushed to the docs-site repo's `main` branch, which triggers an automatic deploy to GitHub Pages

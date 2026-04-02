@@ -5,14 +5,14 @@ inputs:
   component-slug:
     description: "Unique identifier for the component (e.g., my-components)"
     required: true
-  docs-source-dir:
-    description: "Directory containing component docs (relative to component repo root)"
+  public-docs-dir:
+    description: "Directory containing PUBLIC docs (relative to component repo root). Only docs in this directory are published."
     required: false
-    default: "docs"
-  media-source-dir:
-    description: "Directory containing media files (relative to component repo root)"
+    default: "docs/public"
+  public-media-dir:
+    description: "Directory containing media files referenced by published docs"
     required: false
-    default: "docs/media"
+    default: "docs/public/media"
   docs-target-repo:
     description: "Full GitHub URL of the docs-site repo"
     required: true
@@ -67,9 +67,9 @@ runs:
         mkdir -p docs-site/public/media/${{ inputs.component-slug }}
 
         # Copy markdown docs (exclude any media/ subfolder)
-        if [ -d "${{ inputs.docs-source-dir }}" ]; then
-          find "${{ inputs.docs-source-dir }}" -name "*.md" -type f | while read -r file; do
-            REL_PATH="${file#${{ inputs.docs-source-dir }}/}"
+        if [ -d "${{ inputs.public-docs-dir }}" ]; then
+          find "${{ inputs.public-docs-dir }}" -name "*.md" -type f | while read -r file; do
+            REL_PATH="${file#${{ inputs.public-docs-dir }}/}"
             # Skip files inside media/ directories
             if echo "$REL_PATH" | grep -q "^media/"; then
               continue
@@ -81,8 +81,8 @@ runs:
         fi
 
         # Copy media files
-        if [ -d "${{ inputs.media-source-dir }}" ]; then
-          cp -r "${{ inputs.media-source-dir }}"/* docs-site/public/media/${{ inputs.component-slug }}/ 2>/dev/null || true
+        if [ -d "${{ inputs.public-media-dir }}" ]; then
+          cp -r "${{ inputs.public-media-dir }}"/* docs-site/public/media/${{ inputs.component-slug }}/ 2>/dev/null || true
         fi
 
     - name: Commit and push
