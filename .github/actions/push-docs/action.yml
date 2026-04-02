@@ -1,0 +1,141 @@
+name: "Push Component Docs"
+description: "Pushes component documentation and media files to the central docs-site repo"
+
+inputs:
+  component-slug:
+    description: "Unique identifier for the component (e.g., my-components)"
+    required: true
+  docs-source-dir:
+    description: "Directory containing component docs (relative to component repo root)"
+    required: false
+    default: "docs"
+  media-source-dir:
+    description: "Directory containing media files (relative to component repo root)"
+    required: false
+    default: "docs/media"
+  docs-target-repo:
+    description: "Full GitHub URL of the docs-site repo"
+    required: true
+  app-id:
+    description: "GitHub App ID"
+    required: true
+  app-private-key:
+    description: "GitHub App private key (PEM format)"
+    required: true
+  commit-message:
+    description: "Custom commit message (defaults to auto-generated)"
+    required: false
+    default: ""
+  pr-enabled:
+    description: "Whether to open a PR instead of pushing directly"
+    required: false
+    default: "false"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Generate GitHub App Installation Token
+      id: app-token
+      uses: actions/create-github-app-token@v1
+      with:
+        app-id: ${{ inputs.app-id }}
+        private-key: ${{ inputs.app-private-key }}
+
+    - name: Set branch name
+      id: branch
+      shell: bash
+      run: |
+        SHORT_SHA="${GITHUB_SHA:0:7}"
+        echo "name=docs/${{ inputs.component-slug }}-${SHORT_SHA}" >> "$GITHUB_OUTPUT"
+
+    - name: Clone docs-site repo
+      shell: bash
+      run: |
+        REPO_URL="${{ inputs.docs-target-repo }}"
+        REPO_URL="${REPO_URL/https:\/\/github\.com/https://x-access-token:${{ steps.app-token.outputs.token }}@github.com}"
+        git clone --depth 1 --branch main "$REPO_URL" docs-site
+
+    - name: Copy component docs
+      shell: bash
+      run: |
+        # Clean previous docs for this component
+        rm -rf docs-site/docs/components/${{ inputs.component-slug }}
+        rm -rf docs-site/public/media/${{ inputs.component-slug }}
+
+        # Create target directories
+        mkdir -p docs-site/docs/components/${{ inputs.component-slug }}
+        mkdir -p docs-site/public/media/${{ inputs.component-slug }}
+
+        # Copy markdown docs (exclude any media/ subfolder)
+        if [ -d "${{ inputs.docs-source-dir }}" ]; then
+          find "${{ inputs.docs-source-dir }}" -name "*.md" -type f | while read -r file; do
+            REL_PATH="${file#${{ inputs.docs-source-dir }}/}"
+            # Skip files inside media/ directories
+            if echo "$REL_PATH" | grep -q "^media/"; then
+              continue
+            fi
+            TARGET_DIR="docs-site/docs/components/${{ inputs.component-slug }}/$(dirname "$REL_PATH")"
+            mkdir -p "$TARGET_DIR"
+            cp "$file" "$TARGET_DIR/"
+          done
+        fi
+
+        # Copy media files
+        if [ -d "${{ inputs.media-source-dir }}" ]; then
+          cp -r "${{ inputs.media-source-dir }}"/* docs-site/public/media/${{ inputs.component-slug }}/ 2>/dev/null || true
+        fi
+
+    - name: Commit and push
+      if: inputs.pr-enabled == 'false'
+      shell: bash
+      run: |
+        cd docs-site
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+        if [ -z "$(git status --porcelain)" ]; then
+          echo "No changes to commit for ${{ inputs.component-slug }}"
+          exit 0
+        fi
+
+        git add .
+        MSG="${{ inputs.commit-message }}"
+        if [ -z "$MSG" ]; then
+          MSG="docs: update ${{ inputs.component-slug }} docs (${{ github.repository }}@${GITHUB_SHA:0:7})"
+        fi
+        git commit -m "$MSG"
+        git push origin main
+
+    - name: Create PR
+      if: inputs.pr-enabled == 'true'
+      shell: bash
+      env:
+        TOKEN: ${{ steps.app-token.outputs.token }}
+      run: |
+        cd docs-site
+        git checkout -b ${{ steps.branch.outputs.name }}
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+        if [ -z "$(git status --porcelain)" ]; then
+          echo "No changes to commit for ${{ inputs.component-slug }}"
+          exit 0
+        fi
+
+        git add .
+        MSG="${{ inputs.commit-message }}"
+        if [ -z "$MSG" ]; then
+          MSG="docs: update ${{ inputs.component-slug }} docs (${{ github.repository }}@${GITHUB_SHA:0:7})"
+        fi
+        git commit -m "$MSG"
+        git push origin ${{ steps.branch.outputs.name }}
+
+        PR_BODY="Auto-generated docs update for **${{ inputs.component-slug }}** from \`${{ github.repository }}\` at \`${GITHUB_SHA:0:7}\`."
+
+        TARGET_REPO=$(echo "${{ inputs.docs-target-repo }}" | sed 's|https://github.com/||' | sed 's|.git$||')
+
+        curl -s -X POST \
+          -H "Authorization: Bearer $TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          "https://api.github.com/repos/$TARGET_REPO/pulls" \
+          -d "$(jq -n --arg title "docs: update ${{ inputs.component-slug }}" --arg head "${{ steps.branch.outputs.name }}" --arg body "$PR_BODY" '{title: $title, head: $head, base: "main", body: $body}')"
