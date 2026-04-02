@@ -93,7 +93,7 @@ export default defineConfig({
   title: "Docs",
   description: "Component Documentation Site",
   base: "/",
-  outDir: "../_site",
+  outDir: "_site",
 
   head: [
     ["link", { rel: "icon", href: "/favicon.ico" }],
