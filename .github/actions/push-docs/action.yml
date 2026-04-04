@@ -40,6 +40,8 @@ runs:
       with:
         app-id: ${{ inputs.app-id }}
         private-key: ${{ inputs.app-private-key }}
+        owner: dkubeio
+        repositories: docs-site
 
     - name: Set branch name
       id: branch
