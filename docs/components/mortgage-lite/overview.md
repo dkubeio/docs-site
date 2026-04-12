@@ -6,13 +6,15 @@
 
 ## Key Features
 
-### 🤖 Six Specialized AI Agents
-- **Iris** - Document intake and classification
-- **Rex** - Multi-engine OCR extraction
-- **Val** - Deterministic validation (zero AI cost)
-- **Ana** - Local LLM analysis (privacy-safe)
-- **Claire** - Cloud-based compliance checking (anonymized data only)
-- **Max** - Final delivery and notifications
+### 🤖 Eight Specialized AI Agents
+- **Iris** - Document intake and classification (all pipelines)
+- **Rex** - Multi-engine OCR extraction (all pipelines)
+- **Val** - Deterministic validation (underwriting)
+- **Ana** - Local LLM analysis (underwriting)
+- **Claire** - Cloud-based compliance checking (underwriting)
+- **Servo** - Servicing transfer validator (servicing)
+- **Auditor** - Post-close QC auditor (quality control)
+- **Max** - Final delivery and notifications (all pipelines)
 
 ### 🔒 Privacy-First Architecture
 - **Local Processing**: Sensitive data processed on-premises with local LLMs
@@ -27,22 +29,40 @@
 - **Shift-Left Validation**: Catch errors early with deterministic checks
 
 ### 📊 Comprehensive Features
-- Real-time kanban board for application tracking
-- Anomaly detection with severity classification
-- Compliance checking against Fannie Mae, FHA, VA, and Freddie Mac guidelines
-- Executive summary generation with cross-document synthesis
-- Audit trail with complete processing history
-- Telegram notifications for critical events
+- **Multi-Pipeline Support**: Underwriting, Servicing Transfer, and Quality Control
+- **Real-time Kanban Board**: Track applications across pipeline stages
+- **PDF Document Viewer**: Inline document preview with field highlighting
+- **Anomaly Detection**: Severity classification (critical/warning/info)
+- **Compliance Checking**: Fannie Mae, FHA, VA, and Freddie Mac guidelines
+- **Executive Summary**: Cross-document synthesis with AI
+- **Audit Trail**: Complete processing history with timestamps
+- **Telegram Notifications**: Critical event alerts
 
 ## Use Cases
 
-### Mortgage Underwriting
+### 1. Mortgage Underwriting
 Automate the review of mortgage applications including:
 - Purchase loans
 - Refinance applications
 - FHA loans
 - VA loans
 - HELOC applications
+
+### 2. Loan Servicing Transfer
+Validate data integrity during loan servicing transfers:
+- Principal balance reconciliation
+- Payment history completeness
+- Escrow balance verification
+- Interest rate consistency
+- Insurance and tax certificate currency
+
+### 3. Post-Close Quality Control
+Audit closed loan files for defects:
+- Missing signatures detection
+- Stale appraisal checks (>120 days)
+- Income calculation verification
+- Document completeness validation
+- TRID tolerance compliance
 
 ### Document Processing
 Extract and validate data from:
@@ -64,10 +84,25 @@ Automatically check applications against:
 
 ## Architecture Highlights
 
+### Underwriting Pipeline
 ```
 UPLOAD → Iris → Rex → Val → Ana → [ANONYMIZE] → Claire → [DEANONYMIZE] → Max → DONE
          ↓       ↓      ↓      ↓                   ↓                         ↓
       Classify  OCR   Validate Analyze          Comply                    Deliver
+```
+
+### Servicing Pipeline
+```
+RECEIVED → Iris → Rex → Servo → Max → TRANSFERRED
+           ↓       ↓      ↓        ↓
+        Classify  OCR  Reconcile Deliver
+```
+
+### Quality Control Pipeline
+```
+SAMPLED → Iris → Rex → Auditor → Max → CLEARED/DEFECT
+          ↓       ↓      ↓          ↓
+       Classify  OCR   Audit     Deliver
 ```
 
 ### Privacy Boundaries

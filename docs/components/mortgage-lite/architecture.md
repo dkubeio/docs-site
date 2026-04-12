@@ -12,6 +12,7 @@ Mortgage-Lite is a multi-agent AI system designed for automated mortgage underwr
 ┌─────────────────────────────────────────────────────────────────┐
 │                        CLIENT LAYER                              │
 │  Browser (HTMX + TailwindCSS) ←→ WebSocket (Real-time Events)  │
+│  PDF Viewer │ Kanban Board │ Anomaly Inspector                  │
 └─────────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────────┐
@@ -20,12 +21,16 @@ Mortgage-Lite is a multi-agent AI system designed for automated mortgage underwr
 └─────────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────────┐
-│                      AGENT PIPELINE                              │
+│                   MULTI-PIPELINE ARCHITECTURE                    │
 │                                                                   │
-│  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐  ┌────────┐  ┌──────┐ │
-│  │ Iris │→│ Rex  │→│ Val  │→│ Ana  │→│ Claire │→│ Max  │ │
-│  └──────┘  └──────┘  └──────┘  └──────┘  └────────┘  └──────┘ │
-│  Classify   Extract   Validate  Analyze   Comply     Deliver    │
+│  UNDERWRITING:                                                   │
+│  Iris → Rex → Val → Ana → [ANONYMIZE] → Claire → Max           │
+│                                                                   │
+│  SERVICING:                                                      │
+│  Iris → Rex → Servo → Max                                       │
+│                                                                   │
+│  QUALITY CONTROL:                                                │
+│  Iris → Rex → Auditor → Max                                     │
 │                                                                   │
 │           ↑ LOCAL ZONE ↑    │ ANONYMIZE │  ↑ CLOUD ZONE ↑      │
 └─────────────────────────────────────────────────────────────────┘
@@ -38,9 +43,30 @@ Mortgage-Lite is a multi-agent AI system designed for automated mortgage underwr
 
 ## Core Components
 
-### 1. Agent Pipeline
+### 1. Multi-Pipeline Architecture
 
-The pipeline consists of six specialized agents that process applications sequentially:
+Mortgage-Lite supports three distinct pipelines, each optimized for specific workflows:
+
+#### Pipeline Types
+
+**Underwriting Pipeline** (6 agents)
+- Purpose: Loan origination and underwriting review
+- Stages: Intake → Extracting → Validating → Analyzing → Compliance → Delivering
+- Agents: Iris, Rex, Val, Ana, Claire, Max
+
+**Servicing Pipeline** (4 agents)
+- Purpose: Loan servicing transfer validation
+- Stages: Received → Extracting → Reconciling → Delivering
+- Agents: Iris, Rex, Servo, Max
+
+**Quality Control Pipeline** (4 agents)
+- Purpose: Post-close audit and defect tracking
+- Stages: Sampled → Extracting → Auditing → Delivering
+- Agents: Iris, Rex, Auditor, Max
+
+### 2. Agent Catalog
+
+Eight specialized agents handle different aspects of processing:
 
 #### Iris (Intake Agent)
 - **Role**: Document classification and intake
@@ -53,19 +79,17 @@ The pipeline consists of six specialized agents that process applications sequen
   - Sets application status to `extracting`
 
 #### Rex (Extractor Agent)
-- **Role**: OCR and data extraction
+- **Role**: Multi-engine OCR and data extraction
 - **Processing**: Local
 - **Functions**:
-  - Multi-engine OCR cascade:
-    1. GLM-OCR (0.9B, specialized)
-    2. MiniCPM-V (8B, document understanding)
-    3. Qwen2-VL (2B, fast tables)
-    4. Tesseract (fallback)
-    5. PDF text extraction (digital PDFs)
-  - Extracts structured fields per document type
-  - Generates confidence scores and bounding boxes
-  - Converts tables to Pandas DataFrames
-  - Creates ExtractedField records
+  - Document OCR with cascade fallback
+  - Structured field extraction
+  - Table parsing
+  - Confidence scoring
+- **Technology**: 
+  - Vision: GLM-OCR → SecureLLM (Qwen2-VL) → Ollama (Qwen2-VL) → Tesseract
+  - Field extraction: SecureLLM (Qwen 3.5) → Ollama (Qwen 3.5)
+- **Output**: ExtractedField records with confidence scores
 
 #### Val (Validator Agent)
 - **Role**: Deterministic validation (shift-left)
@@ -82,20 +106,18 @@ The pipeline consists of six specialized agents that process applications sequen
   - Sends Telegram alerts for critical anomalies
 
 #### Ana (Analyzer Agent)
-- **Role**: Contextual analysis with local LLM
-- **Processing**: Local (Ollama/Qwen)
+- **Role**: Contextual analysis using local LLM
+- **Processing**: Local (privacy-safe)
 - **Functions**:
-  - Uses local LLM (Qwen 3.5 35B, Nemotron, etc.)
-  - Operates on RAW unredacted data (local = secure)
-  - Finds contextual anomalies:
-    - Phonetic name mismatches
-    - Employment gaps
-    - Unexplained deposits
-    - Income inconsistencies
-  - Cross-references extracted fields
-  - Creates Anomaly records with tier=2
-  - Calculates preliminary DTI and LTV ratios
-  - **Prepares anonymization mapping**
+  - Phonetic name mismatch detection
+  - Employment gap analysis
+  - Income cross-referencing
+  - Large deposit investigation
+  - DTI/LTV calculation
+  - PII entity detection for anonymization
+- **Technology**: SecureLLM → Ollama fallback (Qwen 3.5 35B)
+- **Output**: Anomaly records (tier 2), PII mapping
+- **Fallback**: Deterministic checks if LLMs unavailable
 
 #### Claire (Compliance Agent)
 - **Role**: Compliance checking and synthesis
@@ -118,15 +140,53 @@ The pipeline consists of six specialized agents that process applications sequen
 - **Role**: Final delivery and notifications
 - **Processing**: Local
 - **Functions**:
-  - Receives deanonymized final report
-  - Sets final application status
-  - Generates AuditLog entries with hash chain
-  - Pushes to bank's LOS (Encompass API)
+  - Generates executive summary
   - Sends Telegram notifications
-  - Triggers voice callbacks (Nancy integration)
-  - Executes data death protocol (cleanup)
+  - Updates application status to completed
+  - Archives processed files
+- **Technology**: Template-based reporting
+- **Output**: Final report, notifications sent
 
-### 2. Privacy Boundaries
+#### Servo (Servicing Validator Agent)
+- **Role**: Servicing transfer validation
+- **Processing**: Local (deterministic)
+- **Functions**:
+  - Principal balance reconciliation
+  - Payment history gap detection
+  - Escrow balance verification
+  - Interest rate consistency checks
+  - Insurance/tax certificate currency validation
+- **Technology**: Pure Python deterministic checks
+- **Output**: Transfer validation report, critical flags
+
+#### Auditor (QC Agent)
+- **Role**: Post-close quality control
+- **Processing**: Local (deterministic)
+- **Functions**:
+  - Stale appraisal detection (>120 days)
+  - Missing signature identification
+  - Income calculation verification
+  - Document completeness validation
+  - TRID tolerance compliance
+- **Technology**: Pure Python deterministic checks
+- **Output**: QC audit report, defect flags
+
+### 3. PDF Document Viewer
+
+**Inline Document Preview**
+- Embedded PDF viewer in anomaly inspector
+- Page navigation and zoom controls
+- Field highlighting with bounding boxes
+- Multi-document tabs
+- Extracted fields display
+
+**Features**:
+- Click anomaly to jump to relevant document page
+- Visual field highlighting for flagged data
+- Side-by-side document comparison
+- Supports all PDF documents in application
+
+### 4. Privacy Boundaries
 
 #### Anonymization Boundary (Ana → Claire)
 ```python
@@ -399,10 +459,15 @@ Application (1) ←→ (N) AuditLog
 
 ### Scalability
 - **Horizontal**: Multiple FastAPI replicas
-- **Vertical**: GPU nodes for Ollama
-- **Database**: PostgreSQL with connection pooling
-
-## Future Enhancements
+- **Backend**: FastAPI (Python 3.12+)
+- **Database**: SQLite (dev) / PostgreSQL (production)
+- **AI Models**: 
+  - **SecureLLM** (primary) - Local inference gateway with dynamic model discovery
+  - **Ollama** (fallback) - Local LLM for privacy-safe processing
+  - **Claude** (Anthropic) - Cloud compliance checking (anonymized data only)
+  - **GLM-OCR** - Specialized document OCR
+- **Frontend**: HTMX + TailwindCSS
+- **Deployment**: Docker, Kubernetes (Helm charts included)
 
 ### Planned Features
 - Enhanced monitoring dashboard

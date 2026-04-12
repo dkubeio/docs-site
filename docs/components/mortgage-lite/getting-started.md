@@ -40,19 +40,33 @@ DATABASE_URL=sqlite+aiosqlite:///./mortgage-lite.db
 HOST=0.0.0.0
 PORT=5300
 
-# AI Configuration
+# AI Configuration - Ollama (Local)
 OLLAMA_BASE_URL=http://localhost:11434
 OLLAMA_MODEL=qwen3.5:35b
+
+# AI Configuration - Claude (Cloud)
 CLAUDE_BIN=claude
 CLAUDE_MODEL=sonnet
+ANTHROPIC_API_KEY=your_key_here
+
+# AI Configuration - SecureLLM (Local Inference)
+# For Kubernetes (same namespace: dkubex-apps)
+# Models are discovered automatically from the gateway
+SECURELLM_BASE_URL=http://securellm/securellm/v1
+SECURELLM_API_KEY=your_api_key_here
 
 # API Keys (optional)
-ANTHROPIC_API_KEY=your_key_here
 OPENAI_API_KEY=your_key_here
+
+# Pipeline Configuration
+DEFAULT_PIPELINE_TYPE=underwriting
 
 # Features
 ANONYMIZATION_ENABLED=true
 ENABLE_OPTIMIZED_PIPELINE=false
+ENABLE_PDF_VIEWER=true
+ENABLE_SERVICING_PIPELINE=true
+ENABLE_QC_PIPELINE=true
 
 # DKubeX Integration (optional)
 DKUBEX_BASE_PATH=
@@ -132,19 +146,24 @@ kubectl port-forward svc/mortgage-lite 5300:5300
 ### 1. Explore the Dashboard
 The main dashboard shows:
 - Application statistics
-- Agent status (all 6 agents)
+- Agent status (8 agents across 3 pipelines)
 - Recent activity
 - System metrics
+- Pipeline selector (Underwriting, Servicing, Quality Control)
 
 ### 2. Upload a Test Application
 1. Click **"Upload"** in the navigation
-2. Fill in applicant details:
+2. Select pipeline type:
+   - **Underwriting**: For loan origination
+   - **Servicing**: For loan transfer validation
+   - **Quality Control**: For post-close audit
+3. Fill in applicant details:
    - Name: John Smith
    - Loan Type: Purchase
    - Loan Amount: $350,000
    - Property Value: $450,000
-3. Upload documents (W-2, bank statements, etc.)
-4. Click **"Submit Application"**
+4. Upload documents (W-2, bank statements, etc.)
+5. Click **"Submit Application"**
 
 ### 3. Run the Pipeline
 1. Navigate to **"Applications"**
@@ -155,9 +174,18 @@ The main dashboard shows:
 ### 4. Review Results
 After processing completes:
 - Check **"Anomalies"** for any detected issues
-- Review **"Compliance"** checks
+- Use **"PDF Viewer"** to inspect documents with highlighted fields
+- Review **"Compliance"** checks (underwriting pipeline)
 - View the **"Report"** with executive summary
 - Examine **"Metrics"** for performance data
+
+### 5. Explore PDF Viewer
+The anomaly inspector includes an inline PDF viewer:
+1. Click on any anomaly in the list
+2. Related documents appear in tabs
+3. Navigate pages with Prev/Next buttons
+4. Zoom in/out for detailed inspection
+5. Flagged fields are highlighted with bounding boxes
 
 ## Demo Mode
 
@@ -186,6 +214,8 @@ python3 -m uvicorn app.main:app --host 0.0.0.0 --port 5300
 ### AI Model Selection
 
 #### Local Models (Privacy-Safe)
+
+**Ollama**
 ```bash
 # Ana agent uses local models for PII processing
 OLLAMA_MODEL=qwen3.5:35b
@@ -193,6 +223,20 @@ OLLAMA_MODEL=qwen3.5:35b
 # Alternative models
 OLLAMA_MODEL=nemotron:70b
 OLLAMA_MODEL=llama3.1:70b
+```
+
+**SecureLLM (Local Inference Server)**
+```bash
+# Use SecureLLM for local inference with OpenAI-compatible API
+# Kubernetes service DNS (same namespace: dkubex-apps)
+SECURELLM_BASE_URL=http://securellm/securellm/v1
+SECURELLM_API_KEY=your_api_key
+
+# SecureLLM provides chat completions endpoint
+# Compatible with OpenAI API format
+# Available models are discovered automatically from the gateway
+# Ana and Rex agents will use SecureLLM if models are available,
+# otherwise fall back to Ollama
 ```
 
 #### Cloud Models (Anonymized Data Only)
