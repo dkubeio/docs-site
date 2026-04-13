@@ -1,4 +1,4 @@
-# DKubeX 2.0 Documentation
+# DKubeX 2.0
 
 *Version {{ doc_version }}*
 
@@ -32,5 +32,10 @@ Turn platform components on or off from the UI to adapt DKubeX to different infr
 :maxdepth: 2
 :caption: Contents
 
-test
+self
+installation
+quickstart
+usecases
+applications
+components/index
 ```
