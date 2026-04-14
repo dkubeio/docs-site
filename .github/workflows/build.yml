@@ -11,6 +11,7 @@ on:
       - '_static/**'
       - '_templates/**'
       - 'conf.py'
+      - 'build_docs.sh'
       - 'requirements.txt'
       - '.github/workflows/build.yml'
   workflow_dispatch:
