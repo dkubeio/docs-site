@@ -29,7 +29,8 @@ Turn platform components on or off from the UI to adapt DKubeX to different infr
 ## Contents
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 10
+:includehidden:
 :caption: Contents
 
 self

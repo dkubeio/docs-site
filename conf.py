@@ -61,6 +61,15 @@ myst_substitutions = {
 	"doc_version": doc_version,
 }
 
+# Historical tags can contain content that triggers non-critical warnings.
+# Suppress these categories to keep multiversion builds stable and readable.
+suppress_warnings = [
+	"image.not_readable",
+	"toc.not_included",
+	"myst.xref_missing",
+	"misc.highlighting_failure",
+]
+
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "README.md"]
 

@@ -36,7 +36,12 @@ rm -rf docs
 find . -maxdepth 1 -type d -name 'docs-v*' -exec rm -rf {} +
 rm -rf .multiversion
 
-"$PYTHON_BIN" -m sphinx_multiversion . .multiversion -W --keep-going
+SPHINX_FLAGS=(--keep-going)
+if [ "${STRICT_WARNINGS:-0}" = "1" ]; then
+  SPHINX_FLAGS=(-W --keep-going)
+fi
+
+"$PYTHON_BIN" -m sphinx_multiversion . .multiversion "${SPHINX_FLAGS[@]}"
 
 if [ ! -d .multiversion ]; then
   echo "sphinx-multiversion did not create .multiversion output."

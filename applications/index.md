@@ -3,9 +3,10 @@
 ## Contents
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 10
+:includehidden:
 :caption: Contents
 
-mortgage-lite/overview
+mortgage-lite/index
 ragflow
 ```
