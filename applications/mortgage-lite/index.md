@@ -1,4 +1,4 @@
-# Mortgage-Lite Overview
+# Mortgage-Lite
 
 <!-- ![Mortgage-Lite Icon](./media/mortgage-lite-icon.svg) -->
 
