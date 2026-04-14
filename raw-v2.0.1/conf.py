@@ -7,4 +7,4 @@ module = module_from_spec(spec)
 assert spec and spec.loader
 spec.loader.exec_module(module)
 
-globals().update(module.build_conf(doc_version="v0.1", conf_file=__file__))
+globals().update(module.build_conf(doc_version="v2.0.1", conf_file=__file__))

@@ -36,6 +36,5 @@ self
 installation
 quickstart
 usecases
-applications
-components/index
+applications/index
 ```

@@ -61,7 +61,7 @@ def build_conf(doc_version: str, conf_file: str) -> dict[str, Any]:
         )
 
     return {
-        "project": "DKubeX 2.0 Documentation",
+        "project": "DKubeX Documentation",
         "author": "DKube",
         "doc_version": doc_version,
         "copyright": (
@@ -82,12 +82,12 @@ def build_conf(doc_version: str, conf_file: str) -> dict[str, Any]:
         "templates_path": ["_templates"],
         "exclude_patterns": ["_build", "Thumbs.db", ".DS_Store"],
         "html_theme": "shibuya",
-        "html_title": "DKubeX 2.0 Documentation",
+        "html_title": "DKubeX Documentation",
         "html_static_path": ["_static"],
         "html_logo": "_static/DKube_Icon_512x512.svg",
         "html_theme_options": {
             "logo_target": "index.html",
-            "github_url": "https://github.com/deepro713/product-docs-test/",
+            "github_url": "https://github.com/dkubeio/docs-site/",
             "youtube_url": "https://www.youtube.com/@DKube_OC",
             "nav_links": [
                 {
@@ -104,6 +104,6 @@ def build_conf(doc_version: str, conf_file: str) -> dict[str, Any]:
         },
         "html_css_files": ["custom.css"],
         "html_js_files": ["version-badge.js", "footer-dkube-link.js"],
-        "html_baseurl": "https://docs-test.dkube.io/",
+        "html_baseurl": "https://dkubex2.dkube.io/",
         "html_favicon": "_static/DKube_Icon_512x512.svg",
     }

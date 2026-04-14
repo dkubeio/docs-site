@@ -1,4 +1,4 @@
-# Components
+# Applications
 
 ## Contents
 

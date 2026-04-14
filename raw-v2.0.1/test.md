@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 # Test Page
 
 This is the second page of the documentation.

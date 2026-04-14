@@ -59,7 +59,7 @@ pip install -r requirements.txt
 2. Build all versions and refresh latest:
 
 ```bash
-rm -rf docs 'docs-v*' CNAME && SRC_DIRS="$(find . -maxdepth 1 -type d -name 'raw-v*' -print | sed 's|^\./||' | sort -V)" && [ -n "$SRC_DIRS" ] && printf '%s\n' "$SRC_DIRS" | while IFS= read -r SRC_DIR; do VERSION="${SRC_DIR#raw-}"; python -m sphinx -b html -W --keep-going "$SRC_DIR" "docs-$VERSION"; done && LATEST_SRC="$(printf '%s\n' "$SRC_DIRS" | tail -n1)" && python -m sphinx -b html -W --keep-going "$LATEST_SRC" docs
+rm -rf docs && find . -maxdepth 1 -type d -name 'docs-v*' -exec rm -rf {} + && SRC_DIRS="$(find . -maxdepth 1 -type d -name 'raw-v*' -print | sed 's|^\./||' | sort -V)" && [ -n "$SRC_DIRS" ] && printf '%s\n' "$SRC_DIRS" | while IFS= read -r SRC_DIR; do VERSION="${SRC_DIR#raw-}"; python -m sphinx -b html -W --keep-going "$SRC_DIR" "docs-$VERSION"; done && LATEST_SRC="$(printf '%s\n' "$SRC_DIRS" | tail -n1)" && python -m sphinx -b html -W --keep-going "$LATEST_SRC" docs
 ```
 
 3. Validate the homepage first:
@@ -136,7 +136,7 @@ python3 -m venv .venv-docs && source .venv-docs/bin/activate && pip install --up
 Build all versions + latest:
 
 ```bash
-rm -rf docs 'docs-v*' CNAME && SRC_DIRS="$(find . -maxdepth 1 -type d -name 'raw-v*' -print | sed 's|^\./||' | sort -V)" && [ -n "$SRC_DIRS" ] && printf '%s\n' "$SRC_DIRS" | while IFS= read -r SRC_DIR; do VERSION="${SRC_DIR#raw-}"; python -m sphinx -b html -W --keep-going "$SRC_DIR" "docs-$VERSION"; done && LATEST_SRC="$(printf '%s\n' "$SRC_DIRS" | tail -n1)" && python -m sphinx -b html -W --keep-going "$LATEST_SRC" docs
+rm -rf docs && find . -maxdepth 1 -type d -name 'docs-v*' -exec rm -rf {} + && SRC_DIRS="$(find . -maxdepth 1 -type d -name 'raw-v*' -print | sed 's|^\./||' | sort -V)" && [ -n "$SRC_DIRS" ] && printf '%s\n' "$SRC_DIRS" | while IFS= read -r SRC_DIR; do VERSION="${SRC_DIR#raw-}"; python -m sphinx -b html -W --keep-going "$SRC_DIR" "docs-$VERSION"; done && LATEST_SRC="$(printf '%s\n' "$SRC_DIRS" | tail -n1)" && python -m sphinx -b html -W --keep-going "$LATEST_SRC" docs
 ```
 
 Open homepage (`docs`):
