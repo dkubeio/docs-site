@@ -89,12 +89,56 @@ def rewrite_latest_self_link(file_path: Path, text: str) -> str:
   )
   return pattern.sub(rf'\1{href_to_docs}\3', text)
 
+def add_latest_badge(text: str) -> str:
+  # Add a badge next to the latest version entry in the dropdown.
+  pattern = re.compile(
+    rf'(<a href="[^"]*">\s*{re.escape(latest_tag)})(\s*</a>)'
+  )
+  replacement = rf'\1 <span class="version-latest-badge">Latest</span>\2'
+  return pattern.sub(replacement, text)
+
+def add_latest_heading_badge(text: str) -> str:
+  # Add a badge to the dropdown heading for the latest version pages.
+  pattern = re.compile(
+    rf'(<span class="hidden md:inline">\s*{re.escape(latest_tag)})(\s*</span>)'
+  )
+  replacement = rf'\1 <span class="version-latest-badge">Latest</span>\2'
+  return pattern.sub(replacement, text)
+
+def rewrite_version_labels(file_path: Path, text: str) -> str:
+  # Use the directory name as the version label for each rendered output.
+  parts = file_path.parts
+  if parts and parts[0] == "docs":
+    version_label = latest_tag
+  else:
+    version_dir = next((part for part in parts if part.startswith("docs-")), None)
+    if not version_dir:
+      return text
+    version_label = version_dir.removeprefix("docs-")
+
+  text = re.sub(
+    r'(<div class="sy-foot-copyright"><p>.*?Documentation version: )[^<]+(</p>)',
+    rf'\1{version_label}\2',
+    text,
+    flags=re.S,
+  )
+  text = re.sub(
+    r'(<em>Version\s+)[^<]+(</em>)',
+    rf'\1{version_label}\2',
+    text,
+  )
+  return text
+
 html_files = [p for p in root.glob("docs*/**/*.html") if p.is_file()]
 for html in html_files:
   content = html.read_text(encoding="utf-8")
   updated = rewrite_latest_path_refs(content)
   if latest_root in html.parents:
     updated = rewrite_latest_self_link(html, updated)
+  updated = add_latest_badge(updated)
+  if html.parts and html.parts[0] == "docs":
+    updated = add_latest_heading_badge(updated)
+  updated = rewrite_version_labels(html, updated)
 
   if updated != content:
     html.write_text(updated, encoding="utf-8")

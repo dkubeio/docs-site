@@ -65,6 +65,7 @@ jobs:
           cp -R docs publish/
           find . -maxdepth 1 -type d -name 'docs-v*' -exec cp -R {} publish/ \;
           cp CNAME publish/
+          touch publish/.nojekyll
 
           cd publish
 
