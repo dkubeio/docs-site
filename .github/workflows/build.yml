@@ -61,11 +61,24 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mkdir -p publish
-          cp -R docs publish/
-          find . -maxdepth 1 -type d -name 'docs-v*' -exec cp -R {} publish/ \;
-          cp CNAME publish/
-          touch publish/.nojekyll
+          mkdir -p publish/docs
+          cp -R docs/. publish/docs/
+          find . -maxdepth 1 -type d -name 'docs-v*' -exec cp -R {} publish/docs/ \;
+          cp CNAME publish/docs/
+          touch publish/docs/.nojekyll
+
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          root = Path("publish/docs")
+          for html in root.rglob("*.html"):
+              content = html.read_text(encoding="utf-8")
+              # In docs-folder Pages mode, latest is site root (/index.html), not /docs/index.html.
+              updated = re.sub(r'href="((?:\.\./)*)docs/([^"]*)"', r'href="\1\2"', content)
+              if updated != content:
+                  html.write_text(updated, encoding="utf-8")
+          PY
 
           cd publish
 
