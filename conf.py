@@ -45,7 +45,7 @@ extensions = [
 	"sphinx_multiversion",
 ]
 
-smv_tag_whitelist = r"^v\d+\.\d+\.\d+$"
+smv_tag_whitelist = r"^.+$"
 smv_branch_whitelist = r"^$"
 smv_remote_whitelist = r"^origin$"
 smv_released_pattern = r"^refs/tags/.*$"

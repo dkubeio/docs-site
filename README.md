@@ -12,8 +12,8 @@ This repository hosts the DKubeX documentation site, built on Sphinx and sphinx-
 
 The current workflow is tags-only multiversion:
 - Keep documentation source files at repository root.
-- Build one output per matching Git tag as `docs-vX.Y.Z`.
-- Copy the latest semantic version to `docs/`.
+- Build one output per Git tag as `docs-<tag-name>`.
+- Copy the latest generated version directory to `docs/`.
 - Publish generated output to the `site-files` branch through GitHub Actions.
 
 ## Architecture
@@ -23,7 +23,7 @@ The current workflow is tags-only multiversion:
 
 2. Shared configuration model:
 - Root `conf.py` is the single combined Sphinx configuration.
-- sphinx-multiversion includes tags matching `vX.Y.Z` only.
+- sphinx-multiversion includes all tags.
 
 3. Output model:
 - Versioned build outputs are generated as `docs-v*`.
@@ -90,7 +90,7 @@ Pages and custom domain delivery:
 - Alternatively use `python -m sphinx ...` commands.
 
 2. No versioned output generated:
-- Ensure local repository has matching tags (example: `v2.0.1`).
+- Ensure local repository has tags.
 - Run `git fetch --tags` before local build.
 - Run `bash build_docs.sh` from the docs virtual environment.
 - Confirm `.venv-docs` exists or export `BUILD_PYTHON=/path/to/python`.
@@ -100,7 +100,7 @@ Pages and custom domain delivery:
 - This project pins `Sphinx<8` for `sphinx-multiversion` compatibility.
 
 4. Unexpected version label in navigation:
-- Verify the tag names follow `vX.Y.Z` and are fetched locally.
+- Verify the tags are fetched locally.
 - Confirm you are using the pinned docs virtual environment from this repository.
 
 ## Developer Cheatsheet

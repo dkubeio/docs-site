@@ -26,9 +26,9 @@ if ! "$PYTHON_BIN" -m sphinx_multiversion --help >/dev/null 2>&1; then
   exit 1
 fi
 
-MATCHING_TAGS="$(git tag -l 'v*.*.*' | sort -V)"
+MATCHING_TAGS="$(git tag --list)"
 if [ -z "$MATCHING_TAGS" ]; then
-  echo "No matching tags found. Expected tags like v2.0.1."
+  echo "No tags found. Create at least one tag to generate versioned docs."
   exit 1
 fi
 
