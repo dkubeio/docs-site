@@ -5,7 +5,12 @@ on:
     branches:
       - '**'
     paths:
-      - 'raw-v*/**'
+      - '*.md'
+      - 'applications/**'
+      - 'images/**'
+      - '_static/**'
+      - '_templates/**'
+      - 'conf.py'
       - 'requirements.txt'
       - '.github/workflows/build.yml'
   workflow_dispatch:
@@ -34,21 +39,8 @@ jobs:
       - name: Build documentation
         run: |
           set -euo pipefail
-          rm -rf docs docs-v* CNAME
-
-          SRC_DIRS="$(find . -maxdepth 1 -type d -name 'raw-v*' -print | sed 's|^\./||' | sort -V)"
-          if [ -z "$SRC_DIRS" ]; then
-            echo "No raw-v* directories found."
-            exit 1
-          fi
-
-          printf '%s\n' "$SRC_DIRS" | while IFS= read -r SRC_DIR; do
-            VERSION="${SRC_DIR#raw-}"
-            python -m sphinx -b html -W --keep-going "$SRC_DIR" "docs-$VERSION"
-          done
-
-          LATEST_SRC_DIR="$(printf '%s\n' "$SRC_DIRS" | tail -n1)"
-          python -m sphinx -b html -W --keep-going "$LATEST_SRC_DIR" docs
+          rm -rf docs
+          python -m sphinx -E -b html -W --keep-going . docs
 
           if [ ! -f docs/index.html ]; then
             echo "Build failed: docs/index.html was not generated."
@@ -65,7 +57,6 @@ jobs:
           name: built-docs-site
           path: |
             docs
-            docs-v*
             CNAME
 
       - name: Publish built site to site-files branch
@@ -74,7 +65,6 @@ jobs:
         run: |
           mkdir -p publish
           cp -R docs publish/
-          find . -maxdepth 1 -type d -name 'docs-v*' -exec cp -R {} publish/ \;
           cp CNAME publish/
 
           cd publish
