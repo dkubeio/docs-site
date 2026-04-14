@@ -1,4 +1,4 @@
-sphinx
+sphinx<8
 myst-parser
 shibuya
 sphinx-copybutton

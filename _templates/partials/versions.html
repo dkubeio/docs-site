@@ -1,0 +1,24 @@
+{%- macro render_versions() -%}
+  {%- if versions -%}
+    <div class="nav-versions">
+      <button type="button" aria-label="Versions">
+        <span class="md:hidden">Versions</span>
+        <span class="hidden md:inline">{{ versions[0].name if versions[0] is mapping else versions[0] }}</span>
+        <i class="i-lucide chevron-down"></i>
+      </button>
+      <div class="nav-versions-choices">
+        <ul>
+          {%- for version in versions %}
+            <li>
+              {%- if version is mapping %}
+                <a href="{{ version.url | replace("index.html", "") }}">{{ version.name }}</a>
+              {%- else %}
+                <a href="#">{{ version }}</a>
+              {%- endif %}
+            </li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endmacro -%}

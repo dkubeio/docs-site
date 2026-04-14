@@ -2,3 +2,5 @@ site/
 .venv-docs/
 __pycache__/
 docs
+docs-v*/
+.multiversion/

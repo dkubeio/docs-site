@@ -12,47 +12,4 @@
   height: 28px;
 }
 
-.version-label {
-  white-space: nowrap;
-}
 
-.version-latest-badge {
-  display: inline-block;
-  align-items: center;
-  padding: 0.15em 0.6em;
-  border-radius: 999px;
-  font-size: 0.85em;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  line-height: 1;
-  color: var(--accent-contrast, #fff);
-  background: linear-gradient(90deg, var(--accent-9), var(--accent-10));
-  vertical-align: baseline;
-}
-
-.version-label .version-latest-badge {
-  margin-left: 1em;
-}
-
-.sy-head-links .link > ul a.has-latest-badge {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  column-gap: 1em;
-  align-items: center;
-}
-
-.sy-head-links .link > ul a.has-latest-badge > span {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.sy-head-links .link > ul a.has-latest-badge > small {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.sy-head-links .link > ul a.has-latest-badge > .version-latest-badge {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  align-self: center;
-}

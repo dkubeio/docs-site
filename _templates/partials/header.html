@@ -1,0 +1,30 @@
+{%- import "partials/versions.html" as versions_macro -%}
+{%- if not theme_hide_navbar %}
+<header class="sy-header" role="banner">
+  <div class="sy-header-inner">
+    <div class="sy-header-brand">
+      {%- if logo %}
+        <a href="{{ pathto(master_doc) }}">
+          <img src="{{ logo }}" alt="" />
+        </a>
+      {%- endif %}
+      <strong>{{ project }}</strong>
+    </div>
+    <nav class="sy-header-links"></nav>
+    <div class="sy-header-extra">
+      {%- if theme_announcement %}
+        <aside class="sy-header-announcement">{{ theme_announcement | safe }}</aside>
+      {%- endif %}
+      {{ render_searchbox() }}
+      {{ versions_macro.render_versions() }}
+      {%- include "partials/socials.html" %}
+    </div>
+    <button class="sy-header-nav-toggle"
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded="false">
+      <i class="i-lucide align-left"></i>
+    </button>
+  </div>
+</header>
+{%- endif %}
