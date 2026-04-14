@@ -6,7 +6,15 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 PYTHON_BIN="${BUILD_PYTHON:-$SCRIPT_DIR/.venv-docs/bin/python}"
-if [ ! -x "$PYTHON_BIN" ]; then
+
+# Check if Python executable exists (supports both paths and commands in PATH)
+if [ -f "$PYTHON_BIN" ] && [ -x "$PYTHON_BIN" ]; then
+  # It's an absolute path that exists and is executable
+  :
+elif command -v "$PYTHON_BIN" >/dev/null 2>&1; then
+  # It's a command that exists in PATH
+  :
+else
   echo "Docs Python interpreter not found: $PYTHON_BIN"
   echo "Create .venv-docs or set BUILD_PYTHON to a compatible Python executable."
   exit 1
