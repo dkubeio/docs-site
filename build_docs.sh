@@ -52,6 +52,54 @@ if [ -z "$LATEST_VERSION_DIR" ]; then
 fi
 
 cp -R "$LATEST_VERSION_DIR" docs
+
+LATEST_TAG="${LATEST_VERSION_DIR#docs-}"
+export LATEST_VERSION_DIR
+export LATEST_TAG
+
+"$PYTHON_BIN" - <<'PY'
+from pathlib import Path
+import os
+import re
+
+root = Path(".")
+latest_dir = os.environ["LATEST_VERSION_DIR"]
+latest_tag = os.environ["LATEST_TAG"]
+latest_root = root / latest_dir
+
+if not latest_root.exists():
+  raise SystemExit(0)
+
+def rewrite_latest_path_refs(text: str) -> str:
+  # Rewrite references like ../docs-vX.Y.Z/.. to ../docs/..
+  return re.sub(
+    rf'((?:\.\./)*){re.escape(latest_dir)}/',
+    r'\1docs/',
+    text,
+  )
+
+def rewrite_latest_self_link(file_path: Path, text: str) -> str:
+  # In docs-v<latest> pages, make latest tag link point to docs/<same-page>.
+  rel_from_latest = file_path.relative_to(latest_root)
+  docs_target = (root / "docs" / rel_from_latest).as_posix()
+  href_to_docs = Path(os.path.relpath(docs_target, file_path.parent.as_posix())).as_posix()
+
+  pattern = re.compile(
+    rf'(<a href=")([^"]*)(">\s*{re.escape(latest_tag)}\s*</a>)'
+  )
+  return pattern.sub(rf'\1{href_to_docs}\3', text)
+
+html_files = [p for p in root.glob("docs*/**/*.html") if p.is_file()]
+for html in html_files:
+  content = html.read_text(encoding="utf-8")
+  updated = rewrite_latest_path_refs(content)
+  if latest_root in html.parents:
+    updated = rewrite_latest_self_link(html, updated)
+
+  if updated != content:
+    html.write_text(updated, encoding="utf-8")
+PY
+
 rm -rf .multiversion
 
 if [ ! -f docs/index.html ]; then
