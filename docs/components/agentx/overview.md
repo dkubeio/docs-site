@@ -16,7 +16,7 @@ AgentX provides a comprehensive platform for deploying and managing AI assistant
 
 ### Collaboration
 - **Share Assistants**: Share with team members with granular permissions
-- **Permission Levels**: Read-only or read-write access
+- **Permission Levels**: Three-tier access control (VIEW, USE, MANAGE)
 - **Pin Favorites**: Quick access to frequently used assistants
 - **Shared with Me**: Easy discovery of assistants shared with you
 
@@ -73,6 +73,7 @@ Access your assistant, view logs, and share with team members as needed.
 - **Backend**: FastAPI (Python)
 - **Database**: PostgreSQL
 - **Orchestration**: Kubernetes
+- **Assistant Interface**: CloudCLI with platform mode
 - **Authentication**: OAuth2 Proxy
 
 ## Getting Started

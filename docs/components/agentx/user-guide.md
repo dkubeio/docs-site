@@ -20,9 +20,21 @@ Example configuration:
   "model": "gpt-4",
   "temperature": 0.7,
   "max_tokens": 2000,
-  "system_prompt": "You are a helpful assistant"
+  "system_prompt": "You are a helpful assistant",
+  "resources": {
+    "cpu_request": "200m",
+    "cpu_limit": "4000m",
+    "memory_request": "512Mi",
+    "memory_limit": "2Gi"
+  }
 }
 ```
+
+**Resource Configuration** (optional):
+- `cpu_request`: Minimum CPU (default: 100m)
+- `cpu_limit`: Maximum CPU (default: 2000m)
+- `memory_request`: Minimum memory (default: 256Mi)
+- `memory_limit`: Maximum memory (default: 1Gi)
 
 3. Click **"Create"** to deploy
 
@@ -53,9 +65,11 @@ Example configuration:
 #### Restarting an Assistant
 
 - Click **"Restart"** button on running assistant
-- Performs stop + start sequence
+- Status changes to "starting" during restart
+- Performs stop + start sequence with 2-second delay
 - Useful for applying configuration changes
 - Maintains same pod identity
+- **Note**: Brief downtime during restart
 
 #### Deleting an Assistant
 
@@ -76,8 +90,10 @@ Example configuration:
 **Log Features**:
 - Real-time streaming via Server-Sent Events
 - Automatic reconnection on disconnect
+- 5-minute timeout for inactive streams
 - Searchable and scrollable
 - Timestamps included
+- Automatic cleanup on disconnect
 
 ### Updating Configuration
 
@@ -101,8 +117,9 @@ Example configuration:
 3. Search for users by username or email
 4. Select users to share with
 5. Choose permission level:
-   - **Read**: View-only access
-   - **Write**: Can modify assistant
+   - **VIEW**: View assistant details only
+   - **USE**: Launch and interact with assistant
+   - **MANAGE**: Modify configuration and settings
 6. Click **"Share"**
 
 #### Managing Shares
@@ -130,13 +147,15 @@ Example configuration:
 3. Permission level displayed for each
 
 **Using Shared Assistants**:
-- **Read permission**: View details, view logs
-- **Write permission**: Edit configuration, restart, stop/start
+- **VIEW permission**: View assistant details and metadata
+- **USE permission**: Launch assistant, view logs, interact with interface
+- **MANAGE permission**: Edit configuration, restart, stop/start, modify settings
 
 **Limitations**:
 - Cannot delete shared assistants (owner only)
 - Cannot share with others (owner only)
 - Cannot publish as template (owner only)
+- Permission level determines available actions
 
 ### Pinning Assistants
 
@@ -382,18 +401,21 @@ Access via **"Admin"** tab (admin users only):
 - View assistant details
 - Check error message
 - View logs for details
+- Check health probes (liveness/readiness)
 
 **Common Issues**:
 - Insufficient resources in namespace
 - Invalid configuration
 - Storage quota exceeded
 - Network issues
+- Health probe failures
 
 **Solutions**:
 - Contact admin for resource increase
 - Validate configuration JSON
 - Delete unused assistants
 - Check Kubernetes cluster health
+- Review pod events for health check failures
 
 ### Cannot Share Assistant
 

@@ -65,8 +65,9 @@ Get all assistants owned by the current user.
 **Query Parameters**:
 - `skip` (int, default: 0): Number of records to skip
 - `limit` (int, default: 100, max: 100): Maximum records to return
+- `include_metadata` (bool, default: false): Include pagination metadata
 
-**Response**: `200 OK`
+**Response (without metadata)**: `200 OK`
 ```json
 [
   {
@@ -76,6 +77,24 @@ Get all assistants owned by the current user.
     ...
   }
 ]
+```
+
+**Response (with metadata)**: `200 OK`
+```json
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "my-assistant",
+      "status": "running",
+      ...
+    }
+  ],
+  "total": 42,
+  "page": 1,
+  "page_size": 100,
+  "total_pages": 1
+}
 ```
 
 ### Get Assistant
