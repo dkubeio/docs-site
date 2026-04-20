@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Fail fast on errors, unset variables, and pipeline failures.
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -7,12 +8,10 @@ cd "$SCRIPT_DIR"
 
 PYTHON_BIN="${BUILD_PYTHON:-$SCRIPT_DIR/.venv-docs/bin/python}"
 
-# Check if Python executable exists (supports both paths and commands in PATH)
+# Accept both absolute Python paths and PATH-resolved commands.
 if [ -f "$PYTHON_BIN" ] && [ -x "$PYTHON_BIN" ]; then
-  # It's an absolute path that exists and is executable
   :
 elif command -v "$PYTHON_BIN" >/dev/null 2>&1; then
-  # It's a command that exists in PATH
   :
 else
   echo "Docs Python interpreter not found: $PYTHON_BIN"
@@ -20,18 +19,21 @@ else
   exit 1
 fi
 
+# Require sphinx-multiversion in selected interpreter.
 if ! "$PYTHON_BIN" -m sphinx_multiversion --help >/dev/null 2>&1; then
   echo "sphinx-multiversion is not available in: $PYTHON_BIN"
   echo "Install requirements.txt into that environment first."
   exit 1
 fi
 
+# Require at least one tag for versioned output generation.
 MATCHING_TAGS="$(git tag --list)"
 if [ -z "$MATCHING_TAGS" ]; then
   echo "No tags found. Create at least one tag to generate versioned docs."
   exit 1
 fi
 
+# Reset prior build outputs.
 rm -rf docs
 find . -maxdepth 1 -type d -name 'docs-v*' -exec rm -rf {} +
 rm -rf .multiversion
@@ -41,6 +43,7 @@ if [ "${STRICT_WARNINGS:-0}" = "1" ]; then
   SPHINX_FLAGS=(-W --keep-going)
 fi
 
+# Build all tagged versions via sphinx-multiversion.
 "$PYTHON_BIN" -m sphinx_multiversion . .multiversion "${SPHINX_FLAGS[@]}"
 
 if [ ! -d .multiversion ]; then
@@ -48,14 +51,17 @@ if [ ! -d .multiversion ]; then
   exit 1
 fi
 
+# Copy generated version folders to repository root.
 find .multiversion -maxdepth 1 -type d -name 'docs-v*' -exec cp -R {} . \;
 
+# Determine latest version by semantic sort.
 LATEST_VERSION_DIR="$(find . -maxdepth 1 -type d -name 'docs-v*' -print | sed 's|^\./||' | sort -V | tail -n1)"
 if [ -z "$LATEST_VERSION_DIR" ]; then
   echo "No versioned output directories were generated. Check that matching tags exist."
   exit 1
 fi
 
+# Create docs/ alias from latest version for homepage routing.
 cp -R "$LATEST_VERSION_DIR" docs
 
 LATEST_TAG="${LATEST_VERSION_DIR#docs-}"
@@ -76,14 +82,14 @@ if not latest_root.exists():
   raise SystemExit(0)
 
 def rewrite_latest_path_refs(text: str) -> str:
-  # Rewrite references like ../docs-vX.Y.Z/.. to ../docs/..
+  # Rewrite refs like ../docs-vX.Y.Z/... to ../docs/...
   return re.sub(
     rf'((?:\.\./)*){re.escape(latest_dir)}/',
     r'\1docs/',
     text,
   )
 
-def rewrite_latest_self_link(file_path: Path, text: str) -> str:
+  # On latest-version pages, point latest tag link to docs/<same-page>.
   # In docs-v<latest> pages, make latest tag link point to docs/<same-page>.
   rel_from_latest = file_path.relative_to(latest_root)
   docs_target = (root / "docs" / rel_from_latest).as_posix()
@@ -95,7 +101,7 @@ def rewrite_latest_self_link(file_path: Path, text: str) -> str:
   return pattern.sub(rf'\1{href_to_docs}\3', text)
 
 def add_latest_badge(text: str) -> str:
-  # Add a badge next to the latest version entry in the dropdown.
+  # Add badge to latest entry in version dropdown.
   pattern = re.compile(
     rf'(<a href="[^"]*">\s*{re.escape(latest_tag)})(\s*</a>)'
   )
@@ -103,7 +109,7 @@ def add_latest_badge(text: str) -> str:
   return pattern.sub(replacement, text)
 
 def add_latest_heading_badge(text: str) -> str:
-  # Add a badge to the dropdown heading for the latest version pages.
+  # Add badge to latest version heading label.
   pattern = re.compile(
     rf'(<span class="hidden md:inline">\s*{re.escape(latest_tag)})(\s*</span>)'
   )
@@ -111,7 +117,7 @@ def add_latest_heading_badge(text: str) -> str:
   return pattern.sub(replacement, text)
 
 def rewrite_version_labels(file_path: Path, text: str) -> str:
-  # Use the directory name as the version label for each rendered output.
+  # Keep footer/version labels aligned with rendered directory version.
   parts = file_path.parts
   if parts and parts[0] == "docs":
     version_label = latest_tag
@@ -149,6 +155,7 @@ for html in html_files:
     html.write_text(updated, encoding="utf-8")
 PY
 
+# Remove temporary multiversion staging directory.
 rm -rf .multiversion
 
 if [ ! -f docs/index.html ]; then

@@ -2,10 +2,9 @@ from datetime import datetime, timezone
 import os
 import subprocess
 
-# Multi-version docs configuration (tags-only).
+# Resolve current docs version from tag, then commit, then fallback.
 def detect_doc_version() -> str:
-	# In sphinx-multiversion builds, each ref is checked out before conf.py loads.
-	# Prefer exact tag name when available; otherwise use short commit id.
+	# sphinx-multiversion checks out each ref before loading this file.
 	try:
 		return subprocess.check_output(
 			["git", "describe", "--tags", "--exact-match"],
@@ -61,8 +60,7 @@ myst_substitutions = {
 	"doc_version": doc_version,
 }
 
-# Historical tags can contain content that triggers non-critical warnings.
-# Suppress these categories to keep multiversion builds stable and readable.
+# Suppress warning categories common in historical docs tags.
 suppress_warnings = [
 	"image.not_readable",
 	"toc.not_included",
@@ -91,17 +89,17 @@ html_favicon = "_static/DKube_Icon_512x512.svg"
 
 import re
 
+# Normalize version objects exposed by sphinx-multiversion for templates.
 def format_version(app, pagename, templatename, context, doctree):
-	"""Convert version namedtuple to its name attribute for template rendering."""
+	"""Normalize version objects to simple template-safe values."""
 	if "current_version" in context and context["current_version"]:
 		version_obj = context["current_version"]
-		# If it's a namedtuple/object with 'name' attribute, extract it
 		if hasattr(version_obj, "name"):
 			context["current_version"] = version_obj.name
 		else:
 			context["current_version"] = str(version_obj)
 	
-	# Also format versions list if it exists
+	# Normalize versions list for templates that iterate over it.
 	if "versions" in context and context["versions"]:
 		try:
 			formatted_versions = []
@@ -115,8 +113,9 @@ def format_version(app, pagename, templatename, context, doctree):
 			pass
 
 
+# Post-process generated HTML for any leaked namedtuple repr strings.
 def fix_version_html(app, exception):
-	"""Post-process HTML files to fix version namedtuple representations."""
+	"""Replace version namedtuple repr with readable version names in HTML."""
 	if exception is not None:
 		return
 	
@@ -142,6 +141,7 @@ def fix_version_html(app, exception):
 			pass
 
 
+# Register context and post-build normalization hooks.
 def setup(app):
 	app.connect("html-page-context", format_version)
 	app.connect("build-finished", fix_version_html)

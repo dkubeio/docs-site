@@ -1,6 +1,8 @@
+# Build docs and publish generated output to deployment branch.
 name: Build docs and publish site files branch
 
 on:
+  # Run on docs-related pushes (any branch/tag), tag create/delete, and manual dispatch.
   push:
     branches:
       - '**'
@@ -25,6 +27,7 @@ permissions:
 
 jobs:
   build-and-publish:
+    # For create/delete events, execute only when the ref is a tag.
     if: >-
       github.event_name == 'workflow_dispatch' ||
       github.event_name == 'push' ||
@@ -33,10 +36,12 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      # For delete events, checkout default branch because deleted ref no longer exists.
       - name: Check out repository
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event_name == 'delete' && github.event.repository.default_branch || github.ref }}
+          # Full history/tags retained for tag-aware operations.
           fetch-depth: 0
           fetch-tags: true
 
@@ -50,6 +55,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Build docs via repository script.
       - name: Build documentation
         run: |
           BUILD_PYTHON=python bash build_docs.sh
@@ -58,6 +64,7 @@ jobs:
         run: |
           echo "dkubex2.dkube.io" > CNAME
 
+      # Keep generated output as workflow artifact.
       - name: Upload built site artifact
         uses: actions/upload-artifact@v4
         with:
@@ -67,16 +74,21 @@ jobs:
             docs-v*
             CNAME
 
+      # Publish generated snapshot to site-files branch.
       - name: Publish built site to site-files branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Prepare Pages source layout under publish/docs.
           mkdir -p publish/docs
+
           cp -R docs/. publish/docs/
           find . -maxdepth 1 -type d -name 'docs-v*' -exec cp -R {} publish/docs/ \;
+
           cp CNAME publish/docs/
           touch publish/docs/.nojekyll
 
+          # Rewrite links for docs-folder Pages mode.
           python - <<'PY'
           from pathlib import Path
           import re
@@ -97,6 +109,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          # Full snapshot stage, including removals.
           git add -A
 
           if git diff --cached --quiet; then
