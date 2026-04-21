@@ -1,59 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="AgentX">
+  <!-- AgentX — friendly agent robot. Face wears the "AI" monogram; the body
+       screen shows a terminal prompt ">_" (we are a coding-agent platform);
+       arms extend to orbital nodes that hint at multi-agent orchestration
+       (Claude Code, OpenCode, OpenClaw). Navy outline keeps the silhouette
+       legible down to favicon sizes; the brand gradient (blue→cyan) appears
+       on accent panels, with violet/amber hotspots for visual pop. -->
   <defs>
-    <linearGradient id="clawGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    <linearGradient id="axBrand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"  stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
     </linearGradient>
-    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    <linearGradient id="axBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#eff6ff"/>
+      <stop offset="100%" stop-color="#bfdbfe"/>
     </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2" result="blur"/>
-      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-    </filter>
+    <linearGradient id="axScreen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
   </defs>
-  
-  <!-- Background circle -->
-  <circle cx="64" cy="64" r="58" fill="#0f172a"/>
-  
-  <!-- Outer ring -->
-  <circle cx="64" cy="64" r="56" fill="none" stroke="url(#clawGradient)" stroke-width="3"/>
-  
-  <!-- Central hub representing the pilot/control center -->
-  <circle cx="64" cy="64" r="18" fill="url(#clawGradient)"/>
-  
-  <!-- Inner control dot -->
-  <circle cx="64" cy="64" r="8" fill="#0f172a"/>
-  <circle cx="64" cy="64" r="4" fill="#06b6d4"/>
-  
-  <!-- Claw arm segments extending from center -->
-  <!-- Top claw arm -->
-  <path d="M64 46 L64 28 L58 22 L64 16 L70 22 L64 28" 
-        fill="none" stroke="url(#clawGradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="64" cy="16" r="5" fill="url(#accentGradient)"/>
-  
-  <!-- Right claw arm -->
-  <path d="M82 64 L100 64 L106 58 L112 64 L106 70 L100 64" 
-        fill="none" stroke="url(#clawGradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="112" cy="64" r="5" fill="url(#accentGradient)"/>
-  
-  <!-- Bottom claw arm -->
-  <path d="M64 82 L64 100 L58 106 L64 112 L70 106 L64 100" 
-        fill="none" stroke="url(#clawGradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="64" cy="112" r="5" fill="url(#accentGradient)"/>
-  
-  <!-- Left claw arm -->
-  <path d="M46 64 L28 64 L22 58 L16 64 L22 70 L28 64" 
-        fill="none" stroke="url(#clawGradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="16" cy="64" r="5" fill="url(#accentGradient)"/>
-  
-  <!-- Connection lines from center to arms -->
-  <line x1="64" y1="46" x2="64" y2="54" stroke="url(#clawGradient)" stroke-width="2"/>
-  <line x1="74" y1="64" x2="82" y2="64" stroke="url(#clawGradient)" stroke-width="2"/>
-  <line x1="64" y1="74" x2="64" y2="82" stroke="url(#clawGradient)" stroke-width="2"/>
-  <line x1="54" y1="64" x2="46" y2="64" stroke="url(#clawGradient)" stroke-width="2"/>
-  
-  <!-- Small decorative elements representing code/automation -->
-  <text x="64" y="124" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="6" font-weight="bold">&lt;/&gt;</text>
+
+  <!-- Antenna -->
+  <line x1="64" y1="24" x2="64" y2="10" stroke="#1e3a8a" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="64" cy="7" r="4.5" fill="#fbbf24" stroke="#1e3a8a" stroke-width="2"/>
+
+  <!-- Side "ears" (gradient accent) -->
+  <rect x="12" y="44" width="11" height="22" rx="2.5" fill="url(#axBrand)" stroke="#1e3a8a" stroke-width="3"/>
+  <rect x="105" y="44" width="11" height="22" rx="2.5" fill="url(#axBrand)" stroke="#1e3a8a" stroke-width="3"/>
+
+  <!-- Head -->
+  <rect x="23" y="24" width="82" height="60" rx="11" fill="url(#axBody)" stroke="#1e3a8a" stroke-width="3.5"/>
+  <!-- Gloss highlight -->
+  <path d="M28 30 Q28 26 32 26 L58 26 L36 82 Q28 82 28 76 Z" fill="#ffffff" opacity="0.35"/>
+
+  <!-- "AI" wordmark on the face -->
+  <text x="64" y="66" text-anchor="middle" fill="#1e3a8a"
+        font-family="ui-monospace, 'SF Mono', Menlo, monospace"
+        font-size="30" font-weight="800" letter-spacing="1">AI</text>
+
+  <!-- Neck connector -->
+  <rect x="53" y="84" width="22" height="6" fill="url(#axBrand)" stroke="#1e3a8a" stroke-width="2.5"/>
+
+  <!-- Body -->
+  <rect x="16" y="90" width="96" height="32" rx="6" fill="url(#axBody)" stroke="#1e3a8a" stroke-width="3.5"/>
+
+  <!-- Terminal screen on the body — coding-agent hint -->
+  <rect x="26" y="96" width="76" height="20" rx="3" fill="url(#axScreen)" stroke="#1e3a8a" stroke-width="2"/>
+  <text x="33" y="111" fill="#22d3ee"
+        font-family="ui-monospace, 'SF Mono', Menlo, monospace"
+        font-size="13" font-weight="700">&gt;_</text>
+  <!-- Blinking-cursor block -->
+  <rect x="50" y="101" width="7" height="11" fill="#22d3ee" opacity="0.85"/>
+
+  <!-- Arms reaching out to orbital agent nodes (multi-agent) -->
+  <line x1="16" y1="106" x2="6"  y2="106" stroke="#1e3a8a" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="5"   cy="106" r="4.5" fill="url(#axBrand)" stroke="#1e3a8a" stroke-width="2"/>
+  <line x1="112" y1="106" x2="122" y2="106" stroke="#1e3a8a" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="123" cy="106" r="4.5" fill="url(#axBrand)" stroke="#1e3a8a" stroke-width="2"/>
 </svg>
