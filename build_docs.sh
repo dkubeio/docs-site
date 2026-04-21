@@ -89,6 +89,7 @@ def rewrite_latest_path_refs(text: str) -> str:
     text,
   )
 
+def rewrite_latest_self_link(file_path: Path, text: str) -> str:
   # On latest-version pages, point latest tag link to docs/<same-page>.
   # In docs-v<latest> pages, make latest tag link point to docs/<same-page>.
   rel_from_latest = file_path.relative_to(latest_root)
