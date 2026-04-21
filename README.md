@@ -14,7 +14,7 @@ This repository contains the DKubeX documentation system. It is built with Sphin
 | --- | --- |
 | Primary homepage | `docs/index.html` |
 | Source site entry | `https://dkubex2.dkube.io/` |
-| Versioning model | Git tags via `sphinx-multiversion` |
+| Versioning model | Git tags via `sphinx-multiversion` with a moving `latest` tag |
 | Build entrypoint | `build_docs.sh` |
 | Config entrypoint | `conf.py` |
 | Publish target | `site-files` branch |
@@ -26,12 +26,12 @@ The documentation system follows a strict source/build/publish split:
 
 1. Source of truth
 - Editable content lives in the repository root (`*.md`, `applications/**`, `images/**`, `_static/**`, `_templates/**`).
-- Generated directories (`docs/`, `docs-v*`) are build outputs and should not be edited directly.
+- Generated directories (`docs/`, `docs-*`) are build outputs and should not be edited directly.
 
 2. Versioning
 - Documentation versions are derived from Git tags.
 - Each tag is rendered into its own output directory (`docs-<tag>`).
-- The newest semantic version is copied to `docs/` and becomes the default homepage.
+- The moving `latest` tag is copied to `docs/` when it exists; otherwise the newest semantic version becomes the default homepage.
 
 3. Build execution
 - `build_docs.sh` validates the Python environment.
@@ -59,7 +59,7 @@ The documentation system follows a strict source/build/publish split:
 - `conf.py`: Sphinx entry point and multiversion configuration.
 - `build_docs.sh`: local and CI build orchestration script.
 - `*.md`, `applications/**`, `images/**`, `_static/**`, `_templates/**`: editable source files.
-- `docs-v*/`: generated per-tag HTML outputs.
+- `docs-*/`: generated per-tag HTML outputs.
 - `docs/`: generated latest HTML output.
 
 ## Prerequisites
@@ -95,10 +95,11 @@ Workflow file: `.github/workflows/build.yml`
 
 Current behavior on docs-related pushes and tag events:
 1. Install dependencies.
-2. Build tag-matched versions to `docs-v*` using `sphinx-multiversion`.
-3. Copy the latest semantic version to `docs/`.
+2. Refresh the local `latest` tag on branch builds and build tag-matched versions to `docs-*` using `sphinx-multiversion`.
+3. Copy the moving `latest` build to `docs/` when present, otherwise use the newest semantic version.
 4. Upload the generated site artifact.
 5. Publish the generated snapshot to `site-files`.
+6. Force-update the remote `latest` tag on branch builds.
 
 Pages and custom domain delivery:
 - The workflow writes `CNAME` into generated output.
@@ -148,4 +149,10 @@ Create a release tag (example `v2.0.2`):
 
 ```bash
 git tag v2.0.2 && git push origin v2.0.2
+```
+
+Update the moving latest tag locally:
+
+```bash
+git tag -f latest && git push --force origin latest
 ```

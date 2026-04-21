@@ -35,7 +35,7 @@ fi
 
 # Reset prior build outputs.
 rm -rf docs
-find . -maxdepth 1 -type d -name 'docs-v*' -exec rm -rf {} +
+find . -maxdepth 1 -type d -name 'docs-*' -exec rm -rf {} +
 rm -rf .multiversion
 
 SPHINX_FLAGS=(--keep-going)
@@ -52,10 +52,13 @@ if [ ! -d .multiversion ]; then
 fi
 
 # Copy generated version folders to repository root.
-find .multiversion -maxdepth 1 -type d -name 'docs-v*' -exec cp -R {} . \;
+find .multiversion -maxdepth 1 -type d -name 'docs-*' -exec cp -R {} . \;
 
-# Determine latest version by semantic sort.
-LATEST_VERSION_DIR="$(find . -maxdepth 1 -type d -name 'docs-v*' -print | sed 's|^\./||' | sort -V | tail -n1)"
+# Prefer the moving latest tag when it exists, otherwise fall back to the newest semantic version.
+LATEST_VERSION_DIR="$(find . -maxdepth 1 -type d -name 'docs-latest' -print | sed 's|^\./||' | head -n1)"
+if [ -z "$LATEST_VERSION_DIR" ]; then
+  LATEST_VERSION_DIR="$(find . -maxdepth 1 -type d -name 'docs-v*' -print | sed 's|^\./||' | sort -V | tail -n1)"
+fi
 if [ -z "$LATEST_VERSION_DIR" ]; then
   echo "No versioned output directories were generated. Check that matching tags exist."
   exit 1
