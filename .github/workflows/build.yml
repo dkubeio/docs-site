@@ -33,7 +33,7 @@ jobs:
       github.event_name == 'push' ||
       (github.event_name == 'create' && github.event.ref_type == 'tag') ||
       (github.event_name == 'delete' && github.event.ref_type == 'tag')
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       # For delete events, checkout default branch because deleted ref no longer exists.
