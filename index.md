@@ -36,6 +36,6 @@ Turn platform components on or off from the UI to adapt DKubeX to different infr
 self
 installation
 quickstart
-usecases
+usecases/index
 applications/index
 ```
