@@ -73,7 +73,7 @@ Access your assistant, view logs, and share with team members as needed.
 - **Backend**: FastAPI (Python)
 - **Database**: PostgreSQL
 - **Orchestration**: Kubernetes
-- **Assistant Interface**: CloudCLI with platform mode
+- **Assistant Interface**: OpenClaw gateway + in-browser Claude Code / OpenCode TUIs (ttyd)
 - **Authentication**: OAuth2 Proxy
 
 ## Getting Started
