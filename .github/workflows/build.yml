@@ -6,8 +6,6 @@ on:
   push:
     branches:
       - '**'
-    tags:
-      - '**'
   create:
   delete:
   workflow_dispatch:
@@ -18,9 +16,10 @@ permissions:
 jobs:
   build-and-publish:
     # For create/delete events, execute only when the ref is a tag.
+    # Tag pushes are excluded to prevent loops when CI force-pushes an updated tag.
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      github.event_name == 'push' ||
+      (github.event_name == 'push' && github.ref_type != 'tag') ||
       (github.event_name == 'create' && github.event.ref_type == 'tag') ||
       (github.event_name == 'delete' && github.event.ref_type == 'tag')
     runs-on: ubuntu-latest
@@ -45,6 +44,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # On branch pushes, move the newest semantic version tag to the
+      # current commit so the live site always reflects the latest content.
+      - name: Move newest version tag to current commit
+        if: >-
+          github.event_name == 'workflow_dispatch' ||
+          (github.event_name == 'push' && github.ref_type != 'tag')
+        run: |
+          NEWEST_TAG="$(git tag -l 'v*' | sort -V | tail -n1)"
+          if [ -n "$NEWEST_TAG" ]; then
+            echo "Moving tag $NEWEST_TAG to ${GITHUB_SHA}"
+            git tag -f "$NEWEST_TAG" "${GITHUB_SHA}"
+          fi
 
       # Build docs via repository script.
       - name: Build documentation
@@ -112,3 +123,15 @@ jobs:
 
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git push --force origin site-files
+
+      - name: Push updated version tag
+        if: >-
+          github.event_name == 'workflow_dispatch' ||
+          (github.event_name == 'push' && github.ref_type != 'tag')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NEWEST_TAG="$(git tag -l 'v*' | sort -V | tail -n1)"
+          if [ -n "$NEWEST_TAG" ]; then
+            git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "refs/tags/$NEWEST_TAG"
+          fi

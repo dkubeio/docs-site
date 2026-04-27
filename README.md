@@ -93,12 +93,14 @@ git fetch --tags && bash build_docs.sh
 
 Workflow file: `.github/workflows/build.yml`
 
-Current behavior on pushes and tag events:
+Current behavior on branch pushes and tag events:
 1. Install dependencies.
-2. Build tag-matched versions to `docs-*` using `sphinx-multiversion`.
-3. Copy the newest semantic version build to `docs/` for the homepage.
-4. Upload the generated site artifact.
-5. Publish the generated snapshot to `site-files`.
+2. On branch pushes, move the newest semantic version tag (e.g. `v2.0.0.2`) to the current commit so the site always reflects the latest content.
+3. Build tag-matched versions to `docs-*` using `sphinx-multiversion`.
+4. Copy the newest semantic version build to `docs/` for the homepage.
+5. Upload the generated site artifact.
+6. Publish the generated snapshot to `site-files`.
+7. On branch pushes, force-push the updated version tag to the remote.
 
 Pages and custom domain delivery:
 - The workflow writes `CNAME` into generated output.
