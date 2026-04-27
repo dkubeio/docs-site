@@ -20,9 +20,9 @@ jobs:
     # For create/delete events, execute only when the ref is a tag.
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'push' && !(github.ref_type == 'tag' && github.ref_name == 'latest')) ||
-      (github.event_name == 'create' && github.event.ref_type == 'tag' && github.event.ref != 'latest') ||
-      (github.event_name == 'delete' && github.event.ref_type == 'tag' && github.event.ref != 'latest')
+      github.event_name == 'push' ||
+      (github.event_name == 'create' && github.event.ref_type == 'tag') ||
+      (github.event_name == 'delete' && github.event.ref_type == 'tag')
     runs-on: ubuntu-latest
 
     steps:
@@ -45,12 +45,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Refresh latest tag locally
-        if: >-
-          github.event_name == 'workflow_dispatch' ||
-          (github.event_name == 'push' && github.ref_type != 'tag')
-        run: |
-          git tag -f latest "${GITHUB_SHA}"
 
       # Build docs via repository script.
       - name: Build documentation
@@ -118,12 +112,3 @@ jobs:
 
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git push --force origin site-files
-
-      - name: Push latest tag
-        if: >-
-          github.event_name == 'workflow_dispatch' ||
-          (github.event_name == 'push' && github.ref_type != 'tag')
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" refs/tags/latest

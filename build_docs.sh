@@ -54,11 +54,8 @@ fi
 # Copy generated version folders to repository root.
 find .multiversion -maxdepth 1 -type d -name 'docs-*' -exec cp -R {} . \;
 
-# Prefer the moving latest tag when it exists, otherwise fall back to the newest semantic version.
-LATEST_VERSION_DIR="$(find . -maxdepth 1 -type d -name 'docs-latest' -print | sed 's|^\./||' | head -n1)"
-if [ -z "$LATEST_VERSION_DIR" ]; then
-  LATEST_VERSION_DIR="$(find . -maxdepth 1 -type d -name 'docs-v*' -print | sed 's|^\./||' | sort -V | tail -n1)"
-fi
+# Use the newest semantic version as the homepage source.
+LATEST_VERSION_DIR="$(find . -maxdepth 1 -type d -name 'docs-v*' -print | sed 's|^\./||' | sort -V | tail -n1)"
 if [ -z "$LATEST_VERSION_DIR" ]; then
   echo "No versioned output directories were generated. Check that matching tags exist."
   exit 1

@@ -14,7 +14,7 @@ This repository contains the DKubeX documentation system. It is built with Sphin
 | --- | --- |
 | Primary homepage | `docs/index.html` |
 | Source site entry | `https://dkubex2.dkube.io/` |
-| Versioning model | Git tags via `sphinx-multiversion` with a moving `latest` tag |
+| Versioning model | Git tags via `sphinx-multiversion`; newest semantic version becomes the homepage |
 | Build entrypoint | `build_docs.sh` |
 | Config entrypoint | `conf.py` |
 | Publish target | `site-files` branch |
@@ -31,7 +31,7 @@ The documentation system follows a strict source/build/publish split:
 2. Versioning
 - Documentation versions are derived from Git tags.
 - Each tag is rendered into its own output directory (`docs-<tag>`).
-- The moving `latest` tag is copied to `docs/` when it exists; otherwise the newest semantic version becomes the default homepage.
+- The newest semantic version tag is copied to `docs/` to serve as the default homepage.
 
 3. Build execution
 - `build_docs.sh` validates the Python environment.
@@ -93,13 +93,12 @@ git fetch --tags && bash build_docs.sh
 
 Workflow file: `.github/workflows/build.yml`
 
-Current behavior on docs-related pushes and tag events:
+Current behavior on pushes and tag events:
 1. Install dependencies.
-2. Refresh the local `latest` tag on branch builds and build tag-matched versions to `docs-*` using `sphinx-multiversion`.
-3. Copy the moving `latest` build to `docs/` when present, otherwise use the newest semantic version.
+2. Build tag-matched versions to `docs-*` using `sphinx-multiversion`.
+3. Copy the newest semantic version build to `docs/` for the homepage.
 4. Upload the generated site artifact.
 5. Publish the generated snapshot to `site-files`.
-6. Force-update the remote `latest` tag on branch builds.
 
 Pages and custom domain delivery:
 - The workflow writes `CNAME` into generated output.
@@ -149,10 +148,4 @@ Create a release tag (example `v2.0.2`):
 
 ```bash
 git tag v2.0.2 && git push origin v2.0.2
-```
-
-Update the moving latest tag locally:
-
-```bash
-git tag -f latest && git push --force origin latest
 ```
