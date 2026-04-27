@@ -16,8 +16,4 @@ Until proper content comes, enjoy the company of this little kitty!
 print("Hello, World!")
 ```
 
-Test print.
-Test print.
-2.0.0.2 version retag test 2
-Test commit.
-Test commit.
+Test Commit
