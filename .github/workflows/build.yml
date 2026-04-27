@@ -8,16 +8,6 @@ on:
       - '**'
     tags:
       - '**'
-    paths:
-      - '*.md'
-      - 'applications/**'
-      - 'images/**'
-      - '_static/**'
-      - '_templates/**'
-      - 'conf.py'
-      - 'build_docs.sh'
-      - 'requirements.txt'
-      - '.github/workflows/build.yml'
   create:
   delete:
   workflow_dispatch:
