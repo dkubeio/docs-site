@@ -104,22 +104,6 @@ def rewrite_latest_self_link(file_path: Path, text: str) -> str:
   )
   return pattern.sub(rf'\1{href_to_docs}\3', text)
 
-def add_latest_badge(text: str) -> str:
-  # Add badge to latest entry in version dropdown.
-  pattern = re.compile(
-    rf'(<a href="[^"]*">\s*{re.escape(latest_tag)})(\s*</a>)'
-  )
-  replacement = rf'\1 <span class="version-latest-badge">Latest</span>\2'
-  return pattern.sub(replacement, text)
-
-def add_latest_heading_badge(text: str) -> str:
-  # Add badge to latest version heading label.
-  pattern = re.compile(
-    rf'(<span class="hidden md:inline">\s*{re.escape(latest_tag)})(\s*</span>)'
-  )
-  replacement = rf'\1 <span class="version-latest-badge">Latest</span>\2'
-  return pattern.sub(replacement, text)
-
 def rewrite_version_labels(file_path: Path, text: str) -> str:
   # Keep footer/version labels aligned with rendered directory version.
   parts = file_path.parts
@@ -150,9 +134,6 @@ for html in html_files:
   updated = rewrite_latest_path_refs(content)
   if latest_root in html.parents:
     updated = rewrite_latest_self_link(html, updated)
-  updated = add_latest_badge(updated)
-  if html.parts and html.parts[0] == "docs":
-    updated = add_latest_heading_badge(updated)
   updated = rewrite_version_labels(html, updated)
 
   if updated != content:

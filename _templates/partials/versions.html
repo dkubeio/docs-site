@@ -3,15 +3,28 @@
     <div class="nav-versions">
       <button type="button" aria-label="Versions">
         <span class="md:hidden">Versions</span>
-        <span class="hidden md:inline">{{ versions[0].name if versions[0] is mapping else versions[0] }}</span>
+        <span class="hidden md:inline">
+          {{ current_version_display if current_version_display is defined and current_version_display else (current_version if current_version is defined else (versions[0].name if versions[0] is mapping else versions[0])) }}
+          {%- if current_version_is_latest is defined and current_version_is_latest -%}
+            <span class="version-latest-badge">Latest</span>
+          {%- endif -%}
+        </span>
         <i class="i-lucide chevron-down"></i>
       </button>
       <div class="nav-versions-choices">
         <ul>
           {%- for version in versions %}
+            {%- if version is mapping and version.is_current -%}
+              {%- continue -%}
+            {%- endif -%}
             <li>
               {%- if version is mapping %}
-                <a href="{{ version.url | replace("index.html", "") }}">{{ version.name }}</a>
+                <a href="{{ version.url }}">
+                  {{ version.name }}
+                  {%- if version.is_latest -%}
+                    <span class="version-latest-badge">Latest</span>
+                  {%- endif -%}
+                </a>
               {%- else %}
                 <a href="#">{{ version }}</a>
               {%- endif %}

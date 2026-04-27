@@ -89,6 +89,27 @@ html_favicon = "_static/DKube_Icon_512x512.svg"
 
 import re
 
+
+def _version_parts(name: str):
+	"""Extract comparable numeric parts from tags like v2.0.0.2 or 2.0.0."""
+	match = re.match(r"^v?(\d+(?:\.\d+)*)", str(name or ""))
+	if not match:
+		return None
+	try:
+		return tuple(int(part) for part in match.group(1).split("."))
+	except Exception:
+		return None
+
+
+def _version_sort_key(version_item):
+	"""Sort released versions first, then semantic tags descending."""
+	name = str(version_item.get("name", ""))
+	is_released = 1 if version_item.get("is_released") else 0
+	parts = _version_parts(name)
+	is_semver = 1 if parts is not None else 0
+	parts_key = parts if parts is not None else tuple()
+	return (is_released, is_semver, parts_key, name)
+
 # Normalize version objects exposed by sphinx-multiversion for templates.
 def format_version(app, pagename, templatename, context, doctree):
 	"""Normalize version objects to simple template-safe values."""
@@ -98,16 +119,40 @@ def format_version(app, pagename, templatename, context, doctree):
 			context["current_version"] = version_obj.name
 		else:
 			context["current_version"] = str(version_obj)
-	
+
+	current_name = str(context.get("current_version", ""))
+
 	# Normalize versions list for templates that iterate over it.
 	if "versions" in context and context["versions"]:
 		try:
 			formatted_versions = []
 			for v in context["versions"]:
 				if hasattr(v, "name"):
-					formatted_versions.append({"name": v.name, "url": v.url, "is_released": v.is_released})
+					formatted_versions.append(
+						{
+							"name": v.name,
+							"url": v.url,
+							"is_released": v.is_released,
+						}
+					)
 				else:
-					formatted_versions.append(v)
+					formatted_versions.append(
+						{
+							"name": str(v),
+							"url": "#",
+							"is_released": False,
+						}
+					)
+
+			formatted_versions.sort(key=_version_sort_key, reverse=True)
+			latest_name = formatted_versions[0]["name"] if formatted_versions else ""
+
+			for item in formatted_versions:
+				item["is_current"] = item["name"] == current_name
+				item["is_latest"] = item["name"] == latest_name
+
+			context["current_version_display"] = current_name or latest_name
+			context["current_version_is_latest"] = (current_name == latest_name)
 			context["versions"] = formatted_versions
 		except:
 			pass
