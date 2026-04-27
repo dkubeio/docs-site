@@ -1,8 +1,8 @@
-# Mortgage-Lite Overview
+# MortIQ Overview
 
-![Mortgage-Lite Icon](./media/mortgage-lite-icon.svg)
+![MortIQ Icon](./media/mortiq-icon.svg)
 
-**Mortgage-Lite** is an AI-powered mortgage underwriting assistant that automates document processing, validation, and compliance checking for mortgage applications. Built with privacy-first principles, it uses a multi-agent architecture to process mortgage packets efficiently while maintaining strict data security.
+**MortIQ** is an AI-powered mortgage underwriting assistant that automates document processing, validation, and compliance checking for mortgage applications. Built with privacy-first principles, it uses a multi-agent architecture to process mortgage packets efficiently while maintaining strict data security.
 
 ## Key Features
 
