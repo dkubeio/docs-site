@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Quickstart - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Search" href="ai_search.html" /><link rel="prev" title="API Reference" href="../mortiq/api-reference.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/ragflow/" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/ragflow/"/>
+  <meta property="og:title" content="Quickstart"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="index.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../agentx/index.html">AgentX Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/user-guide.html">User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortgage-lite/index.html">Mortgage-Lite Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/getting-started.html">Getting Started with Mortgage-Lite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/architecture.html">Mortgage-Lite Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortiq/index.html">MortIQ Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/getting-started.html">Getting Started with MortIQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/architecture.html">MortIQ Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Quickstart</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM User Guide</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#contents">Contents</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#start-up-the-server">Start up the server</a></li>
+<li><a class="reference internal" href="#configure-llms">Configure LLMs</a></li>
+<li><a class="reference internal" href="#create-your-first-dataset">Create your first dataset</a></li>
+<li><a class="reference internal" href="#intervene-with-file-parsing">Intervene with file parsing</a></li>
+<li><a class="reference internal" href="#set-up-an-ai-chat">Set up an AI chat</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Quickstart</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/index.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/index.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/ragflow/index.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/index.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/index.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">¶</a></h1>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">RAGFlow Docs</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ai_search.html">Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manage_files.html">Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l1"><a class="reference internal" href="team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="team/share_model.html">Share models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="team/share_memory.html">Share memory</a></li>
+</ul>
+</div>
+<p>RAGFlow is an open-source RAG (Retrieval-Augmented Generation) engine based on deep document understanding. When integrated with LLMs, it is capable of providing truthful question-answering capabilities, backed by well-founded citations from various complex formatted data.</p>
+<p>This quick start guide describes a general process from:</p>
+<ul class="simple">
+<li><p>Starting up a local RAGFlow server,</p></li>
+<li><p>Creating a dataset,</p></li>
+<li><p>Intervening with file parsing, to</p></li>
+<li><p>Establishing an AI chat based on your datasets.</p></li>
+</ul>
+<p>:::danger IMPORTANT
+We officially support x86 CPU and Nvidia GPU, and this document offers instructions on deploying RAGFlow using Docker on x86 platforms. While we also test RAGFlow on ARM64 platforms, we do not maintain RAGFlow Docker images for ARM.</p>
+<p>If you are on an ARM platform, follow <a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docs/develop/build_docker_image.mdx">this guide</a> to build a RAGFlow Docker image.
+:::</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>CPU &gt;= 4 cores (x86);</p></li>
+<li><p>RAM &gt;= 16 GB;</p></li>
+<li><p>Disk &gt;= 50 GB;</p></li>
+<li><p>Docker &gt;= 24.0.0 &amp; Docker Compose &gt;= v2.26.1.</p></li>
+<li><p><a class="reference external" href="https://gvisor.dev/docs/user_guide/install/">gVisor</a>: Required only if you intend to use the code executor (<a class="reference external" href="https://github.com/infiniflow/ragflow/tree/main/sandbox">sandbox</a>) feature of RAGFlow.</p></li>
+</ul>
+<p>:::tip NOTE
+If you have not installed Docker on your local machine (Windows, Mac, or Linux), see <a class="reference external" href="https://docs.docker.com/engine/install/">Install Docker Engine</a>.
+:::</p>
+</section>
+<section id="start-up-the-server">
+<h2>Start up the server<a class="headerlink" href="#start-up-the-server" title="Link to this heading">¶</a></h2>
+<p>This section provides instructions on setting up the RAGFlow server on Linux. If you are on a different operating system, no worries. Most steps are alike.</p>
+<ol class="arabic">
+<li><p>Ensure <code class="docutils literal notranslate"><span class="pre">vm.max_map_count</span></code> &gt;= 262144.</p>
+<p><code class="docutils literal notranslate"><span class="pre">vm.max_map_count</span></code> sets the maximum number of memory map areas a process may have. Its default value is 65530. RAGFlow v0.24.0 uses Elasticsearch or <a class="reference external" href="https://github.com/infiniflow/infinity">Infinity</a> for multiple recall. Setting this value correctly is crucial to the proper functioning of the Elasticsearch component.</p>
+<p><strong>Linux:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Check current value:</span>
+</span><span data-line="2">sysctl<span class="w"> </span>vm.max_map_count
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># Set to 262144:</span>
+</span><span data-line="5">sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.max_map_count<span class="o">=</span><span class="m">262144</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="c1"># Make permanent — add to /etc/sysctl.conf:</span>
+</span><span data-line="8">vm.max_map_count<span class="o">=</span><span class="m">262144</span>
+</span></pre></div>
+</div>
+<p><strong>macOS (Docker Desktop):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--privileged<span class="w"> </span>--pid<span class="o">=</span>host<span class="w"> </span>alpine<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.max_map_count<span class="o">=</span><span class="m">262144</span>
+</span></pre></div>
+</div>
+<p><strong>Windows (Docker Desktop WSL 2):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">wsl<span class="w"> </span>-d<span class="w"> </span>docker-desktop<span class="w"> </span>-u<span class="w"> </span>root
+</span><span data-line="2">sysctl<span class="w"> </span>-w<span class="w"> </span>vm.max_map_count<span class="o">=</span><span class="m">262144</span>
+</span></pre></div>
+</div>
+<p>To make it permanent on Windows, update <code class="docutils literal notranslate"><span class="pre">%USERPROFILE%\.wslconfig</span></code>:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">[wsl2]</span>
+</span><span data-line="2"><span class="na">kernelCommandLine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sysctl.vm.max_map_count=262144&quot;</span>
+</span></pre></div>
+</div>
+</li>
+<li><p>Clone the repo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/infiniflow/ragflow.git
+</span><span data-line="2"><span class="nb">cd</span><span class="w"> </span>ragflow/docker
+</span></pre></div>
+</div>
+</li>
+<li><p>Switch to the current version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>checkout<span class="w"> </span>-f<span class="w"> </span>v0.24.0
+</span></pre></div>
+</div>
+</li>
+<li><p>Use the pre-built Docker images and start up the server:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Use CPU for DeepDoc tasks:</span>
+</span><span data-line="2">docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yml<span class="w"> </span>up<span class="w"> </span>-d
+</span></pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>RAGFlow image tag</p></th>
+<th class="head"><p>Image size (GB)</p></th>
+<th class="head"><p>Stable?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>v0.24.0</p></td>
+<td><p>~2</p></td>
+<td><p>Stable release</p></td>
+</tr>
+<tr class="row-odd"><td><p>nightly</p></td>
+<td><p>~2</p></td>
+<td><p><em>Unstable</em> nightly build</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>:::tip NOTE
+The image size shown refers to the size of the <em>downloaded</em> Docker image, which is compressed. When Docker runs the image, it unpacks it, resulting in significantly greater disk usage. A Docker image will expand to around 7 GB once unpacked.
+:::</p>
+</li>
+<li><p>Check the server status after having the server up and running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>docker-ragflow-cpu-1
+</span></pre></div>
+</div>
+<p><em>The following output confirms a successful launch of the system:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">     <span class="n">____</span>   <span class="n">___</span>    <span class="n">______</span> <span class="n">______</span> <span class="n">__</span>
+</span><span data-line="2">    <span class="o">/</span> <span class="n">__</span> \ <span class="o">/</span>   <span class="o">|</span>  <span class="o">/</span> <span class="n">____</span><span class="o">//</span> <span class="n">____</span><span class="o">//</span> <span class="o">/</span><span class="n">____</span>  <span class="n">_</span>      <span class="n">__</span>
+</span><span data-line="3">   <span class="o">/</span> <span class="o">/</span><span class="n">_</span><span class="o">/</span> <span class="o">//</span> <span class="o">/|</span> <span class="o">|</span> <span class="o">/</span> <span class="o">/</span> <span class="n">__</span> <span class="o">/</span> <span class="o">/</span><span class="n">_</span>   <span class="o">/</span> <span class="o">//</span> <span class="n">__</span> \<span class="o">|</span> <span class="o">|</span> <span class="o">/|</span> <span class="o">/</span> <span class="o">/</span>
+</span><span data-line="4">  <span class="o">/</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="o">//</span> <span class="n">___</span> <span class="o">|/</span> <span class="o">/</span><span class="n">_</span><span class="o">/</span> <span class="o">//</span> <span class="n">__</span><span class="o">/</span>  <span class="o">/</span> <span class="o">//</span> <span class="o">/</span><span class="n">_</span><span class="o">/</span> <span class="o">/|</span> <span class="o">|/</span> <span class="o">|/</span> <span class="o">/</span>
+</span><span data-line="5"> <span class="o">/</span><span class="n">_</span><span class="o">/</span> <span class="o">|</span><span class="n">_</span><span class="o">|/</span><span class="n">_</span><span class="o">/</span>  <span class="o">|</span><span class="n">_</span><span class="o">|</span>\<span class="n">____</span><span class="o">//</span><span class="n">_</span><span class="o">/</span>    <span class="o">/</span><span class="n">_</span><span class="o">/</span> \<span class="n">____</span><span class="o">/</span> <span class="o">|</span><span class="n">__</span><span class="o">/|</span><span class="n">__</span><span class="o">/</span>
+</span><span data-line="6">
+</span><span data-line="7"> <span class="o">*</span> <span class="n">Running</span> <span class="n">on</span> <span class="nb">all</span> <span class="n">addresses</span> <span class="p">(</span><span class="mf">0.0.0.0</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>:::danger IMPORTANT
+If you skip this confirmation step and directly log in to RAGFlow, your browser may prompt a <code class="docutils literal notranslate"><span class="pre">network</span> <span class="pre">anomaly</span></code> error because, at that moment, your RAGFlow may not be fully initialized.
+:::</p>
+</li>
+<li><p>In your web browser, enter the IP address of your server and log in to RAGFlow.</p>
+<p>:::caution WARNING
+With the default settings, you only need to enter <code class="docutils literal notranslate"><span class="pre">http://IP_OF_YOUR_MACHINE</span></code> (<strong>sans</strong> port number) as the default HTTP serving port <code class="docutils literal notranslate"><span class="pre">80</span></code> can be omitted when using the default configurations.
+:::</p>
+</li>
+</ol>
+</section>
+<section id="configure-llms">
+<h2>Configure LLMs<a class="headerlink" href="#configure-llms" title="Link to this heading">¶</a></h2>
+<p>RAGFlow is a RAG engine and needs to work with an LLM to offer grounded, hallucination-free question-answering capabilities. RAGFlow supports most mainstream LLMs. For a complete list of supported models, please refer to <a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docs/guides/models/supported_models.mdx">Supported Models</a>.</p>
+<p>:::note
+RAGFlow also supports deploying LLMs locally using Ollama, Xinference, or LocalAI, but this part is not covered in this quick start guide.
+:::</p>
+<p>To add and configure an LLM:</p>
+<ol class="arabic simple">
+<li><p>Click on your logo on the top right of the page <strong>&gt;</strong> <strong>Model providers</strong>.</p></li>
+<li><p>Click on the desired LLM and update the API key accordingly.</p></li>
+<li><p>Click <strong>System Model Settings</strong> to select the default models:</p>
+<ul class="simple">
+<li><p>Chat model,</p></li>
+<li><p>Embedding model,</p></li>
+<li><p>Image-to-text model,</p></li>
+<li><p>and more.</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p>Some models, such as the image-to-text model <strong>qwen-vl-max</strong>, are subsidiary to a specific LLM. And you may need to update your API key to access these models.</p>
+</div></blockquote>
+</section>
+<section id="create-your-first-dataset">
+<h2>Create your first dataset<a class="headerlink" href="#create-your-first-dataset" title="Link to this heading">¶</a></h2>
+<p>You are allowed to upload files to a dataset in RAGFlow and parse them into datasets. A dataset is virtually a collection of datasets. Question answering in RAGFlow can be based on a particular dataset or multiple datasets. File formats that RAGFlow supports include documents (PDF, DOC, DOCX, TXT, MD, MDX), tables (CSV, XLSX, XLS), pictures (JPEG, JPG, PNG, TIF, GIF), and slides (PPT, PPTX).</p>
+<p>To create your first dataset:</p>
+<ol class="arabic">
+<li><p>Click the <strong>Dataset</strong> tab in the top middle of the page <strong>&gt;</strong> <strong>Create dataset</strong>.</p></li>
+<li><p>Input the name of your dataset and click <strong>OK</strong> to confirm your changes.</p>
+<p><em>You are taken to the <strong>Configuration</strong> page of your dataset.</em></p>
+<p><img alt="dataset configuration" src="https://raw.githubusercontent.com/infiniflow/ragflow-docs/main/images/configure_knowledge_base.jpg" /></p>
+</li>
+<li><p>RAGFlow offers multiple chunk templates that cater to different document layouts and file formats. Select the embedding model and chunking method (template) for your dataset.</p>
+<p>:::danger IMPORTANT
+Once you have selected an embedding model and used it to parse a file, you are no longer allowed to change it. The obvious reason is that we must ensure that all files in a specific dataset are parsed using the <em>same</em> embedding model (ensure that they are being compared in the same embedding space).
+:::</p>
+<p><em>You are taken to the <strong>Dataset</strong> page of your dataset.</em></p>
+</li>
+<li><p>Click <strong>+ Add file</strong> <strong>&gt;</strong> <strong>Local files</strong> to start uploading a particular file to the dataset.</p></li>
+<li><p>In the uploaded file entry, click the play button to start file parsing:</p>
+<p><img alt="parse file" src="https://raw.githubusercontent.com/infiniflow/ragflow-docs/main/images/parse_file.jpg" /></p>
+</li>
+</ol>
+</section>
+<section id="intervene-with-file-parsing">
+<h2>Intervene with file parsing<a class="headerlink" href="#intervene-with-file-parsing" title="Link to this heading">¶</a></h2>
+<p>RAGFlow features visibility and explainability, allowing you to view the chunking results and intervene where necessary. To do so:</p>
+<ol class="arabic">
+<li><p>Click on the file that completes file parsing to view the chunking results:</p>
+<p><em>You are taken to the <strong>Chunk</strong> page:</em></p>
+<p><img alt="chunks" src="https://raw.githubusercontent.com/infiniflow/ragflow-docs/main/images/file_chunks.jpg" /></p>
+</li>
+<li><p>Hover over each snapshot for a quick view of each chunk.</p></li>
+<li><p>Double click the chunked texts to add keywords or make <em>manual</em> changes where necessary:</p>
+<p><img alt="update chunk" src="https://raw.githubusercontent.com/infiniflow/ragflow-docs/main/images/add_keyword_question.jpg" /></p>
+<p>:::caution NOTE
+You can add keywords or questions to a file chunk to improve its ranking for queries containing those keywords. This action increases its keyword weight and can improve its position in search list.
+:::</p>
+</li>
+<li><p>In Retrieval testing, ask a quick question in <strong>Test text</strong> to double check if your configurations work:</p>
+<p><em>As you can tell from the following, RAGFlow responds with truthful citations.</em></p>
+<p><img alt="retrieval test" src="https://raw.githubusercontent.com/infiniflow/ragflow-docs/main/images/retrieval_test.jpg" /></p>
+</li>
+</ol>
+</section>
+<section id="set-up-an-ai-chat">
+<h2>Set up an AI chat<a class="headerlink" href="#set-up-an-ai-chat" title="Link to this heading">¶</a></h2>
+<p>Conversations in RAGFlow are based on a particular dataset or multiple datasets. Once you have created your dataset and finished file parsing, you can go ahead and start an AI conversation.</p>
+<ol class="arabic">
+<li><p>Click the <strong>Chat</strong> tab in the middle top of the page <strong>&gt;</strong> <strong>Create chat</strong> to create a chat assistant.</p></li>
+<li><p>Click the created chat app to enter its configuration page.</p>
+<blockquote>
+<div><p>RAGFlow offer the flexibility of choosing a different chat model for each dialogue, while allowing you to set the default models in <strong>System Model Settings</strong>.</p>
+</div></blockquote>
+</li>
+<li><p>Update <strong>Chat setting</strong> on the right of the configuration page:</p>
+<ul class="simple">
+<li><p>Name your assistant and specify your datasets.</p></li>
+<li><p><strong>Empty response</strong>:</p>
+<ul>
+<li><p>If you wish to <em>confine</em> RAGFlow’s answers to your datasets, leave a response here. Then when it doesn’t retrieve an answer, it <em>uniformly</em> responds with what you set here.</p></li>
+<li><p>If you wish RAGFlow to <em>improvise</em> when it doesn’t retrieve an answer from your datasets, leave it blank, which may give rise to hallucinations.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Update <strong>System prompt</strong> or leave it as is for the beginning.</p></li>
+<li><p>Select a chat model in the <strong>Model</strong> dropdown list.</p></li>
+<li><p>Now, let’s start the show:</p>
+<p><img alt="chat_thermal_solution" src="https://raw.githubusercontent.com/infiniflow/ragflow-docs/main/images/chat_thermal_solution.jpg" /></p>
+</li>
+</ol>
+<p>:::tip NOTE
+RAGFlow also offers HTTP and Python APIs for you to integrate RAGFlow’s capabilities into your applications. Read the following documents for more information:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docs/develop/acquire_ragflow_api_key.md">Acquire a RAGFlow API key</a></p></li>
+<li><p><a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docs/references/http_api_reference.md">HTTP API reference</a></p></li>
+<li><p><a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docs/references/python_api_reference.md">Python API reference</a>
+:::</p></li>
+</ul>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../mortiq/api-reference.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">API Reference</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="ai_search.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Search</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 27.04.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=cac61aee"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script></body>
+</html>

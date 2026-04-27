@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Configuration - DKubeX Documentation</title><link rel="shortcut icon" href="../../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Backup &amp; migration" href="backup_and_migration.html" /><link rel="prev" title="Transformer component" href="../agent/agent_component_reference/transformer.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/ragflow/administrator/configurations.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/ragflow/administrator/configurations.html"/>
+  <meta property="og:title" content="Configuration"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="configurations.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../agentx/index.html">AgentX Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../agentx/overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agentx/getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agentx/user-guide.html">User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agentx/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../mortgage-lite/index.html">Mortgage-Lite Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../mortgage-lite/getting-started.html">Getting Started with Mortgage-Lite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortgage-lite/architecture.html">Mortgage-Lite Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortgage-lite/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortgage-lite/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortgage-lite/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../mortiq/index.html">MortIQ Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../mortiq/getting-started.html">Getting Started with MortIQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortiq/architecture.html">MortIQ Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortiq/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortiq/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortiq/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Quickstart</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../securellm/index.html">SecureLLM User Guide</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#guidelines">Guidelines</a></li>
+<li><a class="reference internal" href="#docker-compose">Docker Compose</a></li>
+<li><a class="reference internal" href="#docker-environment-variables">Docker environment variables</a><ul>
+<li><a class="reference internal" href="#elasticsearch">Elasticsearch</a></li>
+<li><a class="reference internal" href="#kibana">Kibana</a></li>
+<li><a class="reference internal" href="#resource-management">Resource management</a></li>
+<li><a class="reference internal" href="#mysql">MySQL</a></li>
+<li><a class="reference internal" href="#minio">MinIO</a></li>
+<li><a class="reference internal" href="#redis">Redis</a></li>
+<li><a class="reference internal" href="#ragflow">RAGFlow</a></li>
+<li><a class="reference internal" href="#embedding-service">Embedding service</a></li>
+<li><a class="reference internal" href="#timezone">Timezone</a></li>
+<li><a class="reference internal" href="#hugging-face-mirror-site">Hugging Face mirror site</a></li>
+<li><a class="reference internal" href="#macos">MacOS</a></li>
+<li><a class="reference internal" href="#user-registration">User registration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#service-configuration">Service configuration</a><ul>
+<li><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">ragflow</span></code></a></li>
+<li><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">mysql</span></code></a></li>
+<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">minio</span></code></a></li>
+<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li><a class="reference internal" href="#oauth"><code class="docutils literal notranslate"><span class="pre">oauth</span></code></a></li>
+<li><a class="reference internal" href="#user-default-llm"><code class="docutils literal notranslate"><span class="pre">user_default_llm</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Quickstart</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Configuration</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/administrator/configurations.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/administrator/configurations.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/ragflow/administrator/configurations.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/administrator/configurations.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/administrator/configurations.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h1>
+<p>Configurations for deploying RAGFlow via Docker.</p>
+<section id="guidelines">
+<h2>Guidelines<a class="headerlink" href="#guidelines" title="Link to this heading">¶</a></h2>
+<p>When it comes to system configurations, you will need to manage the following files:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docker/.env">.env</a>: Contains important environment variables for Docker.</p></li>
+<li><p><a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docker/service_conf.yaml.template">service_conf.yaml.template</a>: Configures the back-end services. It specifies the system-level configuration for RAGFlow and is used by its API server and task executor. Upon container startup, the <code class="docutils literal notranslate"><span class="pre">service_conf.yaml</span></code> file will be generated based on this template file. This process replaces any environment variables within the template, allowing for dynamic configuration tailored to the container’s environment.</p></li>
+<li><p><a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docker/docker-compose.yml">docker-compose.yml</a>: The Docker Compose file for starting up the RAGFlow service.</p></li>
+</ul>
+<p>To update the default HTTP serving port (80), go to <a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docker/docker-compose.yml">docker-compose.yml</a> and change <code class="docutils literal notranslate"><span class="pre">80:80</span></code>
+to <code class="docutils literal notranslate"><span class="pre">&lt;YOUR_SERVING_PORT&gt;:80</span></code>.</p>
+<p>:::tip NOTE
+Updates to the above configurations require a reboot of all containers to take effect:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker/docker-compose.yml<span class="w"> </span>up<span class="w"> </span>-d
+</span></pre></div>
+</div>
+<p>:::</p>
+</section>
+<section id="docker-compose">
+<h2>Docker Compose<a class="headerlink" href="#docker-compose" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>docker-compose.yml</strong>
+Sets up environment for RAGFlow and its dependencies.</p></li>
+<li><p><strong>docker-compose-base.yml</strong>
+Sets up environment for RAGFlow’s dependencies: Elasticsearch/<a class="reference external" href="https://github.com/infiniflow/infinity">Infinity</a>, MySQL, MinIO, and Redis.</p></li>
+</ul>
+<p>:::danger IMPORTANT
+We do not actively maintain <strong>docker-compose-CN-oc9.yml</strong>, <strong>docker-compose-macos.yml</strong>, so use them at your own risk. However, you are welcome to file a pull request to improve them.
+:::</p>
+</section>
+<section id="docker-environment-variables">
+<h2>Docker environment variables<a class="headerlink" href="#docker-environment-variables" title="Link to this heading">¶</a></h2>
+<p>The <a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docker/.env">.env</a> file contains important environment variables for Docker.</p>
+<section id="elasticsearch">
+<h3>Elasticsearch<a class="headerlink" href="#elasticsearch" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">STACK_VERSION</span></code>
+The version of Elasticsearch. Defaults to <code class="docutils literal notranslate"><span class="pre">8.11.3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ES_PORT</span></code>
+The port used to expose the Elasticsearch service to the host machine, allowing <strong>external</strong> access to the service running inside the Docker container.  Defaults to <code class="docutils literal notranslate"><span class="pre">1200</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ELASTIC_PASSWORD</span></code>
+The password for Elasticsearch.</p></li>
+</ul>
+</section>
+<section id="kibana">
+<h3>Kibana<a class="headerlink" href="#kibana" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">KIBANA_PORT</span></code>
+The port used to expose the Kibana service to the host machine, allowing <strong>external</strong> access to the service running inside the Docker container. Defaults to <code class="docutils literal notranslate"><span class="pre">6601</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KIBANA_USER</span></code>
+The username for Kibana. Defaults to <code class="docutils literal notranslate"><span class="pre">rag_flow</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KIBANA_PASSWORD</span></code>
+The password for Kibana. Defaults to <code class="docutils literal notranslate"><span class="pre">infini_rag_flow</span></code>.</p></li>
+</ul>
+</section>
+<section id="resource-management">
+<h3>Resource management<a class="headerlink" href="#resource-management" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MEM_LIMIT</span></code>
+The maximum amount of the memory, in bytes, that <em>a specific</em> Docker container can use while running. Defaults to <code class="docutils literal notranslate"><span class="pre">8073741824</span></code>.</p></li>
+</ul>
+</section>
+<section id="mysql">
+<h3>MySQL<a class="headerlink" href="#mysql" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MYSQL_PASSWORD</span></code>
+The password for MySQL.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MYSQL_PORT</span></code>
+The port to connect to MySQL from RAGFlow container. Defaults to <code class="docutils literal notranslate"><span class="pre">3306</span></code>. Change this if you use an external MySQL.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EXPOSE_MYSQL_PORT</span></code>
+The port used to expose the MySQL service to the host machine, allowing <strong>external</strong> access to the MySQL database running inside the Docker container. Defaults to <code class="docutils literal notranslate"><span class="pre">5455</span></code>.</p></li>
+</ul>
+</section>
+<section id="minio">
+<h3>MinIO<a class="headerlink" href="#minio" title="Link to this heading">¶</a></h3>
+<p>RAGFlow utilizes MinIO as its object storage solution, leveraging its scalability to store and manage all uploaded files.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MINIO_CONSOLE_PORT</span></code>
+The port used to expose the MinIO console interface to the host machine, allowing <strong>external</strong> access to the web-based console running inside the Docker container. Defaults to <code class="docutils literal notranslate"><span class="pre">9001</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MINIO_PORT</span></code>
+The port used to expose the MinIO API service to the host machine, allowing <strong>external</strong> access to the MinIO object storage service running inside the Docker container. Defaults to <code class="docutils literal notranslate"><span class="pre">9000</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MINIO_USER</span></code>
+The username for MinIO.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MINIO_PASSWORD</span></code>
+The password for MinIO.</p></li>
+</ul>
+</section>
+<section id="redis">
+<h3>Redis<a class="headerlink" href="#redis" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">REDIS_PORT</span></code>
+The port used to expose the Redis service to the host machine, allowing <strong>external</strong> access to the Redis service running inside the Docker container. Defaults to <code class="docutils literal notranslate"><span class="pre">6379</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REDIS_USERNAME</span></code>
+Optional Redis ACL username when using Redis 6+ authentication.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REDIS_PASSWORD</span></code>
+The password for Redis.</p></li>
+</ul>
+</section>
+<section id="ragflow">
+<h3>RAGFlow<a class="headerlink" href="#ragflow" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SVR_HTTP_PORT</span></code>
+The port used to expose RAGFlow’s HTTP API service to the host machine, allowing <strong>external</strong> access to the service running inside the Docker container. Defaults to <code class="docutils literal notranslate"><span class="pre">9380</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RAGFLOW-IMAGE</span></code>
+The Docker image edition. Defaults to <code class="docutils literal notranslate"><span class="pre">infiniflow/ragflow:v0.24.0</span></code> (the RAGFlow Docker image without embedding models).</p></li>
+</ul>
+<p>:::tip NOTE
+If you cannot download the RAGFlow Docker image, try the following mirrors.</p>
+<ul class="simple">
+<li><p>For the <code class="docutils literal notranslate"><span class="pre">nightly</span></code> edition:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">RAGFLOW_IMAGE=swr.cn-north-4.myhuaweicloud.com/infiniflow/ragflow:nightly</span></code> or,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RAGFLOW_IMAGE=registry.cn-hangzhou.aliyuncs.com/infiniflow/ragflow:nightly</span></code>.
+:::</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="embedding-service">
+<h3>Embedding service<a class="headerlink" href="#embedding-service" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TEI_MODEL</span></code>
+The embedding model which text-embeddings-inference serves. Allowed values are one of <code class="docutils literal notranslate"><span class="pre">Qwen/Qwen3-Embedding-0.6B</span></code>(default), <code class="docutils literal notranslate"><span class="pre">BAAI/bge-m3</span></code>, and <code class="docutils literal notranslate"><span class="pre">BAAI/bge-small-en-v1.5</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TEI_PORT</span></code>
+The port used to expose the text-embeddings-inference service to the host machine, allowing <strong>external</strong> access to the text-embeddings-inference service running inside the Docker container. Defaults to <code class="docutils literal notranslate"><span class="pre">6380</span></code>.</p></li>
+</ul>
+</section>
+<section id="timezone">
+<h3>Timezone<a class="headerlink" href="#timezone" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TZ</span></code>
+The local time zone. Defaults to <code class="docutils literal notranslate"><span class="pre">Asia/Shanghai</span></code>.</p></li>
+</ul>
+</section>
+<section id="hugging-face-mirror-site">
+<h3>Hugging Face mirror site<a class="headerlink" href="#hugging-face-mirror-site" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HF_ENDPOINT</span></code>
+The mirror site for huggingface.co. It is disabled by default. You can uncomment this line if you have limited access to the primary Hugging Face domain.</p></li>
+</ul>
+</section>
+<section id="macos">
+<h3>MacOS<a class="headerlink" href="#macos" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MACOS</span></code>
+Optimizations for macOS. It is disabled by default. You can uncomment this line if your OS is macOS.</p></li>
+</ul>
+</section>
+<section id="user-registration">
+<h3>User registration<a class="headerlink" href="#user-registration" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">REGISTER_ENABLED</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>: (Default) Enable user registration.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>: Disable user registration.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="service-configuration">
+<h2>Service configuration<a class="headerlink" href="#service-configuration" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docker/service_conf.yaml.template">service_conf.yaml.template</a> specifies the system-level configuration for RAGFlow and is used by its API server and task executor.</p>
+<section id="id1">
+<h3><code class="docutils literal notranslate"><span class="pre">ragflow</span></code><a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">host</span></code>: The API server’s IP address inside the Docker container. Defaults to <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code>: The API server’s serving port inside the Docker container. Defaults to <code class="docutils literal notranslate"><span class="pre">9380</span></code>.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3><code class="docutils literal notranslate"><span class="pre">mysql</span></code><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The MySQL database name. Defaults to <code class="docutils literal notranslate"><span class="pre">rag_flow</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code>: The username for MySQL.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">password</span></code>: The password for MySQL.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code>: The MySQL serving port inside the Docker container. Defaults to <code class="docutils literal notranslate"><span class="pre">3306</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_connections</span></code>: The maximum number of concurrent connections to the MySQL database. Defaults to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stale_timeout</span></code>: Timeout in seconds.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3><code class="docutils literal notranslate"><span class="pre">minio</span></code><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code>: The username for MinIO.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">password</span></code>: The password for MinIO.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">host</span></code>: The MinIO serving IP <em>and</em> port inside the Docker container. Defaults to <code class="docutils literal notranslate"><span class="pre">minio:9000</span></code>.</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3><code class="docutils literal notranslate"><span class="pre">redis</span></code><a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">host</span></code>: The Redis serving IP <em>and</em> port inside the Docker container. Defaults to <code class="docutils literal notranslate"><span class="pre">redis:6379</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">db</span></code>: The Redis database index to use. Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">username</span></code>: Optional Redis ACL username (Redis 6+).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">password</span></code>: The password for the specified Redis user.</p></li>
+</ul>
+</section>
+<section id="oauth">
+<h3><code class="docutils literal notranslate"><span class="pre">oauth</span></code><a class="headerlink" href="#oauth" title="Link to this heading">¶</a></h3>
+<p>The OAuth configuration for signing up or signing in to RAGFlow using a third-party account.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;channel&gt;</span></code>: Custom channel ID.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: Authentication type, options include <code class="docutils literal notranslate"><span class="pre">oauth2</span></code>, <code class="docutils literal notranslate"><span class="pre">oidc</span></code>, <code class="docutils literal notranslate"><span class="pre">github</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">oauth2</span></code>, when <code class="docutils literal notranslate"><span class="pre">issuer</span></code> parameter is provided, defaults to <code class="docutils literal notranslate"><span class="pre">oidc</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">icon</span></code>: Icon ID, options include <code class="docutils literal notranslate"><span class="pre">github</span></code>, <code class="docutils literal notranslate"><span class="pre">sso</span></code>, default is <code class="docutils literal notranslate"><span class="pre">sso</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">display_name</span></code>: Channel name, defaults to the Title Case format of the channel ID.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">client_id</span></code>: Required, unique identifier assigned to the client application.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">client_secret</span></code>: Required, secret key for the client application, used for communication with the authentication server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">authorization_url</span></code>: Base URL for obtaining user authorization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">token_url</span></code>: URL for exchanging authorization code and obtaining access token.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">userinfo_url</span></code>: URL for obtaining user information (username, email, etc.).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">issuer</span></code>: Base URL of the identity provider. OIDC clients can dynamically obtain the identity provider’s metadata (<code class="docutils literal notranslate"><span class="pre">authorization_url</span></code>, <code class="docutils literal notranslate"><span class="pre">token_url</span></code>, <code class="docutils literal notranslate"><span class="pre">userinfo_url</span></code>) through <code class="docutils literal notranslate"><span class="pre">issuer</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scope</span></code>: Requested permission scope, a space-separated string. For example, <code class="docutils literal notranslate"><span class="pre">openid</span> <span class="pre">profile</span> <span class="pre">email</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">redirect_uri</span></code>: Required, URI to which the authorization server redirects during the authentication flow to return results. Must match the callback URI registered with the authentication server. Format: <code class="docutils literal notranslate"><span class="pre">https://your-app.com/v1/user/oauth/callback/&lt;channel&gt;</span></code>. For local configuration, you can directly use <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:80/v1/user/oauth/callback/&lt;channel&gt;</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+<p>:::tip NOTE
+The following are best practices for configuring various third-party authentication methods. You can configure one or multiple third-party authentication methods for Ragflow:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">oauth</span><span class="p">:</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">oauth2</span><span class="p">:</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">display_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;OAuth2&quot;</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">client_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your_client_id&quot;</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">client_secret</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your_client_secret&quot;</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">authorization_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://your-oauth-provider.com/oauth/authorize&quot;</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">token_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://your-oauth-provider.com/oauth/token&quot;</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">userinfo_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://your-oauth-provider.com/oauth/userinfo&quot;</span>
+</span><span data-line="9"><span class="w">    </span><span class="nt">redirect_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://your-app.com/v1/user/oauth/callback/oauth2&quot;</span>
+</span><span data-line="10">
+</span><span data-line="11"><span class="w">  </span><span class="nt">oidc</span><span class="p">:</span>
+</span><span data-line="12"><span class="w">    </span><span class="nt">display_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;OIDC&quot;</span>
+</span><span data-line="13"><span class="w">    </span><span class="nt">client_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your_client_id&quot;</span>
+</span><span data-line="14"><span class="w">    </span><span class="nt">client_secret</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your_client_secret&quot;</span>
+</span><span data-line="15"><span class="w">    </span><span class="nt">issuer</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://your-oauth-provider.com/oidc&quot;</span>
+</span><span data-line="16"><span class="w">    </span><span class="nt">scope</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;openid</span><span class="nv"> </span><span class="s">email</span><span class="nv"> </span><span class="s">profile&quot;</span>
+</span><span data-line="17"><span class="w">    </span><span class="nt">redirect_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://your-app.com/v1/user/oauth/callback/oidc&quot;</span>
+</span><span data-line="18">
+</span><span data-line="19"><span class="w">  </span><span class="nt">github</span><span class="p">:</span>
+</span><span data-line="20"><span class="w">    </span><span class="c1"># https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app</span>
+</span><span data-line="21"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;github&quot;</span>
+</span><span data-line="22"><span class="w">    </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;github&quot;</span>
+</span><span data-line="23"><span class="w">    </span><span class="nt">display_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Github&quot;</span>
+</span><span data-line="24"><span class="w">    </span><span class="nt">client_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your_client_id&quot;</span>
+</span><span data-line="25"><span class="w">    </span><span class="nt">client_secret</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your_client_secret&quot;</span>
+</span><span data-line="26"><span class="w">    </span><span class="nt">redirect_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://your-app.com/v1/user/oauth/callback/github&quot;</span>
+</span></pre></div>
+</div>
+<p>:::</p>
+</section>
+<section id="user-default-llm">
+<h3><code class="docutils literal notranslate"><span class="pre">user_default_llm</span></code><a class="headerlink" href="#user-default-llm" title="Link to this heading">¶</a></h3>
+<p>The default LLM to use for a new RAGFlow user. It is disabled by default. To enable this feature, uncomment the corresponding lines in <strong>service_conf.yaml.template</strong>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">factory</span></code>: The LLM supplier. Available options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;OpenAI&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;DeepSeek&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Moonshot&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Tongyi-Qianwen&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;VolcEngine&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ZHIPU-AI&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">api_key</span></code>: The API key for the specified LLM. You will need to apply for your model API key online.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allowed_factories</span></code>: If this is set, the users will be allowed to add only the factories in this list.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;OpenAI&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;DeepSeek&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Moonshot&quot;</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>:::tip NOTE
+If you do not set the default LLM here, configure the default LLM on the <strong>Settings</strong> page in the RAGFlow UI.
+:::</p>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../agent/agent_component_reference/transformer.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Transformer component</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="backup_and_migration.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Backup &amp; migration</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 27.04.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/shibuya.js?v=cac61aee"></script>
+      <script src="../../../_static/footer-dkube-link.js?v=47e90260"></script></body>
+</html>

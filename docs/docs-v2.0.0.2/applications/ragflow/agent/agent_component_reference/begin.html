@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Begin component - DKubeX Documentation</title><link rel="shortcut icon" href="../../../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="Title chunker component" href="chunker_title.html" /><link rel="prev" title="Sandbox quickstart" href="../agent_quickstarts/sandbox_quickstart.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/ragflow/agent/agent_component_reference/begin.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/ragflow/agent/agent_component_reference/begin.html"/>
+  <meta property="og:title" content="Begin component"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="../../../../../applications/ragflow/agent/agent_component_reference/begin.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../agentx/index.html">AgentX Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../agentx/overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../agentx/getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../agentx/user-guide.html">User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../agentx/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mortgage-lite/index.html">Mortgage-Lite Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/getting-started.html">Getting Started with Mortgage-Lite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/architecture.html">Mortgage-Lite Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mortiq/index.html">MortIQ Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/getting-started.html">Getting Started with MortIQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/architecture.html">MortIQ Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Quickstart</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../securellm/index.html">SecureLLM User Guide</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#scenarios">Scenarios</a></li>
+<li><a class="reference internal" href="#configurations">Configurations</a><ul>
+<li><a class="reference internal" href="#mode">Mode</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+<li><a class="reference internal" href="#security">Security</a></li>
+<li><a class="reference internal" href="#schema">Schema</a></li>
+<li><a class="reference internal" href="#response">Response</a></li>
+<li><a class="reference internal" href="#opening-greeting">Opening greeting</a></li>
+<li><a class="reference internal" href="#global-variables">Global variables</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#frequently-asked-questions">Frequently asked questions</a><ul>
+<li><a class="reference internal" href="#is-the-uploaded-file-in-a-dataset">Is the uploaded file in a dataset?</a></li>
+<li><a class="reference internal" href="#file-size-limit-for-an-uploaded-file">File size limit for an uploaded file</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">Quickstart</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Begin component</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/agent/agent_component_reference/begin.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/agent/agent_component_reference/begin.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/ragflow/agent/agent_component_reference/begin.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/agent/agent_component_reference/begin.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/agent/agent_component_reference/begin.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="begin-component">
+<h1>Begin component<a class="headerlink" href="#begin-component" title="Link to this heading">¶</a></h1>
+<p>The starting component in a workflow.</p>
+<hr class="docutils" />
+<p>The <strong>Begin</strong> component sets an opening greeting or accepts inputs from the user. It is automatically populated onto the canvas when you create an agent, whether from a template or from scratch (from a blank template). There should be only one <strong>Begin</strong> component in the workflow.</p>
+<section id="scenarios">
+<h2>Scenarios<a class="headerlink" href="#scenarios" title="Link to this heading">¶</a></h2>
+<p>A <strong>Begin</strong> component is essential in all cases. Every agent includes a <strong>Begin</strong> component, which cannot be deleted.</p>
+</section>
+<section id="configurations">
+<h2>Configurations<a class="headerlink" href="#configurations" title="Link to this heading">¶</a></h2>
+<p>Click the component to display its <strong>Configuration</strong> window. Here, you can set an opening greeting and the input parameters (global variables) for the agent.</p>
+<section id="mode">
+<h3>Mode<a class="headerlink" href="#mode" title="Link to this heading">¶</a></h3>
+<p>Mode defines how the workflow is triggered.</p>
+<ul class="simple">
+<li><p>Conversational: The agent is triggered from a conversation.</p></li>
+<li><p>Task: The agent starts without a conversation.</p></li>
+<li><p>Webhook: Receive external HTTP requests via webhooks, enabling automated triggers and workflow initiation.<br />
+<em>When selected, a unique Webhook URL is generated for the current agent.</em></p></li>
+</ul>
+<p><img alt="" src="https://raw.githubusercontent.com/infiniflow/ragflow-docs/main/images/webhook_mode.png" /></p>
+</section>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Link to this heading">¶</a></h3>
+<p>The supported HTTP methods. Available only when <strong>Webhook</strong> is selected as <strong>Mode</strong>.</p>
+</section>
+<section id="security">
+<h3>Security<a class="headerlink" href="#security" title="Link to this heading">¶</a></h3>
+<p>The authentication method to choose, available <em>only</em> when <strong>Webhook</strong> is selected as <strong>Mode</strong>. Including:</p>
+<ul class="simple">
+<li><p><strong>token</strong>: Token-based authentication.</p></li>
+<li><p><strong>basic</strong>: Basic authentication.</p></li>
+<li><p><strong>jwt</strong>: JWT authentication.</p></li>
+</ul>
+</section>
+<section id="schema">
+<h3>Schema<a class="headerlink" href="#schema" title="Link to this heading">¶</a></h3>
+<p>The schema defines the data structure for HTTP requests received by the system in <strong>Webhook</strong> mode. It configurations include:</p>
+<ul class="simple">
+<li><p>Content type:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">application/json</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multipart/form-data</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">application/x-www-form-urlencoded</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text-plain</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">application/octet-stream</span></code></p></li>
+</ul>
+</li>
+<li><p>Query parameters</p></li>
+<li><p>Header parameters</p></li>
+<li><p>Request body parameters</p></li>
+</ul>
+</section>
+<section id="response">
+<h3>Response<a class="headerlink" href="#response" title="Link to this heading">¶</a></h3>
+<p>Available only when <strong>Webhook</strong> is selected as <strong>Mode</strong>.</p>
+<p>The response mode of the workflow, i.e., how the workflow respond to external HTTP requests. Supported options:</p>
+<ul class="simple">
+<li><p><strong>Accepted response</strong>: When an HTTP request is validated, a success response is returned immediately, and the workflow runs asynchronously in the background.</p>
+<ul>
+<li><p>When selected, you configure the corresponding HTTP status code and message in the <strong>Begin</strong> component.</p></li>
+<li><p>The HTTP status code to return is in the range of <code class="docutils literal notranslate"><span class="pre">200-399</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Final response</strong>: The system returns the final processing result only after the entire workflow completes.</p>
+<ul>
+<li><p>When selected, you configure the corresponding HTTP status code and message in the <a class="reference internal" href="message.html"><span class="std std-doc">message</span></a> component.</p></li>
+<li><p>The HTTP status code to return is in the range of <code class="docutils literal notranslate"><span class="pre">200-399</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="opening-greeting">
+<h3>Opening greeting<a class="headerlink" href="#opening-greeting" title="Link to this heading">¶</a></h3>
+<p><strong>Conversational mode only.</strong></p>
+<p>An agent in conversational mode begins with an opening greeting. It is the agent’s first message to the user in conversational mode, which can be a welcoming remark or an instruction to guide the user forward.</p>
+</section>
+<section id="global-variables">
+<h3>Global variables<a class="headerlink" href="#global-variables" title="Link to this heading">¶</a></h3>
+<p>You can define global variables within the <strong>Begin</strong> component, which can be either mandatory or optional. Once set, users will need to provide values for these variables when engaging with the agent. Click <strong>+ Add variable</strong> to add a global variable, each with the following attributes:</p>
+<ul class="simple">
+<li><p><strong>Name</strong>: <em>Required</em><br />
+A descriptive name providing additional details about the variable.</p></li>
+<li><p><strong>Type</strong>: <em>Required</em><br />
+The type of the variable:</p>
+<ul>
+<li><p><strong>Single-line text</strong>: Accepts a single line of text without line breaks.</p></li>
+<li><p><strong>Paragraph text</strong>: Accepts multiple lines of text, including line breaks.</p></li>
+<li><p><strong>Dropdown options</strong>: Requires the user to select a value for this variable from a dropdown menu. And you are required to set <em>at least</em> one option for the dropdown menu.</p></li>
+<li><p><strong>file upload</strong>: Requires the user to upload one or multiple files.</p></li>
+<li><p><strong>Number</strong>: Accepts a number as input.</p></li>
+<li><p><strong>Boolean</strong>: Requires the user to toggle between on and off.</p></li>
+</ul>
+</li>
+<li><p><strong>Key</strong>: <em>Required</em><br />
+The unique variable name.</p></li>
+<li><p><strong>Optional</strong>: A toggle indicating whether the variable is optional.</p></li>
+</ul>
+<p>:::tip NOTE
+To pass in parameters from a client, call:</p>
+<ul class="simple">
+<li><p>HTTP method <a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docs/references/http_api_reference.md#converse-with-agent">Converse with agent</a>, or</p></li>
+<li><p>Python method <a class="reference external" href="https://github.com/infiniflow/ragflow/blob/main/docs/references/python_api_reference.md#converse-with-agent">Converse with agent</a>.
+:::</p></li>
+</ul>
+<p>:::danger IMPORTANT
+If you set the key type as <strong>file</strong>, ensure the token count of the uploaded file does not exceed your model provider’s maximum token limit; otherwise, the plain text in your file will be truncated and incomplete.
+:::</p>
+<p>:::note
+You can tune document parsing and embedding efficiency by setting the environment variables <code class="docutils literal notranslate"><span class="pre">DOC_BULK_SIZE</span></code> and <code class="docutils literal notranslate"><span class="pre">EMBEDDING_BATCH_SIZE</span></code>.
+:::</p>
+</section>
+</section>
+<section id="frequently-asked-questions">
+<h2>Frequently asked questions<a class="headerlink" href="#frequently-asked-questions" title="Link to this heading">¶</a></h2>
+<section id="is-the-uploaded-file-in-a-dataset">
+<h3>Is the uploaded file in a dataset?<a class="headerlink" href="#is-the-uploaded-file-in-a-dataset" title="Link to this heading">¶</a></h3>
+<p>No. Files uploaded to an agent as input are not stored in a dataset and hence will not be processed using RAGFlow’s built-in OCR, DLR or TSR models, or chunked using RAGFlow’s built-in chunking methods.</p>
+</section>
+<section id="file-size-limit-for-an-uploaded-file">
+<h3>File size limit for an uploaded file<a class="headerlink" href="#file-size-limit-for-an-uploaded-file" title="Link to this heading">¶</a></h3>
+<p>There is no <em>specific</em> file size limit for a file uploaded to an agent. However, note that model providers typically have a default or explicit maximum token setting, which can range from 8196 to 128k: The plain text part of the uploaded file will be passed in as the key value, but if the file’s token count exceeds this limit, the string will be truncated and incomplete.</p>
+<p>:::tip NOTE
+The variables <code class="docutils literal notranslate"><span class="pre">MAX_CONTENT_LENGTH</span></code> in <code class="docutils literal notranslate"><span class="pre">/docker/.env</span></code> and <code class="docutils literal notranslate"><span class="pre">client_max_body_size</span></code> in <code class="docutils literal notranslate"><span class="pre">/docker/nginx/nginx.conf</span></code> set the file size limit for each upload to a dataset or RAGFlow’s File system. These settings DO NOT apply in this scenario.
+:::</p>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../agent_quickstarts/sandbox_quickstart.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Sandbox quickstart</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="chunker_title.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Title chunker component</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 27.04.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../../_static/shibuya.js?v=cac61aee"></script>
+      <script src="../../../../_static/footer-dkube-link.js?v=47e90260"></script></body>
+</html>
