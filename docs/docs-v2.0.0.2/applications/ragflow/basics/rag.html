@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>What is Retrieval-Augmented-Generation (RAG)? - DKubeX Documentation</title><link rel="shortcut icon" href="../../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="What is Agent context engine?" href="agent_context_engine.html" /><link rel="prev" title="Files" href="../manage_files.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/ragflow/basics/rag.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/ragflow/basics/rag.html"/>
+  <meta property="og:title" content="What is Retrieval-Augmented-Generation (RAG)?"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="../../../../applications/ragflow/basics/rag.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../agentx/index.html">AgentX Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../agentx/overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agentx/getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agentx/user-guide.html">User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agentx/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../mortgage-lite/index.html">Mortgage-Lite Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../mortgage-lite/getting-started.html">Getting Started with Mortgage-Lite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortgage-lite/architecture.html">Mortgage-Lite Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortgage-lite/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortgage-lite/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortgage-lite/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../mortiq/index.html">MortIQ Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../mortiq/getting-started.html">Getting Started with MortIQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortiq/architecture.html">MortIQ Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortiq/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortiq/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mortiq/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Quickstart</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manage_files.html">Files</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../securellm/index.html">SecureLLM User Guide</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#why-rag-is-important">Why RAG is important?</a></li>
+<li><a class="reference internal" href="#how-rag-works">How RAG works?</a><ul>
+<li><a class="reference internal" href="#data-processing-and-vectorization">Data processing and vectorization</a></li>
+<li><a class="reference internal" href="#retrieve-relevant-information">Retrieve relevant information</a></li>
+<li><a class="reference internal" href="#context-construction-and-answer-generation">Context construction and answer generation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#deep-dive-into-existing-rag-architecture-beyond-vector-retrieval">Deep dive into existing RAG architecture: beyond vector retrieval</a><ul>
+<li><a class="reference internal" href="#data-complexity-multimodal-document-processing">Data complexity: multimodal document processing</a></li>
+<li><a class="reference internal" href="#the-complexity-of-chunking-the-trade-off-between-precision-and-context">The complexity of chunking: the trade-off between precision and context</a></li>
+<li><a class="reference internal" href="#why-is-a-vector-database-insufficient-for-serving-rag">Why is a vector database insufficient for serving RAG?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rag-and-memory-retrieval-from-the-same-source-but-different-streams">RAG and memory: Retrieval from the same source but different streams</a></li>
+<li><a class="reference internal" href="#rag-applications">RAG applications</a></li>
+<li><a class="reference internal" href="#the-future-of-rag">The future of RAG</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Quickstart</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">What is Retrieval-Augmented-Generation (RAG)?</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/basics/rag.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/basics/rag.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/ragflow/basics/rag.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/basics/rag.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/basics/rag.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="what-is-retrieval-augmented-generation-rag">
+<h1>What is Retrieval-Augmented-Generation (RAG)?<a class="headerlink" href="#what-is-retrieval-augmented-generation-rag" title="Link to this heading">¶</a></h1>
+<p>Since large language models (LLMs) became the focus of technology, their ability to handle general knowledge has been astonishing. However, when questions shift to internal corporate documents, proprietary knowledge bases, or real-time data, the limitations of LLMs become glaringly apparent: they cannot access private information outside their training data. Retrieval-Augmented Generation (RAG) was born precisely to address this core need. Before an LLM generates an answer, it first retrieves the most relevant context from an external knowledge base and inputs it as “reference material” to the LLM, thereby guiding it to produce accurate answers. In short, RAG elevates LLMs from “relying on memory” to “having evidence to rely on,” significantly improving their accuracy and trustworthiness in specialized fields and real-time information queries.</p>
+<section id="why-rag-is-important">
+<h2>Why RAG is important?<a class="headerlink" href="#why-rag-is-important" title="Link to this heading">¶</a></h2>
+<p>Although LLMs excel in language understanding and generation, they have inherent limitations:</p>
+<ul class="simple">
+<li><p>Static Knowledge: The model’s knowledge is based on a data snapshot from its training time and cannot be automatically updated, making it difficult to perceive the latest information.</p></li>
+<li><p>Blind Spot to External Data: They cannot directly access corporate private documents, real-time information streams, or domain-specific content.</p></li>
+<li><p>Hallucination Risk: When lacking accurate evidence, they may still fabricate plausible-sounding but false answers to maintain conversational fluency.</p></li>
+</ul>
+<p>The introduction of RAG provides LLMs with real-time, credible “factual grounding.” Its core mechanism is divided into two stages:</p>
+<ul class="simple">
+<li><p>Retrieval Stage: Based on the user’s question, quickly retrieve the most relevant documents or data fragments from an external knowledge base.</p></li>
+<li><p>Generation Stage: The LLM organizes and generates the final answer by incorporating the retrieved information as context, combined with its own linguistic capabilities.</p></li>
+</ul>
+<p>This upgrades LLMs from “speaking from memory” to “speaking with documentation,” significantly enhancing reliability in professional and enterprise-level applications.</p>
+</section>
+<section id="how-rag-works">
+<h2>How RAG works?<a class="headerlink" href="#how-rag-works" title="Link to this heading">¶</a></h2>
+<p>Retrieval-Augmented Generation enables LLMs to generate higher-quality responses by leveraging real-time, external, or private data sources through the introduction of an information retrieval mechanism. Its workflow can be divided into following key steps:</p>
+<section id="data-processing-and-vectorization">
+<h3>Data processing and vectorization<a class="headerlink" href="#data-processing-and-vectorization" title="Link to this heading">¶</a></h3>
+<p>The knowledge required by RAG comes from unstructured data in various formats, such as documents, database records, or API return content. This data typically needs to be chunked, then transformed into vectors via an embedding model, and stored in a vector database.</p>
+<p>Why is Chunking Needed? Indexing entire documents directly faces the following problems:</p>
+<ul class="simple">
+<li><p>Decreased Retrieval Precision: Vectorizing long documents leads to semantic “averaging,” losing details.</p></li>
+<li><p>Context Length Limitation: LLMs have a finite context window, requiring filtering of the most relevant parts for input.</p></li>
+<li><p>Cost and Efficiency: Embedding computation and retrieval costs are higher for long texts.</p></li>
+</ul>
+<p>Therefore, an intelligent chunking strategy is key to balancing information integrity, retrieval granularity, and computational efficiency.</p>
+</section>
+<section id="retrieve-relevant-information">
+<h3>Retrieve relevant information<a class="headerlink" href="#retrieve-relevant-information" title="Link to this heading">¶</a></h3>
+<p>The user’s query is also converted into a vector to perform semantic relevance searches (e.g., calculating cosine similarity) in the vector database, matching and recalling the most relevant text fragments.</p>
+</section>
+<section id="context-construction-and-answer-generation">
+<h3>Context construction and answer generation<a class="headerlink" href="#context-construction-and-answer-generation" title="Link to this heading">¶</a></h3>
+<p>The retrieved relevant content is added to the LLM’s context as factual grounding, and the LLM finally generates the answer. Therefore, RAG can be seen as Context Engineering 1.0 for automated context construction.</p>
+</section>
+</section>
+<section id="deep-dive-into-existing-rag-architecture-beyond-vector-retrieval">
+<h2>Deep dive into existing RAG architecture: beyond vector retrieval<a class="headerlink" href="#deep-dive-into-existing-rag-architecture-beyond-vector-retrieval" title="Link to this heading">¶</a></h2>
+<p>An industrial-grade RAG system is far from being as simple as “vector search + LLM”; its complexity and challenges are primarily embedded in the retrieval process.</p>
+<section id="data-complexity-multimodal-document-processing">
+<h3>Data complexity: multimodal document processing<a class="headerlink" href="#data-complexity-multimodal-document-processing" title="Link to this heading">¶</a></h3>
+<p>Core Challenge: Corporate knowledge mostly exists in the form of multimodal documents containing text, charts, tables, and formulas. Simple OCR extraction loses a large amount of semantic information.</p>
+<p>Advanced Practice: Leading solutions, such as RAGFlow, tend to use Visual Language Models (VLM) or specialized parsing models like DeepDoc to “translate” multimodal documents into unimodal text rich in structural and semantic information. Converting multimodal information into high-quality unimodal text has become standard practice for advanced RAG.</p>
+</section>
+<section id="the-complexity-of-chunking-the-trade-off-between-precision-and-context">
+<h3>The complexity of chunking: the trade-off between precision and context<a class="headerlink" href="#the-complexity-of-chunking-the-trade-off-between-precision-and-context" title="Link to this heading">¶</a></h3>
+<p>A simple “chunk-embed-retrieve” pipeline has an inherent contradiction:</p>
+<ul class="simple">
+<li><p>Semantic Matching requires small text chunks to ensure clear semantic focus.</p></li>
+<li><p>Context Understanding requires large text chunks to ensure complete and coherent information.</p></li>
+</ul>
+<p>This forces system design into a difficult trade-off between “precise but fragmented” and “complete but vague.”</p>
+<p>Advanced Practice: Leading solutions, such as RAGFlow, employ semantic enhancement techniques like constructing semantic tables of contents and knowledge graphs. These not only address semantic fragmentation caused by physical chunking but also enable the discovery of relevant content across documents based on entity-relationship networks.</p>
+</section>
+<section id="why-is-a-vector-database-insufficient-for-serving-rag">
+<h3>Why is a vector database insufficient for serving RAG?<a class="headerlink" href="#why-is-a-vector-database-insufficient-for-serving-rag" title="Link to this heading">¶</a></h3>
+<p>Vector databases excel at semantic similarity search, but RAG requires precise and reliable answers, demanding more capabilities from the retrieval system:</p>
+<ul class="simple">
+<li><p>Hybrid Search: Relying solely on vector retrieval may miss exact keyword matches (e.g., product codes, regulation numbers). Hybrid search, combining vector retrieval with keyword retrieval (BM25), ensures both semantic breadth and keyword precision.</p></li>
+<li><p>Tensor or Multi-Vector Representation: To support cross-modal data, employing tensor or multi-vector representation has become an important trend.</p></li>
+<li><p>Metadata Filtering: Filtering based on attributes like date, department, and type is a rigid requirement in business scenarios.</p></li>
+</ul>
+<p>Therefore, the retrieval layer of RAG is a composite system based on vector search but must integrate capabilities like full-text search, re-ranking, and metadata filtering.</p>
+</section>
+</section>
+<section id="rag-and-memory-retrieval-from-the-same-source-but-different-streams">
+<h2>RAG and memory: Retrieval from the same source but different streams<a class="headerlink" href="#rag-and-memory-retrieval-from-the-same-source-but-different-streams" title="Link to this heading">¶</a></h2>
+<p>Within the agent framework, the essence of the memory mechanism is the same as RAG: both retrieve relevant information from storage based on current needs. The key difference lies in the data source:</p>
+<ul class="simple">
+<li><p>RAG: Targets pre-existing static or dynamic private data provided by the user in advance (e.g., documents, databases).</p></li>
+<li><p>Memory: Targets dynamic data generated or perceived by the agent in real-time during interaction (e.g., conversation history, environmental state, tool execution results).
+They are highly consistent at the technical base (e.g., vector retrieval, keyword matching) and can be seen as the same retrieval capability applied in different scenarios (“existing knowledge” vs. “interaction memory”). A complete agent system often includes both an RAG module for inherent knowledge and a Memory module for interaction history.</p></li>
+</ul>
+</section>
+<section id="rag-applications">
+<h2>RAG applications<a class="headerlink" href="#rag-applications" title="Link to this heading">¶</a></h2>
+<p>RAG has demonstrated clear value in several typical scenarios:</p>
+<ol class="arabic simple">
+<li><p>Enterprise Knowledge Q&amp;A and Internal Search<br />
+By vectorizing corporate private data and combining it with an LLM, RAG can directly return natural language answers based on authoritative sources, rather than document lists. While meeting intelligent Q&amp;A needs, it inherently aligns with corporate requirements for data security, access control, and compliance.</p></li>
+<li><p>Complex Document Understanding and Professional Q&amp;A<br />
+For structurally complex documents like contracts and regulations, the value of RAG lies in its ability to generate accurate, verifiable answers while maintaining context integrity. Its system accuracy largely depends on text chunking and semantic understanding strategies.</p></li>
+<li><p>Dynamic Knowledge Fusion and Decision Support<br />
+In business scenarios requiring the synthesis of information from multiple sources, RAG evolves into a knowledge orchestration and reasoning support system for business decisions. Through a multi-path recall mechanism, it fuses knowledge from different systems and formats, maintaining factual consistency and logical controllability during the generation phase.</p></li>
+</ol>
+</section>
+<section id="the-future-of-rag">
+<h2>The future of RAG<a class="headerlink" href="#the-future-of-rag" title="Link to this heading">¶</a></h2>
+<p>The evolution of RAG is unfolding along several clear paths:</p>
+<ol class="arabic simple">
+<li><p>RAG as the data foundation for Agents<br />
+RAG and agents have an architecture vs. scenario relationship. For agents to achieve autonomous and reliable decision-making and execution, they must rely on accurate and timely knowledge. RAG provides them with a standardized capability to access private domain knowledge and is an inevitable choice for building knowledge-aware agents.</p></li>
+<li><p>Advanced RAG: Using LLMs to optimize retrieval itself<br />
+The core feature of next-generation RAG is fully utilizing the reasoning capabilities of LLMs to optimize the retrieval process, such as rewriting queries, summarizing or fusing results, or implementing intelligent routing. Empowering every aspect of retrieval with LLMs is key to breaking through current performance bottlenecks.</p></li>
+<li><p>Towards context engineering 2.0<br />
+Current RAG can be viewed as Context Engineering 1.0, whose core is assembling static knowledge context for single Q&amp;A tasks. The forthcoming Context Engineering 2.0 will extend with RAG technology at its core, becoming a system that automatically and dynamically assembles comprehensive context for agents. The context fused by this system will come not only from documents but also include interaction memory, available tools/skills, and real-time environmental information. This marks the transition of agent development from a “handicraft workshop” model to the industrial starting point of automated context engineering.</p></li>
+</ol>
+<p>The essence of RAG is to build a dedicated, efficient, and trustworthy external data interface for large language models; its core is Retrieval, not Generation. Starting from the practical need to solve private data access, its technical depth is reflected in the optimization of retrieval for complex unstructured data. With its deep integration into agent architectures and its development towards automated context engineering, RAG is evolving from a technology that improves Q&amp;A quality into the core infrastructure for building the next generation of trustworthy, controllable, and scalable intelligent applications.</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../manage_files.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Files</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="agent_context_engine.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">What is Agent context engine?</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 04.05.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/shibuya.js?v=cac61aee"></script>
+      <script src="../../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

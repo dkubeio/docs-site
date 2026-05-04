@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Deployment Guide - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="SecureLLM Integration Guide" href="securellm-integration.html" /><link rel="prev" title="MortIQ Architecture" href="architecture.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/mortiq/deployment.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/mortiq/deployment.html"/>
+  <meta property="og:title" content="Deployment Guide"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="../../../applications/mortiq/deployment.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../agentx/index.html">AgentX Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/user-guide.html">User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortgage-lite/index.html">Mortgage-Lite Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/getting-started.html">Getting Started with Mortgage-Lite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/architecture.html">Mortgage-Lite Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">MortIQ Overview</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with MortIQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html">MortIQ Architecture</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ragflow/index.html">Quickstart</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM User Guide</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li><a class="reference internal" href="#required">Required</a></li>
+<li><a class="reference internal" href="#recommended">Recommended</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#deployment-options">Deployment Options</a><ul>
+<li><a class="reference internal" href="#docker-compose-simple-production">1. Docker Compose (Simple Production)</a><ul>
+<li><a class="reference internal" href="#docker-compose-yml">docker-compose.yml</a></li>
+<li><a class="reference internal" href="#deploy">Deploy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#kubernetes-with-helm">2. Kubernetes with Helm</a><ul>
+<li><a class="reference internal" href="#add-helm-repository">Add Helm Repository</a></li>
+<li><a class="reference internal" href="#create-values-yaml">Create values.yaml</a></li>
+<li><a class="reference internal" href="#install">Install</a></li>
+<li><a class="reference internal" href="#upgrade">Upgrade</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dkubex-platform-deployment">3. DKubeX Platform Deployment</a><ul>
+<li><a class="reference internal" href="#create-application-manifest">Create Application Manifest</a></li>
+<li><a class="reference internal" href="#id1">Deploy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#database-setup">Database Setup</a><ul>
+<li><a class="reference internal" href="#postgresql-configuration">PostgreSQL Configuration</a><ul>
+<li><a class="reference internal" href="#create-database">Create Database</a></li>
+<li><a class="reference internal" href="#connection-string">Connection String</a></li>
+<li><a class="reference internal" href="#performance-tuning">Performance Tuning</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#database-migrations">Database Migrations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ollama-setup">Ollama Setup</a><ul>
+<li><a class="reference internal" href="#pull-required-models">Pull Required Models</a></li>
+<li><a class="reference internal" href="#gpu-configuration">GPU Configuration</a><ul>
+<li><a class="reference internal" href="#nvidia-gpu">NVIDIA GPU</a></li>
+<li><a class="reference internal" href="#amd-gpu">AMD GPU</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">Performance Tuning</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#storage-configuration">Storage Configuration</a><ul>
+<li><a class="reference internal" href="#persistent-volumes">Persistent Volumes</a><ul>
+<li><a class="reference internal" href="#local-storage-development">Local Storage (Development)</a></li>
+<li><a class="reference internal" href="#nfs-storage-production">NFS Storage (Production)</a></li>
+<li><a class="reference internal" href="#cloud-storage-aws-ebs">Cloud Storage (AWS EBS)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#security-configuration">Security Configuration</a><ul>
+<li><a class="reference internal" href="#secrets-management">Secrets Management</a><ul>
+<li><a class="reference internal" href="#kubernetes-secrets">Kubernetes Secrets</a></li>
+<li><a class="reference internal" href="#external-secrets-operator">External Secrets Operator</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tls-ssl-configuration">TLS/SSL Configuration</a><ul>
+<li><a class="reference internal" href="#cert-manager">Cert-Manager</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#network-policies">Network Policies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#monitoring-observability">Monitoring &amp; Observability</a><ul>
+<li><a class="reference internal" href="#prometheus-metrics">Prometheus Metrics</a></li>
+<li><a class="reference internal" href="#grafana-dashboard">Grafana Dashboard</a></li>
+<li><a class="reference internal" href="#logging">Logging</a><ul>
+<li><a class="reference internal" href="#structured-logging">Structured Logging</a></li>
+<li><a class="reference internal" href="#log-aggregation-elk-stack">Log Aggregation (ELK Stack)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#high-availability">High Availability</a><ul>
+<li><a class="reference internal" href="#multi-region-deployment">Multi-Region Deployment</a></li>
+<li><a class="reference internal" href="#database-replication">Database Replication</a></li>
+<li><a class="reference internal" href="#load-balancing">Load Balancing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#backup-recovery">Backup &amp; Recovery</a><ul>
+<li><a class="reference internal" href="#database-backups">Database Backups</a></li>
+<li><a class="reference internal" href="#restore-procedure">Restore Procedure</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-optimization">Performance Optimization</a><ul>
+<li><a class="reference internal" href="#application-tuning">Application Tuning</a></li>
+<li><a class="reference internal" href="#database-connection-pooling">Database Connection Pooling</a></li>
+<li><a class="reference internal" href="#caching">Caching</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#common-issues">Common Issues</a><ul>
+<li><a class="reference internal" href="#application-won-t-start">Application Won&#8217;t Start</a></li>
+<li><a class="reference internal" href="#database-connection-failed">Database Connection Failed</a></li>
+<li><a class="reference internal" href="#ollama-not-responding">Ollama Not Responding</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#health-checks">Health Checks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#maintenance">Maintenance</a><ul>
+<li><a class="reference internal" href="#rolling-updates">Rolling Updates</a></li>
+<li><a class="reference internal" href="#scaling">Scaling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cost-optimization">Cost Optimization</a><ul>
+<li><a class="reference internal" href="#resource-right-sizing">Resource Right-Sizing</a></li>
+<li><a class="reference internal" href="#spot-instances-aws">Spot Instances (AWS)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#compliance-audit">Compliance &amp; Audit</a><ul>
+<li><a class="reference internal" href="#audit-logging">Audit Logging</a></li>
+<li><a class="reference internal" href="#data-retention">Data Retention</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#support">Support</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">MortIQ Overview</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Deployment Guide</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/mortiq/deployment.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/mortiq/deployment.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/mortiq/deployment.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/mortiq/deployment.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/mortiq/deployment.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="deployment-guide">
+<h1>Deployment Guide<a class="headerlink" href="#deployment-guide" title="Link to this heading">¶</a></h1>
+<p>This guide covers production deployment of MortIQ on various platforms.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<section id="required">
+<h3>Required<a class="headerlink" href="#required" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Kubernetes 1.24+</strong> (for Kubernetes deployment)</p></li>
+<li><p><strong>Helm 3.0+</strong> (for Helm chart deployment)</p></li>
+<li><p><strong>PostgreSQL 14+</strong> (for production database)</p></li>
+<li><p><strong>Docker 20.10+</strong> (for container builds)</p></li>
+</ul>
+</section>
+<section id="recommended">
+<h3>Recommended<a class="headerlink" href="#recommended" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>GPU nodes</strong> for Ollama (NVIDIA T4 or better)</p></li>
+<li><p><strong>Persistent storage</strong> (100GB+ for documents)</p></li>
+<li><p><strong>Load balancer</strong> (for high availability)</p></li>
+<li><p><strong>Monitoring stack</strong> (Prometheus + Grafana)</p></li>
+</ul>
+</section>
+</section>
+<section id="deployment-options">
+<h2>Deployment Options<a class="headerlink" href="#deployment-options" title="Link to this heading">¶</a></h2>
+<section id="docker-compose-simple-production">
+<h3>1. Docker Compose (Simple Production)<a class="headerlink" href="#docker-compose-simple-production" title="Link to this heading">¶</a></h3>
+<section id="docker-compose-yml">
+<h4>docker-compose.yml<a class="headerlink" href="#docker-compose-yml" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="nt">services</span><span class="p">:</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">postgres</span><span class="p">:</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:14-alpine</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+</span><span data-line="7"><span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq</span>
+</span><span data-line="8"><span class="w">      </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortgage</span>
+</span><span data-line="9"><span class="w">      </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DB_PASSWORD}</span>
+</span><span data-line="10"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+</span><span data-line="11"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres_data:/var/lib/postgresql/data</span>
+</span><span data-line="12"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+</span><span data-line="13"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;5432:5432&quot;</span>
+</span><span data-line="14"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+</span><span data-line="15">
+</span><span data-line="16"><span class="w">  </span><span class="nt">ollama</span><span class="p">:</span>
+</span><span data-line="17"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ollama/ollama:latest</span>
+</span><span data-line="18"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+</span><span data-line="19"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ollama_data:/root/.ollama</span>
+</span><span data-line="20"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+</span><span data-line="21"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;11434:11434&quot;</span>
+</span><span data-line="22"><span class="w">    </span><span class="nt">deploy</span><span class="p">:</span>
+</span><span data-line="23"><span class="w">      </span><span class="nt">resources</span><span class="p">:</span>
+</span><span data-line="24"><span class="w">        </span><span class="nt">reservations</span><span class="p">:</span>
+</span><span data-line="25"><span class="w">          </span><span class="nt">devices</span><span class="p">:</span>
+</span><span data-line="26"><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nvidia</span>
+</span><span data-line="27"><span class="w">              </span><span class="nt">count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</span><span data-line="28"><span class="w">              </span><span class="nt">capabilities</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">gpu</span><span class="p p-Indicator">]</span>
+</span><span data-line="29"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+</span><span data-line="30">
+</span><span data-line="31"><span class="w">  </span><span class="nt">mortiq</span><span class="p">:</span>
+</span><span data-line="32"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/dkubeio/mortiq:latest</span>
+</span><span data-line="33"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+</span><span data-line="34"><span class="w">      </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql+asyncpg://mortgage:${DB_PASSWORD}@postgres:5432/mortiq</span>
+</span><span data-line="35"><span class="w">      </span><span class="nt">OLLAMA_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://ollama:11434</span>
+</span><span data-line="36"><span class="w">      </span><span class="nt">OLLAMA_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen3.5:35b</span>
+</span><span data-line="37"><span class="w">      </span><span class="nt">CLAUDE_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sonnet</span>
+</span><span data-line="38"><span class="w">      </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${ANTHROPIC_API_KEY}</span>
+</span><span data-line="39"><span class="w">      </span><span class="nt">ANONYMIZATION_ENABLED</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</span><span data-line="40"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+</span><span data-line="41"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uploads:/app/uploads</span>
+</span><span data-line="42"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+</span><span data-line="43"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;5300:5300&quot;</span>
+</span><span data-line="44"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+</span><span data-line="45"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+</span><span data-line="46"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ollama</span>
+</span><span data-line="47"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+</span><span data-line="48">
+</span><span data-line="49"><span class="nt">volumes</span><span class="p">:</span>
+</span><span data-line="50"><span class="w">  </span><span class="nt">postgres_data</span><span class="p">:</span>
+</span><span data-line="51"><span class="w">  </span><span class="nt">ollama_data</span><span class="p">:</span>
+</span><span data-line="52"><span class="w">  </span><span class="nt">uploads</span><span class="p">:</span>
+</span></pre></div>
+</div>
+</section>
+<section id="deploy">
+<h4>Deploy<a class="headerlink" href="#deploy" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Set environment variables</span>
+</span><span data-line="2"><span class="nb">export</span><span class="w"> </span><span class="nv">DB_PASSWORD</span><span class="o">=</span>your_secure_password
+</span><span data-line="3"><span class="nb">export</span><span class="w"> </span><span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span>your_api_key
+</span><span data-line="4">
+</span><span data-line="5"><span class="c1"># Start services</span>
+</span><span data-line="6">docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</span><span data-line="7">
+</span><span data-line="8"><span class="c1"># Check status</span>
+</span><span data-line="9">docker-compose<span class="w"> </span>ps
+</span><span data-line="10">
+</span><span data-line="11"><span class="c1"># View logs</span>
+</span><span data-line="12">docker-compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>mortiq
+</span><span data-line="13">
+</span><span data-line="14"><span class="c1"># Pull Ollama model</span>
+</span><span data-line="15">docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ollama<span class="w"> </span>ollama<span class="w"> </span>pull<span class="w"> </span>qwen3.5:35b
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="kubernetes-with-helm">
+<h3>2. Kubernetes with Helm<a class="headerlink" href="#kubernetes-with-helm" title="Link to this heading">¶</a></h3>
+<section id="add-helm-repository">
+<h4>Add Helm Repository<a class="headerlink" href="#add-helm-repository" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>dkubeio<span class="w"> </span>https://dkubeio.github.io/helm-charts
+</span><span data-line="2">helm<span class="w"> </span>repo<span class="w"> </span>update
+</span></pre></div>
+</div>
+</section>
+<section id="create-values-yaml">
+<h4>Create values.yaml<a class="headerlink" href="#create-values-yaml" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># values.yaml</span>
+</span><span data-line="2"><span class="nt">replicaCount</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="nt">image</span><span class="p">:</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/dkubeio/mortiq</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">latest</span>
+</span><span data-line="7"><span class="w">  </span><span class="nt">pullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IfNotPresent</span>
+</span><span data-line="8">
+</span><span data-line="9"><span class="nt">service</span><span class="p">:</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
+</span><span data-line="11"><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5300</span>
+</span><span data-line="12">
+</span><span data-line="13"><span class="nt">ingress</span><span class="p">:</span>
+</span><span data-line="14"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span data-line="15"><span class="w">  </span><span class="nt">className</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+</span><span data-line="16"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
+</span><span data-line="17"><span class="w">    </span><span class="nt">cert-manager.io/cluster-issuer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">letsencrypt-prod</span>
+</span><span data-line="18"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+</span><span data-line="19"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq.example.com</span>
+</span><span data-line="20"><span class="w">      </span><span class="nt">paths</span><span class="p">:</span>
+</span><span data-line="21"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
+</span><span data-line="22"><span class="w">          </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+</span><span data-line="23"><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
+</span><span data-line="24"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq-tls</span>
+</span><span data-line="25"><span class="w">      </span><span class="nt">hosts</span><span class="p">:</span>
+</span><span data-line="26"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq.example.com</span>
+</span><span data-line="27">
+</span><span data-line="28"><span class="nt">env</span><span class="p">:</span>
+</span><span data-line="29"><span class="w">  </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql+asyncpg://mortgage:password@postgres-service:5432/mortiq</span>
+</span><span data-line="30"><span class="w">  </span><span class="nt">OLLAMA_BASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://ollama-service:11434</span>
+</span><span data-line="31"><span class="w">  </span><span class="nt">OLLAMA_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qwen3.5:35b</span>
+</span><span data-line="32"><span class="w">  </span><span class="nt">CLAUDE_MODEL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sonnet</span>
+</span><span data-line="33"><span class="w">  </span><span class="nt">ANONYMIZATION_ENABLED</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</span><span data-line="34"><span class="w">  </span><span class="nt">DKUBEX_BASE_PATH</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+</span><span data-line="35">
+</span><span data-line="36"><span class="nt">secrets</span><span class="p">:</span>
+</span><span data-line="37"><span class="w">  </span><span class="nt">ANTHROPIC_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your_api_key_here</span>
+</span><span data-line="38">
+</span><span data-line="39"><span class="nt">persistence</span><span class="p">:</span>
+</span><span data-line="40"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span data-line="41"><span class="w">  </span><span class="nt">storageClass</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard</span>
+</span><span data-line="42"><span class="w">  </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100Gi</span>
+</span><span data-line="43">
+</span><span data-line="44"><span class="nt">resources</span><span class="p">:</span>
+</span><span data-line="45"><span class="w">  </span><span class="nt">limits</span><span class="p">:</span>
+</span><span data-line="46"><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000m</span>
+</span><span data-line="47"><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4Gi</span>
+</span><span data-line="48"><span class="w">  </span><span class="nt">requests</span><span class="p">:</span>
+</span><span data-line="49"><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000m</span>
+</span><span data-line="50"><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2Gi</span>
+</span><span data-line="51">
+</span><span data-line="52"><span class="nt">autoscaling</span><span class="p">:</span>
+</span><span data-line="53"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span data-line="54"><span class="w">  </span><span class="nt">minReplicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+</span><span data-line="55"><span class="w">  </span><span class="nt">maxReplicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+</span><span data-line="56"><span class="w">  </span><span class="nt">targetCPUUtilizationPercentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">70</span>
+</span><span data-line="57">
+</span><span data-line="58"><span class="nt">postgresql</span><span class="p">:</span>
+</span><span data-line="59"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span data-line="60"><span class="w">  </span><span class="nt">auth</span><span class="p">:</span>
+</span><span data-line="61"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortgage</span>
+</span><span data-line="62"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secure_password</span>
+</span><span data-line="63"><span class="w">    </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq</span>
+</span><span data-line="64"><span class="w">  </span><span class="nt">primary</span><span class="p">:</span>
+</span><span data-line="65"><span class="w">    </span><span class="nt">persistence</span><span class="p">:</span>
+</span><span data-line="66"><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span data-line="67"><span class="w">      </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50Gi</span>
+</span><span data-line="68">
+</span><span data-line="69"><span class="nt">ollama</span><span class="p">:</span>
+</span><span data-line="70"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span data-line="71"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ollama/ollama:latest</span>
+</span><span data-line="72"><span class="w">  </span><span class="nt">service</span><span class="p">:</span>
+</span><span data-line="73"><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">11434</span>
+</span><span data-line="74"><span class="w">  </span><span class="nt">resources</span><span class="p">:</span>
+</span><span data-line="75"><span class="w">    </span><span class="nt">limits</span><span class="p">:</span>
+</span><span data-line="76"><span class="w">      </span><span class="nt">nvidia.com/gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</span><span data-line="77"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32Gi</span>
+</span><span data-line="78"><span class="w">    </span><span class="nt">requests</span><span class="p">:</span>
+</span><span data-line="79"><span class="w">      </span><span class="nt">nvidia.com/gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</span><span data-line="80"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16Gi</span>
+</span><span data-line="81"><span class="w">  </span><span class="nt">nodeSelector</span><span class="p">:</span>
+</span><span data-line="82"><span class="w">    </span><span class="nt">gpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</span><span data-line="83"><span class="w">  </span><span class="nt">persistence</span><span class="p">:</span>
+</span><span data-line="84"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span data-line="85"><span class="w">    </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200Gi</span>
+</span></pre></div>
+</div>
+</section>
+<section id="install">
+<h4>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Create namespace</span>
+</span><span data-line="2">kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>mortiq
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># Install with Helm</span>
+</span><span data-line="5">helm<span class="w"> </span>install<span class="w"> </span>mortiq<span class="w"> </span>dkubeio/mortiq<span class="w"> </span><span class="se">\</span>
+</span><span data-line="6"><span class="w">  </span>--namespace<span class="w"> </span>mortiq<span class="w"> </span><span class="se">\</span>
+</span><span data-line="7"><span class="w">  </span>--values<span class="w"> </span>values.yaml
+</span><span data-line="8">
+</span><span data-line="9"><span class="c1"># Check status</span>
+</span><span data-line="10">kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>mortiq
+</span><span data-line="11">kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>mortiq
+</span><span data-line="12">kubectl<span class="w"> </span>get<span class="w"> </span>ingress<span class="w"> </span>-n<span class="w"> </span>mortiq
+</span><span data-line="13">
+</span><span data-line="14"><span class="c1"># View logs</span>
+</span><span data-line="15">kubectl<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>deployment/mortiq<span class="w"> </span>-n<span class="w"> </span>mortiq
+</span></pre></div>
+</div>
+</section>
+<section id="upgrade">
+<h4>Upgrade<a class="headerlink" href="#upgrade" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Update values.yaml, then:</span>
+</span><span data-line="2">helm<span class="w"> </span>upgrade<span class="w"> </span>mortiq<span class="w"> </span>dkubeio/mortiq<span class="w"> </span><span class="se">\</span>
+</span><span data-line="3"><span class="w">  </span>--namespace<span class="w"> </span>mortiq<span class="w"> </span><span class="se">\</span>
+</span><span data-line="4"><span class="w">  </span>--values<span class="w"> </span>values.yaml
+</span><span data-line="5">
+</span><span data-line="6"><span class="c1"># Rollback if needed</span>
+</span><span data-line="7">helm<span class="w"> </span>rollback<span class="w"> </span>mortiq<span class="w"> </span>-n<span class="w"> </span>mortiq
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="dkubex-platform-deployment">
+<h3>3. DKubeX Platform Deployment<a class="headerlink" href="#dkubex-platform-deployment" title="Link to this heading">¶</a></h3>
+<section id="create-application-manifest">
+<h4>Create Application Manifest<a class="headerlink" href="#create-application-manifest" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># mortiq-app.yaml</span>
+</span><span data-line="2"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dkube.io/v1</span>
+</span><span data-line="3"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Application</span>
+</span><span data-line="4"><span class="nt">metadata</span><span class="p">:</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+</span><span data-line="7"><span class="nt">spec</span><span class="p">:</span>
+</span><span data-line="8"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/dkubeio/mortiq:latest</span>
+</span><span data-line="9"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5300</span>
+</span><span data-line="11"><span class="w">  </span><span class="nt">basePath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/mortiq</span>
+</span><span data-line="12"><span class="w">  </span>
+</span><span data-line="13"><span class="w">  </span><span class="nt">env</span><span class="p">:</span>
+</span><span data-line="14"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL</span>
+</span><span data-line="15"><span class="w">      </span><span class="nt">valueFrom</span><span class="p">:</span>
+</span><span data-line="16"><span class="w">        </span><span class="nt">secretKeyRef</span><span class="p">:</span>
+</span><span data-line="17"><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq-secrets</span>
+</span><span data-line="18"><span class="w">          </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database-url</span>
+</span><span data-line="19"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OLLAMA_BASE_URL</span>
+</span><span data-line="20"><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://ollama-service:11434</span>
+</span><span data-line="21"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DKUBEX_BASE_PATH</span>
+</span><span data-line="22"><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/mortiq</span>
+</span><span data-line="23"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANONYMIZATION_ENABLED</span>
+</span><span data-line="24"><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</span><span data-line="25"><span class="w">  </span>
+</span><span data-line="26"><span class="w">  </span><span class="nt">resources</span><span class="p">:</span>
+</span><span data-line="27"><span class="w">    </span><span class="nt">limits</span><span class="p">:</span>
+</span><span data-line="28"><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</span><span data-line="29"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4Gi</span>
+</span><span data-line="30"><span class="w">    </span><span class="nt">requests</span><span class="p">:</span>
+</span><span data-line="31"><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</span><span data-line="32"><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2Gi</span>
+</span><span data-line="33"><span class="w">  </span>
+</span><span data-line="34"><span class="w">  </span><span class="nt">persistence</span><span class="p">:</span>
+</span><span data-line="35"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uploads</span>
+</span><span data-line="36"><span class="w">      </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/app/uploads</span>
+</span><span data-line="37"><span class="w">      </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100Gi</span>
+</span><span data-line="38"><span class="w">  </span>
+</span><span data-line="39"><span class="w">  </span><span class="nt">auth</span><span class="p">:</span>
+</span><span data-line="40"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span data-line="41"><span class="w">    </span><span class="nt">roles</span><span class="p">:</span>
+</span><span data-line="42"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+</span><span data-line="43"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">underwriter</span>
+</span><span data-line="44"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">viewer</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id1">
+<h4>Deploy<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Apply manifest</span>
+</span><span data-line="2">kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>mortiq-app.yaml
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># Check status</span>
+</span><span data-line="5">dkubex<span class="w"> </span>app<span class="w"> </span>status<span class="w"> </span>mortiq
+</span><span data-line="6">
+</span><span data-line="7"><span class="c1"># Access via DKubeX UI</span>
+</span><span data-line="8"><span class="c1"># URL: https://dkubex.example.com/mortiq</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="database-setup">
+<h2>Database Setup<a class="headerlink" href="#database-setup" title="Link to this heading">¶</a></h2>
+<section id="postgresql-configuration">
+<h3>PostgreSQL Configuration<a class="headerlink" href="#postgresql-configuration" title="Link to this heading">¶</a></h3>
+<section id="create-database">
+<h4>Create Database<a class="headerlink" href="#create-database" title="Link to this heading">¶</a></h4>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">mortiq</span><span class="p">;</span>
+</span><span data-line="2"><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">mortgage</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;secure_password&#39;</span><span class="p">;</span>
+</span><span data-line="3"><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">mortiq</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">mortgage</span><span class="p">;</span>
+</span></pre></div>
+</div>
+</section>
+<section id="connection-string">
+<h4>Connection String<a class="headerlink" href="#connection-string" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># For asyncpg (recommended)</span>
+</span><span data-line="2"><span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql+asyncpg://mortgage:password@postgres-host:5432/mortiq
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># For psycopg2</span>
+</span><span data-line="5"><span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql://mortgage:password@postgres-host:5432/mortiq
+</span></pre></div>
+</div>
+</section>
+<section id="performance-tuning">
+<h4>Performance Tuning<a class="headerlink" href="#performance-tuning" title="Link to this heading">¶</a></h4>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1">-- postgresql.conf</span>
+</span><span data-line="2"><span class="n">shared_buffers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="n">MB</span>
+</span><span data-line="3"><span class="n">effective_cache_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">GB</span>
+</span><span data-line="4"><span class="n">maintenance_work_mem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="n">MB</span>
+</span><span data-line="5"><span class="n">checkpoint_completion_target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">9</span>
+</span><span data-line="6"><span class="n">wal_buffers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="n">MB</span>
+</span><span data-line="7"><span class="n">default_statistics_target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+</span><span data-line="8"><span class="n">random_page_cost</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span>
+</span><span data-line="9"><span class="n">effective_io_concurrency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span>
+</span><span data-line="10"><span class="n">work_mem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="n">MB</span>
+</span><span data-line="11"><span class="n">min_wal_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">GB</span>
+</span><span data-line="12"><span class="n">max_wal_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="n">GB</span>
+</span><span data-line="13"><span class="n">max_connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="database-migrations">
+<h3>Database Migrations<a class="headerlink" href="#database-migrations" title="Link to this heading">¶</a></h3>
+<p>MortIQ uses SQLAlchemy with automatic table creation. For production, consider using Alembic for migrations:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Install Alembic</span>
+</span><span data-line="2">pip<span class="w"> </span>install<span class="w"> </span>alembic
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># Initialize</span>
+</span><span data-line="5">alembic<span class="w"> </span>init<span class="w"> </span>migrations
+</span><span data-line="6">
+</span><span data-line="7"><span class="c1"># Generate migration</span>
+</span><span data-line="8">alembic<span class="w"> </span>revision<span class="w"> </span>--autogenerate<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initial schema&quot;</span>
+</span><span data-line="9">
+</span><span data-line="10"><span class="c1"># Apply migration</span>
+</span><span data-line="11">alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="ollama-setup">
+<h2>Ollama Setup<a class="headerlink" href="#ollama-setup" title="Link to this heading">¶</a></h2>
+<section id="pull-required-models">
+<h3>Pull Required Models<a class="headerlink" href="#pull-required-models" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># On Ollama host/container</span>
+</span><span data-line="2">ollama<span class="w"> </span>pull<span class="w"> </span>qwen3.5:35b
+</span><span data-line="3">ollama<span class="w"> </span>pull<span class="w"> </span>nemotron:70b<span class="w">  </span><span class="c1"># Optional alternative</span>
+</span><span data-line="4">ollama<span class="w"> </span>pull<span class="w"> </span>llama3.1:70b<span class="w">  </span><span class="c1"># Optional alternative</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="c1"># Verify models</span>
+</span><span data-line="7">ollama<span class="w"> </span>list
+</span></pre></div>
+</div>
+</section>
+<section id="gpu-configuration">
+<h3>GPU Configuration<a class="headerlink" href="#gpu-configuration" title="Link to this heading">¶</a></h3>
+<section id="nvidia-gpu">
+<h4>NVIDIA GPU<a class="headerlink" href="#nvidia-gpu" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Kubernetes nodeSelector</span>
+</span><span data-line="2"><span class="nt">nodeSelector</span><span class="p">:</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">gpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="c1"># Resource limits</span>
+</span><span data-line="6"><span class="nt">resources</span><span class="p">:</span>
+</span><span data-line="7"><span class="w">  </span><span class="nt">limits</span><span class="p">:</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">nvidia.com/gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</span></pre></div>
+</div>
+</section>
+<section id="amd-gpu">
+<h4>AMD GPU<a class="headerlink" href="#amd-gpu" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">resources</span><span class="p">:</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">limits</span><span class="p">:</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">amd.com/gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="id2">
+<h3>Performance Tuning<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Set Ollama environment variables</span>
+</span><span data-line="2"><span class="nv">OLLAMA_NUM_PARALLEL</span><span class="o">=</span><span class="m">4</span>
+</span><span data-line="3"><span class="nv">OLLAMA_MAX_LOADED_MODELS</span><span class="o">=</span><span class="m">2</span>
+</span><span data-line="4"><span class="nv">OLLAMA_FLASH_ATTENTION</span><span class="o">=</span><span class="m">1</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="storage-configuration">
+<h2>Storage Configuration<a class="headerlink" href="#storage-configuration" title="Link to this heading">¶</a></h2>
+<section id="persistent-volumes">
+<h3>Persistent Volumes<a class="headerlink" href="#persistent-volumes" title="Link to this heading">¶</a></h3>
+<section id="local-storage-development">
+<h4>Local Storage (Development)<a class="headerlink" href="#local-storage-development" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span data-line="2"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PersistentVolume</span>
+</span><span data-line="3"><span class="nt">metadata</span><span class="p">:</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq-uploads</span>
+</span><span data-line="5"><span class="nt">spec</span><span class="p">:</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">capacity</span><span class="p">:</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100Gi</span>
+</span><span data-line="8"><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span>
+</span><span data-line="9"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReadWriteOnce</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">hostPath</span><span class="p">:</span>
+</span><span data-line="11"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/mnt/data/mortiq</span>
+</span></pre></div>
+</div>
+</section>
+<section id="nfs-storage-production">
+<h4>NFS Storage (Production)<a class="headerlink" href="#nfs-storage-production" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span data-line="2"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PersistentVolume</span>
+</span><span data-line="3"><span class="nt">metadata</span><span class="p">:</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq-uploads</span>
+</span><span data-line="5"><span class="nt">spec</span><span class="p">:</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">capacity</span><span class="p">:</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100Gi</span>
+</span><span data-line="8"><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span>
+</span><span data-line="9"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReadWriteMany</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">nfs</span><span class="p">:</span>
+</span><span data-line="11"><span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nfs-server.example.com</span>
+</span><span data-line="12"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/exports/mortiq</span>
+</span></pre></div>
+</div>
+</section>
+<section id="cloud-storage-aws-ebs">
+<h4>Cloud Storage (AWS EBS)<a class="headerlink" href="#cloud-storage-aws-ebs" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span data-line="2"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PersistentVolume</span>
+</span><span data-line="3"><span class="nt">metadata</span><span class="p">:</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq-uploads</span>
+</span><span data-line="5"><span class="nt">spec</span><span class="p">:</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">capacity</span><span class="p">:</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100Gi</span>
+</span><span data-line="8"><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span>
+</span><span data-line="9"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReadWriteOnce</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">awsElasticBlockStore</span><span class="p">:</span>
+</span><span data-line="11"><span class="w">    </span><span class="nt">volumeID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vol-0123456789abcdef</span>
+</span><span data-line="12"><span class="w">    </span><span class="nt">fsType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ext4</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="security-configuration">
+<h2>Security Configuration<a class="headerlink" href="#security-configuration" title="Link to this heading">¶</a></h2>
+<section id="secrets-management">
+<h3>Secrets Management<a class="headerlink" href="#secrets-management" title="Link to this heading">¶</a></h3>
+<section id="kubernetes-secrets">
+<h4>Kubernetes Secrets<a class="headerlink" href="#kubernetes-secrets" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Create secrets</span>
+</span><span data-line="2">kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>generic<span class="w"> </span>mortiq-secrets<span class="w"> </span><span class="se">\</span>
+</span><span data-line="3"><span class="w">  </span>--from-literal<span class="o">=</span>database-url<span class="o">=</span><span class="s1">&#39;postgresql+asyncpg://...&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span data-line="4"><span class="w">  </span>--from-literal<span class="o">=</span>anthropic-api-key<span class="o">=</span><span class="s1">&#39;sk-...&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span data-line="5"><span class="w">  </span>--from-literal<span class="o">=</span>openai-api-key<span class="o">=</span><span class="s1">&#39;sk-...&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span data-line="6"><span class="w">  </span>-n<span class="w"> </span>mortiq
+</span><span data-line="7">
+</span><span data-line="8"><span class="c1"># Use in deployment</span>
+</span><span data-line="9">env:
+</span><span data-line="10"><span class="w">  </span>-<span class="w"> </span>name:<span class="w"> </span>ANTHROPIC_API_KEY
+</span><span data-line="11"><span class="w">    </span>valueFrom:
+</span><span data-line="12"><span class="w">      </span>secretKeyRef:
+</span><span data-line="13"><span class="w">        </span>name:<span class="w"> </span>mortiq-secrets
+</span><span data-line="14"><span class="w">        </span>key:<span class="w"> </span>anthropic-api-key
+</span></pre></div>
+</div>
+</section>
+<section id="external-secrets-operator">
+<h4>External Secrets Operator<a class="headerlink" href="#external-secrets-operator" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">external-secrets.io/v1beta1</span>
+</span><span data-line="2"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExternalSecret</span>
+</span><span data-line="3"><span class="nt">metadata</span><span class="p">:</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq-secrets</span>
+</span><span data-line="5"><span class="nt">spec</span><span class="p">:</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">refreshInterval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1h</span>
+</span><span data-line="7"><span class="w">  </span><span class="nt">secretStoreRef</span><span class="p">:</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aws-secrets-manager</span>
+</span><span data-line="9"><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SecretStore</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">target</span><span class="p">:</span>
+</span><span data-line="11"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq-secrets</span>
+</span><span data-line="12"><span class="w">  </span><span class="nt">data</span><span class="p">:</span>
+</span><span data-line="13"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">secretKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">anthropic-api-key</span>
+</span><span data-line="14"><span class="w">      </span><span class="nt">remoteRef</span><span class="p">:</span>
+</span><span data-line="15"><span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq/anthropic-api-key</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="tls-ssl-configuration">
+<h3>TLS/SSL Configuration<a class="headerlink" href="#tls-ssl-configuration" title="Link to this heading">¶</a></h3>
+<section id="cert-manager">
+<h4>Cert-Manager<a class="headerlink" href="#cert-manager" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager.io/v1</span>
+</span><span data-line="2"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Certificate</span>
+</span><span data-line="3"><span class="nt">metadata</span><span class="p">:</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq-tls</span>
+</span><span data-line="5"><span class="nt">spec</span><span class="p">:</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq-tls</span>
+</span><span data-line="7"><span class="w">  </span><span class="nt">issuerRef</span><span class="p">:</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">letsencrypt-prod</span>
+</span><span data-line="9"><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterIssuer</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">dnsNames</span><span class="p">:</span>
+</span><span data-line="11"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq.example.com</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="network-policies">
+<h3>Network Policies<a class="headerlink" href="#network-policies" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+</span><span data-line="2"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NetworkPolicy</span>
+</span><span data-line="3"><span class="nt">metadata</span><span class="p">:</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq-network-policy</span>
+</span><span data-line="5"><span class="nt">spec</span><span class="p">:</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">podSelector</span><span class="p">:</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+</span><span data-line="8"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq</span>
+</span><span data-line="9"><span class="w">  </span><span class="nt">policyTypes</span><span class="p">:</span>
+</span><span data-line="10"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+</span><span data-line="11"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Egress</span>
+</span><span data-line="12"><span class="w">  </span><span class="nt">ingress</span><span class="p">:</span>
+</span><span data-line="13"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">from</span><span class="p">:</span>
+</span><span data-line="14"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">namespaceSelector</span><span class="p">:</span>
+</span><span data-line="15"><span class="w">            </span><span class="nt">matchLabels</span><span class="p">:</span>
+</span><span data-line="16"><span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ingress-nginx</span>
+</span><span data-line="17"><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+</span><span data-line="18"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
+</span><span data-line="19"><span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5300</span>
+</span><span data-line="20"><span class="w">  </span><span class="nt">egress</span><span class="p">:</span>
+</span><span data-line="21"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">to</span><span class="p">:</span>
+</span><span data-line="22"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">podSelector</span><span class="p">:</span>
+</span><span data-line="23"><span class="w">            </span><span class="nt">matchLabels</span><span class="p">:</span>
+</span><span data-line="24"><span class="w">              </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+</span><span data-line="25"><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+</span><span data-line="26"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
+</span><span data-line="27"><span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
+</span><span data-line="28"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">to</span><span class="p">:</span>
+</span><span data-line="29"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">podSelector</span><span class="p">:</span>
+</span><span data-line="30"><span class="w">            </span><span class="nt">matchLabels</span><span class="p">:</span>
+</span><span data-line="31"><span class="w">              </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ollama</span>
+</span><span data-line="32"><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+</span><span data-line="33"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
+</span><span data-line="34"><span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">11434</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="monitoring-observability">
+<h2>Monitoring &amp; Observability<a class="headerlink" href="#monitoring-observability" title="Link to this heading">¶</a></h2>
+<section id="prometheus-metrics">
+<h3>Prometheus Metrics<a class="headerlink" href="#prometheus-metrics" title="Link to this heading">¶</a></h3>
+<p>MortIQ exposes metrics at <code class="docutils literal notranslate"><span class="pre">/metrics</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># ServiceMonitor for Prometheus Operator</span>
+</span><span data-line="2"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring.coreos.com/v1</span>
+</span><span data-line="3"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ServiceMonitor</span>
+</span><span data-line="4"><span class="nt">metadata</span><span class="p">:</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq</span>
+</span><span data-line="6"><span class="nt">spec</span><span class="p">:</span>
+</span><span data-line="7"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+</span><span data-line="9"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span>
+</span><span data-line="11"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
+</span><span data-line="12"><span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/metrics</span>
+</span><span data-line="13"><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+</span></pre></div>
+</div>
+</section>
+<section id="grafana-dashboard">
+<h3>Grafana Dashboard<a class="headerlink" href="#grafana-dashboard" title="Link to this heading">¶</a></h3>
+<p>Import the provided Grafana dashboard:</p>
+<ul class="simple">
+<li><p>Dashboard ID: TBD</p></li>
+<li><p>Metrics include:</p>
+<ul>
+<li><p>Application throughput</p></li>
+<li><p>Agent performance</p></li>
+<li><p>Pipeline latency</p></li>
+<li><p>Error rates</p></li>
+<li><p>Cost tracking</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="logging">
+<h3>Logging<a class="headerlink" href="#logging" title="Link to this heading">¶</a></h3>
+<section id="structured-logging">
+<h4>Structured Logging<a class="headerlink" href="#structured-logging" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Configure in config.py</span>
+</span><span data-line="2"><span class="n">LOGGING_LEVEL</span><span class="o">=</span><span class="n">INFO</span>
+</span><span data-line="3"><span class="n">LOGGING_FORMAT</span><span class="o">=</span><span class="n">json</span>
+</span></pre></div>
+</div>
+</section>
+<section id="log-aggregation-elk-stack">
+<h4>Log Aggregation (ELK Stack)<a class="headerlink" href="#log-aggregation-elk-stack" title="Link to this heading">¶</a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Filebeat sidecar</span>
+</span><span data-line="2"><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">filebeat</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker.elastic.co/beats/filebeat:8.0.0</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">volumeMounts</span><span class="p">:</span>
+</span><span data-line="5"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">logs</span>
+</span><span data-line="6"><span class="w">      </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/log/mortiq</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="high-availability">
+<h2>High Availability<a class="headerlink" href="#high-availability" title="Link to this heading">¶</a></h2>
+<section id="multi-region-deployment">
+<h3>Multi-Region Deployment<a class="headerlink" href="#multi-region-deployment" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Region 1</span>
+</span><span data-line="2"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span data-line="3"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+</span><span data-line="4"><span class="nt">metadata</span><span class="p">:</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq-us-east</span>
+</span><span data-line="6"><span class="nt">spec</span><span class="p">:</span>
+</span><span data-line="7"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LoadBalancer</span>
+</span><span data-line="8"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+</span><span data-line="9"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq</span>
+</span><span data-line="10"><span class="w">    </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">us-east</span>
+</span><span data-line="11">
+</span><span data-line="12"><span class="c1"># Region 2</span>
+</span><span data-line="13"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span data-line="14"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+</span><span data-line="15"><span class="nt">metadata</span><span class="p">:</span>
+</span><span data-line="16"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq-us-west</span>
+</span><span data-line="17"><span class="nt">spec</span><span class="p">:</span>
+</span><span data-line="18"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LoadBalancer</span>
+</span><span data-line="19"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+</span><span data-line="20"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq</span>
+</span><span data-line="21"><span class="w">    </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">us-west</span>
+</span></pre></div>
+</div>
+</section>
+<section id="database-replication">
+<h3>Database Replication<a class="headerlink" href="#database-replication" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># PostgreSQL with streaming replication</span>
+</span><span data-line="2"><span class="nt">postgresql</span><span class="p">:</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">replication</span><span class="p">:</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">numSynchronousReplicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">synchronousCommit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;on&quot;</span>
+</span><span data-line="7"><span class="w">  </span><span class="nt">readReplicas</span><span class="p">:</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">replicaCount</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</span></pre></div>
+</div>
+</section>
+<section id="load-balancing">
+<h3>Load Balancing<a class="headerlink" href="#load-balancing" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># NGINX Ingress with load balancing</span>
+</span><span data-line="2"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+</span><span data-line="3"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+</span><span data-line="4"><span class="nt">metadata</span><span class="p">:</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/load-balance</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;round_robin&quot;</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/upstream-hash-by</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$remote_addr&quot;</span>
+</span><span data-line="9"><span class="nt">spec</span><span class="p">:</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+</span><span data-line="11"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq.example.com</span>
+</span><span data-line="12"><span class="w">      </span><span class="nt">http</span><span class="p">:</span>
+</span><span data-line="13"><span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
+</span><span data-line="14"><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
+</span><span data-line="15"><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+</span><span data-line="16"><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
+</span><span data-line="17"><span class="w">              </span><span class="nt">service</span><span class="p">:</span>
+</span><span data-line="18"><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mortiq</span>
+</span><span data-line="19"><span class="w">                </span><span class="nt">port</span><span class="p">:</span>
+</span><span data-line="20"><span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5300</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="backup-recovery">
+<h2>Backup &amp; Recovery<a class="headerlink" href="#backup-recovery" title="Link to this heading">¶</a></h2>
+<section id="database-backups">
+<h3>Database Backups<a class="headerlink" href="#database-backups" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Automated backup script</span>
+</span><span data-line="2"><span class="c1">#!/bin/bash</span>
+</span><span data-line="3"><span class="nv">BACKUP_DIR</span><span class="o">=</span>/backups/mortiq
+</span><span data-line="4"><span class="nv">DATE</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%Y%m%d_%H%M%S<span class="k">)</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="c1"># Backup database</span>
+</span><span data-line="7">pg_dump<span class="w"> </span>-h<span class="w"> </span>postgres-host<span class="w"> </span>-U<span class="w"> </span>mortgage<span class="w"> </span>mortiq<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+</span><span data-line="8"><span class="w">  </span>gzip<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$BACKUP_DIR</span>/db_backup_<span class="nv">$DATE</span>.sql.gz
+</span><span data-line="9">
+</span><span data-line="10"><span class="c1"># Backup uploads</span>
+</span><span data-line="11">tar<span class="w"> </span>-czf<span class="w"> </span><span class="nv">$BACKUP_DIR</span>/uploads_<span class="nv">$DATE</span>.tar.gz<span class="w"> </span>/app/uploads
+</span><span data-line="12">
+</span><span data-line="13"><span class="c1"># Cleanup old backups (keep 30 days)</span>
+</span><span data-line="14">find<span class="w"> </span><span class="nv">$BACKUP_DIR</span><span class="w"> </span>-mtime<span class="w"> </span>+30<span class="w"> </span>-delete
+</span></pre></div>
+</div>
+</section>
+<section id="restore-procedure">
+<h3>Restore Procedure<a class="headerlink" href="#restore-procedure" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Restore database</span>
+</span><span data-line="2">gunzip<span class="w"> </span>-c<span class="w"> </span>db_backup_20240115_120000.sql.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+</span><span data-line="3"><span class="w">  </span>psql<span class="w"> </span>-h<span class="w"> </span>postgres-host<span class="w"> </span>-U<span class="w"> </span>mortgage<span class="w"> </span>mortiq
+</span><span data-line="4">
+</span><span data-line="5"><span class="c1"># Restore uploads</span>
+</span><span data-line="6">tar<span class="w"> </span>-xzf<span class="w"> </span>uploads_20240115_120000.tar.gz<span class="w"> </span>-C<span class="w"> </span>/app/uploads
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="performance-optimization">
+<h2>Performance Optimization<a class="headerlink" href="#performance-optimization" title="Link to this heading">¶</a></h2>
+<section id="application-tuning">
+<h3>Application Tuning<a class="headerlink" href="#application-tuning" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Environment variables</span>
+</span><span data-line="2"><span class="nv">UVICORN_WORKERS</span><span class="o">=</span><span class="m">4</span>
+</span><span data-line="3"><span class="nv">UVICORN_WORKER_CLASS</span><span class="o">=</span>uvicorn.workers.UvicornWorker
+</span><span data-line="4"><span class="nv">MAX_PARALLEL_DOCUMENTS</span><span class="o">=</span><span class="m">4</span>
+</span><span data-line="5"><span class="nv">ENABLE_OPTIMIZED_PIPELINE</span><span class="o">=</span><span class="nb">true</span>
+</span></pre></div>
+</div>
+</section>
+<section id="database-connection-pooling">
+<h3>Database Connection Pooling<a class="headerlink" href="#database-connection-pooling" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># config.py</span>
+</span><span data-line="2"><span class="n">DATABASE_POOL_SIZE</span><span class="o">=</span><span class="mi">20</span>
+</span><span data-line="3"><span class="n">DATABASE_MAX_OVERFLOW</span><span class="o">=</span><span class="mi">10</span>
+</span><span data-line="4"><span class="n">DATABASE_POOL_TIMEOUT</span><span class="o">=</span><span class="mi">30</span>
+</span></pre></div>
+</div>
+</section>
+<section id="caching">
+<h3>Caching<a class="headerlink" href="#caching" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Redis for caching</span>
+</span><span data-line="2"><span class="nt">redis</span><span class="p">:</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">master</span><span class="p">:</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">persistence</span><span class="p">:</span>
+</span><span data-line="6"><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span data-line="7"><span class="w">      </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10Gi</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">¶</a></h3>
+<section id="application-won-t-start">
+<h4>Application Won’t Start<a class="headerlink" href="#application-won-t-start" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Check logs</span>
+</span><span data-line="2">kubectl<span class="w"> </span>logs<span class="w"> </span>deployment/mortiq<span class="w"> </span>-n<span class="w"> </span>mortiq
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># Check events</span>
+</span><span data-line="5">kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w"> </span>-n<span class="w"> </span>mortiq
+</span><span data-line="6">
+</span><span data-line="7"><span class="c1"># Verify secrets</span>
+</span><span data-line="8">kubectl<span class="w"> </span>get<span class="w"> </span>secrets<span class="w"> </span>-n<span class="w"> </span>mortiq
+</span></pre></div>
+</div>
+</section>
+<section id="database-connection-failed">
+<h4>Database Connection Failed<a class="headerlink" href="#database-connection-failed" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Test connection</span>
+</span><span data-line="2">kubectl<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>debug<span class="w"> </span>--image<span class="o">=</span>postgres:14<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+</span><span data-line="3"><span class="w">  </span>psql<span class="w"> </span>-h<span class="w"> </span>postgres-service<span class="w"> </span>-U<span class="w"> </span>mortgage<span class="w"> </span>-d<span class="w"> </span>mortiq
+</span><span data-line="4">
+</span><span data-line="5"><span class="c1"># Check service</span>
+</span><span data-line="6">kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>postgres-service<span class="w"> </span>-n<span class="w"> </span>mortiq
+</span></pre></div>
+</div>
+</section>
+<section id="ollama-not-responding">
+<h4>Ollama Not Responding<a class="headerlink" href="#ollama-not-responding" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Check Ollama pod</span>
+</span><span data-line="2">kubectl<span class="w"> </span>logs<span class="w"> </span>deployment/ollama<span class="w"> </span>-n<span class="w"> </span>mortiq
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># Test Ollama API</span>
+</span><span data-line="5">kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deployment/mortiq<span class="w"> </span>-n<span class="w"> </span>mortiq<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+</span><span data-line="6"><span class="w">  </span>curl<span class="w"> </span>http://ollama-service:11434/api/tags
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="health-checks">
+<h3>Health Checks<a class="headerlink" href="#health-checks" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Liveness probe</span>
+</span><span data-line="2"><span class="nt">livenessProbe</span><span class="p">:</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/health</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5300</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+</span><span data-line="7"><span class="w">  </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+</span><span data-line="8">
+</span><span data-line="9"><span class="c1"># Readiness probe</span>
+</span><span data-line="10"><span class="nt">readinessProbe</span><span class="p">:</span>
+</span><span data-line="11"><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span>
+</span><span data-line="12"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/health</span>
+</span><span data-line="13"><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5300</span>
+</span><span data-line="14"><span class="w">  </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+</span><span data-line="15"><span class="w">  </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="maintenance">
+<h2>Maintenance<a class="headerlink" href="#maintenance" title="Link to this heading">¶</a></h2>
+<section id="rolling-updates">
+<h3>Rolling Updates<a class="headerlink" href="#rolling-updates" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Update image</span>
+</span><span data-line="2">kubectl<span class="w"> </span><span class="nb">set</span><span class="w"> </span>image<span class="w"> </span>deployment/mortiq<span class="w"> </span><span class="se">\</span>
+</span><span data-line="3"><span class="w">  </span><span class="nv">mortiq</span><span class="o">=</span>ghcr.io/dkubeio/mortiq:v2.0.0<span class="w"> </span><span class="se">\</span>
+</span><span data-line="4"><span class="w">  </span>-n<span class="w"> </span>mortiq
+</span><span data-line="5">
+</span><span data-line="6"><span class="c1"># Monitor rollout</span>
+</span><span data-line="7">kubectl<span class="w"> </span>rollout<span class="w"> </span>status<span class="w"> </span>deployment/mortiq<span class="w"> </span>-n<span class="w"> </span>mortiq
+</span><span data-line="8">
+</span><span data-line="9"><span class="c1"># Rollback if needed</span>
+</span><span data-line="10">kubectl<span class="w"> </span>rollout<span class="w"> </span>undo<span class="w"> </span>deployment/mortiq<span class="w"> </span>-n<span class="w"> </span>mortiq
+</span></pre></div>
+</div>
+</section>
+<section id="scaling">
+<h3>Scaling<a class="headerlink" href="#scaling" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Manual scaling</span>
+</span><span data-line="2">kubectl<span class="w"> </span>scale<span class="w"> </span>deployment/mortiq<span class="w"> </span>--replicas<span class="o">=</span><span class="m">5</span><span class="w"> </span>-n<span class="w"> </span>mortiq
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># Autoscaling</span>
+</span><span data-line="5">kubectl<span class="w"> </span>autoscale<span class="w"> </span>deployment/mortiq<span class="w"> </span><span class="se">\</span>
+</span><span data-line="6"><span class="w">  </span>--min<span class="o">=</span><span class="m">3</span><span class="w"> </span>--max<span class="o">=</span><span class="m">10</span><span class="w"> </span>--cpu-percent<span class="o">=</span><span class="m">70</span><span class="w"> </span><span class="se">\</span>
+</span><span data-line="7"><span class="w">  </span>-n<span class="w"> </span>mortiq
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="cost-optimization">
+<h2>Cost Optimization<a class="headerlink" href="#cost-optimization" title="Link to this heading">¶</a></h2>
+<section id="resource-right-sizing">
+<h3>Resource Right-Sizing<a class="headerlink" href="#resource-right-sizing" title="Link to this heading">¶</a></h3>
+<p>Monitor actual usage and adjust:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">resources</span><span class="p">:</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">requests</span><span class="p">:</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500m</span><span class="w">      </span><span class="c1"># Start conservative</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1Gi</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">limits</span><span class="p">:</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000m</span><span class="w">     </span><span class="c1"># Allow bursting</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4Gi</span>
+</span></pre></div>
+</div>
+</section>
+<section id="spot-instances-aws">
+<h3>Spot Instances (AWS)<a class="headerlink" href="#spot-instances-aws" title="Link to this heading">¶</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">nodeSelector</span><span class="p">:</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">node.kubernetes.io/instance-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spot</span>
+</span><span data-line="3"><span class="nt">tolerations</span><span class="p">:</span>
+</span><span data-line="4"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spot</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Equal</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NoSchedule</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="compliance-audit">
+<h2>Compliance &amp; Audit<a class="headerlink" href="#compliance-audit" title="Link to this heading">¶</a></h2>
+<section id="audit-logging">
+<h3>Audit Logging<a class="headerlink" href="#audit-logging" title="Link to this heading">¶</a></h3>
+<p>Enable comprehensive audit logging:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nv">AUDIT_LOGGING_ENABLED</span><span class="o">=</span><span class="nb">true</span>
+</span><span data-line="2"><span class="nv">AUDIT_LOG_RETENTION_DAYS</span><span class="o">=</span><span class="m">90</span>
+</span></pre></div>
+</div>
+</section>
+<section id="data-retention">
+<h3>Data Retention<a class="headerlink" href="#data-retention" title="Link to this heading">¶</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1">-- Cleanup old data</span>
+</span><span data-line="2"><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">audit_log</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;90 days&#39;</span><span class="p">;</span>
+</span><span data-line="3"><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">token_usage</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;30 days&#39;</span><span class="p">;</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="support">
+<h2>Support<a class="headerlink" href="#support" title="Link to this heading">¶</a></h2>
+<p>For deployment support:</p>
+<ul class="simple">
+<li><p>Review <a class="reference internal" href="architecture.html"><span class="std std-doc">Architecture Guide</span></a></p></li>
+<li><p>Check <a class="reference internal" href="#../internal/troubleshooting.md"><span class="xref myst">Troubleshooting Guide</span></a></p></li>
+<li><p>Contact platform team</p></li>
+</ul>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="architecture.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">MortIQ Architecture</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="securellm-integration.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">SecureLLM Integration Guide</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 04.05.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=cac61aee"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

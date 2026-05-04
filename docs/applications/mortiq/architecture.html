@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MortIQ Architecture - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Deployment Guide" href="deployment.html" /><link rel="prev" title="Getting Started with MortIQ" href="getting-started.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/mortiq/architecture.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/mortiq/architecture.html"/>
+  <meta property="og:title" content="MortIQ Architecture"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="architecture.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../agentx/index.html">AgentX Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/user-guide.html">User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortgage-lite/index.html">Mortgage-Lite Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/getting-started.html">Getting Started with Mortgage-Lite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/architecture.html">Mortgage-Lite Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">MortIQ Overview</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with MortIQ</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">MortIQ Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ragflow/index.html">Quickstart</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM User Guide</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#system-overview">System Overview</a></li>
+<li><a class="reference internal" href="#high-level-architecture">High-Level Architecture</a></li>
+<li><a class="reference internal" href="#core-components">Core Components</a><ul>
+<li><a class="reference internal" href="#multi-pipeline-architecture">1. Multi-Pipeline Architecture</a><ul>
+<li><a class="reference internal" href="#pipeline-types">Pipeline Types</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#agent-catalog">2. Agent Catalog</a><ul>
+<li><a class="reference internal" href="#iris-intake-agent">Iris (Intake Agent)</a></li>
+<li><a class="reference internal" href="#rex-extractor-agent">Rex (Extractor Agent)</a></li>
+<li><a class="reference internal" href="#val-validator-agent">Val (Validator Agent)</a></li>
+<li><a class="reference internal" href="#ana-analyzer-agent">Ana (Analyzer Agent)</a></li>
+<li><a class="reference internal" href="#claire-compliance-agent">Claire (Compliance Agent)</a></li>
+<li><a class="reference internal" href="#max-messenger-agent">Max (Messenger Agent)</a></li>
+<li><a class="reference internal" href="#servo-servicing-validator-agent">Servo (Servicing Validator Agent)</a></li>
+<li><a class="reference internal" href="#auditor-qc-agent">Auditor (QC Agent)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pdf-document-viewer">3. PDF Document Viewer</a></li>
+<li><a class="reference internal" href="#privacy-boundaries">4. Privacy Boundaries</a><ul>
+<li><a class="reference internal" href="#anonymization-boundary-ana-claire">Anonymization Boundary (Ana &#8594; Claire)</a></li>
+<li><a class="reference internal" href="#deanonymization-boundary-claire-max">Deanonymization Boundary (Claire &#8594; Max)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-models">3. Data Models</a><ul>
+<li><a class="reference internal" href="#application">Application</a></li>
+<li><a class="reference internal" href="#document">Document</a></li>
+<li><a class="reference internal" href="#extractedfield">ExtractedField</a></li>
+<li><a class="reference internal" href="#anomaly">Anomaly</a></li>
+<li><a class="reference internal" href="#compliancecheck">ComplianceCheck</a></li>
+<li><a class="reference internal" href="#auditlog">AuditLog</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#api-layer">4. API Layer</a><ul>
+<li><a class="reference internal" href="#pages-router">Pages Router</a></li>
+<li><a class="reference internal" href="#applications-router">Applications Router</a></li>
+<li><a class="reference internal" href="#pipeline-router">Pipeline Router</a></li>
+<li><a class="reference internal" href="#upload-router">Upload Router</a></li>
+<li><a class="reference internal" href="#anomalies-router">Anomalies Router</a></li>
+<li><a class="reference internal" href="#compliance-router">Compliance Router</a></li>
+<li><a class="reference internal" href="#reports-router">Reports Router</a></li>
+<li><a class="reference internal" href="#metrics-router">Metrics Router</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#event-system">5. Event System</a></li>
+<li><a class="reference internal" href="#database-schema">6. Database Schema</a><ul>
+<li><a class="reference internal" href="#core-tables">Core Tables</a></li>
+<li><a class="reference internal" href="#relationships">Relationships</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#design-principles">Design Principles</a><ul>
+<li><a class="reference internal" href="#privacy-first">1. Privacy-First</a></li>
+<li><a class="reference internal" href="#shift-left-validation">2. Shift-Left Validation</a></li>
+<li><a class="reference internal" href="#cost-optimization">3. Cost Optimization</a></li>
+<li><a class="reference internal" href="#reliability">4. Reliability</a></li>
+<li><a class="reference internal" href="#observability">5. Observability</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#deployment-architecture">Deployment Architecture</a><ul>
+<li><a class="reference internal" href="#development">Development</a></li>
+<li><a class="reference internal" href="#production-kubernetes">Production (Kubernetes)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#security-considerations">Security Considerations</a><ul>
+<li><a class="reference internal" href="#authentication">Authentication</a></li>
+<li><a class="reference internal" href="#data-protection">Data Protection</a></li>
+<li><a class="reference internal" href="#audit-compliance">Audit &amp; Compliance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-characteristics">Performance Characteristics</a><ul>
+<li><a class="reference internal" href="#throughput">Throughput</a></li>
+<li><a class="reference internal" href="#latency">Latency</a></li>
+<li><a class="reference internal" href="#cost">Cost</a></li>
+<li><a class="reference internal" href="#scalability">Scalability</a></li>
+<li><a class="reference internal" href="#planned-features">Planned Features</a></li>
+<li><a class="reference internal" href="#performance-improvements">Performance Improvements</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">MortIQ Overview</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">MortIQ Architecture</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/mortiq/architecture.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/mortiq/architecture.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/mortiq/architecture.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/mortiq/architecture.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/mortiq/architecture.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="mortiq-architecture">
+<h1>MortIQ Architecture<a class="headerlink" href="#mortiq-architecture" title="Link to this heading">¶</a></h1>
+<p>This document describes the system architecture, design principles, and component interactions of MortIQ.</p>
+<section id="system-overview">
+<h2>System Overview<a class="headerlink" href="#system-overview" title="Link to this heading">¶</a></h2>
+<p>MortIQ is a multi-agent AI system designed for automated mortgage underwriting with privacy-first principles. The architecture separates concerns into distinct processing zones based on data sensitivity.</p>
+</section>
+<section id="high-level-architecture">
+<h2>High-Level Architecture<a class="headerlink" href="#high-level-architecture" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">┌─────────────────────────────────────────────────────────────────┐
+</span><span data-line="2">│                        CLIENT LAYER                              │
+</span><span data-line="3">│  Browser (HTMX + TailwindCSS) ←→ WebSocket (Real-time Events)  │
+</span><span data-line="4">│  PDF Viewer │ Kanban Board │ Anomaly Inspector                  │
+</span><span data-line="5">└─────────────────────────────────────────────────────────────────┘
+</span><span data-line="6">                              ↓
+</span><span data-line="7">┌─────────────────────────────────────────────────────────────────┐
+</span><span data-line="8">│                      API LAYER (FastAPI)                         │
+</span><span data-line="9">│  REST Endpoints │ Upload │ Pipeline │ Reports │ Metrics         │
+</span><span data-line="10">└─────────────────────────────────────────────────────────────────┘
+</span><span data-line="11">                              ↓
+</span><span data-line="12">┌─────────────────────────────────────────────────────────────────┐
+</span><span data-line="13">│                   MULTI-PIPELINE ARCHITECTURE                    │
+</span><span data-line="14">│                                                                   │
+</span><span data-line="15">│  UNDERWRITING:                                                   │
+</span><span data-line="16">│  Iris → Rex → Val → Ana → [ANONYMIZE] → Claire → Max           │
+</span><span data-line="17">│                                                                   │
+</span><span data-line="18">│  SERVICING:                                                      │
+</span><span data-line="19">│  Iris → Rex → Servo → Max                                       │
+</span><span data-line="20">│                                                                   │
+</span><span data-line="21">│  QUALITY CONTROL:                                                │
+</span><span data-line="22">│  Iris → Rex → Auditor → Max                                     │
+</span><span data-line="23">│                                                                   │
+</span><span data-line="24">│           ↑ LOCAL ZONE ↑    │ ANONYMIZE │  ↑ CLOUD ZONE ↑      │
+</span><span data-line="25">└─────────────────────────────────────────────────────────────────┘
+</span><span data-line="26">                              ↓
+</span><span data-line="27">┌─────────────────────────────────────────────────────────────────┐
+</span><span data-line="28">│                    DATA LAYER                                    │
+</span><span data-line="29">│  PostgreSQL/SQLite │ File Storage │ Audit Logs                  │
+</span><span data-line="30">└─────────────────────────────────────────────────────────────────┘
+</span></pre></div>
+</div>
+</section>
+<section id="core-components">
+<h2>Core Components<a class="headerlink" href="#core-components" title="Link to this heading">¶</a></h2>
+<section id="multi-pipeline-architecture">
+<h3>1. Multi-Pipeline Architecture<a class="headerlink" href="#multi-pipeline-architecture" title="Link to this heading">¶</a></h3>
+<p>MortIQ supports three distinct pipelines, each optimized for specific workflows:</p>
+<section id="pipeline-types">
+<h4>Pipeline Types<a class="headerlink" href="#pipeline-types" title="Link to this heading">¶</a></h4>
+<p><strong>Underwriting Pipeline</strong> (6 agents)</p>
+<ul class="simple">
+<li><p>Purpose: Loan origination and underwriting review</p></li>
+<li><p>Stages: Intake → Extracting → Validating → Analyzing → Compliance → Delivering</p></li>
+<li><p>Agents: Iris, Rex, Val, Ana, Claire, Max</p></li>
+</ul>
+<p><strong>Servicing Pipeline</strong> (4 agents)</p>
+<ul class="simple">
+<li><p>Purpose: Loan servicing transfer validation</p></li>
+<li><p>Stages: Received → Extracting → Reconciling → Delivering</p></li>
+<li><p>Agents: Iris, Rex, Servo, Max</p></li>
+</ul>
+<p><strong>Quality Control Pipeline</strong> (4 agents)</p>
+<ul class="simple">
+<li><p>Purpose: Post-close audit and defect tracking</p></li>
+<li><p>Stages: Sampled → Extracting → Auditing → Delivering</p></li>
+<li><p>Agents: Iris, Rex, Auditor, Max</p></li>
+</ul>
+</section>
+</section>
+<section id="agent-catalog">
+<h3>2. Agent Catalog<a class="headerlink" href="#agent-catalog" title="Link to this heading">¶</a></h3>
+<p>Eight specialized agents handle different aspects of processing:</p>
+<section id="iris-intake-agent">
+<h4>Iris (Intake Agent)<a class="headerlink" href="#iris-intake-agent" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Role</strong>: Document classification and intake</p></li>
+<li><p><strong>Processing</strong>: Local</p></li>
+<li><p><strong>Functions</strong>:</p>
+<ul>
+<li><p>Receives uploaded files</p></li>
+<li><p>Classifies document types (W-2, 1099, bank statements, etc.)</p></li>
+<li><p>Validates file integrity</p></li>
+<li><p>Creates Document records</p></li>
+<li><p>Sets application status to <code class="docutils literal notranslate"><span class="pre">extracting</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="rex-extractor-agent">
+<h4>Rex (Extractor Agent)<a class="headerlink" href="#rex-extractor-agent" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Role</strong>: Multi-engine OCR and data extraction</p></li>
+<li><p><strong>Processing</strong>: Local</p></li>
+<li><p><strong>Functions</strong>:</p>
+<ul>
+<li><p>Document OCR with cascade fallback</p></li>
+<li><p>Structured field extraction</p></li>
+<li><p>Table parsing</p></li>
+<li><p>Confidence scoring</p></li>
+</ul>
+</li>
+<li><p><strong>Technology</strong>:</p>
+<ul>
+<li><p>Vision: GLM-OCR → SecureLLM (Qwen2-VL) → Ollama (Qwen2-VL) → Tesseract</p></li>
+<li><p>Field extraction: SecureLLM (Qwen 3.5) → Ollama (Qwen 3.5)</p></li>
+</ul>
+</li>
+<li><p><strong>Output</strong>: ExtractedField records with confidence scores</p></li>
+</ul>
+</section>
+<section id="val-validator-agent">
+<h4>Val (Validator Agent)<a class="headerlink" href="#val-validator-agent" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Role</strong>: Deterministic validation (shift-left)</p></li>
+<li><p><strong>Processing</strong>: Local, no AI/LLM</p></li>
+<li><p><strong>Functions</strong>:</p>
+<ul>
+<li><p>Pure Python deterministic checks (zero AI cost)</p></li>
+<li><p>Counts unique SSNs across documents → CRITICAL if &gt;1</p></li>
+<li><p>Detects name variants → WARNING</p></li>
+<li><p>Validates table math (column sums) → WARNING</p></li>
+<li><p>Checks for missing required documents</p></li>
+<li><p>Verifies loan amounts vs limits</p></li>
+<li><p>Creates Anomaly records with tier=1</p></li>
+<li><p>Flags applications for CRITICAL issues</p></li>
+<li><p>Sends Telegram alerts for critical anomalies</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="ana-analyzer-agent">
+<h4>Ana (Analyzer Agent)<a class="headerlink" href="#ana-analyzer-agent" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Role</strong>: Contextual analysis using local LLM</p></li>
+<li><p><strong>Processing</strong>: Local (privacy-safe)</p></li>
+<li><p><strong>Functions</strong>:</p>
+<ul>
+<li><p>Phonetic name mismatch detection</p></li>
+<li><p>Employment gap analysis</p></li>
+<li><p>Income cross-referencing</p></li>
+<li><p>Large deposit investigation</p></li>
+<li><p>DTI/LTV calculation</p></li>
+<li><p>PII entity detection for anonymization</p></li>
+</ul>
+</li>
+<li><p><strong>Technology</strong>: SecureLLM → Ollama fallback (Qwen 3.5 35B)</p></li>
+<li><p><strong>Output</strong>: Anomaly records (tier 2), PII mapping</p></li>
+<li><p><strong>Fallback</strong>: Deterministic checks if LLMs unavailable</p></li>
+</ul>
+</section>
+<section id="claire-compliance-agent">
+<h4>Claire (Compliance Agent)<a class="headerlink" href="#claire-compliance-agent" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Role</strong>: Compliance checking and synthesis</p></li>
+<li><p><strong>Processing</strong>: Cloud (Claude), anonymized data only</p></li>
+<li><p><strong>Functions</strong>:</p>
+<ul>
+<li><p>Receives ONLY anonymized JSON (never sees real PII)</p></li>
+<li><p>Runs compliance checks against 15+ rules:</p>
+<ul>
+<li><p>Fannie Mae guidelines</p></li>
+<li><p>FHA requirements</p></li>
+<li><p>VA loan rules</p></li>
+<li><p>Freddie Mac standards</p></li>
+</ul>
+</li>
+<li><p>Calculates DTI and LTV from anonymized data</p></li>
+<li><p>Generates executive summary with Claude</p></li>
+<li><p>Cross-document synthesis</p></li>
+<li><p>Cites regulatory guidelines</p></li>
+<li><p>Recommends: approve / conditional / deny</p></li>
+<li><p>Creates ComplianceCheck records</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="max-messenger-agent">
+<h4>Max (Messenger Agent)<a class="headerlink" href="#max-messenger-agent" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Role</strong>: Final delivery and notifications</p></li>
+<li><p><strong>Processing</strong>: Local</p></li>
+<li><p><strong>Functions</strong>:</p>
+<ul>
+<li><p>Generates executive summary</p></li>
+<li><p>Sends Telegram notifications</p></li>
+<li><p>Updates application status to completed</p></li>
+<li><p>Archives processed files</p></li>
+</ul>
+</li>
+<li><p><strong>Technology</strong>: Template-based reporting</p></li>
+<li><p><strong>Output</strong>: Final report, notifications sent</p></li>
+</ul>
+</section>
+<section id="servo-servicing-validator-agent">
+<h4>Servo (Servicing Validator Agent)<a class="headerlink" href="#servo-servicing-validator-agent" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Role</strong>: Servicing transfer validation</p></li>
+<li><p><strong>Processing</strong>: Local (deterministic)</p></li>
+<li><p><strong>Functions</strong>:</p>
+<ul>
+<li><p>Principal balance reconciliation</p></li>
+<li><p>Payment history gap detection</p></li>
+<li><p>Escrow balance verification</p></li>
+<li><p>Interest rate consistency checks</p></li>
+<li><p>Insurance/tax certificate currency validation</p></li>
+</ul>
+</li>
+<li><p><strong>Technology</strong>: Pure Python deterministic checks</p></li>
+<li><p><strong>Output</strong>: Transfer validation report, critical flags</p></li>
+</ul>
+</section>
+<section id="auditor-qc-agent">
+<h4>Auditor (QC Agent)<a class="headerlink" href="#auditor-qc-agent" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Role</strong>: Post-close quality control</p></li>
+<li><p><strong>Processing</strong>: Local (deterministic)</p></li>
+<li><p><strong>Functions</strong>:</p>
+<ul>
+<li><p>Stale appraisal detection (&gt;120 days)</p></li>
+<li><p>Missing signature identification</p></li>
+<li><p>Income calculation verification</p></li>
+<li><p>Document completeness validation</p></li>
+<li><p>TRID tolerance compliance</p></li>
+</ul>
+</li>
+<li><p><strong>Technology</strong>: Pure Python deterministic checks</p></li>
+<li><p><strong>Output</strong>: QC audit report, defect flags</p></li>
+</ul>
+</section>
+</section>
+<section id="pdf-document-viewer">
+<h3>3. PDF Document Viewer<a class="headerlink" href="#pdf-document-viewer" title="Link to this heading">¶</a></h3>
+<p><strong>Inline Document Preview</strong></p>
+<ul class="simple">
+<li><p>Embedded PDF viewer in anomaly inspector</p></li>
+<li><p>Page navigation and zoom controls</p></li>
+<li><p>Field highlighting with bounding boxes</p></li>
+<li><p>Multi-document tabs</p></li>
+<li><p>Extracted fields display</p></li>
+</ul>
+<p><strong>Features</strong>:</p>
+<ul class="simple">
+<li><p>Click anomaly to jump to relevant document page</p></li>
+<li><p>Visual field highlighting for flagged data</p></li>
+<li><p>Side-by-side document comparison</p></li>
+<li><p>Supports all PDF documents in application</p></li>
+</ul>
+</section>
+<section id="privacy-boundaries">
+<h3>4. Privacy Boundaries<a class="headerlink" href="#privacy-boundaries" title="Link to this heading">¶</a></h3>
+<section id="anonymization-boundary-ana-claire">
+<h4>Anonymization Boundary (Ana → Claire)<a class="headerlink" href="#anonymization-boundary-ana-claire" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Before Claire processing</span>
+</span><span data-line="2"><span class="p">{</span>
+</span><span data-line="3">  <span class="s2">&quot;applicant_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Catherine Vellotti&quot;</span> <span class="err">→</span> <span class="s2">&quot;[APPLICANT_1]&quot;</span><span class="p">,</span>
+</span><span data-line="4">  <span class="s2">&quot;ssn&quot;</span><span class="p">:</span> <span class="s2">&quot;123-45-6789&quot;</span> <span class="err">→</span> <span class="s2">&quot;[SSN_1]&quot;</span><span class="p">,</span>
+</span><span data-line="5">  <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;1247 Oak St, Austin, TX&quot;</span> <span class="err">→</span> <span class="s2">&quot;[ADDRESS_1]&quot;</span><span class="p">,</span>
+</span><span data-line="6">  <span class="s2">&quot;employer&quot;</span><span class="p">:</span> <span class="s2">&quot;TechSphere LLC&quot;</span> <span class="err">→</span> <span class="s2">&quot;[EMPLOYER_1]&quot;</span><span class="p">,</span>
+</span><span data-line="7">  <span class="s2">&quot;income&quot;</span><span class="p">:</span> <span class="mi">120000</span>  <span class="c1"># Unchanged - not PII without identity</span>
+</span><span data-line="8"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="deanonymization-boundary-claire-max">
+<h4>Deanonymization Boundary (Claire → Max)<a class="headerlink" href="#deanonymization-boundary-claire-max" title="Link to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># After Claire processing</span>
+</span><span data-line="2"><span class="p">{</span>
+</span><span data-line="3">  <span class="s2">&quot;[APPLICANT_1]&quot;</span> <span class="err">→</span> <span class="s2">&quot;Catherine Vellotti&quot;</span><span class="p">,</span>
+</span><span data-line="4">  <span class="s2">&quot;[SSN_1]&quot;</span> <span class="err">→</span> <span class="s2">&quot;123-45-6789&quot;</span><span class="p">,</span>
+</span><span data-line="5">  <span class="s2">&quot;[ADDRESS_1]&quot;</span> <span class="err">→</span> <span class="s2">&quot;1247 Oak St, Austin, TX&quot;</span><span class="p">,</span>
+</span><span data-line="6">  <span class="s2">&quot;[EMPLOYER_1]&quot;</span> <span class="err">→</span> <span class="s2">&quot;TechSphere LLC&quot;</span>
+</span><span data-line="7"><span class="p">}</span>
+</span><span data-line="8"><span class="c1"># Mapping PURGED permanently after deanonymization</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="data-models">
+<h3>3. Data Models<a class="headerlink" href="#data-models" title="Link to this heading">¶</a></h3>
+<section id="application">
+<h4>Application<a class="headerlink" href="#application" title="Link to this heading">¶</a></h4>
+<p>Core entity representing a mortgage application:</p>
+<ul class="simple">
+<li><p>Applicant information</p></li>
+<li><p>Loan details (type, amount, property value)</p></li>
+<li><p>Status tracking (intake → extracting → under_review → flagged/approved/closed)</p></li>
+<li><p>Pipeline stage and mode</p></li>
+<li><p>DTI and LTV ratios</p></li>
+<li><p>AI mode selection</p></li>
+</ul>
+</section>
+<section id="document">
+<h4>Document<a class="headerlink" href="#document" title="Link to this heading">¶</a></h4>
+<p>Uploaded files associated with an application:</p>
+<ul class="simple">
+<li><p>Document type classification</p></li>
+<li><p>File metadata (path, hash, page count)</p></li>
+<li><p>Extraction status</p></li>
+<li><p>Average confidence score</p></li>
+</ul>
+</section>
+<section id="extractedfield">
+<h4>ExtractedField<a class="headerlink" href="#extractedfield" title="Link to this heading">¶</a></h4>
+<p>Structured data extracted from documents:</p>
+<ul class="simple">
+<li><p>Field name and value</p></li>
+<li><p>Confidence score</p></li>
+<li><p>Bounding box coordinates</p></li>
+<li><p>Page number</p></li>
+</ul>
+</section>
+<section id="anomaly">
+<h4>Anomaly<a class="headerlink" href="#anomaly" title="Link to this heading">¶</a></h4>
+<p>Issues detected during processing:</p>
+<ul class="simple">
+<li><p>Type (name_mismatch, ssn_conflict, math_error, etc.)</p></li>
+<li><p>Severity (critical, warning, info)</p></li>
+<li><p>Status (open, resolved, false_positive)</p></li>
+<li><p>Tier (1=deterministic, 2=local LLM, 3=cloud LLM)</p></li>
+</ul>
+</section>
+<section id="compliancecheck">
+<h4>ComplianceCheck<a class="headerlink" href="#compliancecheck" title="Link to this heading">¶</a></h4>
+<p>Regulatory compliance verification:</p>
+<ul class="simple">
+<li><p>Rule reference</p></li>
+<li><p>Pass/fail status</p></li>
+<li><p>Details and explanations</p></li>
+</ul>
+</section>
+<section id="auditlog">
+<h4>AuditLog<a class="headerlink" href="#auditlog" title="Link to this heading">¶</a></h4>
+<p>Complete audit trail:</p>
+<ul class="simple">
+<li><p>Event type and actor</p></li>
+<li><p>Payload and details</p></li>
+<li><p>Hash chain for integrity</p></li>
+</ul>
+</section>
+</section>
+<section id="api-layer">
+<h3>4. API Layer<a class="headerlink" href="#api-layer" title="Link to this heading">¶</a></h3>
+<p>FastAPI-based REST API with the following routers:</p>
+<section id="pages-router">
+<h4>Pages Router<a class="headerlink" href="#pages-router" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Dashboard (<code class="docutils literal notranslate"><span class="pre">/</span></code>)</p></li>
+<li><p>Applications Kanban (<code class="docutils literal notranslate"><span class="pre">/applications</span></code>)</p></li>
+<li><p>Upload interface (<code class="docutils literal notranslate"><span class="pre">/upload</span></code>)</p></li>
+<li><p>Settings (<code class="docutils literal notranslate"><span class="pre">/settings</span></code>)</p></li>
+</ul>
+</section>
+<section id="applications-router">
+<h4>Applications Router<a class="headerlink" href="#applications-router" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>List applications (<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/applications</span></code>)</p></li>
+<li><p>Get application details (<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/applications/{id}</span></code>)</p></li>
+<li><p>Update application (<code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/api/applications/{id}</span></code>)</p></li>
+<li><p>Delete application (<code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/api/applications/{id}</span></code>)</p></li>
+</ul>
+</section>
+<section id="pipeline-router">
+<h4>Pipeline Router<a class="headerlink" href="#pipeline-router" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Run pipeline (<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/pipeline/run/{application_id}</span></code>)</p></li>
+<li><p>Get pipeline status (<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/pipeline/status/{application_id}</span></code>)</p></li>
+<li><p>Manual stage trigger (<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/pipeline/trigger/{application_id}/{stage}</span></code>)</p></li>
+</ul>
+</section>
+<section id="upload-router">
+<h4>Upload Router<a class="headerlink" href="#upload-router" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Upload documents (<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/upload</span></code>)</p></li>
+<li><p>Validate files (<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/upload/validate</span></code>)</p></li>
+</ul>
+</section>
+<section id="anomalies-router">
+<h4>Anomalies Router<a class="headerlink" href="#anomalies-router" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>List anomalies (<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/anomalies</span></code>)</p></li>
+<li><p>Get anomaly details (<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/anomalies/{id}</span></code>)</p></li>
+<li><p>Resolve anomaly (<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/anomalies/{id}/resolve</span></code>)</p></li>
+</ul>
+</section>
+<section id="compliance-router">
+<h4>Compliance Router<a class="headerlink" href="#compliance-router" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>List compliance checks (<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/compliance/{application_id}</span></code>)</p></li>
+<li><p>Get compliance rules (<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/compliance/rules</span></code>)</p></li>
+</ul>
+</section>
+<section id="reports-router">
+<h4>Reports Router<a class="headerlink" href="#reports-router" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Generate report (<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/reports/{application_id}</span></code>)</p></li>
+<li><p>Download PDF (<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/reports/{application_id}/pdf</span></code>)</p></li>
+</ul>
+</section>
+<section id="metrics-router">
+<h4>Metrics Router<a class="headerlink" href="#metrics-router" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>System metrics (<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/metrics</span></code>)</p></li>
+<li><p>Agent performance (<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/metrics/agents</span></code>)</p></li>
+</ul>
+</section>
+</section>
+<section id="event-system">
+<h3>5. Event System<a class="headerlink" href="#event-system" title="Link to this heading">¶</a></h3>
+<p>Real-time event bus for UI updates:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Event types</span>
+</span><span data-line="2"><span class="o">-</span> <span class="s2">&quot;agent.active&quot;</span> <span class="o">-</span> <span class="n">Agent</span> <span class="n">starts</span> <span class="n">processing</span>
+</span><span data-line="3"><span class="o">-</span> <span class="s2">&quot;agent.completed&quot;</span> <span class="o">-</span> <span class="n">Agent</span> <span class="n">finishes</span>
+</span><span data-line="4"><span class="o">-</span> <span class="s2">&quot;agent.error&quot;</span> <span class="o">-</span> <span class="n">Agent</span> <span class="n">encounters</span> <span class="n">error</span>
+</span><span data-line="5"><span class="o">-</span> <span class="s2">&quot;pipeline.stage_changed&quot;</span> <span class="o">-</span> <span class="n">Pipeline</span> <span class="n">advances</span>
+</span><span data-line="6"><span class="o">-</span> <span class="s2">&quot;anomaly.detected&quot;</span> <span class="o">-</span> <span class="n">New</span> <span class="n">anomaly</span> <span class="n">found</span>
+</span><span data-line="7"><span class="o">-</span> <span class="s2">&quot;application.status_changed&quot;</span> <span class="o">-</span> <span class="n">Status</span> <span class="n">update</span>
+</span></pre></div>
+</div>
+</section>
+<section id="database-schema">
+<h3>6. Database Schema<a class="headerlink" href="#database-schema" title="Link to this heading">¶</a></h3>
+<section id="core-tables">
+<h4>Core Tables<a class="headerlink" href="#core-tables" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">applications</span></code> - Application records</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">documents</span></code> - Uploaded files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extracted_fields</span></code> - OCR results</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anomalies</span></code> - Detected issues</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">agents</span></code> - Agent status</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compliance_rules</span></code> - Regulatory rules</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compliance_checks</span></code> - Compliance results</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">audit_log</span></code> - Complete audit trail</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">token_usage</span></code> - AI cost tracking</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">settings</span></code> - System configuration</p></li>
+</ul>
+</section>
+<section id="relationships">
+<h4>Relationships<a class="headerlink" href="#relationships" title="Link to this heading">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">Application (1) ←→ (N) Document
+</span><span data-line="2">Document (1) ←→ (N) ExtractedField
+</span><span data-line="3">Application (1) ←→ (N) Anomaly
+</span><span data-line="4">Application (1) ←→ (N) ComplianceCheck
+</span><span data-line="5">Application (1) ←→ (N) AuditLog
+</span></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="design-principles">
+<h2>Design Principles<a class="headerlink" href="#design-principles" title="Link to this heading">¶</a></h2>
+<section id="privacy-first">
+<h3>1. Privacy-First<a class="headerlink" href="#privacy-first" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Local Processing</strong>: Sensitive data stays on-premises</p></li>
+<li><p><strong>Anonymization</strong>: PII removed before cloud processing</p></li>
+<li><p><strong>Ephemeral Mappings</strong>: Destroyed after use</p></li>
+<li><p><strong>Audit Trail</strong>: Complete tracking of data access</p></li>
+</ul>
+</section>
+<section id="shift-left-validation">
+<h3>2. Shift-Left Validation<a class="headerlink" href="#shift-left-validation" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Deterministic First</strong>: Catch errors with zero-cost Python checks</p></li>
+<li><p><strong>Local LLM Second</strong>: Use on-premises AI for contextual analysis</p></li>
+<li><p><strong>Cloud LLM Last</strong>: Only for complex synthesis with anonymized data</p></li>
+</ul>
+</section>
+<section id="cost-optimization">
+<h3>3. Cost Optimization<a class="headerlink" href="#cost-optimization" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Tiered Processing</strong>: Route to appropriate model based on complexity</p></li>
+<li><p><strong>Parallel Execution</strong>: Process multiple documents concurrently</p></li>
+<li><p><strong>Intelligent Caching</strong>: Reuse results when possible</p></li>
+<li><p><strong>Token Tracking</strong>: Monitor and optimize AI costs</p></li>
+</ul>
+</section>
+<section id="reliability">
+<h3>4. Reliability<a class="headerlink" href="#reliability" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Fault Tolerance</strong>: Retry logic for transient failures</p></li>
+<li><p><strong>Graceful Degradation</strong>: Fallback to alternative models</p></li>
+<li><p><strong>State Management</strong>: Resume from failure points</p></li>
+<li><p><strong>Health Monitoring</strong>: Track agent and system health</p></li>
+</ul>
+</section>
+<section id="observability">
+<h3>5. Observability<a class="headerlink" href="#observability" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Event Streaming</strong>: Real-time pipeline visibility</p></li>
+<li><p><strong>Audit Logging</strong>: Complete processing history</p></li>
+<li><p><strong>Metrics Collection</strong>: Performance and cost tracking</p></li>
+<li><p><strong>Alert System</strong>: Proactive issue notification</p></li>
+</ul>
+</section>
+</section>
+<section id="deployment-architecture">
+<h2>Deployment Architecture<a class="headerlink" href="#deployment-architecture" title="Link to this heading">¶</a></h2>
+<section id="development">
+<h3>Development<a class="headerlink" href="#development" title="Link to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">┌─────────────────┐
+</span><span data-line="2">│   Local Machine │
+</span><span data-line="3">│                 │
+</span><span data-line="4">│  ┌───────────┐  │
+</span><span data-line="5">│  │ FastAPI   │  │
+</span><span data-line="6">│  │ (port 5300)│ │
+</span><span data-line="7">│  └───────────┘  │
+</span><span data-line="8">│       ↓         │
+</span><span data-line="9">│  ┌───────────┐  │
+</span><span data-line="10">│  │  SQLite   │  │
+</span><span data-line="11">│  └───────────┘  │
+</span><span data-line="12">│       ↓         │
+</span><span data-line="13">│  ┌───────────┐  │
+</span><span data-line="14">│  │  Ollama   │  │
+</span><span data-line="15">│  │ (port 11434)│ │
+</span><span data-line="16">│  └───────────┘  │
+</span><span data-line="17">└─────────────────┘
+</span></pre></div>
+</div>
+</section>
+<section id="production-kubernetes">
+<h3>Production (Kubernetes)<a class="headerlink" href="#production-kubernetes" title="Link to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">┌──────────────────────────────────────────┐
+</span><span data-line="2">│            Kubernetes Cluster             │
+</span><span data-line="3">│                                           │
+</span><span data-line="4">│  ┌────────────────────────────────────┐  │
+</span><span data-line="5">│  │         Ingress Controller          │  │
+</span><span data-line="6">│  │    (DKubeX Auth Middleware)        │  │
+</span><span data-line="7">│  └────────────────────────────────────┘  │
+</span><span data-line="8">│                   ↓                       │
+</span><span data-line="9">│  ┌────────────────────────────────────┐  │
+</span><span data-line="10">│  │    MortIQ Deployment        │  │
+</span><span data-line="11">│  │    (replicas: 3)                   │  │
+</span><span data-line="12">│  │                                     │  │
+</span><span data-line="13">│  │  ┌──────────────────────────────┐  │  │
+</span><span data-line="14">│  │  │  FastAPI Container           │  │  │
+</span><span data-line="15">│  │  │  - Port 5300                 │  │  │
+</span><span data-line="16">│  │  │  - Health checks             │  │  │
+</span><span data-line="17">│  │  │  - Resource limits           │  │  │
+</span><span data-line="18">│  │  └──────────────────────────────┘  │  │
+</span><span data-line="19">│  └────────────────────────────────────┘  │
+</span><span data-line="20">│                   ↓                       │
+</span><span data-line="21">│  ┌────────────────────────────────────┐  │
+</span><span data-line="22">│  │    PostgreSQL StatefulSet          │  │
+</span><span data-line="23">│  │    (persistent storage)            │  │
+</span><span data-line="24">│  └────────────────────────────────────┘  │
+</span><span data-line="25">│                   ↓                       │
+</span><span data-line="26">│  ┌────────────────────────────────────┐  │
+</span><span data-line="27">│  │    Ollama Service                  │  │
+</span><span data-line="28">│  │    (GPU nodes)                     │  │
+</span><span data-line="29">│  └────────────────────────────────────┘  │
+</span><span data-line="30">└──────────────────────────────────────────┘
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="security-considerations">
+<h2>Security Considerations<a class="headerlink" href="#security-considerations" title="Link to this heading">¶</a></h2>
+<section id="authentication">
+<h3>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>DKubeX auth headers (<code class="docutils literal notranslate"><span class="pre">X-Auth-Request-User</span></code>, etc.)</p></li>
+<li><p>Role-based access control</p></li>
+<li><p>Namespace isolation</p></li>
+</ul>
+</section>
+<section id="data-protection">
+<h3>Data Protection<a class="headerlink" href="#data-protection" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>PII anonymization before cloud processing</p></li>
+<li><p>Encrypted storage (at rest)</p></li>
+<li><p>TLS for data in transit</p></li>
+<li><p>Ephemeral mapping destruction</p></li>
+</ul>
+</section>
+<section id="audit-compliance">
+<h3>Audit &amp; Compliance<a class="headerlink" href="#audit-compliance" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Complete audit trail with hash chain</p></li>
+<li><p>Immutable log records</p></li>
+<li><p>Regulatory compliance tracking</p></li>
+<li><p>Data retention policies</p></li>
+</ul>
+</section>
+</section>
+<section id="performance-characteristics">
+<h2>Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Link to this heading">¶</a></h2>
+<section id="throughput">
+<h3>Throughput<a class="headerlink" href="#throughput" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Target</strong>: 60 applications/hour</p></li>
+<li><p><strong>Current</strong>: ~15 applications/hour (4x improvement planned)</p></li>
+</ul>
+</section>
+<section id="latency">
+<h3>Latency<a class="headerlink" href="#latency" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Average Processing Time</strong>: 4 minutes per application</p></li>
+<li><p><strong>Industry Standard</strong>: 4 days per application</p></li>
+</ul>
+</section>
+<section id="cost">
+<h3>Cost<a class="headerlink" href="#cost" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Claude API</strong>: ~$0.04 per application (with anonymization)</p></li>
+<li><p><strong>Local LLM</strong>: Zero marginal cost</p></li>
+<li><p><strong>Total</strong>: 60% reduction vs cloud-only approach</p></li>
+</ul>
+</section>
+<section id="scalability">
+<h3>Scalability<a class="headerlink" href="#scalability" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Horizontal</strong>: Multiple FastAPI replicas</p></li>
+<li><p><strong>Backend</strong>: FastAPI (Python 3.12+)</p></li>
+<li><p><strong>Database</strong>: SQLite (dev) / PostgreSQL (production)</p></li>
+<li><p><strong>AI Models</strong>:</p>
+<ul>
+<li><p><strong>SecureLLM</strong> (primary) - Local inference gateway with dynamic model discovery</p></li>
+<li><p><strong>Ollama</strong> (fallback) - Local LLM for privacy-safe processing</p></li>
+<li><p><strong>Claude</strong> (Anthropic) - Cloud compliance checking (anonymized data only)</p></li>
+<li><p><strong>GLM-OCR</strong> - Specialized document OCR</p></li>
+</ul>
+</li>
+<li><p><strong>Frontend</strong>: HTMX + TailwindCSS</p></li>
+<li><p><strong>Deployment</strong>: Docker, Kubernetes (Helm charts included)</p></li>
+</ul>
+</section>
+<section id="planned-features">
+<h3>Planned Features<a class="headerlink" href="#planned-features" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Enhanced monitoring dashboard</p></li>
+<li><p>Advanced anomaly detection</p></li>
+<li><p>Multi-tenant support</p></li>
+<li><p>API rate limiting</p></li>
+<li><p>Webhook integrations</p></li>
+<li><p>Mobile app support</p></li>
+</ul>
+</section>
+<section id="performance-improvements">
+<h3>Performance Improvements<a class="headerlink" href="#performance-improvements" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Adaptive model selection</p></li>
+<li><p>Intelligent stage routing</p></li>
+<li><p>Advanced caching strategies</p></li>
+<li><p>Optimized parallel processing</p></li>
+</ul>
+<p>See the <a class="reference internal" href="#../internal/development.md"><span class="xref myst">Development Guide</span></a> for implementation details.</p>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="getting-started.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Getting Started with MortIQ</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="deployment.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Deployment Guide</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 04.05.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=cac61aee"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

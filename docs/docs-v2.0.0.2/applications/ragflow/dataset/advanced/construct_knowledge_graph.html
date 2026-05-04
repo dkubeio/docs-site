@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Construct knowledge graph - DKubeX Documentation</title><link rel="shortcut icon" href="../../../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="Enable RAPTOR" href="enable_raptor.html" /><link rel="prev" title="Select PDF parser" href="../select_pdf_parser.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/ragflow/dataset/advanced/construct_knowledge_graph.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/ragflow/dataset/advanced/construct_knowledge_graph.html"/>
+  <meta property="og:title" content="Construct knowledge graph"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="../../../../../applications/ragflow/dataset/advanced/construct_knowledge_graph.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../agentx/index.html">AgentX Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../agentx/overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../agentx/getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../agentx/user-guide.html">User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../agentx/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mortgage-lite/index.html">Mortgage-Lite Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/getting-started.html">Getting Started with Mortgage-Lite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/architecture.html">Mortgage-Lite Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mortiq/index.html">MortIQ Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/getting-started.html">Getting Started with MortIQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/architecture.html">MortIQ Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Quickstart</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../securellm/index.html">SecureLLM User Guide</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#scenarios">Scenarios</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#configurations">Configurations</a><ul>
+<li><a class="reference internal" href="#entity-types-required">Entity types (<em>Required</em>)</a></li>
+<li><a class="reference internal" href="#method">Method</a></li>
+<li><a class="reference internal" href="#entity-resolution">Entity resolution</a></li>
+<li><a class="reference internal" href="#community-reports">Community reports</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quickstart">Quickstart</a></li>
+<li><a class="reference internal" href="#frequently-asked-questions">Frequently asked questions</a><ul>
+<li><a class="reference internal" href="#does-the-knowledge-graph-automatically-update-when-i-remove-a-related-file">Does the knowledge graph automatically update when I remove a related file?</a></li>
+<li><a class="reference internal" href="#how-to-remove-a-generated-knowledge-graph">How to remove a generated knowledge graph?</a></li>
+<li><a class="reference internal" href="#where-is-the-created-knowledge-graph-stored">Where is the created knowledge graph stored?</a></li>
+<li><a class="reference internal" href="#how-to-export-a-created-knowledge-graph">How to export a created knowledge graph?</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">Quickstart</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Construct knowledge graph</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/dataset/advanced/construct_knowledge_graph.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/dataset/advanced/construct_knowledge_graph.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/ragflow/dataset/advanced/construct_knowledge_graph.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/dataset/advanced/construct_knowledge_graph.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/dataset/advanced/construct_knowledge_graph.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="construct-knowledge-graph">
+<h1>Construct knowledge graph<a class="headerlink" href="#construct-knowledge-graph" title="Link to this heading">¶</a></h1>
+<p>Generate a knowledge graph for your dataset.</p>
+<hr class="docutils" />
+<p>To enhance multi-hop question-answering, RAGFlow adds a knowledge graph construction step between data extraction and indexing, as illustrated below. This step creates additional chunks from existing ones generated by your specified chunking method.</p>
+<p><img alt="Image" src="https://github.com/user-attachments/assets/1ec21d8e-f255-4d65-9918-69b72dfa142b" /></p>
+<p>From v0.16.0 onward, RAGFlow supports constructing a knowledge graph on a dataset, allowing you to construct a <em>unified</em> graph across multiple files within your dataset. When a newly uploaded file starts parsing, the generated graph will automatically update.</p>
+<p>:::danger WARNING
+Constructing a knowledge graph requires significant memory, computational resources, and tokens.
+:::</p>
+<section id="scenarios">
+<h2>Scenarios<a class="headerlink" href="#scenarios" title="Link to this heading">¶</a></h2>
+<p>Knowledge graphs are especially useful for multi-hop question-answering involving <em>nested</em> logic. They outperform traditional extraction approaches when you are performing question answering on books or works with complex entities and relationships.</p>
+<p>:::tip NOTE
+RAPTOR (Recursive Abstractive Processing for Tree Organized Retrieval) can also be used for multi-hop question-answering tasks. See <a class="reference internal" href="enable_raptor.html"><span class="std std-doc">Enable RAPTOR</span></a> for details. You may use either approach or both, but ensure you understand the memory, computational, and token costs involved.
+:::</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<p>The system’s default chat model is used to generate knowledge graph. Before proceeding, ensure that you have a chat model properly configured:</p>
+<p><img alt="Set default models" src="https://raw.githubusercontent.com/infiniflow/ragflow-docs/main/images/set_default_models.jpg" /></p>
+</section>
+<section id="configurations">
+<h2>Configurations<a class="headerlink" href="#configurations" title="Link to this heading">¶</a></h2>
+<section id="entity-types-required">
+<h3>Entity types (<em>Required</em>)<a class="headerlink" href="#entity-types-required" title="Link to this heading">¶</a></h3>
+<p>The types of the entities to extract from your dataset. The default types are: <strong>organization</strong>, <strong>person</strong>, <strong>event</strong>, and <strong>category</strong>. Add or remove types to suit your specific dataset.</p>
+</section>
+<section id="method">
+<h3>Method<a class="headerlink" href="#method" title="Link to this heading">¶</a></h3>
+<p>The method to use to construct knowledge graph:</p>
+<ul class="simple">
+<li><p><strong>General</strong>: Use prompts provided by <a class="reference external" href="https://github.com/microsoft/graphrag">GraphRAG</a> to extract entities and relationships.</p></li>
+<li><p><strong>Light</strong>: (Default) Use prompts provided by <a class="reference external" href="https://github.com/HKUDS/LightRAG">LightRAG</a> to extract entities and relationships. This option consumes fewer tokens, less memory, and fewer computational resources.</p></li>
+</ul>
+</section>
+<section id="entity-resolution">
+<h3>Entity resolution<a class="headerlink" href="#entity-resolution" title="Link to this heading">¶</a></h3>
+<p>Whether to enable entity resolution. You can think of this as an entity deduplication switch. When enabled, the LLM will combine similar entities - e.g., ‘2025’ and ‘the year of 2025’, or ‘IT’ and ‘Information Technology’ - to construct a more effective graph.</p>
+<ul class="simple">
+<li><p>(Default) Disable entity resolution.</p></li>
+<li><p>Enable entity resolution. This option consumes more tokens.</p></li>
+</ul>
+</section>
+<section id="community-reports">
+<h3>Community reports<a class="headerlink" href="#community-reports" title="Link to this heading">¶</a></h3>
+<p>In a knowledge graph, a community is a cluster of entities linked by relationships. You can have the LLM generate an abstract for each community, known as a community report. See <a class="reference external" href="https://www.microsoft.com/en-us/research/blog/graphrag-improving-global-search-via-dynamic-community-selection/">here</a> for more information. This indicates whether to generate community reports:</p>
+<ul class="simple">
+<li><p>Generate community reports. This option consumes more tokens.</p></li>
+<li><p>(Default) Do not generate community reports.</p></li>
+</ul>
+</section>
+</section>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>Navigate to the <strong>Configuration</strong> page of your dataset and update:</p>
+<ul class="simple">
+<li><p>Entity types: <em>Required</em> - Specifies the entity types in the knowledge graph to generate. You don’t have to stick with the default, but you need to customize them for your documents.</p></li>
+<li><p>Method: <em>Optional</em></p></li>
+<li><p>Entity resolution: <em>Optional</em></p></li>
+<li><p>Community reports: <em>Optional</em>
+<em>The default knowledge graph configurations for your dataset are now set.</em></p></li>
+</ul>
+</li>
+<li><p>Navigate to the <strong>Files</strong> page of your dataset, click the <strong>Generate</strong> button on the top right corner of the page, then select <strong>Knowledge graph</strong> from the dropdown to initiate the knowledge graph generation process.</p>
+<p><em>You can click the pause button in the dropdown to halt the build process when necessary.</em></p>
+</li>
+<li><p>Go back to the <strong>Configuration</strong> page:</p>
+<p><em>Once a knowledge graph is generated, the <strong>Knowledge graph</strong> field changes from <code class="docutils literal notranslate"><span class="pre">Not</span> <span class="pre">generated</span></code> to <code class="docutils literal notranslate"><span class="pre">Generated</span> <span class="pre">at</span> <span class="pre">a</span> <span class="pre">specific</span> <span class="pre">timestamp</span></code>. You can delete it by clicking the recycle bin button to the right of the field.</em></p>
+</li>
+<li><p>To use the created knowledge graph, do either of the following:</p>
+<ul class="simple">
+<li><p>In the <strong>Chat setting</strong> panel of your chat app, switch on the <strong>Use knowledge graph</strong> toggle.</p></li>
+<li><p>If you are using an agent, click the <strong>Retrieval</strong> agent component to specify the dataset(s) and switch on the <strong>Use knowledge graph</strong> toggle.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="frequently-asked-questions">
+<h2>Frequently asked questions<a class="headerlink" href="#frequently-asked-questions" title="Link to this heading">¶</a></h2>
+<section id="does-the-knowledge-graph-automatically-update-when-i-remove-a-related-file">
+<h3>Does the knowledge graph automatically update when I remove a related file?<a class="headerlink" href="#does-the-knowledge-graph-automatically-update-when-i-remove-a-related-file" title="Link to this heading">¶</a></h3>
+<p>Nope. The knowledge graph does <em>not</em> update <em>until</em> you regenerate a knowledge graph for your dataset.</p>
+</section>
+<section id="how-to-remove-a-generated-knowledge-graph">
+<h3>How to remove a generated knowledge graph?<a class="headerlink" href="#how-to-remove-a-generated-knowledge-graph" title="Link to this heading">¶</a></h3>
+<p>On the <strong>Configuration</strong> page of your dataset, find the <strong>Knowledge graph</strong> field and click the recycle bin button to the right of the field.</p>
+</section>
+<section id="where-is-the-created-knowledge-graph-stored">
+<h3>Where is the created knowledge graph stored?<a class="headerlink" href="#where-is-the-created-knowledge-graph-stored" title="Link to this heading">¶</a></h3>
+<p>All chunks of the created knowledge graph are stored in RAGFlow’s document engine: either Elasticsearch or <a class="reference external" href="https://github.com/infiniflow/infinity">Infinity</a>.</p>
+</section>
+<section id="how-to-export-a-created-knowledge-graph">
+<h3>How to export a created knowledge graph?<a class="headerlink" href="#how-to-export-a-created-knowledge-graph" title="Link to this heading">¶</a></h3>
+<p>Nope. Exporting a created knowledge graph is not supported. If you still consider this feature essential, please <a class="reference external" href="https://github.com/infiniflow/ragflow/issues">raise an issue</a> explaining your use case and its importance.</p>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../select_pdf_parser.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Select PDF parser</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="enable_raptor.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Enable RAPTOR</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 04.05.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../../_static/shibuya.js?v=cac61aee"></script>
+      <script src="../../../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

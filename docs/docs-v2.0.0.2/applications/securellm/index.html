@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>SecureLLM User Guide - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="prev" title="Share memory" href="../ragflow/team/share_memory.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/securellm/" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/securellm/"/>
+  <meta property="og:title" content="SecureLLM User Guide"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="../../../applications/securellm/index.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../agentx/index.html">AgentX Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/user-guide.html">User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortgage-lite/index.html">Mortgage-Lite Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/getting-started.html">Getting Started with Mortgage-Lite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/architecture.html">Mortgage-Lite Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortiq/index.html">MortIQ Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/getting-started.html">Getting Started with MortIQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/architecture.html">MortIQ Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ragflow/index.html">Quickstart</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">SecureLLM User Guide</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#logging-in">Logging In</a></li>
+<li><a class="reference internal" href="#for-all-users">For All Users</a><ul>
+<li><a class="reference internal" href="#dashboard">Dashboard</a></li>
+<li><a class="reference internal" href="#api-keys">API Keys</a></li>
+<li><a class="reference internal" href="#models">Models</a></li>
+<li><a class="reference internal" href="#usage-my-requests">Usage (My Requests)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#for-administrators">For Administrators</a><ul>
+<li><a class="reference internal" href="#dashboard-admin-view">Dashboard (Admin View)</a></li>
+<li><a class="reference internal" href="#providers">Providers</a></li>
+<li><a class="reference internal" href="#users">Users</a></li>
+<li><a class="reference internal" href="#guardrails">Guardrails</a></li>
+<li><a class="reference internal" href="#guardrail-logs">Guardrail Logs</a></li>
+<li><a class="reference internal" href="#audit-logs">Audit Logs</a></li>
+<li><a class="reference internal" href="#performance">Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quick-reference">Quick Reference</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">SecureLLM User Guide</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/securellm/index.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/securellm/index.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/securellm/index.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/securellm/index.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/securellm/index.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="securellm-user-guide">
+<h1>SecureLLM User Guide<a class="headerlink" href="#securellm-user-guide" title="Link to this heading">¶</a></h1>
+<p>SecureLLM is your organization’s secure gateway to AI. Instead of everyone connecting directly to different AI services, all requests go through one central hub that your team controls. This means consistent access, cost tracking, and safety guardrails — without you needing to manage separate accounts or API keys for every AI provider.</p>
+<hr class="docutils" />
+<section id="logging-in">
+<h2>Logging In<a class="headerlink" href="#logging-in" title="Link to this heading">¶</a></h2>
+<p><strong>Production:</strong> SecureLLM uses your company’s single sign-on (SSO). Navigate to the app URL and you are logged in automatically using your existing credentials — no separate account or password needed.</p>
+<p><strong>Development mode:</strong> A <code class="docutils literal notranslate"><span class="pre">/login</span></code> page is shown where you enter your email address to sign in.</p>
+</section>
+<hr class="docutils" />
+<section id="for-all-users">
+<h2>For All Users<a class="headerlink" href="#for-all-users" title="Link to this heading">¶</a></h2>
+<p>Once logged in, you will see a sidebar with four pages: <strong>Dashboard</strong>, <strong>API Keys</strong>, <strong>Models</strong>, and <strong>Usage</strong>.</p>
+<section id="dashboard">
+<h3>Dashboard<a class="headerlink" href="#dashboard" title="Link to this heading">¶</a></h3>
+<p>The Dashboard gives you a snapshot of your AI usage at a glance.</p>
+<p><img alt="Admin Dashboard view" src="applications/securellm/media/screenshot-1.png" /></p>
+<ul class="simple">
+<li><p><strong>Total Requests</strong> — how many AI calls you have made</p></li>
+<li><p><strong>Input / Output Tokens</strong> — a measure of how much text was sent and received (tokens ≈ words)</p></li>
+<li><p><strong>Total Cost</strong> — estimated spend based on your requests</p></li>
+<li><p><strong>By Provider / By Model</strong> — tables showing which AI services and models you used most</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> If you have admin access, the Dashboard shows usage for your entire organization, not just your own.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="api-keys">
+<h3>API Keys<a class="headerlink" href="#api-keys" title="Link to this heading">¶</a></h3>
+<p>An API key is like a password that lets an application (a script, a tool, or an IDE plugin) talk to SecureLLM on your behalf. You create keys here and paste them into whichever tool needs them.</p>
+<p><strong>Creating a key:</strong></p>
+<ol class="arabic simple">
+<li><p>Click <strong>API Keys</strong> in the sidebar.</p></li>
+<li><p>Click <strong>Create Key</strong>.</p></li>
+<li><p>Enter a descriptive name (e.g., <code class="docutils literal notranslate"><span class="pre">my-vscode-plugin</span></code> or <code class="docutils literal notranslate"><span class="pre">data-pipeline</span></code>).</p></li>
+<li><p>Click <strong>Create</strong>.</p></li>
+<li><p><strong>Copy the key immediately</strong> — it is only shown once. Store it somewhere safe (a password manager or <code class="docutils literal notranslate"><span class="pre">.env</span></code> file).</p></li>
+</ol>
+<p><strong>Revoking a key:</strong></p>
+<ol class="arabic simple">
+<li><p>Find the key in your list.</p></li>
+<li><p>Click <strong>Revoke</strong>.</p></li>
+<li><p>Confirm the action.</p></li>
+</ol>
+<blockquote>
+<div><p><strong>Tip:</strong> If you suspect a key has been leaked or is no longer needed, revoke it right away. Revoking a key instantly stops any further requests made with it.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="models">
+<h3>Models<a class="headerlink" href="#models" title="Link to this heading">¶</a></h3>
+<p>The Models page lists every AI model available to you through SecureLLM.</p>
+<ul class="simple">
+<li><p>Use the <strong>search bar</strong> to find a specific model by name.</p></li>
+<li><p>Use the <strong>Provider</strong> and <strong>Category</strong> filters to narrow the list (e.g., Chat, Reasoning, Embedding).</p></li>
+<li><p>Click the <strong>copy icon</strong> next to a model name to copy its identifier — paste this directly into your code or tool.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> If an admin has restricted your access, you will only see the models and providers your organization has made available to you.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="usage-my-requests">
+<h3>Usage (My Requests)<a class="headerlink" href="#usage-my-requests" title="Link to this heading">¶</a></h3>
+<p>The Usage page shows your request history — everything you or your keys have sent to SecureLLM.</p>
+<p><img alt="Request Detail modal" src="applications/securellm/media/screenshot-2.png" /></p>
+<ul class="simple">
+<li><p>Use the <strong>filters</strong> at the top to narrow by provider, model, status, or API key name.</p></li>
+<li><p>Click any row to open the <strong>Request Detail</strong> panel, which shows:</p>
+<ul>
+<li><p>The exact messages sent and the AI’s response</p></li>
+<li><p>Request status, cost, token counts, and latency</p></li>
+<li><p>Any guardrail events triggered by that request</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="for-administrators">
+<h2>For Administrators<a class="headerlink" href="#for-administrators" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>Note:</strong> Admin pages are only visible if your account has been granted admin access. Contact your SecureLLM administrator if you believe you should have admin rights.</p>
+</div></blockquote>
+<p>Admins see all four user pages (with organization-wide data) plus six additional pages: <strong>Providers</strong>, <strong>Users</strong>, <strong>Guardrails</strong>, <strong>Guardrail Logs</strong>, <strong>Audit Logs</strong>, and <strong>Performance</strong>.</p>
+<hr class="docutils" />
+<section id="dashboard-admin-view">
+<h3>Dashboard (Admin View)<a class="headerlink" href="#dashboard-admin-view" title="Link to this heading">¶</a></h3>
+<p>Identical to the user dashboard, but all numbers reflect the <strong>entire organization</strong> — every user’s requests, tokens, and costs. Use this to monitor overall AI spend and identify which teams or models drive the most usage.</p>
+</section>
+<hr class="docutils" />
+<section id="providers">
+<h3>Providers<a class="headerlink" href="#providers" title="Link to this heading">¶</a></h3>
+<p>Providers are the AI services SecureLLM connects to (e.g., OpenAI, Anthropic, or your organization’s own AI deployment).</p>
+<p><strong>Adding a provider:</strong></p>
+<ol class="arabic simple">
+<li><p>Click <strong>Providers</strong> → <strong>Add Provider</strong>.</p></li>
+<li><p>Select the provider type from the dropdown.</p></li>
+<li><p>Enter the provider’s <strong>API Key</strong> and, if needed, a custom <strong>Base URL</strong>.</p></li>
+<li><p>Optionally list <strong>Allowed Models</strong> (leave blank to allow all models from this provider).</p></li>
+<li><p>Click <strong>Save</strong>.</p></li>
+</ol>
+<p><strong>Enabling / disabling a provider:</strong></p>
+<p>Use the toggle switch on each provider card. Disabling pauses routing to that provider without losing its configuration — useful for maintenance or cost control. Only delete a provider when you are certain it will never be used again.</p>
+</section>
+<hr class="docutils" />
+<section id="users">
+<h3>Users<a class="headerlink" href="#users" title="Link to this heading">¶</a></h3>
+<p>The Users page lets you set access policies for individual users — controlling which providers and models each person can use.</p>
+<p><strong>Adding a restriction:</strong></p>
+<ol class="arabic simple">
+<li><p>Click <strong>Users</strong> → <strong>Add Restriction</strong>.</p></li>
+<li><p>Enter the user’s email or username.</p></li>
+<li><p>Specify <strong>Allowed Providers</strong> and/or <strong>Allowed Models</strong> (comma-separated).</p></li>
+<li><p>Click <strong>Save</strong>.</p></li>
+</ol>
+<p>To remove all restrictions from a user (giving them full access), click <strong>Remove</strong> next to their policy.</p>
+</section>
+<hr class="docutils" />
+<section id="guardrails">
+<h3>Guardrails<a class="headerlink" href="#guardrails" title="Link to this heading">¶</a></h3>
+<p>Guardrails are automatic safety filters that inspect AI requests and responses before they reach the AI or your users.</p>
+<p><strong>Three guardrail types:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>What it does</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Content Filter</strong></p></td>
+<td><p>Blocks or masks sensitive content — credit card numbers, passwords, PII (names, phone numbers, etc.)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Prompt Injection</strong></p></td>
+<td><p>Detects attempts to manipulate the AI into ignoring its instructions (jailbreak attempts)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Custom</strong></p></td>
+<td><p>Advanced: accepts a raw JSON configuration for organization-specific rules</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Enabling or disabling a guardrail:</strong> Use the toggle switch on each guardrail card. Changes take effect immediately for all new requests.</p>
+<p><strong>Testing a guardrail:</strong></p>
+<ol class="arabic simple">
+<li><p>Click the <strong>Test Guardrails</strong> tab.</p></li>
+<li><p>Select one or more guardrails to test.</p></li>
+<li><p>Paste sample text into the input box.</p></li>
+<li><p>Click <strong>Run Test</strong>.</p></li>
+<li><p>Results show whether the guardrail triggered, what action it took (block / mask / warn), and how long it took to run.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="guardrail-logs">
+<h3>Guardrail Logs<a class="headerlink" href="#guardrail-logs" title="Link to this heading">¶</a></h3>
+<p>Every time a guardrail evaluates a request, it writes a log entry here.</p>
+<ul class="simple">
+<li><p>Filter by <strong>guardrail name</strong> or <strong>trigger status</strong> (triggered / not triggered).</p></li>
+<li><p>The summary bar shows total events, how many triggered, and the overall pass rate.</p></li>
+<li><p>Click any row to see the exact text that was flagged and the action taken.</p></li>
+</ul>
+<p>Use this page to verify that your guardrails are catching what they should — and not over-blocking legitimate requests.</p>
+</section>
+<hr class="docutils" />
+<section id="audit-logs">
+<h3>Audit Logs<a class="headerlink" href="#audit-logs" title="Link to this heading">¶</a></h3>
+<p>Audit Logs record every administrative action taken in SecureLLM: who created or revoked a key, who changed a provider, who updated a user policy — with timestamps and IP addresses.</p>
+<ul class="simple">
+<li><p>Filter by <strong>actor</strong> (admin’s email) or <strong>action type</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">create_key</span></code>, <code class="docutils literal notranslate"><span class="pre">revoke_key</span></code>, <code class="docutils literal notranslate"><span class="pre">update_provider</span></code>).</p></li>
+<li><p>Use this page for compliance reviews or to investigate unexpected changes.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="performance">
+<h3>Performance<a class="headerlink" href="#performance" title="Link to this heading">¶</a></h3>
+<p>The Performance page shows how the gateway itself is behaving.</p>
+<ul class="simple">
+<li><p><strong>Uptime</strong> — how long SecureLLM has been running since last restart</p></li>
+<li><p><strong>Total Requests / 5xx Errors</strong> — overall traffic and error counts</p></li>
+<li><p><strong>Latency by Endpoint</strong> — P50, P95, and P99 response times per API endpoint</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Tip:</strong> P95 latency is the response time that 95% of requests fall under. A spike here usually means a specific provider is slow, not that SecureLLM itself is the bottleneck.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="quick-reference">
+<h2>Quick Reference<a class="headerlink" href="#quick-reference" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Page</p></th>
+<th class="head"><p>Regular User</p></th>
+<th class="head"><p>Administrator</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dashboard</p></td>
+<td><p>Own usage stats</p></td>
+<td><p>Organization-wide stats</p></td>
+</tr>
+<tr class="row-odd"><td><p>API Keys</p></td>
+<td><p>Create / revoke own keys</p></td>
+<td><p>Create / revoke / restrict any key</p></td>
+</tr>
+<tr class="row-even"><td><p>Models</p></td>
+<td><p>Browse available models</p></td>
+<td><p>Browse + manually refresh list</p></td>
+</tr>
+<tr class="row-odd"><td><p>Usage</p></td>
+<td><p>Own request history</p></td>
+<td><p>All users’ request history</p></td>
+</tr>
+<tr class="row-even"><td><p>Providers</p></td>
+<td><p>—</p></td>
+<td><p>Add / edit / enable / disable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Users</p></td>
+<td><p>—</p></td>
+<td><p>Set per-user access policies</p></td>
+</tr>
+<tr class="row-even"><td><p>Guardrails</p></td>
+<td><p>—</p></td>
+<td><p>Configure, toggle, and test</p></td>
+</tr>
+<tr class="row-odd"><td><p>Guardrail Logs</p></td>
+<td><p>—</p></td>
+<td><p>View and filter</p></td>
+</tr>
+<tr class="row-even"><td><p>Audit Logs</p></td>
+<td><p>—</p></td>
+<td><p>View and filter</p></td>
+</tr>
+<tr class="row-odd"><td><p>Performance</p></td>
+<td><p>—</p></td>
+<td><p>View gateway metrics</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../ragflow/team/share_memory.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Share memory</div></div>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 04.05.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=cac61aee"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

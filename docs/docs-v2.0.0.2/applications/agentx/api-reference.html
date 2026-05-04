@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>API Reference - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Mortgage-Lite Overview" href="../mortgage-lite/index.html" /><link rel="prev" title="User Guide" href="user-guide.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/agentx/api-reference.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/agentx/api-reference.html"/>
+  <meta property="og:title" content="API Reference"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="../../../applications/agentx/api-reference.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">AgentX Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-guide.html">User Guide</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortgage-lite/index.html">Mortgage-Lite Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/getting-started.html">Getting Started with Mortgage-Lite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/architecture.html">Mortgage-Lite Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortiq/index.html">MortIQ Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/getting-started.html">Getting Started with MortIQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/architecture.html">MortIQ Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ragflow/index.html">Quickstart</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM User Guide</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#base-url">Base URL</a></li>
+<li><a class="reference internal" href="#authentication">Authentication</a><ul>
+<li><a class="reference internal" href="#headers-production">Headers (Production)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#assistants-api">Assistants API</a><ul>
+<li><a class="reference internal" href="#create-assistant">Create Assistant</a></li>
+<li><a class="reference internal" href="#list-assistants">List Assistants</a></li>
+<li><a class="reference internal" href="#get-assistant">Get Assistant</a></li>
+<li><a class="reference internal" href="#update-assistant">Update Assistant</a></li>
+<li><a class="reference internal" href="#delete-assistant">Delete Assistant</a></li>
+<li><a class="reference internal" href="#start-assistant">Start Assistant</a></li>
+<li><a class="reference internal" href="#stop-assistant">Stop Assistant</a></li>
+<li><a class="reference internal" href="#restart-assistant">Restart Assistant</a></li>
+<li><a class="reference internal" href="#stream-logs">Stream Logs</a></li>
+<li><a class="reference internal" href="#publish-as-template">Publish as Template</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sharing-api">Sharing API</a><ul>
+<li><a class="reference internal" href="#share-assistant">Share Assistant</a></li>
+<li><a class="reference internal" href="#list-shares">List Shares</a></li>
+<li><a class="reference internal" href="#update-share-permission">Update Share Permission</a></li>
+<li><a class="reference internal" href="#revoke-share">Revoke Share</a></li>
+<li><a class="reference internal" href="#list-shared-with-me">List Shared with Me</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pin-api">Pin API</a><ul>
+<li><a class="reference internal" href="#pin-assistant">Pin Assistant</a></li>
+<li><a class="reference internal" href="#unpin-assistant">Unpin Assistant</a></li>
+<li><a class="reference internal" href="#list-pinned-assistants">List Pinned Assistants</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#templates-api">Templates API</a><ul>
+<li><a class="reference internal" href="#list-templates">List Templates</a></li>
+<li><a class="reference internal" href="#get-template">Get Template</a></li>
+<li><a class="reference internal" href="#deploy-from-template">Deploy from Template</a></li>
+<li><a class="reference internal" href="#create-template-version">Create Template Version</a></li>
+<li><a class="reference internal" href="#list-template-versions">List Template Versions</a></li>
+<li><a class="reference internal" href="#deprecate-template-version">Deprecate Template Version</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#users-api">Users API</a><ul>
+<li><a class="reference internal" href="#get-current-user">Get Current User</a></li>
+<li><a class="reference internal" href="#search-users">Search Users</a></li>
+<li><a class="reference internal" href="#list-users-admin-only">List Users (Admin Only)</a></li>
+<li><a class="reference internal" href="#get-user-admin-only">Get User (Admin Only)</a></li>
+<li><a class="reference internal" href="#create-user-admin-only">Create User (Admin Only)</a></li>
+<li><a class="reference internal" href="#update-user-admin-only">Update User (Admin Only)</a></li>
+<li><a class="reference internal" href="#delete-user-admin-only">Delete User (Admin Only)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#admin-api">Admin API</a><ul>
+<li><a class="reference internal" href="#list-all-assistants-admin-only">List All Assistants (Admin Only)</a></li>
+<li><a class="reference internal" href="#stop-assistant-admin-only">Stop Assistant (Admin Only)</a></li>
+<li><a class="reference internal" href="#delete-assistant-admin-only">Delete Assistant (Admin Only)</a></li>
+<li><a class="reference internal" href="#get-user-assistants-admin-only">Get User Assistants (Admin Only)</a></li>
+<li><a class="reference internal" href="#get-pod-metrics-admin-only">Get Pod Metrics (Admin Only)</a></li>
+<li><a class="reference internal" href="#get-system-health-admin-only">Get System Health (Admin Only)</a></li>
+<li><a class="reference internal" href="#get-audit-logs-admin-only">Get Audit Logs (Admin Only)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#events-api">Events API</a><ul>
+<li><a class="reference internal" href="#subscribe-to-events">Subscribe to Events</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error-responses">Error Responses</a><ul>
+<li><a class="reference internal" href="#bad-request">400 Bad Request</a></li>
+<li><a class="reference internal" href="#unauthorized">401 Unauthorized</a></li>
+<li><a class="reference internal" href="#forbidden">403 Forbidden</a></li>
+<li><a class="reference internal" href="#not-found">404 Not Found</a></li>
+<li><a class="reference internal" href="#conflict">409 Conflict</a></li>
+<li><a class="reference internal" href="#internal-server-error">500 Internal Server Error</a></li>
+<li><a class="reference internal" href="#bad-gateway">502 Bad Gateway</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rate-limiting">Rate Limiting</a></li>
+<li><a class="reference internal" href="#pagination">Pagination</a></li>
+<li><a class="reference internal" href="#openapi-documentation">OpenAPI Documentation</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">AgentX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">API Reference</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/agentx/api-reference.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/agentx/api-reference.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/agentx/api-reference.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/agentx/api-reference.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/agentx/api-reference.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
+<p>AgentX provides a comprehensive RESTful API for managing AI assistants, templates, users, and system administration.</p>
+<section id="base-url">
+<h2>Base URL<a class="headerlink" href="#base-url" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Development</strong>: <code class="docutils literal notranslate"><span class="pre">http://localhost:8000</span></code></p></li>
+<li><p><strong>Production</strong>: <code class="docutils literal notranslate"><span class="pre">https://your-domain.com/agentx</span></code></p></li>
+</ul>
+</section>
+<section id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">¶</a></h2>
+<p>All API requests require authentication via OAuth2 Proxy headers in production or use the default admin user in development mode.</p>
+<section id="headers-production">
+<h3>Headers (Production)<a class="headerlink" href="#headers-production" title="Link to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">X</span><span class="o">-</span><span class="n">Auth</span><span class="o">-</span><span class="n">Request</span><span class="o">-</span><span class="n">User</span><span class="p">:</span> <span class="n">username</span>
+</span><span data-line="2"><span class="n">X</span><span class="o">-</span><span class="n">Auth</span><span class="o">-</span><span class="n">Request</span><span class="o">-</span><span class="n">Email</span><span class="p">:</span> <span class="n">user</span><span class="nd">@example</span><span class="o">.</span><span class="n">com</span>
+</span><span data-line="3"><span class="n">X</span><span class="o">-</span><span class="n">Auth</span><span class="o">-</span><span class="n">Request</span><span class="o">-</span><span class="n">Groups</span><span class="p">:</span> <span class="n">group1</span><span class="p">,</span><span class="n">group2</span>
+</span><span data-line="4"><span class="n">X</span><span class="o">-</span><span class="n">Auth</span><span class="o">-</span><span class="n">Request</span><span class="o">-</span><span class="n">User</span><span class="o">-</span><span class="n">Namespace</span><span class="p">:</span> <span class="n">user</span><span class="o">-</span><span class="n">namespace</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="assistants-api">
+<h2>Assistants API<a class="headerlink" href="#assistants-api" title="Link to this heading">¶</a></h2>
+<section id="create-assistant">
+<h3>Create Assistant<a class="headerlink" href="#create-assistant" title="Link to this heading">¶</a></h3>
+<p>Create a new AI assistant.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/assistants</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-assistant&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My AI assistant&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;configuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span>
+</span><span data-line="7"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="8"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">201</span> <span class="pre">Created</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;550e8400-e29b-41d4-a716-446655440000&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-assistant&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My AI assistant&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">&quot;configuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+</span><span data-line="7"><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;running&quot;</span><span class="p">,</span>
+</span><span data-line="8"><span class="w">  </span><span class="nt">&quot;owner_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="9"><span class="w">  </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;secure-token-here&quot;</span><span class="p">,</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span><span class="p">,</span>
+</span><span data-line="11"><span class="w">  </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span>
+</span><span data-line="12"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="list-assistants">
+<h3>List Assistants<a class="headerlink" href="#list-assistants" title="Link to this heading">¶</a></h3>
+<p>Get all assistants owned by the current user.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/assistants</span></code></p>
+<p><strong>Query Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">skip</span></code> (int, default: 0): Number of records to skip</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">limit</span></code> (int, default: 100, max: 100): Maximum records to return</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">include_metadata</span></code> (bool, default: false): Include pagination metadata</p></li>
+</ul>
+<p><strong>Response (without metadata)</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-assistant&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;running&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="err">...</span>
+</span><span data-line="7"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="8"><span class="p">]</span>
+</span></pre></div>
+</div>
+<p><strong>Response (with metadata)</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="3"><span class="w">    </span><span class="p">{</span>
+</span><span data-line="4"><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-assistant&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;running&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">      </span><span class="err">...</span>
+</span><span data-line="8"><span class="w">    </span><span class="p">}</span>
+</span><span data-line="9"><span class="w">  </span><span class="p">],</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+</span><span data-line="11"><span class="w">  </span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="12"><span class="w">  </span><span class="nt">&quot;page_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+</span><span data-line="13"><span class="w">  </span><span class="nt">&quot;total_pages&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+</span><span data-line="14"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="get-assistant">
+<h3>Get Assistant<a class="headerlink" href="#get-assistant" title="Link to this heading">¶</a></h3>
+<p>Get details of a specific assistant.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/assistants/{assistant_id}</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-assistant&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;running&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">  </span><span class="err">...</span>
+</span><span data-line="6"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="update-assistant">
+<h3>Update Assistant<a class="headerlink" href="#update-assistant" title="Link to this heading">¶</a></h3>
+<p>Update an existing assistant.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/api/assistants/{assistant_id}</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;updated-name&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Updated description&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;configuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+<section id="delete-assistant">
+<h3>Delete Assistant<a class="headerlink" href="#delete-assistant" title="Link to this heading">¶</a></h3>
+<p>Delete an assistant and its resources.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/api/assistants/{assistant_id}</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">204</span> <span class="pre">No</span> <span class="pre">Content</span></code></p>
+</section>
+<section id="start-assistant">
+<h3>Start Assistant<a class="headerlink" href="#start-assistant" title="Link to this heading">¶</a></h3>
+<p>Start a stopped assistant.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/assistants/{assistant_id}/start</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;running&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="err">...</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="stop-assistant">
+<h3>Stop Assistant<a class="headerlink" href="#stop-assistant" title="Link to this heading">¶</a></h3>
+<p>Stop a running assistant.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/assistants/{assistant_id}/stop</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stopped&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="err">...</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="restart-assistant">
+<h3>Restart Assistant<a class="headerlink" href="#restart-assistant" title="Link to this heading">¶</a></h3>
+<p>Restart a running assistant.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/assistants/{assistant_id}/restart</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+<section id="stream-logs">
+<h3>Stream Logs<a class="headerlink" href="#stream-logs" title="Link to this heading">¶</a></h3>
+<p>Stream real-time logs from an assistant’s pod.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/assistants/{assistant_id}/logs</span></code></p>
+<p><strong>Response</strong>: Server-Sent Events (SSE) stream</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">event</span><span class="p">:</span> <span class="n">log</span>
+</span><span data-line="2"><span class="n">data</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;line&quot;</span><span class="p">:</span> <span class="s2">&quot;Assistant started&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span><span class="p">}</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="n">event</span><span class="p">:</span> <span class="n">log</span>
+</span><span data-line="5"><span class="n">data</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;line&quot;</span><span class="p">:</span> <span class="s2">&quot;Processing request...&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15T10:30:01Z&quot;</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="publish-as-template">
+<h3>Publish as Template<a class="headerlink" href="#publish-as-template" title="Link to this heading">¶</a></h3>
+<p>Publish an assistant’s configuration as a reusable template.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/assistants/{assistant_id}/publish</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My Template&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Template description&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ai&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;gpt-4&quot;</span><span class="p">],</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">&quot;template_metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;author&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AI&quot;</span>
+</span><span data-line="9"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="10"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">201</span> <span class="pre">Created</span></code></p>
+</section>
+</section>
+<section id="sharing-api">
+<h2>Sharing API<a class="headerlink" href="#sharing-api" title="Link to this heading">¶</a></h2>
+<section id="share-assistant">
+<h3>Share Assistant<a class="headerlink" href="#share-assistant" title="Link to this heading">¶</a></h3>
+<p>Share an assistant with one or more users.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/assistants/{assistant_id}/shares</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;shares&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="3"><span class="w">    </span><span class="p">{</span>
+</span><span data-line="4"><span class="w">      </span><span class="nt">&quot;shared_with_user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">      </span><span class="nt">&quot;permission&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;read&quot;</span>
+</span><span data-line="6"><span class="w">    </span><span class="p">},</span>
+</span><span data-line="7"><span class="w">    </span><span class="p">{</span>
+</span><span data-line="8"><span class="w">      </span><span class="nt">&quot;shared_with_user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+</span><span data-line="9"><span class="w">      </span><span class="nt">&quot;permission&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;write&quot;</span>
+</span><span data-line="10"><span class="w">    </span><span class="p">}</span>
+</span><span data-line="11"><span class="w">  </span><span class="p">]</span>
+</span><span data-line="12"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Permissions</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">read</span></code>: View-only access</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write</span></code>: Can modify the assistant</p></li>
+</ul>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">201</span> <span class="pre">Created</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;assistant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;shared_with_user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">&quot;permission&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;read&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;shared_with_username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user2&quot;</span>
+</span><span data-line="8"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="9"><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+<section id="list-shares">
+<h3>List Shares<a class="headerlink" href="#list-shares" title="Link to this heading">¶</a></h3>
+<p>List all sharing relationships for an assistant.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/assistants/{assistant_id}/shares</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+<section id="update-share-permission">
+<h3>Update Share Permission<a class="headerlink" href="#update-share-permission" title="Link to this heading">¶</a></h3>
+<p>Update the permission level of an existing share.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/api/assistants/{assistant_id}/shares/{share_id}</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;permission&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;write&quot;</span>
+</span><span data-line="3"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+<section id="revoke-share">
+<h3>Revoke Share<a class="headerlink" href="#revoke-share" title="Link to this heading">¶</a></h3>
+<p>Remove a sharing relationship.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/api/assistants/{assistant_id}/shares/{share_id}</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">204</span> <span class="pre">No</span> <span class="pre">Content</span></code></p>
+</section>
+<section id="list-shared-with-me">
+<h3>List Shared with Me<a class="headerlink" href="#list-shared-with-me" title="Link to this heading">¶</a></h3>
+<p>Get all assistants shared with the current user.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/assistants/shared-with-me</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shared-assistant&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;share_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">&quot;permission&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;read&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;shared_by_owner_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">&quot;shared_by_owner_username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;owner&quot;</span>
+</span><span data-line="9"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="10"><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="pin-api">
+<h2>Pin API<a class="headerlink" href="#pin-api" title="Link to this heading">¶</a></h2>
+<section id="pin-assistant">
+<h3>Pin Assistant<a class="headerlink" href="#pin-assistant" title="Link to this heading">¶</a></h3>
+<p>Pin an assistant for quick access.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/assistants/{assistant_id}/pin</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">201</span> <span class="pre">Created</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;pinned&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+</span><span data-line="3"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="unpin-assistant">
+<h3>Unpin Assistant<a class="headerlink" href="#unpin-assistant" title="Link to this heading">¶</a></h3>
+<p>Remove a pin from an assistant.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/api/assistants/{assistant_id}/pin</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">204</span> <span class="pre">No</span> <span class="pre">Content</span></code></p>
+</section>
+<section id="list-pinned-assistants">
+<h3>List Pinned Assistants<a class="headerlink" href="#list-pinned-assistants" title="Link to this heading">¶</a></h3>
+<p>Get all assistants pinned by the current user.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/assistants/pinned</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+</section>
+<section id="templates-api">
+<h2>Templates API<a class="headerlink" href="#templates-api" title="Link to this heading">¶</a></h2>
+<section id="list-templates">
+<h3>List Templates<a class="headerlink" href="#list-templates" title="Link to this heading">¶</a></h3>
+<p>Get all available templates.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/templates</span></code></p>
+<p><strong>Query Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">skip</span></code> (int): Pagination offset</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">limit</span></code> (int): Maximum records</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tags</span></code> (string): Filter by tags (comma-separated)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">q</span></code> (string): Search query</p></li>
+</ul>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+<section id="get-template">
+<h3>Get Template<a class="headerlink" href="#get-template" title="Link to this heading">¶</a></h3>
+<p>Get details of a specific template.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/templates/{template_id}</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+<section id="deploy-from-template">
+<h3>Deploy from Template<a class="headerlink" href="#deploy-from-template" title="Link to this heading">¶</a></h3>
+<p>Create a new assistant from a template.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/templates/{template_id}/deploy</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-new-assistant&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Created from template&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;version_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">201</span> <span class="pre">Created</span></code></p>
+</section>
+<section id="create-template-version">
+<h3>Create Template Version<a class="headerlink" href="#create-template-version" title="Link to this heading">¶</a></h3>
+<p>Create a versioned snapshot of a template.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/templates/{template_id}/versions</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.1.0&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;configuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;changelog&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Added new features&quot;</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">201</span> <span class="pre">Created</span></code></p>
+</section>
+<section id="list-template-versions">
+<h3>List Template Versions<a class="headerlink" href="#list-template-versions" title="Link to this heading">¶</a></h3>
+<p>Get all versions of a template.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/templates/{template_id}/versions</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+<section id="deprecate-template-version">
+<h3>Deprecate Template Version<a class="headerlink" href="#deprecate-template-version" title="Link to this heading">¶</a></h3>
+<p>Mark a template version as deprecated.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/templates/{template_id}/versions/{version_id}/deprecate</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;deprecation_message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Use version 2.0.0 instead&quot;</span>
+</span><span data-line="3"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+</section>
+<section id="users-api">
+<h2>Users API<a class="headerlink" href="#users-api" title="Link to this heading">¶</a></h2>
+<section id="get-current-user">
+<h3>Get Current User<a class="headerlink" href="#get-current-user" title="Link to this heading">¶</a></h3>
+<p>Get information about the authenticated user.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/users/me</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;john.doe&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;john@example.com&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">&quot;namespace&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user-john-doe&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">  </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span>
+</span><span data-line="8"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="search-users">
+<h3>Search Users<a class="headerlink" href="#search-users" title="Link to this heading">¶</a></h3>
+<p>Search for users by username or email.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/users/search</span></code></p>
+<p><strong>Query Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">q</span></code> (string, required): Search query</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">limit</span></code> (int, default: 10, max: 50): Maximum results</p></li>
+</ul>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jane.doe&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jane@example.com&quot;</span>
+</span><span data-line="6"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="7"><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+<section id="list-users-admin-only">
+<h3>List Users (Admin Only)<a class="headerlink" href="#list-users-admin-only" title="Link to this heading">¶</a></h3>
+<p>Get all users in the system.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/users</span></code></p>
+<p><strong>Query Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">skip</span></code> (int): Pagination offset</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">limit</span></code> (int): Maximum records</p></li>
+</ul>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+<section id="get-user-admin-only">
+<h3>Get User (Admin Only)<a class="headerlink" href="#get-user-admin-only" title="Link to this heading">¶</a></h3>
+<p>Get details of a specific user.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/users/{user_id}</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+<section id="create-user-admin-only">
+<h3>Create User (Admin Only)<a class="headerlink" href="#create-user-admin-only" title="Link to this heading">¶</a></h3>
+<p>Create a new user.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/users</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;newuser&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;newuser@example.com&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">&quot;namespace&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user-newuser&quot;</span>
+</span><span data-line="6"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+<section id="update-user-admin-only">
+<h3>Update User (Admin Only)<a class="headerlink" href="#update-user-admin-only" title="Link to this heading">¶</a></h3>
+<p>Update user information.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/api/v1/users/{user_id}</span></code></p>
+<p><strong>Request Body</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;admin&quot;</span>
+</span><span data-line="3"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+<section id="delete-user-admin-only">
+<h3>Delete User (Admin Only)<a class="headerlink" href="#delete-user-admin-only" title="Link to this heading">¶</a></h3>
+<p>Delete a user.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/api/v1/users/{user_id}</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+</section>
+<section id="admin-api">
+<h2>Admin API<a class="headerlink" href="#admin-api" title="Link to this heading">¶</a></h2>
+<section id="list-all-assistants-admin-only">
+<h3>List All Assistants (Admin Only)<a class="headerlink" href="#list-all-assistants-admin-only" title="Link to this heading">¶</a></h3>
+<p>Get all assistants across all users.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/admin/assistants</span></code></p>
+<p><strong>Query Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">skip</span></code> (int): Pagination offset</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">limit</span></code> (int, max: 200): Maximum records</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code> (string): Filter by status</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">owner_id</span></code> (int): Filter by owner</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">q</span></code> (string): Search query</p></li>
+</ul>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assistant-1&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;owner_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">&quot;owner_username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;john.doe&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;running&quot;</span>
+</span><span data-line="8"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="9"><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+<section id="stop-assistant-admin-only">
+<h3>Stop Assistant (Admin Only)<a class="headerlink" href="#stop-assistant-admin-only" title="Link to this heading">¶</a></h3>
+<p>Stop any assistant regardless of owner.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/admin/assistants/{assistant_id}/stop</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+</section>
+<section id="delete-assistant-admin-only">
+<h3>Delete Assistant (Admin Only)<a class="headerlink" href="#delete-assistant-admin-only" title="Link to this heading">¶</a></h3>
+<p>Delete any assistant regardless of owner.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/api/v1/admin/assistants/{assistant_id}</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">204</span> <span class="pre">No</span> <span class="pre">Content</span></code></p>
+</section>
+<section id="get-user-assistants-admin-only">
+<h3>Get User Assistants (Admin Only)<a class="headerlink" href="#get-user-assistants-admin-only" title="Link to this heading">¶</a></h3>
+<p>Get summary of assistants owned by a user.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/admin/users/{user_id}/assistants</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;assistants&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="5"><span class="w">    </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assistant-1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;running&quot;</span><span class="p">}</span>
+</span><span data-line="6"><span class="w">  </span><span class="p">]</span>
+</span><span data-line="7"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="get-pod-metrics-admin-only">
+<h3>Get Pod Metrics (Admin Only)<a class="headerlink" href="#get-pod-metrics-admin-only" title="Link to this heading">¶</a></h3>
+<p>Get CPU and memory metrics for all pods.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/admin/metrics/pods</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;k8s_enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;pods&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="4"><span class="w">    </span><span class="p">{</span>
+</span><span data-line="5"><span class="w">      </span><span class="nt">&quot;assistant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">      </span><span class="nt">&quot;assistant_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-assistant&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">      </span><span class="nt">&quot;pod_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assistant-my-assistant-1-0&quot;</span><span class="p">,</span>
+</span><span data-line="8"><span class="w">      </span><span class="nt">&quot;cpu_millicores&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span>
+</span><span data-line="9"><span class="w">      </span><span class="nt">&quot;memory_mib&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span>
+</span><span data-line="10"><span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Running&quot;</span>
+</span><span data-line="11"><span class="w">    </span><span class="p">}</span>
+</span><span data-line="12"><span class="w">  </span><span class="p">]</span>
+</span><span data-line="13"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="get-system-health-admin-only">
+<h3>Get System Health (Admin Only)<a class="headerlink" href="#get-system-health-admin-only" title="Link to this heading">¶</a></h3>
+<p>Get system health overview.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/admin/health</span></code></p>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;counters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;total_users&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;total_assistants&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;running_assistants&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">&quot;stopped_assistants&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;error_assistants&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+</span><span data-line="8"><span class="w">  </span><span class="p">},</span>
+</span><span data-line="9"><span class="w">  </span><span class="nt">&quot;services&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span data-line="10"><span class="w">    </span><span class="nt">&quot;database&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;healthy&quot;</span><span class="p">},</span>
+</span><span data-line="11"><span class="w">    </span><span class="nt">&quot;kubernetes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;enabled&quot;</span><span class="p">},</span>
+</span><span data-line="12"><span class="w">    </span><span class="nt">&quot;api&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;healthy&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;uptime_seconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">86400</span><span class="p">}</span>
+</span><span data-line="13"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="14"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="get-audit-logs-admin-only">
+<h3>Get Audit Logs (Admin Only)<a class="headerlink" href="#get-audit-logs-admin-only" title="Link to this heading">¶</a></h3>
+<p>Get audit log entries.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/admin/audit-logs</span></code></p>
+<p><strong>Query Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">skip</span></code> (int): Pagination offset</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">limit</span></code> (int, max: 200): Maximum records</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">action</span></code> (string): Filter by action</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">q</span></code> (string): Search query</p></li>
+</ul>
+<p><strong>Response</strong>: <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;admin_username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;admin.assistant.stop&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;resource_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">&quot;resource_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+</span><span data-line="9"><span class="w">    </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assistant-1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;owner_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">}</span>
+</span><span data-line="10"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="11"><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="events-api">
+<h2>Events API<a class="headerlink" href="#events-api" title="Link to this heading">¶</a></h2>
+<section id="subscribe-to-events">
+<h3>Subscribe to Events<a class="headerlink" href="#subscribe-to-events" title="Link to this heading">¶</a></h3>
+<p>Subscribe to real-time assistant events via Server-Sent Events.</p>
+<p><strong>Endpoint</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/assistants/events</span></code></p>
+<p><strong>Response</strong>: SSE stream</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">event</span><span class="p">:</span> <span class="n">assistant</span><span class="o">.</span><span class="n">created</span>
+</span><span data-line="2"><span class="n">data</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;new-assistant&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="n">event</span><span class="p">:</span> <span class="n">assistant</span><span class="o">.</span><span class="n">updated</span>
+</span><span data-line="5"><span class="n">data</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;running&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="n">event</span><span class="p">:</span> <span class="n">assistant</span><span class="o">.</span><span class="n">deleted</span>
+</span><span data-line="8"><span class="n">data</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="error-responses">
+<h2>Error Responses<a class="headerlink" href="#error-responses" title="Link to this heading">¶</a></h2>
+<p>All endpoints may return the following error responses:</p>
+<section id="bad-request">
+<h3>400 Bad Request<a class="headerlink" href="#bad-request" title="Link to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid request parameters&quot;</span>
+</span><span data-line="3"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="unauthorized">
+<h3>401 Unauthorized<a class="headerlink" href="#unauthorized" title="Link to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Not authenticated&quot;</span>
+</span><span data-line="3"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="forbidden">
+<h3>403 Forbidden<a class="headerlink" href="#forbidden" title="Link to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Insufficient permissions&quot;</span>
+</span><span data-line="3"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="not-found">
+<h3>404 Not Found<a class="headerlink" href="#not-found" title="Link to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Resource not found&quot;</span>
+</span><span data-line="3"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="conflict">
+<h3>409 Conflict<a class="headerlink" href="#conflict" title="Link to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Resource already exists&quot;</span>
+</span><span data-line="3"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="internal-server-error">
+<h3>500 Internal Server Error<a class="headerlink" href="#internal-server-error" title="Link to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Internal server error&quot;</span>
+</span><span data-line="3"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<section id="bad-gateway">
+<h3>502 Bad Gateway<a class="headerlink" href="#bad-gateway" title="Link to this heading">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Kubernetes operation failed&quot;</span>
+</span><span data-line="3"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="rate-limiting">
+<h2>Rate Limiting<a class="headerlink" href="#rate-limiting" title="Link to this heading">¶</a></h2>
+<p>Currently, there are no rate limits enforced. This may change in future versions.</p>
+</section>
+<section id="pagination">
+<h2>Pagination<a class="headerlink" href="#pagination" title="Link to this heading">¶</a></h2>
+<p>List endpoints support pagination via <code class="docutils literal notranslate"><span class="pre">skip</span></code> and <code class="docutils literal notranslate"><span class="pre">limit</span></code> query parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">skip</span></code>: Number of records to skip (default: 0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">limit</span></code>: Maximum records to return (varies by endpoint)</p></li>
+</ul>
+</section>
+<section id="openapi-documentation">
+<h2>OpenAPI Documentation<a class="headerlink" href="#openapi-documentation" title="Link to this heading">¶</a></h2>
+<p>Interactive API documentation is available at:</p>
+<ul class="simple">
+<li><p><strong>Swagger UI</strong>: <code class="docutils literal notranslate"><span class="pre">/docs</span></code></p></li>
+<li><p><strong>ReDoc</strong>: <code class="docutils literal notranslate"><span class="pre">/redoc</span></code></p></li>
+</ul>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="user-guide.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">User Guide</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../mortgage-lite/index.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Mortgage-Lite Overview</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 04.05.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=cac61aee"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

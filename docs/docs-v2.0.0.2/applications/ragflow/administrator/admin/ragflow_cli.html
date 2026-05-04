@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RAGFlow CLI - DKubeX Documentation</title><link rel="shortcut icon" href="../../../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="Use memory" href="../../memory/use_memory.html" /><link rel="prev" title="Admin UI" href="admin_ui.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/ragflow/administrator/admin/ragflow_cli.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/ragflow/administrator/admin/ragflow_cli.html"/>
+  <meta property="og:title" content="RAGFlow CLI"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="../../../../../applications/ragflow/administrator/admin/ragflow_cli.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../agentx/index.html">AgentX Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../agentx/overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../agentx/getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../agentx/user-guide.html">User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../agentx/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mortgage-lite/index.html">Mortgage-Lite Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/getting-started.html">Getting Started with Mortgage-Lite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/architecture.html">Mortgage-Lite Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortgage-lite/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mortiq/index.html">MortIQ Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/getting-started.html">Getting Started with MortIQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/architecture.html">MortIQ Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../mortiq/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Quickstart</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../securellm/index.html">SecureLLM User Guide</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#using-the-ragflow-cli">Using the RAGFlow CLI</a></li>
+<li><a class="reference internal" href="#default-administrative-account">Default administrative account</a></li>
+<li><a class="reference internal" href="#supported-commands">Supported Commands</a><ul>
+<li><a class="reference internal" href="#service-manage-commands">Service manage commands</a></li>
+<li><a class="reference internal" href="#user-management-commands">User Management Commands</a></li>
+<li><a class="reference internal" href="#data-and-agent-commands">Data and Agent Commands</a></li>
+<li><a class="reference internal" href="#system-info">System info</a></li>
+<li><a class="reference internal" href="#meta-commands">Meta-Commands</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">Quickstart</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">RAGFlow CLI</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/administrator/admin/ragflow_cli.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/administrator/admin/ragflow_cli.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/ragflow/administrator/admin/ragflow_cli.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/administrator/admin/ragflow_cli.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/administrator/admin/ragflow_cli.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="ragflow-cli">
+<h1>RAGFlow CLI<a class="headerlink" href="#ragflow-cli" title="Link to this heading">¶</a></h1>
+<p>The RAGFlow CLI is a command-line-based system administration tool that offers administrators an efficient and flexible method for system interaction and control. Operating on a client-server architecture, it communicates in real-time with the Admin Service, receiving administrator commands and dynamically returning execution results.</p>
+<section id="using-the-ragflow-cli">
+<h2>Using the RAGFlow CLI<a class="headerlink" href="#using-the-ragflow-cli" title="Link to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>Ensure the Admin Service is running.</p></li>
+<li><p>Install ragflow-cli.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span>ragflow-cli<span class="o">==</span><span class="m">0</span>.24.0
+</span></pre></div>
+</div>
+</li>
+<li><p>Launch the CLI client:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">ragflow-cli<span class="w"> </span>-h<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span>-p<span class="w"> </span><span class="m">9381</span>
+</span></pre></div>
+</div>
+<p>You will be prompted to enter the superuser’s password to log in.
+The default password is admin.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p>-h: RAGFlow admin server host address</p></li>
+<li><p>-p: RAGFlow admin server port</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="default-administrative-account">
+<h2>Default administrative account<a class="headerlink" href="#default-administrative-account" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Username: admin&#64;ragflow.io</p></li>
+<li><p>Password: admin</p></li>
+</ul>
+</section>
+<section id="supported-commands">
+<h2>Supported Commands<a class="headerlink" href="#supported-commands" title="Link to this heading">¶</a></h2>
+<p>Commands are case-insensitive and must be terminated with a semicolon(;).</p>
+<section id="service-manage-commands">
+<h3>Service manage commands<a class="headerlink" href="#service-manage-commands" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">LIST</span> <span class="pre">SERVICES;</span></code></p>
+<ul class="simple">
+<li><p>Lists all available services within the RAGFlow system.</p></li>
+<li><p><a class="reference internal" href="#example-list-services"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">SERVICE</span> <span class="pre">&lt;id&gt;;</span></code></p>
+<ul class="simple">
+<li><p>Shows detailed status information for the service identified by <strong>id</strong>.</p></li>
+<li><p><a class="reference internal" href="#example-show-service"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">VERSION;</span></code></p>
+<ul class="simple">
+<li><p>Shows RAGFlow version.</p></li>
+<li><p><a class="reference internal" href="#example-show-version"><span class="xref myst">Example</span></a></p></li>
+</ul>
+</section>
+<section id="user-management-commands">
+<h3>User Management Commands<a class="headerlink" href="#user-management-commands" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">LIST</span> <span class="pre">USERS;</span></code></p>
+<ul class="simple">
+<li><p>Lists all users known to the system.</p></li>
+<li><p><a class="reference internal" href="#example-list-users"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">USER</span> <span class="pre">&lt;username&gt;;</span></code></p>
+<ul class="simple">
+<li><p>Shows details and permissions for the user specified by <strong>email</strong>. The username must be enclosed in single or double quotes.</p></li>
+<li><p><a class="reference internal" href="#example-show-user"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">USER</span> <span class="pre">&lt;username&gt;</span> <span class="pre">&lt;password&gt;;</span></code></p>
+<ul class="simple">
+<li><p>Create user by username and password. The username and password must be enclosed in single or double quotes.</p></li>
+<li><p><a class="reference internal" href="#example-create-user"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">DROP</span> <span class="pre">USER</span> <span class="pre">&lt;username&gt;;</span></code></p>
+<ul class="simple">
+<li><p>Removes the specified user from the system. Use with caution.</p></li>
+<li><p><a class="reference internal" href="#example-drop-user"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">USER</span> <span class="pre">PASSWORD</span> <span class="pre">&lt;username&gt;</span> <span class="pre">&lt;new_password&gt;;</span></code></p>
+<ul class="simple">
+<li><p>Changes the password for the specified user.</p></li>
+<li><p><a class="reference internal" href="#example-alter-user-password"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">USER</span> <span class="pre">ACTIVE</span> <span class="pre">&lt;username&gt;</span> <span class="pre">&lt;on/off&gt;;</span></code></p>
+<ul class="simple">
+<li><p>Changes the user to active or inactive.</p></li>
+<li><p><a class="reference internal" href="#example-alter-user-active"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">GENERATE</span> <span class="pre">KEY</span> <span class="pre">FOR</span> <span class="pre">USER</span> <span class="pre">&lt;username&gt;;</span></code></p>
+<ul class="simple">
+<li><p>Generates a new API key for the specified user.</p></li>
+<li><p><a class="reference internal" href="#example-generate-key"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">LIST</span> <span class="pre">KEYS</span> <span class="pre">OF</span> <span class="pre">&lt;username&gt;;</span></code></p>
+<ul class="simple">
+<li><p>Lists all API keys associated with the specified user.</p></li>
+<li><p><a class="reference internal" href="#example-list-keys"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">DROP</span> <span class="pre">KEY</span> <span class="pre">&lt;key&gt;</span> <span class="pre">OF</span> <span class="pre">&lt;username&gt;;</span></code></p>
+<ul class="simple">
+<li><p>Deletes a specific API key for the specified user.</p></li>
+<li><p><a class="reference internal" href="#example-drop-key"><span class="xref myst">Example</span></a></p></li>
+</ul>
+</section>
+<section id="data-and-agent-commands">
+<h3>Data and Agent Commands<a class="headerlink" href="#data-and-agent-commands" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">LIST</span> <span class="pre">DATASETS</span> <span class="pre">OF</span> <span class="pre">&lt;username&gt;;</span></code></p>
+<ul class="simple">
+<li><p>Lists the datasets associated with the specified user.</p></li>
+<li><p><a class="reference internal" href="#example-list-datasets-of-user"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">LIST</span> <span class="pre">AGENTS</span> <span class="pre">OF</span> <span class="pre">&lt;username&gt;;</span></code></p>
+<ul class="simple">
+<li><p>Lists the agents associated with the specified user.</p></li>
+<li><p><a class="reference internal" href="#example-list-agents-of-user"><span class="xref myst">Example</span></a></p></li>
+</ul>
+</section>
+<section id="system-info">
+<h3>System info<a class="headerlink" href="#system-info" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">VERSION;</span></code></p>
+<ul class="simple">
+<li><p>Display the current RAGFlow version.</p></li>
+<li><p><a class="reference internal" href="#example-show-version"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">GRANT</span> <span class="pre">ADMIN</span> <span class="pre">&lt;username&gt;</span></code></p>
+<ul class="simple">
+<li><p>Grant administrator privileges to the specified user.</p></li>
+<li><p><a class="reference internal" href="#example-grant-admin"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">REVOKE</span> <span class="pre">ADMIN</span> <span class="pre">&lt;username&gt;</span></code></p>
+<ul class="simple">
+<li><p>Revoke administrator privileges from the specified user.</p></li>
+<li><p><a class="reference internal" href="#example-revoke-admin"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">LIST</span> <span class="pre">VARS</span></code></p>
+<ul class="simple">
+<li><p>List all system settings.</p></li>
+<li><p><a class="reference internal" href="#example-list-vars"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">VAR</span> <span class="pre">&lt;var_name&gt;</span></code></p>
+<ul class="simple">
+<li><p>Display the content of a specific system configuration/setting by its name or name prefix.</p></li>
+<li><p><a class="reference internal" href="#example-show-var"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">SET</span> <span class="pre">VAR</span> <span class="pre">&lt;var_name&gt;</span> <span class="pre">&lt;var_value&gt;</span></code></p>
+<ul class="simple">
+<li><p>Set the value for a specified configuration item.</p></li>
+<li><p><a class="reference internal" href="#example-set-var"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">LIST</span> <span class="pre">CONFIGS</span></code></p>
+<ul class="simple">
+<li><p>List all system configurations.</p></li>
+<li><p><a class="reference internal" href="#example-list-configs"><span class="xref myst">Example</span></a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">LIST</span> <span class="pre">ENVS</span></code></p>
+<ul class="simple">
+<li><p>List all system environments which can accessed by Admin service.</p></li>
+<li><p><a class="reference internal" href="#example-list-environments"><span class="xref myst">Example</span></a></p></li>
+</ul>
+</section>
+<section id="meta-commands">
+<h3>Meta-Commands<a class="headerlink" href="#meta-commands" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>? or \help
+Shows help information for the available commands.</p></li>
+<li><p>\q or \quit
+Exits the CLI application.</p></li>
+<li><p><a class="reference internal" href="#example-meta-commands"><span class="xref myst">Example</span></a></p></li>
+</ul>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
+<p><span id="example-list-services"></span></p>
+<ul class="simple">
+<li><p>List all available services.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="nb">list</span> <span class="n">services</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">command</span><span class="p">:</span> <span class="nb">list</span> <span class="n">services</span><span class="p">;</span>
+</span><span data-line="3"><span class="n">Listing</span> <span class="nb">all</span> <span class="n">services</span>
+</span><span data-line="4"><span class="o">+-------------------------------------------------------------------------------------------+-----------+----+---------------+-------+----------------+---------+</span>
+</span><span data-line="5"><span class="o">|</span> <span class="n">extra</span>                                                                                     <span class="o">|</span> <span class="n">host</span>      <span class="o">|</span> <span class="nb">id</span> <span class="o">|</span> <span class="n">name</span>          <span class="o">|</span> <span class="n">port</span>  <span class="o">|</span> <span class="n">service_type</span>   <span class="o">|</span> <span class="n">status</span>  <span class="o">|</span>
+</span><span data-line="6"><span class="o">+-------------------------------------------------------------------------------------------+-----------+----+---------------+-------+----------------+---------+</span>
+</span><span data-line="7"><span class="o">|</span> <span class="p">{}</span>                                                                                        <span class="o">|</span> <span class="mf">0.0.0.0</span>   <span class="o">|</span> <span class="mi">0</span>  <span class="o">|</span> <span class="n">ragflow_0</span>     <span class="o">|</span> <span class="mi">9380</span>  <span class="o">|</span> <span class="n">ragflow_server</span> <span class="o">|</span> <span class="n">Timeout</span> <span class="o">|</span>
+</span><span data-line="8"><span class="o">|</span> <span class="p">{</span><span class="s1">&#39;meta_type&#39;</span><span class="p">:</span> <span class="s1">&#39;mysql&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;infini_rag_flow&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span><span class="p">}</span>                 <span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="mi">1</span>  <span class="o">|</span> <span class="n">mysql</span>         <span class="o">|</span> <span class="mi">5455</span>  <span class="o">|</span> <span class="n">meta_data</span>      <span class="o">|</span> <span class="n">Alive</span>   <span class="o">|</span>
+</span><span data-line="9"><span class="o">|</span> <span class="p">{</span><span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;infini_rag_flow&#39;</span><span class="p">,</span> <span class="s1">&#39;store_type&#39;</span><span class="p">:</span> <span class="s1">&#39;minio&#39;</span><span class="p">,</span> <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="s1">&#39;rag_flow&#39;</span><span class="p">}</span>                <span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="mi">2</span>  <span class="o">|</span> <span class="n">minio</span>         <span class="o">|</span> <span class="mi">9000</span>  <span class="o">|</span> <span class="n">file_store</span>     <span class="o">|</span> <span class="n">Alive</span>   <span class="o">|</span>
+</span><span data-line="10"><span class="o">|</span> <span class="p">{</span><span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;infini_rag_flow&#39;</span><span class="p">,</span> <span class="s1">&#39;retrieval_type&#39;</span><span class="p">:</span> <span class="s1">&#39;elasticsearch&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;elastic&#39;</span><span class="p">}</span> <span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="mi">3</span>  <span class="o">|</span> <span class="n">elasticsearch</span> <span class="o">|</span> <span class="mi">1200</span>  <span class="o">|</span> <span class="n">retrieval</span>      <span class="o">|</span> <span class="n">Alive</span>   <span class="o">|</span>
+</span><span data-line="11"><span class="o">|</span> <span class="p">{</span><span class="s1">&#39;db_name&#39;</span><span class="p">:</span> <span class="s1">&#39;default_db&#39;</span><span class="p">,</span> <span class="s1">&#39;retrieval_type&#39;</span><span class="p">:</span> <span class="s1">&#39;infinity&#39;</span><span class="p">}</span>                                   <span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="mi">4</span>  <span class="o">|</span> <span class="n">infinity</span>      <span class="o">|</span> <span class="mi">23817</span> <span class="o">|</span> <span class="n">retrieval</span>      <span class="o">|</span> <span class="n">Timeout</span> <span class="o">|</span>
+</span><span data-line="12"><span class="o">|</span> <span class="p">{</span><span class="s1">&#39;database&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;mq_type&#39;</span><span class="p">:</span> <span class="s1">&#39;redis&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;infini_rag_flow&#39;</span><span class="p">}</span>                        <span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="mi">5</span>  <span class="o">|</span> <span class="n">redis</span>         <span class="o">|</span> <span class="mi">6379</span>  <span class="o">|</span> <span class="n">message_queue</span>  <span class="o">|</span> <span class="n">Alive</span>   <span class="o">|</span>
+</span><span data-line="13"><span class="o">+-------------------------------------------------------------------------------------------+-----------+----+---------------+-------+----------------+---------+</span>
+</span><span data-line="14">
+</span></pre></div>
+</div>
+<p><span id="example-show-service"></span></p>
+<ul class="simple">
+<li><p>Show ragflow_server.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">service</span> <span class="mi">0</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">command</span><span class="p">:</span> <span class="n">show</span> <span class="n">service</span> <span class="mi">0</span><span class="p">;</span>
+</span><span data-line="3"><span class="n">Showing</span> <span class="n">service</span><span class="p">:</span> <span class="mi">0</span>
+</span><span data-line="4"><span class="n">Service</span> <span class="n">ragflow_0</span> <span class="ow">is</span> <span class="n">alive</span><span class="o">.</span> <span class="n">Detail</span><span class="p">:</span>
+</span><span data-line="5"><span class="n">Confirm</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mf">26.0</span> <span class="n">ms</span><span class="o">.</span>
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p>Show mysql.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">service</span> <span class="mi">1</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">command</span><span class="p">:</span> <span class="n">show</span> <span class="n">service</span> <span class="mi">1</span><span class="p">;</span>
+</span><span data-line="3"><span class="n">Showing</span> <span class="n">service</span><span class="p">:</span> <span class="mi">1</span>
+</span><span data-line="4"><span class="n">Service</span> <span class="n">mysql</span> <span class="ow">is</span> <span class="n">alive</span><span class="o">.</span> <span class="n">Detail</span><span class="p">:</span>
+</span><span data-line="5"><span class="o">+---------+----------+------------------+------+------------------+------------------------+-------+-----------------+</span>
+</span><span data-line="6"><span class="o">|</span> <span class="n">command</span> <span class="o">|</span> <span class="n">db</span>       <span class="o">|</span> <span class="n">host</span>             <span class="o">|</span> <span class="nb">id</span>   <span class="o">|</span> <span class="n">info</span>             <span class="o">|</span> <span class="n">state</span>                  <span class="o">|</span> <span class="n">time</span>  <span class="o">|</span> <span class="n">user</span>            <span class="o">|</span>
+</span><span data-line="7"><span class="o">+---------+----------+------------------+------+------------------+------------------------+-------+-----------------+</span>
+</span><span data-line="8"><span class="o">|</span> <span class="n">Daemon</span>  <span class="o">|</span> <span class="kc">None</span>     <span class="o">|</span> <span class="n">localhost</span>        <span class="o">|</span> <span class="mi">5</span>    <span class="o">|</span> <span class="kc">None</span>             <span class="o">|</span> <span class="n">Waiting</span> <span class="n">on</span> <span class="n">empty</span> <span class="n">queue</span> <span class="o">|</span> <span class="mi">16111</span> <span class="o">|</span> <span class="n">event_scheduler</span> <span class="o">|</span>
+</span><span data-line="9"><span class="o">|</span> <span class="n">Sleep</span>   <span class="o">|</span> <span class="n">rag_flow</span> <span class="o">|</span> <span class="mf">172.18.0.1</span><span class="p">:</span><span class="mi">40046</span> <span class="o">|</span> <span class="mi">1610</span> <span class="o">|</span> <span class="kc">None</span>             <span class="o">|</span>                        <span class="o">|</span> <span class="mi">2</span>     <span class="o">|</span> <span class="n">root</span>            <span class="o">|</span>
+</span><span data-line="10"><span class="o">|</span> <span class="n">Query</span>   <span class="o">|</span> <span class="n">rag_flow</span> <span class="o">|</span> <span class="mf">172.18.0.1</span><span class="p">:</span><span class="mi">35882</span> <span class="o">|</span> <span class="mi">1629</span> <span class="o">|</span> <span class="n">SHOW</span> <span class="n">PROCESSLIST</span> <span class="o">|</span> <span class="n">init</span>                   <span class="o">|</span> <span class="mi">0</span>     <span class="o">|</span> <span class="n">root</span>            <span class="o">|</span>
+</span><span data-line="11"><span class="o">+---------+----------+------------------+------+------------------+------------------------+-------+-----------------+</span>
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p>Show minio.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">service</span> <span class="mi">2</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">command</span><span class="p">:</span> <span class="n">show</span> <span class="n">service</span> <span class="mi">2</span><span class="p">;</span>
+</span><span data-line="3"><span class="n">Showing</span> <span class="n">service</span><span class="p">:</span> <span class="mi">2</span>
+</span><span data-line="4"><span class="n">Service</span> <span class="n">minio</span> <span class="ow">is</span> <span class="n">alive</span><span class="o">.</span> <span class="n">Detail</span><span class="p">:</span>
+</span><span data-line="5"><span class="n">Confirm</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mf">2.1</span> <span class="n">ms</span><span class="o">.</span>
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p>Show elasticsearch.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">service</span> <span class="mi">3</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">command</span><span class="p">:</span> <span class="n">show</span> <span class="n">service</span> <span class="mi">3</span><span class="p">;</span>
+</span><span data-line="3"><span class="n">Showing</span> <span class="n">service</span><span class="p">:</span> <span class="mi">3</span>
+</span><span data-line="4"><span class="n">Service</span> <span class="n">elasticsearch</span> <span class="ow">is</span> <span class="n">alive</span><span class="o">.</span> <span class="n">Detail</span><span class="p">:</span>
+</span><span data-line="5"><span class="o">+----------------+------+--------------+---------+----------------+--------------+---------------+--------------+------------------------------+----------------------------+-----------------+-------+---------------+---------+-------------+---------------------+--------+------------+--------------------+</span>
+</span><span data-line="6"><span class="o">|</span> <span class="n">cluster_name</span>   <span class="o">|</span> <span class="n">docs</span> <span class="o">|</span> <span class="n">docs_deleted</span> <span class="o">|</span> <span class="n">indices</span> <span class="o">|</span> <span class="n">indices_shards</span> <span class="o">|</span> <span class="n">jvm_heap_max</span> <span class="o">|</span> <span class="n">jvm_heap_used</span> <span class="o">|</span> <span class="n">jvm_versions</span> <span class="o">|</span> <span class="n">mappings_deduplicated_fields</span> <span class="o">|</span> <span class="n">mappings_deduplicated_size</span> <span class="o">|</span> <span class="n">mappings_fields</span> <span class="o">|</span> <span class="n">nodes</span> <span class="o">|</span> <span class="n">nodes_version</span> <span class="o">|</span> <span class="n">os_mem</span>  <span class="o">|</span> <span class="n">os_mem_used</span> <span class="o">|</span> <span class="n">os_mem_used_percent</span> <span class="o">|</span> <span class="n">status</span> <span class="o">|</span> <span class="n">store_size</span> <span class="o">|</span> <span class="n">total_dataset_size</span> <span class="o">|</span>
+</span><span data-line="7"><span class="o">+----------------+------+--------------+---------+----------------+--------------+---------------+--------------+------------------------------+----------------------------+-----------------+-------+---------------+---------+-------------+---------------------+--------+------------+--------------------+</span>
+</span><span data-line="8"><span class="o">|</span> <span class="n">docker</span><span class="o">-</span><span class="n">cluster</span> <span class="o">|</span> <span class="mi">717</span>  <span class="o">|</span> <span class="mi">86</span>           <span class="o">|</span> <span class="mi">37</span>      <span class="o">|</span> <span class="mi">42</span>             <span class="o">|</span> <span class="mf">3.76</span> <span class="n">GB</span>      <span class="o">|</span> <span class="mf">1.74</span> <span class="n">GB</span>       <span class="o">|</span> <span class="mf">21.0.1</span><span class="o">+</span><span class="mi">12</span><span class="o">-</span><span class="mi">29</span> <span class="o">|</span> <span class="mi">6575</span>                         <span class="o">|</span> <span class="mf">48.0</span> <span class="n">KB</span>                    <span class="o">|</span> <span class="mi">8521</span>            <span class="o">|</span> <span class="mi">1</span>     <span class="o">|</span> <span class="p">[</span><span class="s1">&#39;8.11.3&#39;</span><span class="p">]</span>    <span class="o">|</span> <span class="mf">7.52</span> <span class="n">GB</span> <span class="o">|</span> <span class="mf">4.55</span> <span class="n">GB</span>     <span class="o">|</span> <span class="mi">61</span>                  <span class="o">|</span> <span class="n">green</span>  <span class="o">|</span> <span class="mf">4.60</span> <span class="n">MB</span>    <span class="o">|</span> <span class="mf">4.60</span> <span class="n">MB</span>            <span class="o">|</span>
+</span><span data-line="9"><span class="o">+----------------+------+--------------+---------+----------------+--------------+---------------+--------------+------------------------------+----------------------------+-----------------+-------+---------------+---------+-------------+---------------------+--------+------------+--------------------+</span>
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p>Show infinity.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">service</span> <span class="mi">4</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">command</span><span class="p">:</span> <span class="n">show</span> <span class="n">service</span> <span class="mi">4</span><span class="p">;</span>
+</span><span data-line="3"><span class="n">Showing</span> <span class="n">service</span><span class="p">:</span> <span class="mi">4</span>
+</span><span data-line="4"><span class="n">Fail</span> <span class="n">to</span> <span class="n">show</span> <span class="n">service</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Infinity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">use</span><span class="o">.</span>
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p>Show redis.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">service</span> <span class="mi">5</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">command</span><span class="p">:</span> <span class="n">show</span> <span class="n">service</span> <span class="mi">5</span><span class="p">;</span>
+</span><span data-line="3"><span class="n">Showing</span> <span class="n">service</span><span class="p">:</span> <span class="mi">5</span>
+</span><span data-line="4"><span class="n">Service</span> <span class="n">redis</span> <span class="ow">is</span> <span class="n">alive</span><span class="o">.</span> <span class="n">Detail</span><span class="p">:</span>
+</span><span data-line="5"><span class="o">+-----------------+-------------------+---------------------------+-------------------------+---------------+-------------+--------------------------+---------------------+-------------+</span>
+</span><span data-line="6"><span class="o">|</span> <span class="n">blocked_clients</span> <span class="o">|</span> <span class="n">connected_clients</span> <span class="o">|</span> <span class="n">instantaneous_ops_per_sec</span> <span class="o">|</span> <span class="n">mem_fragmentation_ratio</span> <span class="o">|</span> <span class="n">redis_version</span> <span class="o">|</span> <span class="n">server_mode</span> <span class="o">|</span> <span class="n">total_commands_processed</span> <span class="o">|</span> <span class="n">total_system_memory</span> <span class="o">|</span> <span class="n">used_memory</span> <span class="o">|</span>
+</span><span data-line="7"><span class="o">+-----------------+-------------------+---------------------------+-------------------------+---------------+-------------+--------------------------+---------------------+-------------+</span>
+</span><span data-line="8"><span class="o">|</span> <span class="mi">0</span>               <span class="o">|</span> <span class="mi">2</span>                 <span class="o">|</span> <span class="mi">1</span>                         <span class="o">|</span> <span class="mf">10.41</span>                   <span class="o">|</span> <span class="mf">7.2.4</span>         <span class="o">|</span> <span class="n">standalone</span>  <span class="o">|</span> <span class="mi">10446</span>                    <span class="o">|</span> <span class="mf">30.84</span><span class="n">G</span>              <span class="o">|</span> <span class="mf">1.10</span><span class="n">M</span>       <span class="o">|</span>
+</span><span data-line="9"><span class="o">+-----------------+-------------------+---------------------------+-------------------------+---------------+-------------+--------------------------+---------------------+-------------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-show-version"></span></p>
+<ul class="simple">
+<li><p>Show RAGFlow version</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">version</span><span class="p">;</span>
+</span><span data-line="2"><span class="o">+-----------------------+</span>
+</span><span data-line="3"><span class="o">|</span> <span class="n">version</span>               <span class="o">|</span>
+</span><span data-line="4"><span class="o">+-----------------------+</span>
+</span><span data-line="5"><span class="o">|</span> <span class="n">v0</span><span class="mf">.21.0</span><span class="o">-</span><span class="mi">241</span><span class="o">-</span><span class="n">gc6cf58d5</span> <span class="o">|</span>
+</span><span data-line="6"><span class="o">+-----------------------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-list-users"></span></p>
+<ul class="simple">
+<li><p>List all user.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="nb">list</span> <span class="n">users</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">command</span><span class="p">:</span> <span class="nb">list</span> <span class="n">users</span><span class="p">;</span>
+</span><span data-line="3"><span class="n">Listing</span> <span class="nb">all</span> <span class="n">users</span>
+</span><span data-line="4"><span class="o">+-------------------------------+----------------------+-----------+----------+</span>
+</span><span data-line="5"><span class="o">|</span> <span class="n">create_date</span>                   <span class="o">|</span> <span class="n">email</span>                <span class="o">|</span> <span class="n">is_active</span> <span class="o">|</span> <span class="n">nickname</span> <span class="o">|</span>
+</span><span data-line="6"><span class="o">+-------------------------------+----------------------+-----------+----------+</span>
+</span><span data-line="7"><span class="o">|</span> <span class="n">Mon</span><span class="p">,</span> <span class="mi">22</span> <span class="n">Sep</span> <span class="mi">2025</span> <span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">04</span> <span class="n">GMT</span> <span class="o">|</span> <span class="n">admin</span><span class="nd">@ragflow</span><span class="o">.</span><span class="n">io</span>     <span class="o">|</span> <span class="mi">1</span>         <span class="o">|</span> <span class="n">admin</span>    <span class="o">|</span>
+</span><span data-line="8"><span class="o">|</span> <span class="n">Sun</span><span class="p">,</span> <span class="mi">14</span> <span class="n">Sep</span> <span class="mi">2025</span> <span class="mi">17</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">27</span> <span class="n">GMT</span> <span class="o">|</span> <span class="n">lynn_inf</span><span class="nd">@hotmail</span><span class="o">.</span><span class="n">com</span> <span class="o">|</span> <span class="mi">1</span>         <span class="o">|</span> <span class="n">Lynn</span>     <span class="o">|</span>
+</span><span data-line="9"><span class="o">+-------------------------------+----------------------+-----------+----------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-show-user"></span></p>
+<ul class="simple">
+<li><p>Show specified user.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">user</span> <span class="s2">&quot;admin@ragflow.io&quot;</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">command</span><span class="p">:</span> <span class="n">show</span> <span class="n">user</span> <span class="s2">&quot;admin@ragflow.io&quot;</span><span class="p">;</span>
+</span><span data-line="3"><span class="n">Showing</span> <span class="n">user</span><span class="p">:</span> <span class="n">admin</span><span class="nd">@ragflow</span><span class="o">.</span><span class="n">io</span>
+</span><span data-line="4"><span class="o">+-------------------------------+------------------+-----------+--------------+------------------+--------------+----------+-----------------+---------------+--------+-------------------------------+</span>
+</span><span data-line="5"><span class="o">|</span> <span class="n">create_date</span>                   <span class="o">|</span> <span class="n">email</span>            <span class="o">|</span> <span class="n">is_active</span> <span class="o">|</span> <span class="n">is_anonymous</span> <span class="o">|</span> <span class="n">is_authenticated</span> <span class="o">|</span> <span class="n">is_superuser</span> <span class="o">|</span> <span class="n">language</span> <span class="o">|</span> <span class="n">last_login_time</span> <span class="o">|</span> <span class="n">login_channel</span> <span class="o">|</span> <span class="n">status</span> <span class="o">|</span> <span class="n">update_date</span>                   <span class="o">|</span>
+</span><span data-line="6"><span class="o">+-------------------------------+------------------+-----------+--------------+------------------+--------------+----------+-----------------+---------------+--------+-------------------------------+</span>
+</span><span data-line="7"><span class="o">|</span> <span class="n">Mon</span><span class="p">,</span> <span class="mi">22</span> <span class="n">Sep</span> <span class="mi">2025</span> <span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">04</span> <span class="n">GMT</span> <span class="o">|</span> <span class="n">admin</span><span class="nd">@ragflow</span><span class="o">.</span><span class="n">io</span> <span class="o">|</span> <span class="mi">1</span>         <span class="o">|</span> <span class="mi">0</span>            <span class="o">|</span> <span class="mi">1</span>                <span class="o">|</span> <span class="kc">True</span>         <span class="o">|</span> <span class="n">Chinese</span>  <span class="o">|</span> <span class="kc">None</span>            <span class="o">|</span> <span class="kc">None</span>          <span class="o">|</span> <span class="mi">1</span>      <span class="o">|</span> <span class="n">Mon</span><span class="p">,</span> <span class="mi">22</span> <span class="n">Sep</span> <span class="mi">2025</span> <span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">04</span> <span class="n">GMT</span> <span class="o">|</span>
+</span><span data-line="8"><span class="o">+-------------------------------+------------------+-----------+--------------+------------------+--------------+----------+-----------------+---------------+--------+-------------------------------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-create-user"></span></p>
+<ul class="simple">
+<li><p>Create new user.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="n">create</span> <span class="n">user</span> <span class="s2">&quot;example@ragflow.io&quot;</span> <span class="s2">&quot;psw&quot;</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">command</span><span class="p">:</span> <span class="n">create</span> <span class="n">user</span> <span class="s2">&quot;example@ragflow.io&quot;</span> <span class="s2">&quot;psw&quot;</span><span class="p">;</span>
+</span><span data-line="3"><span class="n">Create</span> <span class="n">user</span><span class="p">:</span> <span class="n">example</span><span class="nd">@ragflow</span><span class="o">.</span><span class="n">io</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">psw</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">user</span>
+</span><span data-line="4"><span class="o">+----------------------------------+--------------------+----------------------------------+--------------+---------------+----------+</span>
+</span><span data-line="5"><span class="o">|</span> <span class="n">access_token</span>                     <span class="o">|</span> <span class="n">email</span>              <span class="o">|</span> <span class="nb">id</span>                               <span class="o">|</span> <span class="n">is_superuser</span> <span class="o">|</span> <span class="n">login_channel</span> <span class="o">|</span> <span class="n">nickname</span> <span class="o">|</span>
+</span><span data-line="6"><span class="o">+----------------------------------+--------------------+----------------------------------+--------------+---------------+----------+</span>
+</span><span data-line="7"><span class="o">|</span> <span class="mi">5</span><span class="n">cdc6d1e9df111f099b543aee592c6bf</span> <span class="o">|</span> <span class="n">example</span><span class="nd">@ragflow</span><span class="o">.</span><span class="n">io</span> <span class="o">|</span> <span class="mi">5</span><span class="n">cdc6ca69df111f099b543aee592c6bf</span> <span class="o">|</span> <span class="kc">False</span>        <span class="o">|</span> <span class="n">password</span>      <span class="o">|</span>          <span class="o">|</span>
+</span><span data-line="8"><span class="o">+----------------------------------+--------------------+----------------------------------+--------------+---------------+----------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-alter-user-password"></span></p>
+<ul class="simple">
+<li><p>Alter user password.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">ragflow&gt; alter user password &quot;example@ragflow.io&quot; &quot;newpsw&quot;;
+</span><span data-line="2">command: alter user password &quot;example@ragflow.io&quot; &quot;newpsw&quot;;
+</span><span data-line="3">Alter user: example@ragflow.io, password: newpsw
+</span><span data-line="4">Password updated successfully!
+</span></pre></div>
+</div>
+<p><span id="example-alter-user-active"></span></p>
+<ul class="simple">
+<li><p>Alter user active, turn off.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">ragflow&gt; alter user active &quot;example@ragflow.io&quot; off;
+</span><span data-line="2">command: alter user active &quot;example@ragflow.io&quot; off;
+</span><span data-line="3">Alter user example@ragflow.io activate status, turn off.
+</span><span data-line="4">Turn off user activate status successfully!
+</span></pre></div>
+</div>
+<p><span id="example-drop-user"></span></p>
+<ul class="simple">
+<li><p>Drop user.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">ragflow&gt; Drop user &quot;example@ragflow.io&quot;;
+</span><span data-line="2">command: Drop user &quot;example@ragflow.io&quot;;
+</span><span data-line="3">Drop user: example@ragflow.io
+</span><span data-line="4">Successfully deleted user. Details:
+</span><span data-line="5">Start to delete owned tenant.
+</span><span data-line="6">- Deleted 2 tenant-LLM records.
+</span><span data-line="7">- Deleted 0 langfuse records.
+</span><span data-line="8">- Deleted 1 tenant.
+</span><span data-line="9">- Deleted 1 user-tenant records.
+</span><span data-line="10">- Deleted 1 user.
+</span><span data-line="11">Delete done!
+</span></pre></div>
+</div>
+<p>Delete user’s data at the same time.</p>
+<p><span id="example-generate-key"></span></p>
+<ul class="simple">
+<li><p>Generate API key for user.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">admin</span><span class="o">&gt;</span> <span class="n">generate</span> <span class="n">key</span> <span class="k">for</span> <span class="n">user</span> <span class="s2">&quot;example@ragflow.io&quot;</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">Generating</span> <span class="n">API</span> <span class="n">key</span> <span class="k">for</span> <span class="n">user</span><span class="p">:</span> <span class="n">example</span><span class="nd">@ragflow</span><span class="o">.</span><span class="n">io</span>
+</span><span data-line="3"><span class="o">+----------------------------------+-------------------------------+---------------+----------------------------------+-----------------------------------------------------+-------------+-------------+</span>
+</span><span data-line="4"><span class="o">|</span> <span class="n">beta</span>                             <span class="o">|</span> <span class="n">create_date</span>                   <span class="o">|</span> <span class="n">create_time</span>   <span class="o">|</span> <span class="n">tenant_id</span>                        <span class="o">|</span> <span class="n">token</span>                                               <span class="o">|</span> <span class="n">update_date</span> <span class="o">|</span> <span class="n">update_time</span> <span class="o">|</span>
+</span><span data-line="5"><span class="o">+----------------------------------+-------------------------------+---------------+----------------------------------+-----------------------------------------------------+-------------+-------------+</span>
+</span><span data-line="6"><span class="o">|</span> <span class="n">Es9OpZ6hrnPGeYA3VU1xKUkj6NCb7cp</span><span class="o">-</span> <span class="o">|</span> <span class="n">Mon</span><span class="p">,</span> <span class="mi">12</span> <span class="n">Jan</span> <span class="mi">2026</span> <span class="mi">15</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="mi">11</span> <span class="n">GMT</span> <span class="o">|</span> <span class="mi">1768227551361</span> <span class="o">|</span> <span class="mi">5</span><span class="n">d5ea8a3efc111f0a79b80fa5b90e659</span> <span class="o">|</span> <span class="n">ragflow</span><span class="o">-</span><span class="n">piwVJHEk09M5UN3LS_Xx9HA7yehs3yNOc9GGsD4jzus</span> <span class="o">|</span> <span class="kc">None</span>        <span class="o">|</span> <span class="kc">None</span>        <span class="o">|</span>
+</span><span data-line="7"><span class="o">+----------------------------------+-------------------------------+---------------+----------------------------------+-----------------------------------------------------+-------------+-------------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-list-keys"></span></p>
+<ul class="simple">
+<li><p>List all API keys for user.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">admin</span><span class="o">&gt;</span> <span class="nb">list</span> <span class="n">keys</span> <span class="n">of</span> <span class="s2">&quot;example@ragflow.io&quot;</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">Listing</span> <span class="n">API</span> <span class="n">keys</span> <span class="k">for</span> <span class="n">user</span><span class="p">:</span> <span class="n">example</span><span class="nd">@ragflow</span><span class="o">.</span><span class="n">io</span>
+</span><span data-line="3"><span class="o">+----------------------------------+-------------------------------+---------------+-----------+--------+----------------------------------+-----------------------------------------------------+-------------------------------+---------------+</span>
+</span><span data-line="4"><span class="o">|</span> <span class="n">beta</span>                             <span class="o">|</span> <span class="n">create_date</span>                   <span class="o">|</span> <span class="n">create_time</span>   <span class="o">|</span> <span class="n">dialog_id</span> <span class="o">|</span> <span class="n">source</span> <span class="o">|</span> <span class="n">tenant_id</span>                        <span class="o">|</span> <span class="n">token</span>                                               <span class="o">|</span> <span class="n">update_date</span>                   <span class="o">|</span> <span class="n">update_time</span>   <span class="o">|</span>
+</span><span data-line="5"><span class="o">+----------------------------------+-------------------------------+---------------+-----------+--------+----------------------------------+-----------------------------------------------------+-------------------------------+---------------+</span>
+</span><span data-line="6"><span class="o">|</span> <span class="n">Es9OpZ6hrnPGeYA3VU1xKUkj6NCb7cp</span><span class="o">-</span> <span class="o">|</span> <span class="n">Mon</span><span class="p">,</span> <span class="mi">12</span> <span class="n">Jan</span> <span class="mi">2026</span> <span class="mi">15</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="mi">11</span> <span class="n">GMT</span> <span class="o">|</span> <span class="mi">1768227551361</span> <span class="o">|</span> <span class="kc">None</span>      <span class="o">|</span> <span class="kc">None</span>   <span class="o">|</span> <span class="mi">5</span><span class="n">d5ea8a3efc111f0a79b80fa5b90e659</span> <span class="o">|</span> <span class="n">ragflow</span><span class="o">-</span><span class="n">piwVJHEk09M5UN3LS_Xx9HA7yehs3yNOc9GGsD4jzus</span> <span class="o">|</span> <span class="n">Mon</span><span class="p">,</span> <span class="mi">12</span> <span class="n">Jan</span> <span class="mi">2026</span> <span class="mi">15</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="mi">11</span> <span class="n">GMT</span> <span class="o">|</span> <span class="mi">1768227551361</span> <span class="o">|</span>
+</span><span data-line="7"><span class="o">+----------------------------------+-------------------------------+---------------+-----------+--------+----------------------------------+-----------------------------------------------------+-------------------------------+---------------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-drop-key"></span></p>
+<ul class="simple">
+<li><p>Drop API key for user.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">admin</span><span class="o">&gt;</span> <span class="n">drop</span> <span class="n">key</span> <span class="s2">&quot;ragflow-piwVJHEk09M5UN3LS_Xx9HA7yehs3yNOc9GGsD4jzus&quot;</span> <span class="n">of</span> <span class="s2">&quot;example@ragflow.io&quot;</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">Dropping</span> <span class="n">API</span> <span class="n">key</span> <span class="k">for</span> <span class="n">user</span><span class="p">:</span> <span class="n">example</span><span class="nd">@ragflow</span><span class="o">.</span><span class="n">io</span>
+</span><span data-line="3"><span class="n">API</span> <span class="n">key</span> <span class="n">deleted</span> <span class="n">successfully</span>
+</span></pre></div>
+</div>
+<p><span id="example-list-datasets-of-user"></span></p>
+<ul class="simple">
+<li><p>List the specified user’s dataset.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="nb">list</span> <span class="n">datasets</span> <span class="n">of</span> <span class="s2">&quot;lynn_inf@hotmail.com&quot;</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">command</span><span class="p">:</span> <span class="nb">list</span> <span class="n">datasets</span> <span class="n">of</span> <span class="s2">&quot;lynn_inf@hotmail.com&quot;</span><span class="p">;</span>
+</span><span data-line="3"><span class="n">Listing</span> <span class="nb">all</span> <span class="n">datasets</span> <span class="n">of</span> <span class="n">user</span><span class="p">:</span> <span class="n">lynn_inf</span><span class="nd">@hotmail</span><span class="o">.</span><span class="n">com</span>
+</span><span data-line="4"><span class="o">+-----------+-------------------------------+---------+----------+---------------+------------+--------+-----------+-------------------------------+</span>
+</span><span data-line="5"><span class="o">|</span> <span class="n">chunk_num</span> <span class="o">|</span> <span class="n">create_date</span>                   <span class="o">|</span> <span class="n">doc_num</span> <span class="o">|</span> <span class="n">language</span> <span class="o">|</span> <span class="n">name</span>          <span class="o">|</span> <span class="n">permission</span> <span class="o">|</span> <span class="n">status</span> <span class="o">|</span> <span class="n">token_num</span> <span class="o">|</span> <span class="n">update_date</span>                   <span class="o">|</span>
+</span><span data-line="6"><span class="o">+-----------+-------------------------------+---------+----------+---------------+------------+--------+-----------+-------------------------------+</span>
+</span><span data-line="7"><span class="o">|</span> <span class="mi">29</span>        <span class="o">|</span> <span class="n">Mon</span><span class="p">,</span> <span class="mi">15</span> <span class="n">Sep</span> <span class="mi">2025</span> <span class="mi">11</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mi">59</span> <span class="n">GMT</span> <span class="o">|</span> <span class="mi">12</span>      <span class="o">|</span> <span class="n">Chinese</span>  <span class="o">|</span> <span class="n">test_dataset</span>  <span class="o">|</span> <span class="n">me</span>         <span class="o">|</span> <span class="mi">1</span>      <span class="o">|</span> <span class="mi">12896</span>     <span class="o">|</span> <span class="n">Fri</span><span class="p">,</span> <span class="mi">19</span> <span class="n">Sep</span> <span class="mi">2025</span> <span class="mi">17</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mi">58</span> <span class="n">GMT</span> <span class="o">|</span>
+</span><span data-line="8"><span class="o">|</span> <span class="mi">4</span>         <span class="o">|</span> <span class="n">Sun</span><span class="p">,</span> <span class="mi">28</span> <span class="n">Sep</span> <span class="mi">2025</span> <span class="mi">11</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mi">31</span> <span class="n">GMT</span> <span class="o">|</span> <span class="mi">6</span>       <span class="o">|</span> <span class="n">Chinese</span>  <span class="o">|</span> <span class="n">dataset_share</span> <span class="o">|</span> <span class="n">team</span>       <span class="o">|</span> <span class="mi">1</span>      <span class="o">|</span> <span class="mi">1121</span>      <span class="o">|</span> <span class="n">Sun</span><span class="p">,</span> <span class="mi">28</span> <span class="n">Sep</span> <span class="mi">2025</span> <span class="mi">14</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="mi">03</span> <span class="n">GMT</span> <span class="o">|</span>
+</span><span data-line="9"><span class="o">+-----------+-------------------------------+---------+----------+---------------+------------+--------+-----------+-------------------------------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-list-agents-of-user"></span></p>
+<ul class="simple">
+<li><p>List the specified user’s agents.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="nb">list</span> <span class="n">agents</span> <span class="n">of</span> <span class="s2">&quot;lynn_inf@hotmail.com&quot;</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">command</span><span class="p">:</span> <span class="nb">list</span> <span class="n">agents</span> <span class="n">of</span> <span class="s2">&quot;lynn_inf@hotmail.com&quot;</span><span class="p">;</span>
+</span><span data-line="3"><span class="n">Listing</span> <span class="nb">all</span> <span class="n">agents</span> <span class="n">of</span> <span class="n">user</span><span class="p">:</span> <span class="n">lynn_inf</span><span class="nd">@hotmail</span><span class="o">.</span><span class="n">com</span>
+</span><span data-line="4"><span class="o">+-----------------+-------------+------------+-----------------+</span>
+</span><span data-line="5"><span class="o">|</span> <span class="n">canvas_category</span> <span class="o">|</span> <span class="n">canvas_type</span> <span class="o">|</span> <span class="n">permission</span> <span class="o">|</span> <span class="n">title</span>           <span class="o">|</span>
+</span><span data-line="6"><span class="o">+-----------------+-------------+------------+-----------------+</span>
+</span><span data-line="7"><span class="o">|</span> <span class="n">agent</span>           <span class="o">|</span> <span class="kc">None</span>        <span class="o">|</span> <span class="n">team</span>       <span class="o">|</span> <span class="n">research_helper</span> <span class="o">|</span>
+</span><span data-line="8"><span class="o">+-----------------+-------------+------------+-----------------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-show-version"></span></p>
+<ul class="simple">
+<li><p>Display the current RAGFlow version.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">version</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">show_version</span>
+</span><span data-line="3"><span class="o">+-----------------------+</span>
+</span><span data-line="4"><span class="o">|</span> <span class="n">version</span>               <span class="o">|</span>
+</span><span data-line="5"><span class="o">+-----------------------+</span>
+</span><span data-line="6"><span class="o">|</span> <span class="n">v0</span><span class="mf">.24.0</span><span class="o">-</span><span class="mi">24</span><span class="o">-</span><span class="n">g6f60e9f9e</span> <span class="o">|</span>
+</span><span data-line="7"><span class="o">+-----------------------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-grant-admin"></span></p>
+<ul class="simple">
+<li><p>Grant administrator privileges to the specified user.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">ragflow&gt; grant admin &quot;anakin.skywalker@ragflow.io&quot;;
+</span><span data-line="2">Grant successfully!
+</span></pre></div>
+</div>
+<p><span id="example-revoke-admin"></span></p>
+<ul class="simple">
+<li><p>Revoke administrator privileges from the specified user.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">ragflow&gt; revoke admin &quot;anakin.skywalker@ragflow.io&quot;;
+</span><span data-line="2">Revoke successfully!
+</span></pre></div>
+</div>
+<p><span id="example-list-vars"></span></p>
+<ul class="simple">
+<li><p>List all system settings.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="nb">list</span> <span class="nb">vars</span><span class="p">;</span>
+</span><span data-line="2"><span class="o">+-----------+---------------------+--------------+-----------+</span>
+</span><span data-line="3"><span class="o">|</span> <span class="n">data_type</span> <span class="o">|</span> <span class="n">name</span>                <span class="o">|</span> <span class="n">source</span>       <span class="o">|</span> <span class="n">value</span>     <span class="o">|</span>
+</span><span data-line="4"><span class="o">+-----------+---------------------+--------------+-----------+</span>
+</span><span data-line="5"><span class="o">|</span> <span class="n">string</span>    <span class="o">|</span> <span class="n">default_role</span>        <span class="o">|</span> <span class="n">variable</span>     <span class="o">|</span> <span class="n">user</span>      <span class="o">|</span>
+</span><span data-line="6"><span class="o">|</span> <span class="nb">bool</span>      <span class="o">|</span> <span class="n">enable_whitelist</span>    <span class="o">|</span> <span class="n">variable</span>     <span class="o">|</span> <span class="n">true</span>      <span class="o">|</span>
+</span><span data-line="7"><span class="o">|</span> <span class="n">string</span>    <span class="o">|</span> <span class="n">mail</span><span class="o">.</span><span class="n">default_sender</span> <span class="o">|</span> <span class="n">variable</span>     <span class="o">|</span>           <span class="o">|</span>
+</span><span data-line="8"><span class="o">|</span> <span class="n">string</span>    <span class="o">|</span> <span class="n">mail</span><span class="o">.</span><span class="n">password</span>       <span class="o">|</span> <span class="n">variable</span>     <span class="o">|</span>           <span class="o">|</span>
+</span><span data-line="9"><span class="o">|</span> <span class="n">integer</span>   <span class="o">|</span> <span class="n">mail</span><span class="o">.</span><span class="n">port</span>           <span class="o">|</span> <span class="n">variable</span>     <span class="o">|</span> <span class="mi">15</span>        <span class="o">|</span>
+</span><span data-line="10"><span class="o">|</span> <span class="n">string</span>    <span class="o">|</span> <span class="n">mail</span><span class="o">.</span><span class="n">server</span>         <span class="o">|</span> <span class="n">variable</span>     <span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span>
+</span><span data-line="11"><span class="o">|</span> <span class="n">integer</span>   <span class="o">|</span> <span class="n">mail</span><span class="o">.</span><span class="n">timeout</span>        <span class="o">|</span> <span class="n">variable</span>     <span class="o">|</span> <span class="mi">10</span>        <span class="o">|</span>
+</span><span data-line="12"><span class="o">|</span> <span class="nb">bool</span>      <span class="o">|</span> <span class="n">mail</span><span class="o">.</span><span class="n">use_ssl</span>        <span class="o">|</span> <span class="n">variable</span>     <span class="o">|</span> <span class="n">true</span>      <span class="o">|</span>
+</span><span data-line="13"><span class="o">|</span> <span class="nb">bool</span>      <span class="o">|</span> <span class="n">mail</span><span class="o">.</span><span class="n">use_tls</span>        <span class="o">|</span> <span class="n">variable</span>     <span class="o">|</span> <span class="n">false</span>     <span class="o">|</span>
+</span><span data-line="14"><span class="o">|</span> <span class="n">string</span>    <span class="o">|</span> <span class="n">mail</span><span class="o">.</span><span class="n">username</span>       <span class="o">|</span> <span class="n">variable</span>     <span class="o">|</span>           <span class="o">|</span>
+</span><span data-line="15"><span class="o">+-----------+---------------------+--------------+-----------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-show-var"></span></p>
+<ul class="simple">
+<li><p>Display the content of a specific system configuration/setting by its name or name prefix.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">var</span> <span class="n">mail</span><span class="o">.</span><span class="n">server</span><span class="p">;</span>
+</span><span data-line="2"><span class="o">+-----------+-------------+--------------+-----------+</span>
+</span><span data-line="3"><span class="o">|</span> <span class="n">data_type</span> <span class="o">|</span> <span class="n">name</span>        <span class="o">|</span> <span class="n">source</span>       <span class="o">|</span> <span class="n">value</span>     <span class="o">|</span>
+</span><span data-line="4"><span class="o">+-----------+-------------+--------------+-----------+</span>
+</span><span data-line="5"><span class="o">|</span> <span class="n">string</span>    <span class="o">|</span> <span class="n">mail</span><span class="o">.</span><span class="n">server</span> <span class="o">|</span> <span class="n">variable</span>     <span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span>
+</span><span data-line="6"><span class="o">+-----------+-------------+--------------+-----------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-set-var"></span></p>
+<ul class="simple">
+<li><p>Set the value for a specified configuration item.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="nb">set</span> <span class="n">var</span> <span class="n">mail</span><span class="o">.</span><span class="n">server</span> <span class="mf">127.0.0.1</span><span class="p">;</span>
+</span><span data-line="2"><span class="n">Set</span> <span class="n">variable</span> <span class="n">successfully</span>
+</span></pre></div>
+</div>
+<p><span id="example-list-configs"></span></p>
+<ul class="simple">
+<li><p>List all system configurations.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="nb">list</span> <span class="n">configs</span><span class="p">;</span>
+</span><span data-line="2"><span class="o">+-------------------------------------------------------------------------------------------+-----------+----+---------------+-------+----------------+</span>
+</span><span data-line="3"><span class="o">|</span> <span class="n">extra</span>                                                                                     <span class="o">|</span> <span class="n">host</span>      <span class="o">|</span> <span class="nb">id</span> <span class="o">|</span> <span class="n">name</span>          <span class="o">|</span> <span class="n">port</span>  <span class="o">|</span> <span class="n">service_type</span>   <span class="o">|</span>
+</span><span data-line="4"><span class="o">+-------------------------------------------------------------------------------------------+-----------+----+---------------+-------+----------------+</span>
+</span><span data-line="5"><span class="o">|</span> <span class="p">{}</span>                                                                                        <span class="o">|</span> <span class="mf">0.0.0.0</span>   <span class="o">|</span> <span class="mi">0</span>  <span class="o">|</span> <span class="n">ragflow_0</span>     <span class="o">|</span> <span class="mi">9380</span>  <span class="o">|</span> <span class="n">ragflow_server</span> <span class="o">|</span>
+</span><span data-line="6"><span class="o">|</span> <span class="p">{</span><span class="s1">&#39;meta_type&#39;</span><span class="p">:</span> <span class="s1">&#39;mysql&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;infini_rag_flow&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span><span class="p">}</span>                 <span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="mi">1</span>  <span class="o">|</span> <span class="n">mysql</span>         <span class="o">|</span> <span class="mi">5455</span>  <span class="o">|</span> <span class="n">meta_data</span>      <span class="o">|</span>
+</span><span data-line="7"><span class="o">|</span> <span class="p">{</span><span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;infini_rag_flow&#39;</span><span class="p">,</span> <span class="s1">&#39;store_type&#39;</span><span class="p">:</span> <span class="s1">&#39;minio&#39;</span><span class="p">,</span> <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="s1">&#39;rag_flow&#39;</span><span class="p">}</span>                <span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="mi">2</span>  <span class="o">|</span> <span class="n">minio</span>         <span class="o">|</span> <span class="mi">9000</span>  <span class="o">|</span> <span class="n">file_store</span>     <span class="o">|</span>
+</span><span data-line="8"><span class="o">|</span> <span class="p">{</span><span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;infini_rag_flow&#39;</span><span class="p">,</span> <span class="s1">&#39;retrieval_type&#39;</span><span class="p">:</span> <span class="s1">&#39;elasticsearch&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;elastic&#39;</span><span class="p">}</span> <span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="mi">3</span>  <span class="o">|</span> <span class="n">elasticsearch</span> <span class="o">|</span> <span class="mi">1200</span>  <span class="o">|</span> <span class="n">retrieval</span>      <span class="o">|</span>
+</span><span data-line="9"><span class="o">|</span> <span class="p">{</span><span class="s1">&#39;db_name&#39;</span><span class="p">:</span> <span class="s1">&#39;default_db&#39;</span><span class="p">,</span> <span class="s1">&#39;retrieval_type&#39;</span><span class="p">:</span> <span class="s1">&#39;infinity&#39;</span><span class="p">}</span>                                   <span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="mi">4</span>  <span class="o">|</span> <span class="n">infinity</span>      <span class="o">|</span> <span class="mi">23817</span> <span class="o">|</span> <span class="n">retrieval</span>      <span class="o">|</span>
+</span><span data-line="10"><span class="o">|</span> <span class="p">{</span><span class="s1">&#39;database&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;mq_type&#39;</span><span class="p">:</span> <span class="s1">&#39;redis&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;infini_rag_flow&#39;</span><span class="p">}</span>                        <span class="o">|</span> <span class="n">localhost</span> <span class="o">|</span> <span class="mi">5</span>  <span class="o">|</span> <span class="n">redis</span>         <span class="o">|</span> <span class="mi">6379</span>  <span class="o">|</span> <span class="n">message_queue</span>  <span class="o">|</span>
+</span><span data-line="11"><span class="o">|</span> <span class="p">{</span><span class="s1">&#39;message_queue_type&#39;</span><span class="p">:</span> <span class="s1">&#39;redis&#39;</span><span class="p">}</span>                                                           <span class="o">|</span>           <span class="o">|</span> <span class="mi">6</span>  <span class="o">|</span> <span class="n">task_executor</span> <span class="o">|</span> <span class="mi">0</span>     <span class="o">|</span> <span class="n">task_executor</span>  <span class="o">|</span>
+</span><span data-line="12"><span class="o">+-------------------------------------------------------------------------------------------+-----------+----+---------------+-------+----------------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-list-environments"></span></p>
+<ul class="simple">
+<li><p>List all system environments which can accessed by Admin service.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ragflow</span><span class="o">&gt;</span> <span class="nb">list</span> <span class="n">envs</span><span class="p">;</span>
+</span><span data-line="2"><span class="o">+-------------------------+------------------+</span>
+</span><span data-line="3"><span class="o">|</span> <span class="n">env</span>                     <span class="o">|</span> <span class="n">value</span>            <span class="o">|</span>
+</span><span data-line="4"><span class="o">+-------------------------+------------------+</span>
+</span><span data-line="5"><span class="o">|</span> <span class="n">DOC_ENGINE</span>              <span class="o">|</span> <span class="n">elasticsearch</span>    <span class="o">|</span>
+</span><span data-line="6"><span class="o">|</span> <span class="n">DEFAULT_SUPERUSER_EMAIL</span> <span class="o">|</span> <span class="n">admin</span><span class="nd">@ragflow</span><span class="o">.</span><span class="n">io</span> <span class="o">|</span>
+</span><span data-line="7"><span class="o">|</span> <span class="n">DB_TYPE</span>                 <span class="o">|</span> <span class="n">mysql</span>            <span class="o">|</span>
+</span><span data-line="8"><span class="o">|</span> <span class="n">DEVICE</span>                  <span class="o">|</span> <span class="n">cpu</span>              <span class="o">|</span>
+</span><span data-line="9"><span class="o">|</span> <span class="n">STORAGE_IMPL</span>            <span class="o">|</span> <span class="n">MINIO</span>            <span class="o">|</span>
+</span><span data-line="10"><span class="o">+-------------------------+------------------+</span>
+</span></pre></div>
+</div>
+<p><span id="example-meta-commands"></span></p>
+<ul class="simple">
+<li><p>Show help information.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">ragflow&gt; \help
+</span><span data-line="2">command: \help
+</span><span data-line="3">
+</span><span data-line="4">Commands:
+</span><span data-line="5">LIST SERVICES
+</span><span data-line="6">SHOW SERVICE &lt;service&gt;
+</span><span data-line="7">STARTUP SERVICE &lt;service&gt;
+</span><span data-line="8">SHUTDOWN SERVICE &lt;service&gt;
+</span><span data-line="9">RESTART SERVICE &lt;service&gt;
+</span><span data-line="10">LIST USERS
+</span><span data-line="11">SHOW USER &lt;user&gt;
+</span><span data-line="12">DROP USER &lt;user&gt;
+</span><span data-line="13">CREATE USER &lt;user&gt; &lt;password&gt;
+</span><span data-line="14">ALTER USER PASSWORD &lt;user&gt; &lt;new_password&gt;
+</span><span data-line="15">ALTER USER ACTIVE &lt;user&gt; &lt;on/off&gt;
+</span><span data-line="16">LIST DATASETS OF &lt;user&gt;
+</span><span data-line="17">LIST AGENTS OF &lt;user&gt;
+</span><span data-line="18">CREATE ROLE &lt;role&gt;
+</span><span data-line="19">DROP ROLE &lt;role&gt;
+</span><span data-line="20">ALTER ROLE &lt;role&gt; SET DESCRIPTION &lt;description&gt;
+</span><span data-line="21">LIST ROLES
+</span><span data-line="22">SHOW ROLE &lt;role&gt;
+</span><span data-line="23">GRANT &lt;action_list&gt; ON &lt;function&gt; TO ROLE &lt;role&gt;
+</span><span data-line="24">REVOKE &lt;action_list&gt; ON &lt;function&gt; TO ROLE &lt;role&gt;
+</span><span data-line="25">ALTER USER &lt;user&gt; SET ROLE &lt;role&gt;
+</span><span data-line="26">SHOW USER PERMISSION &lt;user&gt;
+</span><span data-line="27">SHOW VERSION
+</span><span data-line="28">GRANT ADMIN &lt;user&gt;
+</span><span data-line="29">REVOKE ADMIN &lt;user&gt;
+</span><span data-line="30">GENERATE KEY FOR USER &lt;user&gt;
+</span><span data-line="31">LIST KEYS OF &lt;user&gt;
+</span><span data-line="32">DROP KEY &lt;key&gt; OF &lt;user&gt;
+</span><span data-line="33">
+</span><span data-line="34">Meta Commands:
+</span><span data-line="35">  \?, \h, \help     Show this help
+</span><span data-line="36">  \q, \quit, \exit   Quit the CLI
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p>Exit</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">ragflow&gt; \q
+</span><span data-line="2">command: \q
+</span><span data-line="3">Goodbye!
+</span></pre></div>
+</div>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="admin_ui.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Admin UI</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../../memory/use_memory.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Use memory</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 04.05.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../../_static/shibuya.js?v=cac61aee"></script>
+      <script src="../../../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

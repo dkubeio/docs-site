@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>User Guide - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="API Reference" href="api-reference.html" /><link rel="prev" title="Getting Started with AgentX" href="getting-started.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/agentx/user-guide.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/agentx/user-guide.html"/>
+  <meta property="og:title" content="User Guide"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="user-guide.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">AgentX Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortgage-lite/index.html">Mortgage-Lite Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/getting-started.html">Getting Started with Mortgage-Lite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/architecture.html">Mortgage-Lite Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortgage-lite/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortiq/index.html">MortIQ Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/getting-started.html">Getting Started with MortIQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/architecture.html">MortIQ Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/deployment.html">Deployment Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/securellm-integration.html">SecureLLM Integration Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/api-reference.html">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ragflow/index.html">Quickstart</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM User Guide</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#managing-assistants">Managing Assistants</a><ul>
+<li><a class="reference internal" href="#creating-assistants">Creating Assistants</a><ul>
+<li><a class="reference internal" href="#from-scratch">From Scratch</a></li>
+<li><a class="reference internal" href="#from-template">From Template</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#assistant-lifecycle">Assistant Lifecycle</a><ul>
+<li><a class="reference internal" href="#starting-an-assistant">Starting an Assistant</a></li>
+<li><a class="reference internal" href="#stopping-an-assistant">Stopping an Assistant</a></li>
+<li><a class="reference internal" href="#restarting-an-assistant">Restarting an Assistant</a></li>
+<li><a class="reference internal" href="#deleting-an-assistant">Deleting an Assistant</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#viewing-logs">Viewing Logs</a></li>
+<li><a class="reference internal" href="#updating-configuration">Updating Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#collaboration-features">Collaboration Features</a><ul>
+<li><a class="reference internal" href="#sharing-assistants">Sharing Assistants</a><ul>
+<li><a class="reference internal" href="#share-with-users">Share with Users</a></li>
+<li><a class="reference internal" href="#managing-shares">Managing Shares</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#accessing-shared-assistants">Accessing Shared Assistants</a></li>
+<li><a class="reference internal" href="#pinning-assistants">Pinning Assistants</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#templates">Templates</a><ul>
+<li><a class="reference internal" href="#publishing-templates">Publishing Templates</a></li>
+<li><a class="reference internal" href="#template-versioning">Template Versioning</a></li>
+<li><a class="reference internal" href="#browsing-templates">Browsing Templates</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#admin-features">Admin Features</a><ul>
+<li><a class="reference internal" href="#admin-dashboard">Admin Dashboard</a></li>
+<li><a class="reference internal" href="#user-management">User Management</a></li>
+<li><a class="reference internal" href="#assistant-management">Assistant Management</a></li>
+<li><a class="reference internal" href="#monitoring">Monitoring</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#best-practices">Best Practices</a><ul>
+<li><a class="reference internal" href="#naming-conventions">Naming Conventions</a></li>
+<li><a class="reference internal" href="#configuration-management">Configuration Management</a></li>
+<li><a class="reference internal" href="#resource-management">Resource Management</a></li>
+<li><a class="reference internal" href="#template-strategy">Template Strategy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#assistant-won-t-start">Assistant Won&#8217;t Start</a></li>
+<li><a class="reference internal" href="#cannot-share-assistant">Cannot Share Assistant</a></li>
+<li><a class="reference internal" href="#template-deployment-fails">Template Deployment Fails</a></li>
+<li><a class="reference internal" href="#logs-not-streaming">Logs Not Streaming</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#keyboard-shortcuts">Keyboard Shortcuts</a><ul>
+<li><a class="reference internal" href="#navigation">Navigation</a></li>
+<li><a class="reference internal" href="#actions">Actions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#accessibility">Accessibility</a></li>
+<li><a class="reference internal" href="#getting-help">Getting Help</a><ul>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#support-channels">Support Channels</a></li>
+<li><a class="reference internal" href="#reporting-issues">Reporting Issues</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tips-and-tricks">Tips and Tricks</a><ul>
+<li><a class="reference internal" href="#efficient-workflow">Efficient Workflow</a></li>
+<li><a class="reference internal" href="#advanced-usage">Advanced Usage</a></li>
+<li><a class="reference internal" href="#performance-optimization">Performance Optimization</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">AgentX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">User Guide</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/agentx/user-guide.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/agentx/user-guide.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/agentx/user-guide.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/agentx/user-guide.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/agentx/user-guide.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading">¶</a></h1>
+<p>This guide covers advanced features and best practices for using AgentX effectively.</p>
+<section id="managing-assistants">
+<h2>Managing Assistants<a class="headerlink" href="#managing-assistants" title="Link to this heading">¶</a></h2>
+<section id="creating-assistants">
+<h3>Creating Assistants<a class="headerlink" href="#creating-assistants" title="Link to this heading">¶</a></h3>
+<section id="from-scratch">
+<h4>From Scratch<a class="headerlink" href="#from-scratch" title="Link to this heading">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Click <strong>“Create Assistant”</strong> button</p></li>
+<li><p>Fill in the form:</p>
+<ul class="simple">
+<li><p><strong>Name</strong>: Unique identifier (lowercase, alphanumeric, hyphens)</p></li>
+<li><p><strong>Description</strong>: What your assistant does</p></li>
+<li><p><strong>Configuration</strong>: JSON object with custom settings</p></li>
+</ul>
+</li>
+</ol>
+<p>Example configuration:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;max_tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">&quot;system_prompt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You are a helpful assistant&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">&quot;resources&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;cpu_request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;200m&quot;</span><span class="p">,</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">&quot;cpu_limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4000m&quot;</span><span class="p">,</span>
+</span><span data-line="9"><span class="w">    </span><span class="nt">&quot;memory_request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;512Mi&quot;</span><span class="p">,</span>
+</span><span data-line="10"><span class="w">    </span><span class="nt">&quot;memory_limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2Gi&quot;</span>
+</span><span data-line="11"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="12"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Resource Configuration</strong> (optional):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cpu_request</span></code>: Minimum CPU (default: 100m)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpu_limit</span></code>: Maximum CPU (default: 2000m)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">memory_request</span></code>: Minimum memory (default: 256Mi)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">memory_limit</span></code>: Maximum memory (default: 1Gi)</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Click <strong>“Create”</strong> to deploy</p></li>
+</ol>
+</section>
+<section id="from-template">
+<h4>From Template<a class="headerlink" href="#from-template" title="Link to this heading">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>“Templates”</strong> tab</p></li>
+<li><p>Browse available templates</p></li>
+<li><p>Click <strong>“Deploy”</strong> on desired template</p></li>
+<li><p>Provide a unique name</p></li>
+<li><p>Optionally modify description</p></li>
+<li><p>Click <strong>“Create”</strong></p></li>
+</ol>
+</section>
+</section>
+<section id="assistant-lifecycle">
+<h3>Assistant Lifecycle<a class="headerlink" href="#assistant-lifecycle" title="Link to this heading">¶</a></h3>
+<section id="starting-an-assistant">
+<h4>Starting an Assistant<a class="headerlink" href="#starting-an-assistant" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Auto-start</strong>: Assistants start automatically on creation</p></li>
+<li><p><strong>Manual start</strong>: Click <strong>“Start”</strong> button on stopped assistant</p></li>
+<li><p><strong>Status</strong>: Changes from “stopped” → “starting” → “running”</p></li>
+</ul>
+</section>
+<section id="stopping-an-assistant">
+<h4>Stopping an Assistant<a class="headerlink" href="#stopping-an-assistant" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Click <strong>“Stop”</strong> button on running assistant</p></li>
+<li><p>Kubernetes resources are deleted</p></li>
+<li><p>Database record and configuration preserved</p></li>
+<li><p>Can be restarted later</p></li>
+</ul>
+</section>
+<section id="restarting-an-assistant">
+<h4>Restarting an Assistant<a class="headerlink" href="#restarting-an-assistant" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Click <strong>“Restart”</strong> button on running assistant</p></li>
+<li><p>Status changes to “starting” during restart</p></li>
+<li><p>Performs stop + start sequence with 2-second delay</p></li>
+<li><p>Useful for applying configuration changes</p></li>
+<li><p>Maintains same pod identity</p></li>
+<li><p><strong>Note</strong>: Brief downtime during restart</p></li>
+</ul>
+</section>
+<section id="deleting-an-assistant">
+<h4>Deleting an Assistant<a class="headerlink" href="#deleting-an-assistant" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Click <strong>“Delete”</strong> button</p></li>
+<li><p>Confirms deletion</p></li>
+<li><p>Removes all Kubernetes resources</p></li>
+<li><p>Deletes database record</p></li>
+<li><p><strong>Warning</strong>: This action cannot be undone</p></li>
+</ul>
+</section>
+</section>
+<section id="viewing-logs">
+<h3>Viewing Logs<a class="headerlink" href="#viewing-logs" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Click on an assistant to open details</p></li>
+<li><p>Click <strong>“View Logs”</strong> button</p></li>
+<li><p>Real-time log stream appears</p></li>
+<li><p>Logs update automatically</p></li>
+<li><p>Click <strong>“Close”</strong> to stop streaming</p></li>
+</ol>
+<p><strong>Log Features</strong>:</p>
+<ul class="simple">
+<li><p>Real-time streaming via Server-Sent Events</p></li>
+<li><p>Automatic reconnection on disconnect</p></li>
+<li><p>5-minute timeout for inactive streams</p></li>
+<li><p>Searchable and scrollable</p></li>
+<li><p>Timestamps included</p></li>
+<li><p>Automatic cleanup on disconnect</p></li>
+</ul>
+</section>
+<section id="updating-configuration">
+<h3>Updating Configuration<a class="headerlink" href="#updating-configuration" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Open assistant details</p></li>
+<li><p>Click <strong>“Edit”</strong> button</p></li>
+<li><p>Modify fields:</p>
+<ul class="simple">
+<li><p>Name (must remain unique)</p></li>
+<li><p>Description</p></li>
+<li><p>Configuration JSON</p></li>
+</ul>
+</li>
+<li><p>Click <strong>“Save”</strong></p></li>
+<li><p>Restart assistant to apply changes</p></li>
+</ol>
+</section>
+</section>
+<section id="collaboration-features">
+<h2>Collaboration Features<a class="headerlink" href="#collaboration-features" title="Link to this heading">¶</a></h2>
+<section id="sharing-assistants">
+<h3>Sharing Assistants<a class="headerlink" href="#sharing-assistants" title="Link to this heading">¶</a></h3>
+<section id="share-with-users">
+<h4>Share with Users<a class="headerlink" href="#share-with-users" title="Link to this heading">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Open assistant details</p></li>
+<li><p>Click <strong>“Share”</strong> button</p></li>
+<li><p>Search for users by username or email</p></li>
+<li><p>Select users to share with</p></li>
+<li><p>Choose permission level:</p>
+<ul class="simple">
+<li><p><strong>VIEW</strong>: View assistant details only</p></li>
+<li><p><strong>USE</strong>: Launch and interact with assistant</p></li>
+<li><p><strong>MANAGE</strong>: Modify configuration and settings</p></li>
+</ul>
+</li>
+<li><p>Click <strong>“Share”</strong></p></li>
+</ol>
+</section>
+<section id="managing-shares">
+<h4>Managing Shares<a class="headerlink" href="#managing-shares" title="Link to this heading">¶</a></h4>
+<p><strong>View Shares</strong>:</p>
+<ul class="simple">
+<li><p>Open assistant details</p></li>
+<li><p>Click <strong>“Manage Shares”</strong> tab</p></li>
+<li><p>See list of users with access</p></li>
+</ul>
+<p><strong>Update Permissions</strong>:</p>
+<ul class="simple">
+<li><p>Click <strong>“Edit”</strong> next to a share</p></li>
+<li><p>Change permission level</p></li>
+<li><p>Click <strong>“Save”</strong></p></li>
+</ul>
+<p><strong>Revoke Access</strong>:</p>
+<ul class="simple">
+<li><p>Click <strong>“Remove”</strong> next to a share</p></li>
+<li><p>Confirm revocation</p></li>
+<li><p>User loses access immediately</p></li>
+</ul>
+</section>
+</section>
+<section id="accessing-shared-assistants">
+<h3>Accessing Shared Assistants<a class="headerlink" href="#accessing-shared-assistants" title="Link to this heading">¶</a></h3>
+<p><strong>View Shared Assistants</strong>:</p>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>“Shared with Me”</strong> tab</p></li>
+<li><p>See all assistants shared with you</p></li>
+<li><p>Permission level displayed for each</p></li>
+</ol>
+<p><strong>Using Shared Assistants</strong>:</p>
+<ul class="simple">
+<li><p><strong>VIEW permission</strong>: View assistant details and metadata</p></li>
+<li><p><strong>USE permission</strong>: Launch assistant, view logs, interact with interface</p></li>
+<li><p><strong>MANAGE permission</strong>: Edit configuration, restart, stop/start, modify settings</p></li>
+</ul>
+<p><strong>Limitations</strong>:</p>
+<ul class="simple">
+<li><p>Cannot delete shared assistants (owner only)</p></li>
+<li><p>Cannot share with others (owner only)</p></li>
+<li><p>Cannot publish as template (owner only)</p></li>
+<li><p>Permission level determines available actions</p></li>
+</ul>
+</section>
+<section id="pinning-assistants">
+<h3>Pinning Assistants<a class="headerlink" href="#pinning-assistants" title="Link to this heading">¶</a></h3>
+<p>Pin frequently used assistants for quick access:</p>
+<p><strong>Pin an Assistant</strong>:</p>
+<ol class="arabic simple">
+<li><p>Click <strong>“Pin”</strong> icon on assistant card</p></li>
+<li><p>Assistant appears in pinned section</p></li>
+<li><p>Works for owned and shared assistants</p></li>
+</ol>
+<p><strong>Unpin an Assistant</strong>:</p>
+<ol class="arabic simple">
+<li><p>Click <strong>“Unpin”</strong> icon</p></li>
+<li><p>Assistant removed from pinned section</p></li>
+<li><p>Still accessible in main list</p></li>
+</ol>
+<p><strong>Pinned Section</strong>:</p>
+<ul class="simple">
+<li><p>Appears at top of assistant list</p></li>
+<li><p>Persists across sessions</p></li>
+<li><p>Personal to each user</p></li>
+</ul>
+</section>
+</section>
+<section id="templates">
+<h2>Templates<a class="headerlink" href="#templates" title="Link to this heading">¶</a></h2>
+<section id="publishing-templates">
+<h3>Publishing Templates<a class="headerlink" href="#publishing-templates" title="Link to this heading">¶</a></h3>
+<p>Convert your assistant configuration into a reusable template:</p>
+<ol class="arabic simple">
+<li><p>Open a working assistant</p></li>
+<li><p>Click <strong>“Publish as Template”</strong></p></li>
+<li><p>Fill in template details:</p>
+<ul class="simple">
+<li><p><strong>Name</strong>: Template name</p></li>
+<li><p><strong>Description</strong>: What it does</p></li>
+<li><p><strong>Tags</strong>: Categorization (e.g., “ai”, “gpt-4”)</p></li>
+<li><p><strong>Version</strong>: Semantic version (1.0.0)</p></li>
+<li><p><strong>Metadata</strong>: Additional info (JSON)</p></li>
+</ul>
+</li>
+</ol>
+<p>Example metadata:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;author&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AI Assistants&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;use_case&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Code generation&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;GPU&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;High memory&quot;</span><span class="p">]</span>
+</span><span data-line="6"><span class="p">}</span>
+</span></pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Click <strong>“Publish”</strong></p></li>
+</ol>
+</section>
+<section id="template-versioning">
+<h3>Template Versioning<a class="headerlink" href="#template-versioning" title="Link to this heading">¶</a></h3>
+<p>Create multiple versions of a template:</p>
+<p><strong>Create New Version</strong>:</p>
+<ol class="arabic simple">
+<li><p>Open template details</p></li>
+<li><p>Click <strong>“Create Version”</strong></p></li>
+<li><p>Provide:</p>
+<ul class="simple">
+<li><p><strong>Version</strong>: Semantic version (1.1.0)</p></li>
+<li><p><strong>Configuration</strong>: Updated config</p></li>
+<li><p><strong>Changelog</strong>: What changed</p></li>
+</ul>
+</li>
+<li><p>Click <strong>“Create”</strong></p></li>
+</ol>
+<p><strong>Deprecate Version</strong>:</p>
+<ol class="arabic simple">
+<li><p>Open template details</p></li>
+<li><p>Click <strong>“Versions”</strong> tab</p></li>
+<li><p>Click <strong>“Deprecate”</strong> on old version</p></li>
+<li><p>Provide deprecation message</p></li>
+<li><p>Users see warning when deploying</p></li>
+</ol>
+<p><strong>Version Selection</strong>:</p>
+<ul class="simple">
+<li><p>Latest version deployed by default</p></li>
+<li><p>Can select specific version when deploying</p></li>
+<li><p>Deprecated versions show warning</p></li>
+</ul>
+</section>
+<section id="browsing-templates">
+<h3>Browsing Templates<a class="headerlink" href="#browsing-templates" title="Link to this heading">¶</a></h3>
+<p><strong>Search Templates</strong>:</p>
+<ul class="simple">
+<li><p>Use search box to filter by name/description</p></li>
+<li><p>Filter by tags</p></li>
+<li><p>Sort by usage count or date</p></li>
+</ul>
+<p><strong>Template Details</strong>:</p>
+<ul class="simple">
+<li><p>Click on template to view details</p></li>
+<li><p>See configuration preview</p></li>
+<li><p>View version history</p></li>
+<li><p>Check usage count</p></li>
+<li><p>Read metadata</p></li>
+</ul>
+</section>
+</section>
+<section id="admin-features">
+<h2>Admin Features<a class="headerlink" href="#admin-features" title="Link to this heading">¶</a></h2>
+<section id="admin-dashboard">
+<h3>Admin Dashboard<a class="headerlink" href="#admin-dashboard" title="Link to this heading">¶</a></h3>
+<p>Access via <strong>“Admin”</strong> tab (admin users only):</p>
+<p><strong>System Overview</strong>:</p>
+<ul class="simple">
+<li><p>Total users count</p></li>
+<li><p>Total assistants count</p></li>
+<li><p>Running/stopped/error counts</p></li>
+<li><p>System health status</p></li>
+<li><p>Uptime information</p></li>
+</ul>
+<p><strong>Service Status</strong>:</p>
+<ul class="simple">
+<li><p>Database health</p></li>
+<li><p>Kubernetes status</p></li>
+<li><p>API health</p></li>
+</ul>
+</section>
+<section id="user-management">
+<h3>User Management<a class="headerlink" href="#user-management" title="Link to this heading">¶</a></h3>
+<p><strong>List Users</strong>:</p>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>“Admin”</strong> → <strong>“Users”</strong></p></li>
+<li><p>See all registered users</p></li>
+<li><p>Search by username or email</p></li>
+</ol>
+<p><strong>View User Details</strong>:</p>
+<ol class="arabic simple">
+<li><p>Click on a user</p></li>
+<li><p>See user information</p></li>
+<li><p>View user’s assistants</p></li>
+</ol>
+<p><strong>Create User</strong>:</p>
+<ol class="arabic simple">
+<li><p>Click <strong>“Create User”</strong></p></li>
+<li><p>Provide:</p>
+<ul class="simple">
+<li><p>Username</p></li>
+<li><p>Email</p></li>
+<li><p>Role (user/admin)</p></li>
+<li><p>Namespace</p></li>
+</ul>
+</li>
+<li><p>Click <strong>“Create”</strong></p></li>
+</ol>
+<p><strong>Update User Role</strong>:</p>
+<ol class="arabic simple">
+<li><p>Open user details</p></li>
+<li><p>Click <strong>“Edit”</strong></p></li>
+<li><p>Change role</p></li>
+<li><p>Click <strong>“Save”</strong></p></li>
+<li><p>Action logged in audit log</p></li>
+</ol>
+<p><strong>Delete User</strong>:</p>
+<ol class="arabic simple">
+<li><p>Open user details</p></li>
+<li><p>Click <strong>“Delete”</strong></p></li>
+<li><p>Confirm deletion</p></li>
+<li><p>User and their assistants removed</p></li>
+</ol>
+</section>
+<section id="assistant-management">
+<h3>Assistant Management<a class="headerlink" href="#assistant-management" title="Link to this heading">¶</a></h3>
+<p><strong>View All Assistants</strong>:</p>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>“Admin”</strong> → <strong>“Assistants”</strong></p></li>
+<li><p>See assistants across all users</p></li>
+<li><p>Filter by status or owner</p></li>
+<li><p>Search by name</p></li>
+</ol>
+<p><strong>Stop Any Assistant</strong>:</p>
+<ol class="arabic simple">
+<li><p>Find assistant in list</p></li>
+<li><p>Click <strong>“Stop”</strong></p></li>
+<li><p>Confirm action</p></li>
+<li><p>Action logged in audit log</p></li>
+</ol>
+<p><strong>Delete Any Assistant</strong>:</p>
+<ol class="arabic simple">
+<li><p>Find assistant in list</p></li>
+<li><p>Click <strong>“Delete”</strong></p></li>
+<li><p>Confirm deletion</p></li>
+<li><p>Action logged in audit log</p></li>
+</ol>
+</section>
+<section id="monitoring">
+<h3>Monitoring<a class="headerlink" href="#monitoring" title="Link to this heading">¶</a></h3>
+<p><strong>Pod Metrics</strong>:</p>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>“Admin”</strong> → <strong>“Metrics”</strong></p></li>
+<li><p>View CPU and memory usage</p></li>
+<li><p>See pod status</p></li>
+<li><p>Identify resource-heavy assistants</p></li>
+</ol>
+<p><strong>Audit Logs</strong>:</p>
+<ol class="arabic simple">
+<li><p>Navigate to <strong>“Admin”</strong> → <strong>“Audit Logs”</strong></p></li>
+<li><p>View admin actions</p></li>
+<li><p>Filter by action type</p></li>
+<li><p>Search by resource ID or username</p></li>
+</ol>
+<p><strong>Log Entries Include</strong>:</p>
+<ul class="simple">
+<li><p>Timestamp</p></li>
+<li><p>Admin username</p></li>
+<li><p>Action performed</p></li>
+<li><p>Resource type and ID</p></li>
+<li><p>Additional details</p></li>
+</ul>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
+<section id="naming-conventions">
+<h3>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Link to this heading">¶</a></h3>
+<p><strong>Assistants</strong>:</p>
+<ul class="simple">
+<li><p>Use lowercase</p></li>
+<li><p>Use hyphens for spaces</p></li>
+<li><p>Be descriptive: <code class="docutils literal notranslate"><span class="pre">code-reviewer</span></code>, <code class="docutils literal notranslate"><span class="pre">data-analyzer</span></code></p></li>
+<li><p>Avoid special characters</p></li>
+</ul>
+<p><strong>Templates</strong>:</p>
+<ul class="simple">
+<li><p>Use title case</p></li>
+<li><p>Be descriptive: “GPT-4 Code Assistant”</p></li>
+<li><p>Include version in name if needed</p></li>
+</ul>
+</section>
+<section id="configuration-management">
+<h3>Configuration Management<a class="headerlink" href="#configuration-management" title="Link to this heading">¶</a></h3>
+<p><strong>Version Control</strong>:</p>
+<ul class="simple">
+<li><p>Keep configuration in version control</p></li>
+<li><p>Document changes in description</p></li>
+<li><p>Use template versions for major changes</p></li>
+</ul>
+<p><strong>Environment-Specific Config</strong>:</p>
+<ul class="simple">
+<li><p>Use different assistants for dev/staging/prod</p></li>
+<li><p>Name accordingly: <code class="docutils literal notranslate"><span class="pre">my-assistant-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">my-assistant-prod</span></code></p></li>
+</ul>
+<p><strong>Secrets</strong>:</p>
+<ul class="simple">
+<li><p>Never hardcode API keys in configuration</p></li>
+<li><p>Use Kubernetes Secrets</p></li>
+<li><p>Reference secrets in configuration</p></li>
+</ul>
+</section>
+<section id="resource-management">
+<h3>Resource Management<a class="headerlink" href="#resource-management" title="Link to this heading">¶</a></h3>
+<p><strong>Optimize Resources</strong>:</p>
+<ul class="simple">
+<li><p>Stop assistants when not in use</p></li>
+<li><p>Monitor resource usage via admin panel</p></li>
+<li><p>Delete unused assistants</p></li>
+</ul>
+<p><strong>Sharing Strategy</strong>:</p>
+<ul class="simple">
+<li><p>Share with specific users, not everyone</p></li>
+<li><p>Use read permission for viewers</p></li>
+<li><p>Use write permission for collaborators</p></li>
+<li><p>Review shares periodically</p></li>
+</ul>
+</section>
+<section id="template-strategy">
+<h3>Template Strategy<a class="headerlink" href="#template-strategy" title="Link to this heading">¶</a></h3>
+<p><strong>When to Create Templates</strong>:</p>
+<ul class="simple">
+<li><p>Reusable configurations</p></li>
+<li><p>Standard setups for teams</p></li>
+<li><p>Common use cases</p></li>
+<li><p>Tested and validated configs</p></li>
+</ul>
+<p><strong>Template Maintenance</strong>:</p>
+<ul class="simple">
+<li><p>Update versions for improvements</p></li>
+<li><p>Deprecate old versions</p></li>
+<li><p>Document breaking changes</p></li>
+<li><p>Keep metadata current</p></li>
+</ul>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<section id="assistant-won-t-start">
+<h3>Assistant Won’t Start<a class="headerlink" href="#assistant-won-t-start" title="Link to this heading">¶</a></h3>
+<p><strong>Check Status</strong>:</p>
+<ul class="simple">
+<li><p>View assistant details</p></li>
+<li><p>Check error message</p></li>
+<li><p>View logs for details</p></li>
+<li><p>Check health probes (liveness/readiness)</p></li>
+</ul>
+<p><strong>Common Issues</strong>:</p>
+<ul class="simple">
+<li><p>Insufficient resources in namespace</p></li>
+<li><p>Invalid configuration</p></li>
+<li><p>Storage quota exceeded</p></li>
+<li><p>Network issues</p></li>
+<li><p>Health probe failures</p></li>
+</ul>
+<p><strong>Solutions</strong>:</p>
+<ul class="simple">
+<li><p>Contact admin for resource increase</p></li>
+<li><p>Validate configuration JSON</p></li>
+<li><p>Delete unused assistants</p></li>
+<li><p>Check Kubernetes cluster health</p></li>
+<li><p>Review pod events for health check failures</p></li>
+</ul>
+</section>
+<section id="cannot-share-assistant">
+<h3>Cannot Share Assistant<a class="headerlink" href="#cannot-share-assistant" title="Link to this heading">¶</a></h3>
+<p><strong>Possible Causes</strong>:</p>
+<ul class="simple">
+<li><p>User not found</p></li>
+<li><p>Already shared with user</p></li>
+<li><p>Trying to share with yourself</p></li>
+</ul>
+<p><strong>Solutions</strong>:</p>
+<ul class="simple">
+<li><p>Verify username/email</p></li>
+<li><p>Check existing shares</p></li>
+<li><p>Share with different user</p></li>
+</ul>
+</section>
+<section id="template-deployment-fails">
+<h3>Template Deployment Fails<a class="headerlink" href="#template-deployment-fails" title="Link to this heading">¶</a></h3>
+<p><strong>Check</strong>:</p>
+<ul class="simple">
+<li><p>Template configuration validity</p></li>
+<li><p>Namespace quotas</p></li>
+<li><p>Naming conflicts</p></li>
+</ul>
+<p><strong>Solutions</strong>:</p>
+<ul class="simple">
+<li><p>Choose different name</p></li>
+<li><p>Contact admin for quota increase</p></li>
+<li><p>Review template configuration</p></li>
+</ul>
+</section>
+<section id="logs-not-streaming">
+<h3>Logs Not Streaming<a class="headerlink" href="#logs-not-streaming" title="Link to this heading">¶</a></h3>
+<p><strong>Troubleshooting</strong>:</p>
+<ul class="simple">
+<li><p>Refresh page</p></li>
+<li><p>Check assistant status (must be running)</p></li>
+<li><p>Verify network connection</p></li>
+<li><p>Check browser console for errors</p></li>
+</ul>
+<p><strong>Solutions</strong>:</p>
+<ul class="simple">
+<li><p>Restart assistant</p></li>
+<li><p>Try different browser</p></li>
+<li><p>Contact admin if persists</p></li>
+</ul>
+</section>
+</section>
+<section id="keyboard-shortcuts">
+<h2>Keyboard Shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Link to this heading">¶</a></h2>
+<section id="navigation">
+<h3>Navigation<a class="headerlink" href="#navigation" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Tab</strong>: Navigate between tabs</p></li>
+<li><p><strong>Arrow Keys</strong>: Move between tabs</p></li>
+<li><p><strong>Home</strong>: First tab</p></li>
+<li><p><strong>End</strong>: Last tab</p></li>
+</ul>
+</section>
+<section id="actions">
+<h3>Actions<a class="headerlink" href="#actions" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Enter</strong>: Activate focused button</p></li>
+<li><p><strong>Escape</strong>: Close modal/dialog</p></li>
+<li><p><strong>Space</strong>: Toggle checkbox/button</p></li>
+</ul>
+</section>
+</section>
+<section id="accessibility">
+<h2>Accessibility<a class="headerlink" href="#accessibility" title="Link to this heading">¶</a></h2>
+<p>AgentX is built with accessibility in mind:</p>
+<ul class="simple">
+<li><p><strong>Screen Reader Support</strong>: ARIA labels and roles</p></li>
+<li><p><strong>Keyboard Navigation</strong>: Full keyboard support</p></li>
+<li><p><strong>Focus Indicators</strong>: Visible focus states</p></li>
+<li><p><strong>Color Contrast</strong>: WCAG AA compliant</p></li>
+<li><p><strong>Responsive Design</strong>: Works on all screen sizes</p></li>
+</ul>
+</section>
+<section id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading">¶</a></h2>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Getting Started</strong>: Quick start guide</p></li>
+<li><p><strong>API Reference</strong>: Complete API documentation</p></li>
+<li><p><strong>Architecture</strong>: System design details</p></li>
+<li><p><strong>Deployment</strong>: Production deployment guide</p></li>
+</ul>
+</section>
+<section id="support-channels">
+<h3>Support Channels<a class="headerlink" href="#support-channels" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>GitHub Issues</strong>: Bug reports and feature requests</p></li>
+<li><p><strong>Documentation</strong>: https://dkubeio.github.io/docs-site/components/agentx/</p></li>
+<li><p><strong>API Docs</strong>: http://localhost:8000/docs (local)</p></li>
+</ul>
+</section>
+<section id="reporting-issues">
+<h3>Reporting Issues<a class="headerlink" href="#reporting-issues" title="Link to this heading">¶</a></h3>
+<p>When reporting issues, include:</p>
+<ol class="arabic simple">
+<li><p><strong>Description</strong>: What went wrong</p></li>
+<li><p><strong>Steps to Reproduce</strong>: How to recreate</p></li>
+<li><p><strong>Expected Behavior</strong>: What should happen</p></li>
+<li><p><strong>Actual Behavior</strong>: What actually happened</p></li>
+<li><p><strong>Environment</strong>: Browser, OS, AgentX version</p></li>
+<li><p><strong>Logs</strong>: Relevant error messages</p></li>
+</ol>
+</section>
+</section>
+<section id="tips-and-tricks">
+<h2>Tips and Tricks<a class="headerlink" href="#tips-and-tricks" title="Link to this heading">¶</a></h2>
+<section id="efficient-workflow">
+<h3>Efficient Workflow<a class="headerlink" href="#efficient-workflow" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Pin frequently used assistants</strong> for quick access</p></li>
+<li><p><strong>Use templates</strong> for common configurations</p></li>
+<li><p><strong>Share assistants</strong> instead of duplicating</p></li>
+<li><p><strong>Monitor resources</strong> via admin panel</p></li>
+<li><p><strong>Stop unused assistants</strong> to save resources</p></li>
+</ol>
+</section>
+<section id="advanced-usage">
+<h3>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Link to this heading">¶</a></h3>
+<p><strong>Bulk Operations</strong>:</p>
+<ul class="simple">
+<li><p>Share with multiple users at once</p></li>
+<li><p>Create multiple assistants from same template</p></li>
+<li><p>Use API for automation</p></li>
+</ul>
+<p><strong>Configuration Patterns</strong>:</p>
+<ul class="simple">
+<li><p>Use environment variables in config</p></li>
+<li><p>Reference external resources</p></li>
+<li><p>Modular configuration structure</p></li>
+</ul>
+<p><strong>Monitoring</strong>:</p>
+<ul class="simple">
+<li><p>Set up alerts for assistant failures</p></li>
+<li><p>Monitor resource usage trends</p></li>
+<li><p>Review audit logs regularly</p></li>
+</ul>
+</section>
+<section id="performance-optimization">
+<h3>Performance Optimization<a class="headerlink" href="#performance-optimization" title="Link to this heading">¶</a></h3>
+<p><strong>Frontend</strong>:</p>
+<ul class="simple">
+<li><p>Use latest browser version</p></li>
+<li><p>Clear cache if experiencing issues</p></li>
+<li><p>Disable browser extensions if needed</p></li>
+</ul>
+<p><strong>Backend</strong>:</p>
+<ul class="simple">
+<li><p>Use pagination for large lists</p></li>
+<li><p>Filter results to reduce data transfer</p></li>
+<li><p>Close log streams when not needed</p></li>
+</ul>
+<p><strong>Assistants</strong>:</p>
+<ul class="simple">
+<li><p>Optimize configuration for performance</p></li>
+<li><p>Use appropriate resource limits</p></li>
+<li><p>Monitor and adjust based on usage</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="getting-started.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Getting Started with AgentX</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="api-reference.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">API Reference</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 04.05.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=cac61aee"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>
