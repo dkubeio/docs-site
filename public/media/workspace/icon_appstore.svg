@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <filter id="as-glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Terminal screen / window frame -->
+  <rect x="60" y="96" width="392" height="316" rx="26"
+        fill="#131722" stroke="#818cf8" stroke-width="3" stroke-opacity="0.28"/>
+
+  <!-- Title-bar divider -->
+  <line x1="60" y1="142" x2="452" y2="142"
+        stroke="#818cf8" stroke-width="1.5" stroke-opacity="0.2"/>
+
+  <!-- Traffic-light dots -->
+  <circle cx="90"  cy="119" r="9" fill="#818cf8" fill-opacity="0.7"/>
+  <circle cx="118" cy="119" r="9" fill="#818cf8" fill-opacity="0.4"/>
+  <circle cx="146" cy="119" r="9" fill="#818cf8" fill-opacity="0.18"/>
+
+  <!-- >_ prompt — _ sits in the lower third of the chevron -->
+  <g filter="url(#as-glow)">
+    <!-- ">" chevron -->
+    <polyline points="96,168 222,272 96,376"
+      fill="none" stroke="#818cf8" stroke-width="36"
+      stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- "_" block cursor, lower position -->
+    <rect x="246" y="324" width="166" height="48" rx="14" fill="#818cf8"/>
+  </g>
+</svg>
