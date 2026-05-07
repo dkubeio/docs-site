@@ -1,208 +1,145 @@
 # Getting Started with AgentX
 
-AgentX is an AI Assistant Management Platform for Kubernetes that enables you to create, manage, and share AI assistants with ease.
+## Prerequisites
 
-## Quick Start
+| Tool | Version | Notes |
+|---|---|---|
+| Python | 3.12+ | Backend runtime |
+| Node.js | 18+ | Frontend dev server |
+| uv | latest | Python package manager (recommended) |
+| Docker | any | Building container images |
+| Kubernetes | 1.28+ | Production deployment only |
+| kubectl + helm | any | Production deployment only |
 
-### Prerequisites
+## Local Development Setup
 
-Before you begin, ensure you have:
-
-- **Python 3.12+** installed
-- **Node.js 18+** installed
-- **uv** package manager (recommended) or pip
-- **Docker** (for building images)
-- **Kubernetes cluster** (for production deployment)
-
-### Installation
-
-#### 1. Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/dkubeio/agentx.git
 cd agentx
 ```
 
-#### 2. Install Dependencies
+### 2. Install Dependencies
 
-Using uv (recommended):
 ```bash
-# Install Python dependencies
+# Python backend
 uv sync
 
-# Install frontend dependencies
+# Node frontend
 cd frontend && npm install
 ```
 
-Using pip:
-```bash
-# Install Python dependencies
-pip install -e .
+### 3. Configure Environment
 
-# Install frontend dependencies
-cd frontend && npm install
-```
-
-#### 3. Configure Environment
-
-Create a `.env` file in the `backend` directory:
+Create `backend/.env`:
 
 ```env
-# Database Configuration
+# Database (SQLite for local dev)
 DATABASE_URL=sqlite:///./agentx.db
 
-# Authentication Mode
-# Options: local-admin (development) or oauth2-proxy (production)
+# Auth mode: local-admin skips OAuth2, logs you in as a default admin
 AUTHENTICATION_MODE=local-admin
 
 # Security
-SECRET_KEY=your-secret-key-change-in-production
+SECRET_KEY=dev-secret-key-change-in-production
 ```
 
-#### 4. Initialize Database
+### 4. Initialize the Database
 
 ```bash
 cd backend
 uv run alembic upgrade head
 ```
 
-#### 5. Start Development Servers
+### 5. Start Development Servers
 
-**Option A: Using Task (recommended)**
-
+**Option A — using Task (recommended):**
 ```bash
 task dev
 ```
 
-**Option B: Manual Start**
-
-Terminal 1 - Backend:
+**Option B — manually:**
 ```bash
+# Terminal 1: backend
 cd backend
 uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-```
 
-Terminal 2 - Frontend:
-```bash
+# Terminal 2: frontend
 cd frontend
 npm run dev
 ```
 
-#### 6. Access the Application
+### 6. Access the Application
 
-- **Frontend UI**: http://localhost:5173
-- **Backend API**: http://localhost:8000
-- **API Documentation**: http://localhost:8000/docs
-- **Health Check**: http://localhost:8000/health
+| URL | Description |
+|---|---|
+| http://localhost:5173 | Web UI |
+| http://localhost:8000/docs | Interactive API docs (Swagger UI) |
+| http://localhost:8000/redoc | API docs (ReDoc) |
+| http://localhost:8000/health | Health check |
 
-## First Steps
+In `local-admin` mode you are automatically signed in as an admin with username `default`.
 
-### Creating Your First Assistant
+---
 
-1. Open the AgentX UI at http://localhost:5173
-2. Click the **"Create Assistant"** button
-3. Fill in the assistant details:
-   - **Name**: Give your assistant a unique name
-   - **Description**: Describe what your assistant does
-   - **Configuration**: Add any custom configuration (JSON format)
-4. Click **"Create"** to deploy your assistant
+## Creating Your First Assistant
 
-Your assistant will be automatically started and deployed as a Kubernetes StatefulSet (in production) or a local process (in development).
+1. Open the AgentX UI
+2. Click **"Create Assistant"**
+3. Fill in the form:
+   - **Name** — unique name for this assistant (lowercase, hyphens allowed)
+   - **Description** — what this assistant is for
+   - **Provider / Model** — select DKubeX and enter your API key; pick a model from the dropdown
+   - **Workspace source** *(optional)* — leave blank for an empty workspace, or provide a git repo URL to clone on startup
+4. Click **"Create"**
 
-### Managing Assistants
+The assistant moves through `starting` → `running` as Kubernetes provisions the pod. In development (no Kubernetes) the status stays `starting` unless a real cluster is reachable.
 
-Once created, you can:
+### Accessing the Assistant
 
-- **Start/Stop**: Control assistant lifecycle
-- **Restart**: Restart a running assistant
-- **View Logs**: Stream real-time logs from your assistant
-- **Update**: Modify assistant configuration
-- **Delete**: Remove an assistant and its resources
+Once `running`, click the assistant card to open it. You'll see tabs for:
+- **OpenClaw** (`/agentx/<uuid>/webui/`) — the AI gateway web interface
+- **Terminal** — plain bash in the workspace
+- **Claude Code** — Anthropic Claude Code CLI
+- **OpenCode** — OpenCode CLI
+- **Gemini CLI**, **Codex CLI**, **Copilot CLI**, **Mistral Vibe** — additional coding agents
 
-### Sharing Assistants
+Each terminal tab lazy-starts its process on first click.
 
-To share an assistant with other users:
+---
 
-1. Navigate to your assistant
-2. Click the **"Share"** button
-3. Search for users by username or email
-4. Select permission level:
-   - **Read**: View-only access
-   - **Write**: Can modify the assistant
-5. Click **"Share"**
+## Workspace Sources
 
-Shared assistants appear in the **"Shared with Me"** tab for recipients.
+When creating an assistant you can optionally configure a `workspace_sources` entry:
 
-### Using Templates
-
-Templates allow you to reuse assistant configurations:
-
-#### Publishing a Template
-
-1. Open an existing assistant
-2. Click **"Publish as Template"**
-3. Provide template details:
-   - **Name**: Template name
-   - **Description**: What this template does
-   - **Tags**: Categorize your template
-   - **Version**: Semantic version (e.g., 1.0.0)
-4. Click **"Publish"**
-
-#### Deploying from Template
-
-1. Navigate to the **"Templates"** tab
-2. Browse available templates
-3. Click **"Deploy"** on a template
-4. Provide a name for your new assistant
-5. Click **"Create"**
-
-## Development Workflow
-
-### Project Structure
-
-```
-agentx/
-├── backend/          # FastAPI backend
-│   ├── app/
-│   │   ├── api/      # API endpoints
-│   │   ├── core/     # Core functionality
-│   │   ├── crud/     # Database operations
-│   │   ├── models/   # Database models
-│   │   └── schemas/  # API schemas
-│   └── alembic/      # Database migrations
-├── frontend/         # React frontend
-│   └── src/
-│       ├── components/
-│       └── lib/
-└── helm/            # Kubernetes deployment
+**Blank workspace** (default):
+```json
+{
+  "workspace_sources": [
+    { "type": "blank", "dir": "my-project", "git_init": true }
+  ]
+}
 ```
 
-### Running Tests
-
-```bash
-# Backend tests
-uv run pytest backend/tests/
-
-# Frontend tests
-cd frontend && npm test
+**Clone a git repository** (SSH):
+```json
+{
+  "workspace_sources": [
+    { "type": "git", "dir": "my-project", "url": "git@github.com:org/repo.git", "ref": "main" }
+  ]
+}
 ```
 
-### Building for Production
+> **SSH key required** for git sources: configure a DKubeX SSH key in your account settings before creating the assistant.
 
-```bash
-# Build Docker image
-docker build -t agentx:latest .
-
-# Build assistant runtime image
-docker build -t agentx-assistant:latest -f assistant/Dockerfile assistant/
-```
+---
 
 ## Kubernetes Deployment
 
 ### Using Helm
 
 ```bash
-# Install AgentX
 helm install agentx ./helm/agentx \
   --namespace dkubex-apps \
   --create-namespace \
@@ -210,102 +147,71 @@ helm install agentx ./helm/agentx \
   --set hostname=your-domain.com
 ```
 
-### Configuration Options
-
-Key Helm values:
+### Key Helm Values
 
 ```yaml
-# Image configuration
 image:
   repository: ghcr.io/dkubeio/agentx
   tag: "latest"
+  imagePullSecret: "dkubex-registry-secret"
 
-# Database
 database:
-  enabled: true
   db_url: postgresql://user:password@host/agentx
 
-# Authentication
 authentication:
-  mode: oauth2-proxy  # or local-admin
+  mode: ""   # auto-detected: oauth2-proxy in K8s, local-admin otherwise
 
-# Resources
+hostname: ""   # your cluster hostname for HTTPRoute generation
+
 resources:
-  requests:
-    cpu: 250m
-    memory: 256Mi
-  limits:
-    cpu: 500m
-    memory: 512Mi
+  requests: { cpu: 250m, memory: 256Mi }
+  limits:   { cpu: 500m, memory: 512Mi }
 ```
 
-## Authentication
+### Authentication in Kubernetes
 
-### Local Development (local-admin mode)
+AgentX integrates with OAuth2 Proxy. The proxy authenticates users and passes identity via HTTP headers:
 
-In development, AgentX uses a default admin user:
-- **Username**: default
-- **Email**: admin@example.com
-- **Role**: admin
+| Header | Description |
+|---|---|
+| `X-Auth-Request-User` | Username |
+| `X-Auth-Request-Email` | Email address |
+| `X-Auth-Request-Groups` | Comma-separated group names |
+| `X-Auth-Request-User-Namespace` | User's Kubernetes namespace |
 
-No authentication is required.
+Users are automatically provisioned in the database on first access. Group membership drives role assignment (`admins` group → admin role).
 
-### Production (oauth2-proxy mode)
-
-In Kubernetes environments, AgentX integrates with OAuth2 Proxy:
-
-1. OAuth2 Proxy authenticates users
-2. Passes user information via headers:
-   - `X-Auth-Request-User`: Username
-   - `X-Auth-Request-Email`: Email
-   - `X-Auth-Request-Groups`: User groups
-   - `X-Auth-Request-User-Namespace`: Kubernetes namespace
-3. AgentX automatically creates user records on first access
+---
 
 ## Troubleshooting
 
-### Common Issues
-
-**Issue**: Database connection errors
+**Database connection errors:**
 ```bash
-# Solution: Check DATABASE_URL in .env
-# For SQLite (development):
-DATABASE_URL=sqlite:///./agentx.db
-
-# For PostgreSQL (production):
-DATABASE_URL=postgresql://user:password@localhost/agentx
+# Check DATABASE_URL in backend/.env
+# SQLite (dev): sqlite:///./agentx.db
+# PostgreSQL: postgresql://user:pass@host/agentx
 ```
 
-**Issue**: Frontend can't connect to backend
+**Frontend can't reach backend:**
 ```bash
-# Solution: Ensure backend is running on port 8000
-# Check frontend proxy configuration in vite.config.ts
+# Ensure backend is running on :8000
+# Check vite.config.ts proxy settings
 ```
 
-**Issue**: Kubernetes resources not created
+**Assistant stuck in `starting`:**
 ```bash
-# Solution: Verify kubectl access
+# Verify kubectl access and pod status
 kubectl get pods -n dkubex-apps
-
-# Check assistant logs
 kubectl logs -n dkubex-apps <pod-name>
 ```
 
-**Issue**: Authentication errors in Kubernetes
-```bash
-# Solution: Verify OAuth2 Proxy headers
-# Check authentication mode setting
-AUTHENTICATION_MODE=oauth2-proxy
-```
+**Invalid API key error on assistant creation:**
+- The provider is validated before the pod is created; check that the DKubeX API key is correct and the base URL is reachable from the cluster.
 
-### Getting Help
-
-- **Documentation**: [Full Documentation](https://dkubeio.github.io/docs-site/components/agentx/)
-- **API Docs**: http://localhost:8000/docs (when running locally)
-- **Issues**: [GitHub Issues](https://github.com/dkubeio/agentx/issues)
+---
 
 ## Next Steps
 
-- Explore the [API Reference](./api-reference.md) for detailed endpoint documentation
-- Review [User Guide](./user-guide.md) for advanced features
-- Check the [Overview](./overview.md) to learn more about AgentX capabilities
+- [User Guide](./user-guide.md) — managing assistants, sharing, templates, admin features
+- [API Reference](./api-reference.md) — full REST API documentation
+- [Overview](./overview.md) — platform architecture and concepts

@@ -2,45 +2,21 @@
 
 Welcome to the AgentX documentation. AgentX is an AI Assistant Management Platform for Kubernetes.
 
+## Contents
+
+| Document | Description |
+|---|---|
+| [Overview](./overview.md) | Platform overview, features, and use cases |
+| [Getting Started](./getting-started.md) | Installation, configuration, and first steps |
+| [User Guide](./user-guide.md) | Managing assistants, sharing, templates, admin |
+| [API Reference](./api-reference.md) | REST API endpoints and request/response schemas |
+
 ## What is AgentX?
 
-AgentX enables you to create, manage, and share AI assistants with your team. Deploy assistants in Kubernetes with a modern web interface and comprehensive API.
+AgentX deploys AI coding assistants as Kubernetes StatefulSets. Each assistant provides a persistent workspace and a set of browser-accessible coding-agent terminals (Claude Code, OpenCode, Gemini CLI, Codex CLI, Copilot CLI, Mistral Vibe, and a plain shell). Assistants can be shared with teammates, published as reusable templates, and managed centrally by admins.
 
-## Documentation
+## Getting Help
 
-### For Users
-
-- **[Overview](./overview.md)** - What AgentX is and what it can do
-- **[Getting Started](./getting-started.md)** - Installation and first steps
-- **[User Guide](./user-guide.md)** - How to use all features
-- **[API Reference](./api-reference.md)** - REST API documentation
-
-### Quick Start
-
-```bash
-# Install dependencies
-uv sync && cd frontend && npm install
-
-# Start development servers
-task dev
-
-# Access at http://localhost:5173
-```
-
-## Key Features
-
-- **Easy Management**: Create, start, stop, and monitor AI assistants
-- **Collaboration**: Share assistants with team members
-- **Templates**: Reuse configurations across projects
-- **Real-time**: Live updates and log streaming
-- **Kubernetes Native**: Deploys as StatefulSets with persistent storage
-
-## Need Help?
-
-- **GitHub**: [dkubeio/agentx](https://github.com/dkubeio/agentx)
-- **Issues**: [Report bugs or request features](https://github.com/dkubeio/agentx/issues)
-- **API Docs**: Interactive docs at `/docs` endpoint
-
----
-
-**Get Started**: Follow the [Getting Started Guide](./getting-started.md) to install AgentX.
+- **API Docs** (interactive): `/docs` or `/redoc` when the backend is running
+- **Issues**: [GitHub Issues](https://github.com/dkubeio/agentx/issues)
+- **Full docs site**: [https://dkubeio.github.io/docs-site/components/agentx/](https://dkubeio.github.io/docs-site/components/agentx/)

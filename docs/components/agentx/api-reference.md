@@ -1,17 +1,21 @@
 # API Reference
 
-AgentX provides a comprehensive RESTful API for managing AI assistants, templates, users, and system administration.
+AgentX provides a RESTful API for managing assistants, templates, users, sharing, and system administration.
 
 ## Base URL
 
-- **Development**: `http://localhost:8000`
-- **Production**: `https://your-domain.com/agentx`
+| Environment | Base URL |
+|---|---|
+| Development | `http://localhost:8000` |
+| Production | `https://<hostname>/agentx` |
+
+Interactive documentation is available at `/docs` (Swagger UI) and `/redoc` (ReDoc).
 
 ## Authentication
 
-All API requests require authentication via OAuth2 Proxy headers in production or use the default admin user in development mode.
+**Development (`local-admin` mode):** No credentials required. All requests run as the default admin user.
 
-### Headers (Production)
+**Production (`oauth2-proxy` mode):** OAuth2 Proxy authenticates requests and injects headers:
 
 ```
 X-Auth-Request-User: username
@@ -20,76 +24,157 @@ X-Auth-Request-Groups: group1,group2
 X-Auth-Request-User-Namespace: user-namespace
 ```
 
+Users are automatically created in the database on first access.
+
+---
+
+## Common Response Fields
+
+Every `AssistantRead` response includes these computed fields in addition to database fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `url` | string | WebUI URL: `/agentx/<uuid>/webui/` |
+| `tuis` | array of `TuiLink` | Browser links for each coding-agent terminal |
+
+**`TuiLink` object:**
+```json
+{ "id": "claude", "label": "Claude Code", "url": "/agentx/<uuid>/claude/" }
+```
+
+**`tuis` array** (always returned, 7 entries):
+```json
+[
+  { "id": "shell",    "label": "Terminal",     "url": "/agentx/<uuid>/shell/" },
+  { "id": "claude",   "label": "Claude Code",  "url": "/agentx/<uuid>/claude/" },
+  { "id": "opencode", "label": "OpenCode",     "url": "/agentx/<uuid>/opencode/" },
+  { "id": "gemini",   "label": "Gemini CLI",   "url": "/agentx/<uuid>/gemini/" },
+  { "id": "codex",    "label": "Codex CLI",    "url": "/agentx/<uuid>/codex/" },
+  { "id": "copilot",  "label": "Copilot CLI",  "url": "/agentx/<uuid>/copilot/" },
+  { "id": "vibe",     "label": "Mistral Vibe", "url": "/agentx/<uuid>/vibe/" }
+]
+```
+
+**Assistant statuses:** `pending` | `starting` | `running` | `stopping` | `stopped` | `error`
+
+> **Note:** `model_api_key` is filtered from all API responses — it is stored as a Kubernetes Secret and never returned.
+
+---
+
 ## Assistants API
+
+### Subscribe to Events
+
+Subscribe to real-time assistant status events via Server-Sent Events. Subscribe once per session to receive all `assistant.*` events for the current user.
+
+```
+GET /api/assistants/events
+```
+
+**Response:** SSE stream
+
+```
+: connected
+
+event: assistant.created
+data: {"id": 1, "name": "my-assistant", "status": "starting", ...}
+
+event: assistant.updated
+data: {"id": 1, "status": "running", ...}
+
+event: assistant.deleted
+data: {"id": 1}
+```
+
+The watcher also pushes `assistant.updated` events to shared-assistant recipients so their cards stay in sync.
+
+---
 
 ### Create Assistant
 
-Create a new AI assistant.
+```
+POST /api/assistants/
+```
 
-**Endpoint**: `POST /api/assistants`
-
-**Request Body**:
+**Request body:**
 ```json
 {
   "name": "my-assistant",
-  "description": "My AI assistant",
+  "description": "My coding assistant",
   "configuration": {
-    "model": "gpt-4",
-    "temperature": 0.7
+    "model_provider": "securellm",
+    "model": "claude-3-5-sonnet",
+    "model_api_key": "sk-...",
+    "model_base_url": "http://securellm.dkubex-apps/securellm/v1",
+    "workspace_sources": [
+      { "type": "git", "dir": "my-project", "url": "git@github.com:org/repo.git", "ref": "main" }
+    ],
+    "resources": {
+      "cpu_request": "100m",
+      "cpu_limit": "2000m",
+      "memory_request": "256Mi",
+      "memory_limit": "1Gi"
+    }
   }
 }
 ```
 
-**Response**: `201 Created`
+**Validation rules:**
+- `model_provider` must be set if `model` is set (and vice versa)
+- `model_provider` must be an enabled provider (currently `securellm`)
+- `workspace_sources[].dir` must match `[a-z0-9][a-z0-9._-]{0,63}` (no slashes, no `..`)
+- git sources require `url`; `ref` defaults to `main`
+- The API key is validated against the provider before the pod is created
+
+**Response:** `201 Created`
 ```json
 {
   "id": 1,
   "uuid": "550e8400-e29b-41d4-a716-446655440000",
   "name": "my-assistant",
-  "description": "My AI assistant",
-  "configuration": {...},
-  "status": "running",
+  "description": "My coding assistant",
+  "configuration": { "model_provider": "securellm", "model": "claude-3-5-sonnet", ... },
+  "status": "starting",
   "owner_id": 1,
-  "token": "secure-token-here",
-  "created_at": "2024-01-15T10:30:00Z",
-  "updated_at": "2024-01-15T10:30:00Z"
+  "template_source_id": null,
+  "token": "secure-token",
+  "created_at": "2026-01-01T00:00:00Z",
+  "updated_at": "2026-01-01T00:00:00Z",
+  "url": "/agentx/550e8400-e29b-41d4-a716-446655440000/webui/",
+  "tuis": [ ... ]
 }
 ```
 
+**Error responses:**
+- `409` — assistant with this name already owned by the user
+- `400` — invalid configuration (missing model, disabled provider, etc.)
+- `502` — Kubernetes resource creation failed
+
+---
+
 ### List Assistants
 
-Get all assistants owned by the current user.
-
-**Endpoint**: `GET /api/assistants`
-
-**Query Parameters**:
-- `skip` (int, default: 0): Number of records to skip
-- `limit` (int, default: 100, max: 100): Maximum records to return
-- `include_metadata` (bool, default: false): Include pagination metadata
-
-**Response (without metadata)**: `200 OK`
-```json
-[
-  {
-    "id": 1,
-    "name": "my-assistant",
-    "status": "running",
-    ...
-  }
-]
+```
+GET /api/assistants/
 ```
 
-**Response (with metadata)**: `200 OK`
+**Query parameters:**
+
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `skip` | int | 0 | Pagination offset |
+| `limit` | int | 100 | Max records (max 100) |
+| `include_metadata` | bool | false | Wrap response in pagination envelope |
+
+**Response without metadata** (`include_metadata=false`): `200 OK`
+```json
+[ { "id": 1, "name": "my-assistant", "status": "running", ... } ]
+```
+
+**Response with metadata** (`include_metadata=true`): `200 OK`
 ```json
 {
-  "items": [
-    {
-      "id": 1,
-      "name": "my-assistant",
-      "status": "running",
-      ...
-    }
-  ],
+  "items": [ { "id": 1, ... } ],
   "total": 42,
   "page": 1,
   "page_size": 100,
@@ -97,276 +182,336 @@ Get all assistants owned by the current user.
 }
 ```
 
+---
+
 ### Get Assistant
 
-Get details of a specific assistant.
-
-**Endpoint**: `GET /api/assistants/{assistant_id}`
-
-**Response**: `200 OK`
-```json
-{
-  "id": 1,
-  "name": "my-assistant",
-  "status": "running",
-  ...
-}
 ```
+GET /api/assistants/{assistant_id}
+```
+
+**Response:** `200 OK` — `AssistantRead` object
+
+---
 
 ### Update Assistant
 
-Update an existing assistant.
+```
+PUT /api/assistants/{assistant_id}
+```
 
-**Endpoint**: `PUT /api/assistants/{assistant_id}`
-
-**Request Body**:
+**Request body** (all fields optional):
 ```json
 {
-  "name": "updated-name",
+  "name": "new-name",
   "description": "Updated description",
-  "configuration": {...}
+  "configuration": { ... },
+  "status": "stopped"
 }
 ```
 
-**Response**: `200 OK`
+**Response:** `200 OK` — updated `AssistantRead`
+
+Publishes an `assistant.updated` SSE event.
+
+---
 
 ### Delete Assistant
 
-Delete an assistant and its resources.
+```
+DELETE /api/assistants/{assistant_id}
+```
 
-**Endpoint**: `DELETE /api/assistants/{assistant_id}`
+Deletes all Kubernetes resources (StatefulSet, Service, HTTPRoute, Secrets, ConfigMap) if the assistant is not already stopped, then removes the database record.
 
-**Response**: `204 No Content`
+**Response:** `204 No Content`
+
+Publishes an `assistant.deleted` SSE event.
+
+---
 
 ### Start Assistant
 
-Start a stopped assistant.
+Start a `stopped` assistant by recreating its Kubernetes resources.
 
-**Endpoint**: `POST /api/assistants/{assistant_id}/start`
-
-**Response**: `200 OK`
-```json
-{
-  "id": 1,
-  "status": "running",
-  ...
-}
 ```
+POST /api/assistants/{assistant_id}/start
+```
+
+**Response:** `200 OK` — `AssistantRead` with `status: "starting"`
+
+Status transitions to `running` once the pod readiness probe passes (detected by the StatefulSet watcher).
+
+---
 
 ### Stop Assistant
 
-Stop a running assistant.
+Stop a `running` assistant by deleting its Kubernetes resources (workspace PVC is preserved).
 
-**Endpoint**: `POST /api/assistants/{assistant_id}/stop`
-
-**Response**: `200 OK`
-```json
-{
-  "id": 1,
-  "status": "stopped",
-  ...
-}
 ```
+POST /api/assistants/{assistant_id}/stop
+```
+
+**Response:** `200 OK` — `AssistantRead` with `status: "stopping"`
+
+---
 
 ### Restart Assistant
 
-Restart a running assistant.
+Restart a `running` assistant (delete + recreate resources).
 
-**Endpoint**: `POST /api/assistants/{assistant_id}/restart`
+```
+POST /api/assistants/{assistant_id}/restart
+```
 
-**Response**: `200 OK`
+**Response:** `200 OK` — `AssistantRead` with `status: "starting"`
+
+---
 
 ### Stream Logs
 
-Stream real-time logs from an assistant's pod.
+Stream live log lines from the assistant's pod.
 
-**Endpoint**: `GET /api/assistants/{assistant_id}/logs`
+```
+GET /api/assistants/{assistant_id}/logs
+```
 
-**Response**: Server-Sent Events (SSE) stream
+**Response:** SSE stream (`text/event-stream`)
 ```
 event: log
-data: {"line": "Assistant started", "timestamp": "2024-01-15T10:30:00Z"}
-
-event: log
-data: {"line": "Processing request...", "timestamp": "2024-01-15T10:30:01Z"}
+data: {"line": "Starting openclaw...", "timestamp": "..."}
 ```
+
+The stream closes automatically after 5 minutes of inactivity. A legacy equivalent endpoint exists at `/temp/assistants/{assistant_id}/logs`.
+
+---
 
 ### Publish as Template
 
-Publish an assistant's configuration as a reusable template.
+Publish the assistant's configuration as a reusable template.
 
-**Endpoint**: `POST /api/assistants/{assistant_id}/publish`
+```
+POST /api/assistants/{assistant_id}/publish
+```
 
-**Request Body**:
+**Request body:**
 ```json
 {
   "name": "My Template",
   "description": "Template description",
-  "tags": ["ai", "gpt-4"],
+  "tags": ["claude", "python"],
   "version": "1.0.0",
-  "template_metadata": {
-    "author": "John Doe",
-    "category": "AI"
-  }
+  "template_metadata": { "author": "Jane" }
 }
 ```
 
-**Response**: `201 Created`
+**Response:** `201 Created` — `TemplateRead` object
+
+---
+
+### Pin / Unpin
+
+```
+POST   /api/assistants/{assistant_id}/pin     → 201 { "pinned": true }
+DELETE /api/assistants/{assistant_id}/pin     → 204
+GET    /api/assistants/pinned                 → 200 [ AssistantRead, ... ]
+```
+
+Pins work for both owned and shared assistants (requires at least VIEW access).
+
+---
 
 ## Sharing API
 
 ### Share Assistant
 
-Share an assistant with one or more users.
+```
+POST /api/assistants/{assistant_id}/shares
+```
 
-**Endpoint**: `POST /api/assistants/{assistant_id}/shares`
-
-**Request Body**:
+**Request body:**
 ```json
 {
   "shares": [
-    {
-      "shared_with_user_id": 2,
-      "permission": "read"
-    },
-    {
-      "shared_with_user_id": 3,
-      "permission": "write"
-    }
+    { "shared_with_user_id": 2, "permission": "use" },
+    { "shared_with_user_id": 3, "permission": "manage" }
   ]
 }
 ```
 
-**Permissions**:
-- `read`: View-only access
-- `write`: Can modify the assistant
+**Permission values:** `view` | `use` | `manage`
 
-**Response**: `201 Created`
+**Response:** `201 Created` — array of `AssistantShareRead`
 ```json
 [
   {
     "id": 1,
     "assistant_id": 1,
     "shared_with_user_id": 2,
-    "permission": "read",
-    "shared_with_username": "user2"
+    "permission": "use",
+    "shared_with_username": "user2",
+    "created_at": "...",
+    "updated_at": "..."
   }
 ]
 ```
 
+---
+
 ### List Shares
 
-List all sharing relationships for an assistant.
+```
+GET /api/assistants/{assistant_id}/shares
+```
 
-**Endpoint**: `GET /api/assistants/{assistant_id}/shares`
+**Response:** `200 OK` — array of shares for this assistant
 
-**Response**: `200 OK`
+---
 
 ### Update Share Permission
 
-Update the permission level of an existing share.
-
-**Endpoint**: `PUT /api/assistants/{assistant_id}/shares/{share_id}`
-
-**Request Body**:
-```json
-{
-  "permission": "write"
-}
+```
+PUT /api/assistants/{assistant_id}/shares/{share_id}
 ```
 
-**Response**: `200 OK`
+**Request body:**
+```json
+{ "permission": "manage" }
+```
+
+**Response:** `200 OK` — updated share
+
+---
 
 ### Revoke Share
 
-Remove a sharing relationship.
+```
+DELETE /api/assistants/{assistant_id}/shares/{share_id}
+```
 
-**Endpoint**: `DELETE /api/assistants/{assistant_id}/shares/{share_id}`
+**Response:** `204 No Content`
 
-**Response**: `204 No Content`
+---
 
 ### List Shared with Me
 
-Get all assistants shared with the current user.
+```
+GET /api/assistants/shared-with-me
+```
 
-**Endpoint**: `GET /api/assistants/shared-with-me`
-
-**Response**: `200 OK`
+**Response:** `200 OK` — array of `SharedAssistantRead`
 ```json
 [
   {
     "id": 1,
-    "name": "shared-assistant",
-    "share_id": 1,
-    "permission": "read",
-    "shared_by_owner_id": 2,
-    "shared_by_owner_username": "owner"
+    "name": "teammates-assistant",
+    "status": "running",
+    "share_id": 5,
+    "permission": "use",
+    "shared_by_owner_id": 3,
+    "shared_by_owner_username": "teammate",
+    "url": "/agentx/.../webui/",
+    "tuis": [ ... ],
+    ...
   }
 ]
 ```
 
-## Pin API
+---
 
-### Pin Assistant
+## Providers API
 
-Pin an assistant for quick access.
+### List Enabled Providers
 
-**Endpoint**: `POST /api/assistants/{assistant_id}/pin`
+```
+GET /api/providers/
+```
 
-**Response**: `201 Created`
+Returns the list of providers currently enabled in the system.
+
+**Response:** `200 OK`
+```json
+[
+  {
+    "id": "securellm",
+    "label": "DKubeX",
+    "default_base_url": "http://securellm.dkubex-apps/securellm/v1",
+    "requires_base_url": false,
+    "requires_api_key": true
+  }
+]
+```
+
+---
+
+### List Models
+
+Fetch available models for a provider and validate the API key. Used by the Create-Assistant form to populate the model dropdown.
+
+```
+POST /api/providers/models
+```
+
+**Request body:**
 ```json
 {
-  "pinned": true
+  "provider": "securellm",
+  "api_key": "sk-...",
+  "base_url": null
 }
 ```
 
-### Unpin Assistant
+`base_url` is optional — omit to use the provider's default.
 
-Remove a pin from an assistant.
+**Response:** `200 OK`
+```json
+{
+  "models": [
+    { "id": "claude-3-5-sonnet-20241022", "name": "claude-3-5-sonnet-20241022" },
+    { "id": "claude-3-haiku-20240307",    "name": "claude-3-haiku-20240307" }
+  ]
+}
+```
 
-**Endpoint**: `DELETE /api/assistants/{assistant_id}/pin`
+**Error responses:**
+- `400` — unknown or disabled provider, missing required field
+- `401` — invalid API key
+- `502` — upstream provider returned an error
+- `504` — could not reach the upstream endpoint
 
-**Response**: `204 No Content`
-
-### List Pinned Assistants
-
-Get all assistants pinned by the current user.
-
-**Endpoint**: `GET /api/assistants/pinned`
-
-**Response**: `200 OK`
+---
 
 ## Templates API
 
 ### List Templates
 
-Get all available templates.
+```
+GET /api/templates/
+```
 
-**Endpoint**: `GET /api/templates`
+**Query parameters:** `skip`, `limit`, `tags` (comma-separated), `q` (search)
 
-**Query Parameters**:
-- `skip` (int): Pagination offset
-- `limit` (int): Maximum records
-- `tags` (string): Filter by tags (comma-separated)
-- `q` (string): Search query
+**Response:** `200 OK` — array of `TemplateRead`
 
-**Response**: `200 OK`
+---
 
 ### Get Template
 
-Get details of a specific template.
+```
+GET /api/templates/{template_id}
+```
 
-**Endpoint**: `GET /api/templates/{template_id}`
+**Response:** `200 OK` — `TemplateRead`
 
-**Response**: `200 OK`
+---
 
 ### Deploy from Template
 
-Create a new assistant from a template.
+```
+POST /api/templates/{template_id}/deploy
+```
 
-**Endpoint**: `POST /api/templates/{template_id}/deploy`
-
-**Request Body**:
+**Request body:**
 ```json
 {
   "name": "my-new-assistant",
@@ -375,218 +520,217 @@ Create a new assistant from a template.
 }
 ```
 
-**Response**: `201 Created`
+`version_id` is optional — omit to use the latest version.
+
+**Response:** `201 Created` — `AssistantRead`
+
+---
 
 ### Create Template Version
 
-Create a versioned snapshot of a template.
+```
+POST /api/templates/{template_id}/versions
+```
 
-**Endpoint**: `POST /api/templates/{template_id}/versions`
-
-**Request Body**:
+**Request body:**
 ```json
 {
   "version": "1.1.0",
-  "configuration": {...},
-  "changelog": "Added new features"
+  "configuration": { ... },
+  "changelog": "Added workspace source support"
 }
 ```
 
-**Response**: `201 Created`
+**Response:** `201 Created`
+
+---
 
 ### List Template Versions
 
-Get all versions of a template.
+```
+GET /api/templates/{template_id}/versions
+```
 
-**Endpoint**: `GET /api/templates/{template_id}/versions`
+**Response:** `200 OK`
 
-**Response**: `200 OK`
+---
 
 ### Deprecate Template Version
 
-Mark a template version as deprecated.
-
-**Endpoint**: `POST /api/templates/{template_id}/versions/{version_id}/deprecate`
-
-**Request Body**:
-```json
-{
-  "deprecation_message": "Use version 2.0.0 instead"
-}
+```
+POST /api/templates/{template_id}/versions/{version_id}/deprecate
 ```
 
-**Response**: `200 OK`
+**Request body:**
+```json
+{ "deprecation_message": "Use v2.0.0 instead" }
+```
+
+**Response:** `200 OK`
+
+---
 
 ## Users API
 
 ### Get Current User
 
-Get information about the authenticated user.
+```
+GET /api/v1/users/me
+```
 
-**Endpoint**: `GET /api/v1/users/me`
-
-**Response**: `200 OK`
+**Response:** `200 OK`
 ```json
 {
   "id": 1,
-  "username": "john.doe",
-  "email": "john@example.com",
+  "username": "alice",
+  "email": "alice@example.com",
   "role": "user",
-  "namespace": "user-john-doe",
-  "created_at": "2024-01-15T10:30:00Z"
+  "namespace": "user-alice",
+  "group": "engineers",
+  "created_at": "...",
+  "updated_at": "...",
+  "last_accessed_at": "..."
 }
 ```
+
+---
 
 ### Search Users
 
-Search for users by username or email.
+Search by username or email (used when sharing an assistant).
 
-**Endpoint**: `GET /api/v1/users/search`
-
-**Query Parameters**:
-- `q` (string, required): Search query
-- `limit` (int, default: 10, max: 50): Maximum results
-
-**Response**: `200 OK`
-```json
-[
-  {
-    "id": 2,
-    "username": "jane.doe",
-    "email": "jane@example.com"
-  }
-]
+```
+GET /api/v1/users/search?q=alice&limit=10
 ```
 
-### List Users (Admin Only)
+**Query parameters:** `q` (required), `limit` (default 10, max 50)
 
-Get all users in the system.
+**Response:** `200 OK` — array of user summaries
 
-**Endpoint**: `GET /api/v1/users`
+---
 
-**Query Parameters**:
-- `skip` (int): Pagination offset
-- `limit` (int): Maximum records
+### List All Users *(admin only)*
 
-**Response**: `200 OK`
+```
+GET /api/v1/users/?skip=0&limit=100
+```
 
-### Get User (Admin Only)
+**Response:** `200 OK`
 
-Get details of a specific user.
+---
 
-**Endpoint**: `GET /api/v1/users/{user_id}`
+### Get User *(admin only)*
 
-**Response**: `200 OK`
+```
+GET /api/v1/users/{user_id}
+```
 
-### Create User (Admin Only)
+---
 
-Create a new user.
+### Create User *(admin only)*
 
-**Endpoint**: `POST /api/v1/users`
+```
+POST /api/v1/users/
+```
 
-**Request Body**:
+**Request body:**
 ```json
 {
-  "username": "newuser",
-  "email": "newuser@example.com",
+  "username": "bob",
+  "email": "bob@example.com",
   "role": "user",
-  "namespace": "user-newuser"
+  "namespace": "user-bob"
 }
 ```
 
-**Response**: `200 OK`
+---
 
-### Update User (Admin Only)
+### Update User *(admin only)*
 
-Update user information.
-
-**Endpoint**: `PUT /api/v1/users/{user_id}`
-
-**Request Body**:
-```json
-{
-  "role": "admin"
-}
+```
+PUT /api/v1/users/{user_id}
 ```
 
-**Response**: `200 OK`
+**Request body:** any subset of `username`, `email`, `role`, `namespace`, `group`
 
-### Delete User (Admin Only)
+---
 
-Delete a user.
+### Delete User *(admin only)*
 
-**Endpoint**: `DELETE /api/v1/users/{user_id}`
+```
+DELETE /api/v1/users/{user_id}
+```
 
-**Response**: `200 OK`
+**Response:** `200 OK`
+
+---
 
 ## Admin API
 
-### List All Assistants (Admin Only)
+All endpoints require the `admin` role.
 
-Get all assistants across all users.
+### List All Assistants
 
-**Endpoint**: `GET /api/v1/admin/assistants`
-
-**Query Parameters**:
-- `skip` (int): Pagination offset
-- `limit` (int, max: 200): Maximum records
-- `status` (string): Filter by status
-- `owner_id` (int): Filter by owner
-- `q` (string): Search query
-
-**Response**: `200 OK`
-```json
-[
-  {
-    "id": 1,
-    "name": "assistant-1",
-    "owner_id": 1,
-    "owner_username": "john.doe",
-    "status": "running"
-  }
-]
+```
+GET /api/v1/admin/assistants
 ```
 
-### Stop Assistant (Admin Only)
+**Query parameters:** `skip`, `limit` (max 200), `status`, `owner_id`, `q`
 
-Stop any assistant regardless of owner.
+**Response:** `200 OK` — array of `AdminAssistantRead` (includes `owner_username`)
 
-**Endpoint**: `POST /api/v1/admin/assistants/{assistant_id}/stop`
+---
 
-**Response**: `200 OK`
+### Stop Any Assistant
 
-### Delete Assistant (Admin Only)
+```
+POST /api/v1/admin/assistants/{assistant_id}/stop
+```
 
-Delete any assistant regardless of owner.
+Action is recorded in the audit log.
 
-**Endpoint**: `DELETE /api/v1/admin/assistants/{assistant_id}`
+**Response:** `200 OK` — `AdminAssistantRead`
 
-**Response**: `204 No Content`
+---
 
-### Get User Assistants (Admin Only)
+### Delete Any Assistant
 
-Get summary of assistants owned by a user.
+```
+DELETE /api/v1/admin/assistants/{assistant_id}
+```
 
-**Endpoint**: `GET /api/v1/admin/users/{user_id}/assistants`
+Action is recorded in the audit log.
 
-**Response**: `200 OK`
+**Response:** `204 No Content`
+
+---
+
+### Get User's Assistants
+
+```
+GET /api/v1/admin/users/{user_id}/assistants
+```
+
+**Response:** `200 OK`
 ```json
 {
   "user_id": 1,
-  "total": 5,
+  "total": 3,
   "assistants": [
-    {"id": 1, "name": "assistant-1", "status": "running"}
+    { "id": 1, "name": "my-assistant", "status": "running" }
   ]
 }
 ```
 
-### Get Pod Metrics (Admin Only)
+---
 
-Get CPU and memory metrics for all pods.
+### Get Pod Metrics
 
-**Endpoint**: `GET /api/v1/admin/metrics/pods`
+```
+GET /api/v1/admin/metrics/pods
+```
 
-**Response**: `200 OK`
+**Response:** `200 OK`
 ```json
 {
   "k8s_enabled": true,
@@ -603,13 +747,17 @@ Get CPU and memory metrics for all pods.
 }
 ```
 
-### Get System Health (Admin Only)
+When `k8s_enabled` is `false` (local dev), `pods` is empty.
 
-Get system health overview.
+---
 
-**Endpoint**: `GET /api/v1/admin/health`
+### Get System Health
 
-**Response**: `200 OK`
+```
+GET /api/v1/admin/health
+```
+
+**Response:** `200 OK`
 ```json
 {
   "counters": {
@@ -620,126 +768,70 @@ Get system health overview.
     "error_assistants": 2
   },
   "services": {
-    "database": {"status": "healthy"},
-    "kubernetes": {"status": "enabled"},
-    "api": {"status": "healthy", "uptime_seconds": 86400}
+    "database":   { "status": "healthy" },
+    "kubernetes": { "status": "enabled" },
+    "api":        { "status": "healthy", "uptime_seconds": 86400 }
   }
 }
 ```
 
-### Get Audit Logs (Admin Only)
+---
 
-Get audit log entries.
+### Get Audit Logs
 
-**Endpoint**: `GET /api/v1/admin/audit-logs`
+```
+GET /api/v1/admin/audit-logs
+```
 
-**Query Parameters**:
-- `skip` (int): Pagination offset
-- `limit` (int, max: 200): Maximum records
-- `action` (string): Filter by action
-- `q` (string): Search query
+**Query parameters:** `skip`, `limit` (max 200), `action`, `q`
 
-**Response**: `200 OK`
+**Response:** `200 OK`
 ```json
 [
   {
     "id": 1,
-    "timestamp": "2024-01-15T10:30:00Z",
+    "timestamp": "2026-01-01T00:00:00Z",
     "admin_username": "admin",
     "action": "admin.assistant.stop",
     "resource_type": "assistant",
-    "resource_id": "1",
-    "details": {"name": "assistant-1", "owner_id": 2}
+    "resource_id": "5",
+    "details": { "name": "old-assistant", "owner_id": 2 }
   }
 ]
 ```
 
-## Events API
+---
 
-### Subscribe to Events
+## Health Endpoints
 
-Subscribe to real-time assistant events via Server-Sent Events.
-
-**Endpoint**: `GET /api/assistants/events`
-
-**Response**: SSE stream
 ```
-event: assistant.created
-data: {"id": 1, "name": "new-assistant", ...}
-
-event: assistant.updated
-data: {"id": 1, "status": "running", ...}
-
-event: assistant.deleted
-data: {"id": 1}
+GET /health        → { "status": "healthy" }
+GET /users/me      → current user (same as /api/v1/users/me)
 ```
+
+---
 
 ## Error Responses
 
-All endpoints may return the following error responses:
+| Status | When |
+|---|---|
+| `400` | Invalid request parameters or business rule violation |
+| `401` | Not authenticated |
+| `403` | Insufficient permissions |
+| `404` | Resource not found |
+| `409` | Conflict (duplicate name, already shared, etc.) |
+| `422` | Validation error (request body schema violation) |
+| `500` | Internal server error |
+| `502` | Kubernetes operation failed |
+| `504` | Could not reach upstream provider |
 
-### 400 Bad Request
+All error responses use the shape:
 ```json
-{
-  "detail": "Invalid request parameters"
-}
+{ "detail": "Human-readable error message" }
 ```
 
-### 401 Unauthorized
-```json
-{
-  "detail": "Not authenticated"
-}
-```
-
-### 403 Forbidden
-```json
-{
-  "detail": "Insufficient permissions"
-}
-```
-
-### 404 Not Found
-```json
-{
-  "detail": "Resource not found"
-}
-```
-
-### 409 Conflict
-```json
-{
-  "detail": "Resource already exists"
-}
-```
-
-### 500 Internal Server Error
-```json
-{
-  "detail": "Internal server error"
-}
-```
-
-### 502 Bad Gateway
-```json
-{
-  "detail": "Kubernetes operation failed"
-}
-```
-
-## Rate Limiting
-
-Currently, there are no rate limits enforced. This may change in future versions.
+---
 
 ## Pagination
 
-List endpoints support pagination via `skip` and `limit` query parameters:
-
-- `skip`: Number of records to skip (default: 0)
-- `limit`: Maximum records to return (varies by endpoint)
-
-## OpenAPI Documentation
-
-Interactive API documentation is available at:
-- **Swagger UI**: `/docs`
-- **ReDoc**: `/redoc`
+List endpoints accept `skip` (offset) and `limit` parameters. Use `include_metadata=true` on `GET /api/assistants/` to get the full pagination envelope.
