@@ -247,7 +247,7 @@ Current logged actions:
 ### Agent terminal shows blank or error
 
 - The agent process lazy-starts; wait a few seconds on first open
-- If status is `error`, the startup self-test failed — check pod logs for the specific agent that failed
+- If status is `error`, the pod has crashed — check pod logs and events (`kubectl describe pod`) for the specific failure
 
 ### Logs not streaming
 
