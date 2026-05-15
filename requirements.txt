@@ -3,3 +3,4 @@ myst-parser
 shibuya
 sphinx-copybutton
 sphinx-multiversion
+sphinxcontrib-video

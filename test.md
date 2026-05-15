@@ -16,4 +16,10 @@ Until proper content comes, enjoy the company of this little kitty!
 print("Hello, World!")
 ```
 
+Here's a test video to verify `sphinxcontrib-video`:
+
+```{video} images/test.mp4
+:width: 100%
+```
+
 Test Commit

@@ -42,6 +42,7 @@ extensions = [
 	"sphinx.ext.githubpages",
 	"sphinx_copybutton",
 	"sphinx_multiversion",
+	"sphinxcontrib.video",
 ]
 
 smv_tag_whitelist = r"^.+$"
