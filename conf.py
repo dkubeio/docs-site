@@ -187,8 +187,29 @@ def fix_version_html(app, exception):
 			pass
 
 
-# Append an auto-generated toctree to applications/index.md so new components
-# show up in the navigation without anyone editing this file by hand.
+# Read the first level-1 heading from a markdown file. Used to derive a
+# human-readable display title from each application's index.md.
+def _read_h1(path):
+	try:
+		with open(path, "r", encoding="utf-8") as f:
+			for line in f:
+				stripped = line.strip()
+				if stripped.startswith("# "):
+					return stripped[2:].strip()
+	except Exception:
+		pass
+	return None
+
+
+def _format_slug(slug):
+	return slug.replace("-", " ").replace("_", " ").title()
+
+
+# Append an auto-generated bulleted list of applications plus a hidden toctree
+# to applications/index.md. The visible list keeps the page discoverable for
+# end users; the hidden toctree drives the sidebar navigation and document
+# structure. New components show up automatically as soon as their index.md
+# lands under applications/<slug>/.
 def auto_app_toctree(app, docname, source):
 	if docname != "applications/index":
 		return
@@ -197,29 +218,30 @@ def auto_app_toctree(app, docname, source):
 	if not os.path.isdir(apps_dir):
 		return
 
-	slugs = []
+	entries = []
 	for entry in sorted(os.listdir(apps_dir)):
 		entry_path = os.path.join(apps_dir, entry)
-		if os.path.isdir(entry_path) and os.path.isfile(os.path.join(entry_path, "index.md")):
-			slugs.append(entry)
+		index_path = os.path.join(entry_path, "index.md")
+		if os.path.isdir(entry_path) and os.path.isfile(index_path):
+			title = _read_h1(index_path) or _format_slug(entry)
+			entries.append((entry, title))
 
-	if not slugs:
+	if not entries:
 		return
 
-	toctree = [
-		"",
-		"",
-		"```{toctree}",
-		":maxdepth: 10",
-		":includehidden:",
-		":caption: Contents",
-		"",
-	]
-	toctree.extend(f"{slug}/index" for slug in slugs)
-	toctree.append("```")
-	toctree.append("")
+	lines = ["", ""]
+	for slug, title in entries:
+		lines.append(f"- [{title}](./{slug}/index.md)")
+	lines.append("")
+	lines.append("```{toctree}")
+	lines.append(":hidden:")
+	lines.append("")
+	for slug, _ in entries:
+		lines.append(f"{slug}/index")
+	lines.append("```")
+	lines.append("")
 
-	source[0] = source[0].rstrip() + "\n".join(toctree)
+	source[0] = source[0].rstrip() + "\n" + "\n".join(lines)
 
 
 # Register context and post-build normalization hooks.

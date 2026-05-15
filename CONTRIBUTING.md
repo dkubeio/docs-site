@@ -88,13 +88,15 @@ Only files under `docs/public/` are published. Keep private, internal, or develo
 
 ### Folder layout
 
+Keep all of your published markdown files **flat** under `docs/public/`. Do not nest tutorials in a subfolder — it just adds an extra `index.md` step. The only subdirectory inside `docs/public/` is `media/`.
+
 ```
 docs/
 ├── public/                    # ← Published to docs-site
-│   ├── index.md               # Application homepage with toctree (required)
+│   ├── index.md               # Application homepage (required)
 │   ├── getting-started.md     # Tutorial
-│   ├── tutorials/
-│   │   └── advanced-usage.md
+│   ├── advanced-usage.md      # Tutorial
+│   ├── configuration.md       # Tutorial
 │   └── media/                 # All binary assets — icons, screenshots, diagrams, videos
 │       ├── icon.svg
 │       ├── screenshot.png
@@ -113,7 +115,8 @@ It must:
 
 - Use an appropriate top-level heading for your application.
 - Describe what the application is, what it does, and what its main components and features are.
-- Link to your other published pages through a `toctree`.
+- Include a **visible "Tutorials" section** (or similarly named section) with markdown links to every other published page, so users can discover them directly from the page body.
+- Include a **hidden `toctree`** that lists those same pages so Sphinx can build the sidebar navigation, breadcrumbs, and previous/next links.
 
 Sample homepage template:
 
@@ -127,17 +130,24 @@ My Application is a … (one-paragraph description of what the app is and does).
 - Feature one — short description.
 - Feature two — short description.
 
+## Tutorials
+
+- [Getting started](./getting-started.md) — install and run your first workflow.
+- [Advanced usage](./advanced-usage.md) — common patterns and tips.
+- [Configuration](./configuration.md) — every option you can set.
+
 ```{toctree}
-:maxdepth: 2
-:caption: Contents
+:hidden:
 
 getting-started
-tutorials/advanced-usage
+advanced-usage
+configuration
 ```
 ````
 
 Notes:
 
+- The visible "Tutorials" section and the hidden `toctree` should list the **same** pages — the visible section is what users click; the hidden toctree is what Sphinx uses to build navigation.
 - List pages without `.md` in `toctree` entries.
 - Paths in the `toctree` are relative to your `index.md`.
 
@@ -151,8 +161,8 @@ Examples:
 # From docs/public/index.md
 ![Architecture](./media/architecture.png)
 
-# From docs/public/tutorials/advanced-usage.md
-![Architecture](../media/architecture.png)
+# From docs/public/advanced-usage.md
+![Architecture](./media/architecture.png)
 ```
 
 If the relative path to `media/` is wrong, the image will not render.
