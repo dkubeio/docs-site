@@ -20,15 +20,3 @@ These guides are focused on practical usage, including setup, configuration, com
 4. Use architecture, deployment, and API pages as needed for advanced scenarios.
 
 ## Contents
-
-```{toctree}
-:maxdepth: 10
-:includehidden:
-:caption: Contents
-
-agentx/index
-mortgage-lite/index
-mortiq/index
-ragflow/index
-securellm/index
-```

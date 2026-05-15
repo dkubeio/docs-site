@@ -187,7 +187,43 @@ def fix_version_html(app, exception):
 			pass
 
 
+# Append an auto-generated toctree to applications/index.md so new components
+# show up in the navigation without anyone editing this file by hand.
+def auto_app_toctree(app, docname, source):
+	if docname != "applications/index":
+		return
+
+	apps_dir = os.path.join(os.path.dirname(__file__), "applications")
+	if not os.path.isdir(apps_dir):
+		return
+
+	slugs = []
+	for entry in sorted(os.listdir(apps_dir)):
+		entry_path = os.path.join(apps_dir, entry)
+		if os.path.isdir(entry_path) and os.path.isfile(os.path.join(entry_path, "index.md")):
+			slugs.append(entry)
+
+	if not slugs:
+		return
+
+	toctree = [
+		"",
+		"",
+		"```{toctree}",
+		":maxdepth: 10",
+		":includehidden:",
+		":caption: Contents",
+		"",
+	]
+	toctree.extend(f"{slug}/index" for slug in slugs)
+	toctree.append("```")
+	toctree.append("")
+
+	source[0] = source[0].rstrip() + "\n".join(toctree)
+
+
 # Register context and post-build normalization hooks.
 def setup(app):
+	app.connect("source-read", auto_app_toctree)
 	app.connect("html-page-context", format_version)
 	app.connect("build-finished", fix_version_html)

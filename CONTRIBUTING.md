@@ -192,8 +192,7 @@ The action **wipes `applications/<component-slug>/` completely before each push*
 
 ## Notes
 
-- **`component-slug`**: Must be unique across all component repos (kebab-case recommended).
-- **First-time onboarding**: A new component slug must be registered in this repo's top-level `applications/index.md` toctree so it appears in the site navigation. This is a one-time setup; coordinate with the platform team when you onboard a new component.
+- **`component-slug`**: Must be unique across all component repos (kebab-case recommended). New slugs are picked up automatically — as soon as your first push includes an `index.md`, your component appears in the site navigation. No manual registration is required.
 - **`pr-enabled`**: Set to `"true"` in your workflow if you want the action to open a PR for review on docs-site instead of pushing directly to `main`.
 - **Only `docs/public/` is published** — anything outside that directory stays private in your repo.
 - Pushes to docs-site's `main` branch automatically trigger a documentation build and live-site deploy.
