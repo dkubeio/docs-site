@@ -28,6 +28,28 @@ Rule of thumb: if an end user reading the product documentation needs the page, 
 
 ---
 
+## Where your documentation lives in docs-site
+
+You do **not** create or edit any files in this docs-site repo directly. The GitHub Action you'll configure in the next steps publishes your docs from your component repo into a dedicated folder under `applications/`. Every component is self-contained:
+
+```
+applications/
+├── index.md                        # Platform-managed landing page (do not edit)
+├── <your-component-slug>/          # Your application's folder — one per component
+│   ├── index.md                    # Application homepage
+│   ├── getting-started.md          # Tutorial
+│   ├── advanced-usage.md           # Tutorial
+│   └── media/                      # All binary assets — icons, screenshots, videos
+│       ├── icon.svg
+│       ├── screenshot.png
+│       └── demo.mp4
+└── <other-components>/             # Same layout, one folder per component
+```
+
+The next sections explain how to set up your component repo so the action populates this folder automatically.
+
+---
+
 ## Prerequisites
 
 - The docs GitHub App credentials (App ID and Private Key) are provided to you by the platform team.
@@ -83,6 +105,17 @@ Replace `my-component` with your application's slug (kebab-case, unique across a
 ---
 
 ## Step 3 — Organize your component repo's docs
+
+> **Important:** The directory layout described below lives **inside your own component repo**, not inside this docs-site repo. You never create or edit `applications/<your-component-slug>/` here by hand.
+
+The GitHub Action you configured in Step 2 watches `docs/public/` in your component repo on every push to `main` and automatically copies its contents into docs-site:
+
+| In your component repo | Lands in docs-site |
+| --- | --- |
+| `docs/public/*.md` (and any subdirectories) | `applications/<your-component-slug>/*.md` |
+| `docs/public/media/*` | `applications/<your-component-slug>/media/*` |
+
+The action **wipes `applications/<your-component-slug>/` completely before each push**, so removing a file from `docs/public/` in your repo removes it from the published site on the next push.
 
 Only files under `docs/public/` are published. Keep private, internal, or developer-only docs anywhere else in your repo (e.g. `docs/internal/`, `docs/api/`).
 
@@ -184,19 +217,6 @@ To embed a video, use the MyST `{video}` directive (provided by `sphinxcontrib-v
 Supported options include `:autoplay:`, `:loop:`, `:muted:`, `:poster:`, `:width:`, `:height:`, and `:nocontrols:`.
 
 Recommended video formats: `.mp4` (H.264) for broad browser support, or `.webm`.
-
----
-
-## Where your content lands in docs-site
-
-When the action runs, every component lands in a single, self-contained folder:
-
-| Source in your component repo | Destination in docs-site |
-| --- | --- |
-| `docs/public/*.md` (and any subdirectories) | `applications/<component-slug>/*.md` |
-| `docs/public/media/*` | `applications/<component-slug>/media/*` |
-
-The action **wipes `applications/<component-slug>/` completely before each push**, so removing a file from your `docs/public/` removes it from the published site on the next push.
 
 ---
 
