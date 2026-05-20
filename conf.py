@@ -205,6 +205,18 @@ def _format_slug(slug):
 	return slug.replace("-", " ").replace("_", " ").title()
 
 
+# Canonical display names for slugs whose folder name doesn't match the
+# brand name. Overrides both the visible list label and the sidebar entry.
+APPLICATION_DISPLAY_NAMES = {
+	"lexpilot": "LexPilot",
+	"mortiq": "MortIQ",
+	"modelstudio": "ModelStudio",
+	"mlflow": "MLflow",
+	"ragflow": "RAGFlow",
+	"securellm": "SecureLLM",
+}
+
+
 # Append an auto-generated bulleted list of applications plus a hidden toctree
 # to applications/index.md. The visible list keeps the page discoverable for
 # end users; the hidden toctree drives the sidebar navigation and document
@@ -223,7 +235,11 @@ def auto_app_toctree(app, docname, source):
 		entry_path = os.path.join(apps_dir, entry)
 		index_path = os.path.join(entry_path, "index.md")
 		if os.path.isdir(entry_path) and os.path.isfile(index_path):
-			title = _read_h1(index_path) or _format_slug(entry)
+			title = (
+				APPLICATION_DISPLAY_NAMES.get(entry)
+				or _read_h1(index_path)
+				or _format_slug(entry)
+			)
 			entries.append((entry, title))
 
 	if not entries:
@@ -236,8 +252,11 @@ def auto_app_toctree(app, docname, source):
 	lines.append("```{toctree}")
 	lines.append(":hidden:")
 	lines.append("")
-	for slug, _ in entries:
-		lines.append(f"{slug}/index")
+	for slug, title in entries:
+		if APPLICATION_DISPLAY_NAMES.get(slug):
+			lines.append(f"{title} <{slug}/index>")
+		else:
+			lines.append(f"{slug}/index")
 	lines.append("```")
 	lines.append("")
 
