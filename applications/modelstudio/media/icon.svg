@@ -1,0 +1,36 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Laptop base -->
+  <rect x="96" y="260" width="320" height="60" rx="20" fill="#8B8FB5" stroke="black" stroke-width="6"/>
+
+  <!-- Laptop screen -->
+  <rect x="120" y="120" width="272" height="160" rx="16" fill="#E5E7EB" stroke="black" stroke-width="6"/>
+
+  <!-- Cloud -->
+  <path d="M180 140
+           C160 100, 240 90, 260 130
+           C280 90, 360 110, 340 150
+           C380 150, 380 200, 340 200
+           L200 200
+           C160 200, 150 160, 180 140 Z"
+        fill="#38BDF8" stroke="black" stroke-width="6"/>
+
+  <!-- Neural lines -->
+  <line x1="220" y1="200" x2="220" y2="240" stroke="black" stroke-width="4"/>
+  <line x1="256" y1="200" x2="256" y2="240" stroke="black" stroke-width="4"/>
+  <line x1="292" y1="200" x2="292" y2="240" stroke="black" stroke-width="4"/>
+
+  <!-- Nodes -->
+  <circle cx="220" cy="250" r="8" fill="#5B3A8E"/>
+  <circle cx="256" cy="250" r="8" fill="#5B3A8E"/>
+  <circle cx="292" cy="250" r="8" fill="#5B3A8E"/>
+
+  <!-- Bottom pipeline -->
+  <line x1="256" y1="320" x2="256" y2="380" stroke="#E5A4A4" stroke-width="8"/>
+  <line x1="256" y1="380" x2="150" y2="380" stroke="#E5A4A4" stroke-width="8"/>
+  <line x1="256" y1="380" x2="362" y2="380" stroke="#E5A4A4" stroke-width="8"/>
+
+  <!-- Boxes -->
+  <rect x="120" y="380" width="60" height="60" rx="10" fill="#5B3A8E"/>
+  <rect x="226" y="380" width="60" height="60" rx="10" fill="#2F5D85"/>
+  <rect x="332" y="380" width="60" height="60" rx="10" fill="#A33A44"/>
+</svg>
