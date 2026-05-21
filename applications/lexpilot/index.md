@@ -15,22 +15,12 @@ LexPilot is an AI-powered legal document analysis platform that automates contra
 
 ## Tutorials
 
-- [Overview](./overview.md) — what LexPilot is, why it exists, and a 5-minute quick start.
-- [Features](./features.md) — a deep dive into document processing, the agent pipeline, and the compliance engine.
-- [User guide](./user-guide.md) — step-by-step usage, from creating matters to generating reports.
-- [Use cases & workflows](./use-cases.md) — transaction-specific walkthroughs for VC, M&A, formation, securities, and debt financing.
-- [Comparison & ROI](./comparison.md) — how LexPilot compares to manual review and competing tools.
-- [FAQ & troubleshooting](./faq.md) — answers to common questions on setup, accuracy, security, and performance.
-- [Resources & support](./resources.md) — roadmap, version history, community, and support options.
+
+- [Features](./features.md) — everything LexPilot can do, from document understanding to compliance checking.
 
 ```{toctree}
 :hidden:
 
-overview
 features
-user-guide
-use-cases
-comparison
-faq
-resources
+
 ```
