@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>API Reference - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/securellm/api-reference.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=9454f7d5" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/securellm/api-reference.html"/>
+  <meta property="og:title" content="API Reference"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="api-reference.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../agentx/index.html">AgentX</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/user-guide.html">User Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../langflow/index.html">Langflow on DKubeX</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/building-flows.html">Building Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/deploying-flows.html">Deploying Flows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../lexpilot/index.html">LexPilot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../lexpilot/features.html">Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modelstudio/index.html">ModelStudio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/getting-started.html">Getting Started with ModelStudio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/deploying-models.html">Deploying Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/playground.html">Playground Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortiq/index.html">MortIQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/getting-started.html">Getting Started with MortIQ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ragflow/index.html">RAGFlow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">SecureLLM</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#authentication">Authentication</a><ul>
+<li><a class="reference internal" href="#api-key-v1-and-api">API Key (<code class="docutils literal notranslate"><span class="pre">/v1/*</span></code> and <code class="docutils literal notranslate"><span class="pre">/api/*</span></code>)</a></li>
+<li><a class="reference internal" href="#sso-admin-api">SSO (<code class="docutils literal notranslate"><span class="pre">/admin/api/*</span></code>)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#base-url">Base URL</a></li>
+<li><a class="reference internal" href="#inference-endpoints">Inference Endpoints</a><ul>
+<li><a class="reference internal" href="#get-health"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/health</span></code></a></li>
+<li><a class="reference internal" href="#get-v1-models"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/v1/models</span></code></a></li>
+<li><a class="reference internal" href="#post-v1-chat-completions"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/chat/completions</span></code></a></li>
+<li><a class="reference internal" href="#post-v1-embeddings"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/embeddings</span></code></a></li>
+<li><a class="reference internal" href="#get-api-usage-me"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/usage/me</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#admin-self-service-endpoints">Admin Self-Service Endpoints</a><ul>
+<li><a class="reference internal" href="#get-admin-api-me"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/me</span></code></a></li>
+<li><a class="reference internal" href="#get-admin-api-me-restrictions"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/me/restrictions</span></code></a></li>
+<li><a class="reference internal" href="#get-admin-api-keys"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/keys</span></code></a></li>
+<li><a class="reference internal" href="#post-admin-api-keys"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/admin/api/keys</span></code></a></li>
+<li><a class="reference internal" href="#delete-admin-api-keys-id"><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/admin/api/keys/{id}</span></code></a></li>
+<li><a class="reference internal" href="#get-admin-api-models"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/models</span></code></a></li>
+<li><a class="reference internal" href="#get-admin-api-usage-mine"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/usage/mine</span></code></a></li>
+<li><a class="reference internal" href="#get-admin-api-usage-mine-summary"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/usage/mine/summary</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#admin-only-endpoints">Admin-Only Endpoints</a><ul>
+<li><a class="reference internal" href="#providers">Providers</a><ul>
+<li><a class="reference internal" href="#get-admin-api-providers"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/providers</span></code></a></li>
+<li><a class="reference internal" href="#post-admin-api-providers"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/admin/api/providers</span></code></a></li>
+<li><a class="reference internal" href="#put-admin-api-providers-name"><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/admin/api/providers/{name}</span></code></a></li>
+<li><a class="reference internal" href="#put-admin-api-providers-name-toggle"><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/admin/api/providers/{name}/toggle</span></code></a></li>
+<li><a class="reference internal" href="#delete-admin-api-providers-name"><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/admin/api/providers/{name}</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#model-routes">Model Routes</a><ul>
+<li><a class="reference internal" href="#get-admin-api-model-routes"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/model-routes</span></code></a></li>
+<li><a class="reference internal" href="#post-admin-api-model-routes"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/admin/api/model-routes</span></code></a></li>
+<li><a class="reference internal" href="#put-admin-api-model-routes-id"><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/admin/api/model-routes/{id}</span></code></a></li>
+<li><a class="reference internal" href="#delete-admin-api-model-routes-id"><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/admin/api/model-routes/{id}</span></code></a></li>
+<li><a class="reference internal" href="#get-admin-api-model-routes-events"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/model-routes/events</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#users-restrictions">Users &amp; Restrictions</a><ul>
+<li><a class="reference internal" href="#get-admin-api-users"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/users</span></code></a></li>
+<li><a class="reference internal" href="#get-admin-api-users-restrictions"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/users/restrictions</span></code></a></li>
+<li><a class="reference internal" href="#get-admin-api-users-restrictions-username"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/users/restrictions/{username}</span></code></a></li>
+<li><a class="reference internal" href="#put-admin-api-users-restrictions-username"><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/admin/api/users/restrictions/{username}</span></code></a></li>
+<li><a class="reference internal" href="#delete-admin-api-users-restrictions-username"><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/admin/api/users/restrictions/{username}</span></code></a></li>
+<li><a class="reference internal" href="#patch-admin-api-keys-id"><code class="docutils literal notranslate"><span class="pre">PATCH</span> <span class="pre">/admin/api/keys/{id}</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#guardrails">Guardrails</a><ul>
+<li><a class="reference internal" href="#get-admin-api-guardrails"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/guardrails</span></code></a></li>
+<li><a class="reference internal" href="#post-admin-api-guardrails"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/admin/api/guardrails</span></code></a></li>
+<li><a class="reference internal" href="#put-admin-api-guardrails-name"><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/admin/api/guardrails/{name}</span></code></a></li>
+<li><a class="reference internal" href="#put-admin-api-guardrails-name-toggle"><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/admin/api/guardrails/{name}/toggle</span></code></a></li>
+<li><a class="reference internal" href="#delete-admin-api-guardrails-name"><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/admin/api/guardrails/{name}</span></code></a></li>
+<li><a class="reference internal" href="#post-admin-api-guardrails-test"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/admin/api/guardrails/test</span></code></a></li>
+<li><a class="reference internal" href="#get-admin-api-guardrail-logs"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/guardrail-logs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage-audit-admin">Usage &amp; Audit (Admin)</a><ul>
+<li><a class="reference internal" href="#get-admin-api-usage"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/usage</span></code></a></li>
+<li><a class="reference internal" href="#get-admin-api-usage-summary"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/usage/summary</span></code></a></li>
+<li><a class="reference internal" href="#get-admin-api-audit"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/audit</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#metrics-cooldowns">Metrics &amp; Cooldowns</a><ul>
+<li><a class="reference internal" href="#get-admin-api-metrics"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/metrics</span></code></a></li>
+<li><a class="reference internal" href="#get-admin-api-cooldowns"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/cooldowns</span></code></a></li>
+<li><a class="reference internal" href="#delete-admin-api-cooldowns-provider"><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/admin/api/cooldowns/{provider}</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error-responses">Error Responses</a></li>
+<li><a class="reference internal" href="#rate-limiting">Rate Limiting</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">API Reference</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/securellm/api-reference.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/securellm/api-reference.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/securellm/api-reference.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/securellm/api-reference.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/securellm/api-reference.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
+<p>SecureLLM exposes two groups of endpoints:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">/v1/*</span></code></strong> — OpenAI-compatible inference endpoints. Authenticated with an API key.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">/admin/api/*</span></code></strong> — Admin and self-service management endpoints. Authenticated via SSO (the <code class="docutils literal notranslate"><span class="pre">X-Forwarded-User</span></code> header injected by your SSO proxy).</p></li>
+</ul>
+<hr class="docutils" />
+<section id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">¶</a></h2>
+<section id="api-key-v1-and-api">
+<h3>API Key (<code class="docutils literal notranslate"><span class="pre">/v1/*</span></code> and <code class="docutils literal notranslate"><span class="pre">/api/*</span></code>)<a class="headerlink" href="#api-key-v1-and-api" title="Link to this heading">¶</a></h3>
+<p>Pass your API key in the <code class="docutils literal notranslate"><span class="pre">Authorization</span></code> header:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">Authorization</span><span class="p">:</span> <span class="n">Bearer</span> <span class="n">sk</span><span class="o">-&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">key</span><span class="o">&gt;</span>
+</span></pre></div>
+</div>
+<p>Keys are created in the admin UI under <strong>Keys</strong>. Each key is shown only once at creation.</p>
+</section>
+<section id="sso-admin-api">
+<h3>SSO (<code class="docutils literal notranslate"><span class="pre">/admin/api/*</span></code>)<a class="headerlink" href="#sso-admin-api" title="Link to this heading">¶</a></h3>
+<p>Admin endpoints rely on an upstream SSO proxy that injects <code class="docutils literal notranslate"><span class="pre">X-Forwarded-User:</span> <span class="pre">username&#64;example.com</span></code>. In <code class="docutils literal notranslate"><span class="pre">DEV_MODE</span></code> this header is set by the dev login page.</p>
+<p>Admin-only endpoints additionally require the user to be listed in <code class="docutils literal notranslate"><span class="pre">ADMIN_USERS</span></code> or for the proxy to set <code class="docutils literal notranslate"><span class="pre">X-Auth-Request-Role:</span> <span class="pre">admin</span></code>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="base-url">
+<h2>Base URL<a class="headerlink" href="#base-url" title="Link to this heading">¶</a></h2>
+<p>All paths below are relative to the gateway base URL, e.g. <code class="docutils literal notranslate"><span class="pre">http://localhost:8081</span></code>.</p>
+<p>If you deployed with a path prefix (via <code class="docutils literal notranslate"><span class="pre">BASE_PATH</span></code>), prepend it. For example, with <code class="docutils literal notranslate"><span class="pre">BASE_PATH=/securellm</span></code> the chat endpoint becomes <code class="docutils literal notranslate"><span class="pre">/securellm/v1/chat/completions</span></code>.</p>
+</section>
+<hr class="docutils" />
+<section id="inference-endpoints">
+<h2>Inference Endpoints<a class="headerlink" href="#inference-endpoints" title="Link to this heading">¶</a></h2>
+<section id="get-health">
+<h3><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/health</span></code><a class="headerlink" href="#get-health" title="Link to this heading">¶</a></h3>
+<p>Returns gateway health status. No authentication required.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;db&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="get-v1-models">
+<h3><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/v1/models</span></code><a class="headerlink" href="#get-v1-models" title="Link to this heading">¶</a></h3>
+<p>Lists models available to the caller, respecting key-level and user-level restrictions.</p>
+<p><strong>Auth:</strong> API key</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;object&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="4"><span class="w">    </span><span class="p">{</span>
+</span><span data-line="5"><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">      </span><span class="nt">&quot;object&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;model&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">      </span><span class="nt">&quot;created&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1715367049</span><span class="p">,</span>
+</span><span data-line="8"><span class="w">      </span><span class="nt">&quot;owned_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openai&quot;</span>
+</span><span data-line="9"><span class="w">    </span><span class="p">}</span>
+</span><span data-line="10"><span class="w">  </span><span class="p">]</span>
+</span><span data-line="11"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="post-v1-chat-completions">
+<h3><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/chat/completions</span></code><a class="headerlink" href="#post-v1-chat-completions" title="Link to this heading">¶</a></h3>
+<p>OpenAI-compatible chat completions. Supports streaming via Server-Sent Events.</p>
+<p><strong>Auth:</strong> API key</p>
+<p><strong>Request body:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;messages&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="4"><span class="w">    </span><span class="p">{</span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;system&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You are a helpful assistant.&quot;</span><span class="p">},</span>
+</span><span data-line="5"><span class="w">    </span><span class="p">{</span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello!&quot;</span><span class="p">}</span>
+</span><span data-line="6"><span class="w">  </span><span class="p">],</span>
+</span><span data-line="7"><span class="w">  </span><span class="nt">&quot;stream&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span data-line="8"><span class="w">  </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span>
+</span><span data-line="9"><span class="w">  </span><span class="nt">&quot;max_tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span>
+</span><span data-line="10"><span class="p">}</span>
+</span></pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">model</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Yes</p></td>
+<td><p>Model ID as returned by <code class="docutils literal notranslate"><span class="pre">/v1/models</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">messages</span></code></p></td>
+<td><p>array</p></td>
+<td><p>Yes</p></td>
+<td><p>Conversation history</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">stream</span></code></p></td>
+<td><p>boolean</p></td>
+<td><p>No</p></td>
+<td><p>Stream response as SSE (default: <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">temperature</span></code></p></td>
+<td><p>number</p></td>
+<td><p>No</p></td>
+<td><p>Sampling temperature (0–2)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max_tokens</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>No</p></td>
+<td><p>Maximum tokens to generate</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>All additional OpenAI-compatible parameters are forwarded to the upstream provider unchanged.</p>
+<p><strong>Headers:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Header</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x-provider</span></code></p></td>
+<td><p>Override automatic routing and target a specific provider by name (e.g., <code class="docutils literal notranslate"><span class="pre">openai</span></code>, <code class="docutils literal notranslate"><span class="pre">anthropic</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Non-streaming response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;chatcmpl-abc123&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;object&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;chat.completion&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;created&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1715367049</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">&quot;choices&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="7"><span class="w">    </span><span class="p">{</span>
+</span><span data-line="8"><span class="w">      </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span data-line="9"><span class="w">      </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assistant&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello! How can I help?&quot;</span><span class="p">},</span>
+</span><span data-line="10"><span class="w">      </span><span class="nt">&quot;finish_reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stop&quot;</span>
+</span><span data-line="11"><span class="w">    </span><span class="p">}</span>
+</span><span data-line="12"><span class="w">  </span><span class="p">],</span>
+</span><span data-line="13"><span class="w">  </span><span class="nt">&quot;usage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span data-line="14"><span class="w">    </span><span class="nt">&quot;prompt_tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+</span><span data-line="15"><span class="w">    </span><span class="nt">&quot;completion_tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+</span><span data-line="16"><span class="w">    </span><span class="nt">&quot;total_tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
+</span><span data-line="17"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="18"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Streaming response:</strong> Each SSE event is a <code class="docutils literal notranslate"><span class="pre">data:</span></code> line containing a JSON delta, terminated by <code class="docutils literal notranslate"><span class="pre">data:</span> <span class="pre">[DONE]</span></code>. The format matches the OpenAI streaming protocol exactly.</p>
+</section>
+<hr class="docutils" />
+<section id="post-v1-embeddings">
+<h3><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/embeddings</span></code><a class="headerlink" href="#post-v1-embeddings" title="Link to this heading">¶</a></h3>
+<p>OpenAI-compatible embeddings endpoint.</p>
+<p><strong>Auth:</strong> API key</p>
+<p><strong>Request body:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text-embedding-3-small&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The quick brown fox&quot;</span>
+</span><span data-line="4"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;object&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="4"><span class="w">    </span><span class="p">{</span>
+</span><span data-line="5"><span class="w">      </span><span class="nt">&quot;object&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;embedding&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">      </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">      </span><span class="nt">&quot;embedding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.0023064255</span><span class="p">,</span><span class="w"> </span><span class="mf">-0.009327292</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">]</span>
+</span><span data-line="8"><span class="w">    </span><span class="p">}</span>
+</span><span data-line="9"><span class="w">  </span><span class="p">],</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text-embedding-3-small&quot;</span><span class="p">,</span>
+</span><span data-line="11"><span class="w">  </span><span class="nt">&quot;usage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span data-line="12"><span class="w">    </span><span class="nt">&quot;prompt_tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+</span><span data-line="13"><span class="w">    </span><span class="nt">&quot;total_tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
+</span><span data-line="14"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="15"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="get-api-usage-me">
+<h3><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/usage/me</span></code><a class="headerlink" href="#get-api-usage-me" title="Link to this heading">¶</a></h3>
+<p>Returns usage logs for the API key used in the request.</p>
+<p><strong>Auth:</strong> API key</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;key_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;input_tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">&quot;output_tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+</span><span data-line="9"><span class="w">    </span><span class="nt">&quot;cost_usd&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.000150</span><span class="p">,</span>
+</span><span data-line="10"><span class="w">    </span><span class="nt">&quot;latency_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">842</span><span class="p">,</span>
+</span><span data-line="11"><span class="w">    </span><span class="nt">&quot;status_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+</span><span data-line="12"><span class="w">    </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-05-10T12:34:56Z&quot;</span>
+</span><span data-line="13"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="14"><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="admin-self-service-endpoints">
+<h2>Admin Self-Service Endpoints<a class="headerlink" href="#admin-self-service-endpoints" title="Link to this heading">¶</a></h2>
+<p>These endpoints are available to any authenticated SSO user.</p>
+<section id="get-admin-api-me">
+<h3><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/me</span></code><a class="headerlink" href="#get-admin-api-me" title="Link to this heading">¶</a></h3>
+<p>Returns information about the currently logged-in user.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;you@example.com&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;is_admin&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-05-01T09:00:00Z&quot;</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="get-admin-api-me-restrictions">
+<h3><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/me/restrictions</span></code><a class="headerlink" href="#get-admin-api-me-restrictions" title="Link to this heading">¶</a></h3>
+<p>Returns the provider and model restrictions applied to your account by an admin.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;you@example.com&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;allowed_providers&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openai,anthropic&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;allowed_models&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p>An empty string means no restriction (all allowed).</p>
+</section>
+<hr class="docutils" />
+<section id="get-admin-api-keys">
+<h3><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/keys</span></code><a class="headerlink" href="#get-admin-api-keys" title="Link to this heading">¶</a></h3>
+<p>Lists all API keys belonging to the current user.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-app&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sk-a1b2c3d4&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">&quot;allowed_providers&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;allowed_models&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">&quot;last_used_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-05-10T12:00:00Z&quot;</span><span class="p">,</span>
+</span><span data-line="9"><span class="w">    </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-05-01T09:00:00Z&quot;</span>
+</span><span data-line="10"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="11"><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="post-admin-api-keys">
+<h3><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/admin/api/keys</span></code><a class="headerlink" href="#post-admin-api-keys" title="Link to this heading">¶</a></h3>
+<p>Creates a new API key for the current user.</p>
+<p><strong>Request body:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-app&quot;</span>
+</span><span data-line="3"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-app&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sk-a1b2c3d4e5f6...&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sk-a1b2c3d4&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-05-01T09:00:00Z&quot;</span>
+</span><span data-line="7"><span class="p">}</span>
+</span></pre></div>
+</div>
+<blockquote>
+<div><p>The <code class="docutils literal notranslate"><span class="pre">key</span></code> field contains the plaintext key and is returned <strong>only once</strong>. Store it immediately.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="delete-admin-api-keys-id">
+<h3><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/admin/api/keys/{id}</span></code><a class="headerlink" href="#delete-admin-api-keys-id" title="Link to this heading">¶</a></h3>
+<p>Revokes one of your own API keys by ID.</p>
+<p><strong>Response:</strong> <code class="docutils literal notranslate"><span class="pre">204</span> <span class="pre">No</span> <span class="pre">Content</span></code></p>
+</section>
+<hr class="docutils" />
+<section id="get-admin-api-models">
+<h3><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/models</span></code><a class="headerlink" href="#get-admin-api-models" title="Link to this heading">¶</a></h3>
+<p>Lists all models available across all enabled providers.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openai&quot;</span><span class="p">},</span>
+</span><span data-line="3"><span class="w">  </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;claude-3-5-sonnet-20241022&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;anthropic&quot;</span><span class="p">}</span>
+</span><span data-line="4"><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="get-admin-api-usage-mine">
+<h3><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/usage/mine</span></code><a class="headerlink" href="#get-admin-api-usage-mine" title="Link to this heading">¶</a></h3>
+<p>Returns all usage logs across all your keys.</p>
+</section>
+<hr class="docutils" />
+<section id="get-admin-api-usage-mine-summary">
+<h3><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/usage/mine/summary</span></code><a class="headerlink" href="#get-admin-api-usage-mine-summary" title="Link to this heading">¶</a></h3>
+<p>Returns aggregated usage statistics for all your keys.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;total_requests&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;total_input_tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500000</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;total_output_tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200000</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">&quot;total_cost_usd&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.75</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">&quot;by_model&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;gpt-4o&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;requests&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;cost_usd&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.50</span><span class="p">}</span>
+</span><span data-line="8"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="9"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="admin-only-endpoints">
+<h2>Admin-Only Endpoints<a class="headerlink" href="#admin-only-endpoints" title="Link to this heading">¶</a></h2>
+<p>These endpoints require admin privileges.</p>
+<section id="providers">
+<h3>Providers<a class="headerlink" href="#providers" title="Link to this heading">¶</a></h3>
+<section id="get-admin-api-providers">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/providers</span></code><a class="headerlink" href="#get-admin-api-providers" title="Link to this heading">¶</a></h4>
+<p>Lists all configured providers with their health status.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">&quot;base_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;allowed_models&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span data-line="8"><span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span data-line="9"><span class="w">    </span><span class="nt">&quot;healthy&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+</span><span data-line="10"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="11"><span class="p">]</span>
+</span></pre></div>
+</div>
+<blockquote>
+<div><p>API keys are never returned.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="post-admin-api-providers">
+<h4><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/admin/api/providers</span></code><a class="headerlink" href="#post-admin-api-providers" title="Link to this heading">¶</a></h4>
+<p>Creates a new provider.</p>
+<p><strong>Request body:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-ollama&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;custom&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;api_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">&quot;base_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://localhost:11434/v1&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">&quot;allowed_models&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;llama3,mistral&quot;</span>
+</span><span data-line="7"><span class="p">}</span>
+</span></pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Unique identifier for this provider</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">openai</span></code>, <code class="docutils literal notranslate"><span class="pre">anthropic</span></code>, <code class="docutils literal notranslate"><span class="pre">custom</span></code>, or <code class="docutils literal notranslate"><span class="pre">dkubex</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">api_key</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Provider API key (optional for some types)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">base_url</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Override base URL (required for <code class="docutils literal notranslate"><span class="pre">custom</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">allowed_models</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Comma-separated list of allowed models (empty = all)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="put-admin-api-providers-name">
+<h4><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/admin/api/providers/{name}</span></code><a class="headerlink" href="#put-admin-api-providers-name" title="Link to this heading">¶</a></h4>
+<p>Updates an existing provider’s configuration. Accepts the same fields as <code class="docutils literal notranslate"><span class="pre">POST</span></code>.</p>
+</section>
+<hr class="docutils" />
+<section id="put-admin-api-providers-name-toggle">
+<h4><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/admin/api/providers/{name}/toggle</span></code><a class="headerlink" href="#put-admin-api-providers-name-toggle" title="Link to this heading">¶</a></h4>
+<p>Enables or disables a provider without deleting it.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="delete-admin-api-providers-name">
+<h4><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/admin/api/providers/{name}</span></code><a class="headerlink" href="#delete-admin-api-providers-name" title="Link to this heading">¶</a></h4>
+<p>Permanently deletes a provider.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="model-routes">
+<h3>Model Routes<a class="headerlink" href="#model-routes" title="Link to this heading">¶</a></h3>
+<p>Model routes define which provider handles a given model name, with an explicit priority order for fallbacks.</p>
+<section id="get-admin-api-model-routes">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/model-routes</span></code><a class="headerlink" href="#get-admin-api-model-routes" title="Link to this heading">¶</a></h4>
+<p>Lists all model routes.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;model_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;provider_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">&quot;priority&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+</span><span data-line="7"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="8"><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="post-admin-api-model-routes">
+<h4><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/admin/api/model-routes</span></code><a class="headerlink" href="#post-admin-api-model-routes" title="Link to this heading">¶</a></h4>
+<p>Creates a new model route.</p>
+<p><strong>Request body:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;model_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;provider_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;priority&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p>Lower priority values are tried first. Create multiple routes for the same <code class="docutils literal notranslate"><span class="pre">model_name</span></code> with different providers to set up a fallback chain.</p>
+</section>
+<hr class="docutils" />
+<section id="put-admin-api-model-routes-id">
+<h4><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/admin/api/model-routes/{id}</span></code><a class="headerlink" href="#put-admin-api-model-routes-id" title="Link to this heading">¶</a></h4>
+<p>Updates the priority of an existing route.</p>
+<p><strong>Request body:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span><span class="nt">&quot;priority&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="delete-admin-api-model-routes-id">
+<h4><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/admin/api/model-routes/{id}</span></code><a class="headerlink" href="#delete-admin-api-model-routes-id" title="Link to this heading">¶</a></h4>
+<p>Deletes a model route.</p>
+</section>
+<hr class="docutils" />
+<section id="get-admin-api-model-routes-events">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/model-routes/events</span></code><a class="headerlink" href="#get-admin-api-model-routes-events" title="Link to this heading">¶</a></h4>
+<p>SSE stream of real-time model route change notifications. Used by the admin UI.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="users-restrictions">
+<h3>Users &amp; Restrictions<a class="headerlink" href="#users-restrictions" title="Link to this heading">¶</a></h3>
+<section id="get-admin-api-users">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/users</span></code><a class="headerlink" href="#get-admin-api-users" title="Link to this heading">¶</a></h4>
+<p>Lists all SSO users who have logged into the gateway.</p>
+</section>
+<hr class="docutils" />
+<section id="get-admin-api-users-restrictions">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/users/restrictions</span></code><a class="headerlink" href="#get-admin-api-users-restrictions" title="Link to this heading">¶</a></h4>
+<p>Lists all per-user restrictions.</p>
+</section>
+<hr class="docutils" />
+<section id="get-admin-api-users-restrictions-username">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/users/restrictions/{username}</span></code><a class="headerlink" href="#get-admin-api-users-restrictions-username" title="Link to this heading">¶</a></h4>
+<p>Returns restrictions for a specific user.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dev@example.com&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;allowed_providers&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;allowed_models&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4o-mini,gpt-3.5-turbo&quot;</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="put-admin-api-users-restrictions-username">
+<h4><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/admin/api/users/restrictions/{username}</span></code><a class="headerlink" href="#put-admin-api-users-restrictions-username" title="Link to this heading">¶</a></h4>
+<p>Sets or updates restrictions for a user.</p>
+<p><strong>Request body:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;allowed_providers&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;allowed_models&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4o-mini&quot;</span>
+</span><span data-line="4"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p>Pass an empty string to remove a restriction.</p>
+</section>
+<hr class="docutils" />
+<section id="delete-admin-api-users-restrictions-username">
+<h4><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/admin/api/users/restrictions/{username}</span></code><a class="headerlink" href="#delete-admin-api-users-restrictions-username" title="Link to this heading">¶</a></h4>
+<p>Removes all restrictions for a user (grants unrestricted access).</p>
+</section>
+<hr class="docutils" />
+<section id="patch-admin-api-keys-id">
+<h4><code class="docutils literal notranslate"><span class="pre">PATCH</span> <span class="pre">/admin/api/keys/{id}</span></code><a class="headerlink" href="#patch-admin-api-keys-id" title="Link to this heading">¶</a></h4>
+<p>Updates the restrictions on any API key (admin can modify keys belonging to any user).</p>
+<p><strong>Request body:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;allowed_providers&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;anthropic&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;allowed_models&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;claude-3-haiku-20240307&quot;</span>
+</span><span data-line="4"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="guardrails">
+<h3>Guardrails<a class="headerlink" href="#guardrails" title="Link to this heading">¶</a></h3>
+<section id="get-admin-api-guardrails">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/guardrails</span></code><a class="headerlink" href="#get-admin-api-guardrails" title="Link to this heading">¶</a></h4>
+<p>Lists all guardrails (built-in and custom) with their current status.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pii-masking&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pii&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;builtin&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+</span><span data-line="8"><span class="w">  </span><span class="p">},</span>
+</span><span data-line="9"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="10"><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;no-profanity&quot;</span><span class="p">,</span>
+</span><span data-line="11"><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;content_filter&quot;</span><span class="p">,</span>
+</span><span data-line="12"><span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span data-line="13"><span class="w">    </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span>
+</span><span data-line="14"><span class="w">    </span><span class="nt">&quot;builtin&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span data-line="15"><span class="w">    </span><span class="nt">&quot;block_patterns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;badword1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;badword2&quot;</span><span class="p">]</span>
+</span><span data-line="16"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="17"><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="post-admin-api-guardrails">
+<h4><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/admin/api/guardrails</span></code><a class="headerlink" href="#post-admin-api-guardrails" title="Link to this heading">¶</a></h4>
+<p>Creates a custom guardrail.</p>
+<p><strong>Request body:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;no-profanity&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;content_filter&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">  </span><span class="nt">&quot;block_patterns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pattern1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;pattern2&quot;</span><span class="p">],</span>
+</span><span data-line="6"><span class="w">  </span><span class="nt">&quot;warn_patterns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pattern3&quot;</span><span class="p">]</span>
+</span><span data-line="7"><span class="p">}</span>
+</span></pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Values</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">content_filter</span></code>, <code class="docutils literal notranslate"><span class="pre">injection</span></code>, <code class="docutils literal notranslate"><span class="pre">pii</span></code></p></td>
+<td><p>Guardrail type</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">action</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">block</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code></p></td>
+<td><p>What to do when triggered</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">block_patterns</span></code></p></td>
+<td><p>array of regex strings</p></td>
+<td><p>Patterns that block the request</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">warn_patterns</span></code></p></td>
+<td><p>array of regex strings</p></td>
+<td><p>Patterns that log a warning but allow the request</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="put-admin-api-guardrails-name">
+<h4><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/admin/api/guardrails/{name}</span></code><a class="headerlink" href="#put-admin-api-guardrails-name" title="Link to this heading">¶</a></h4>
+<p>Updates an existing guardrail configuration.</p>
+</section>
+<hr class="docutils" />
+<section id="put-admin-api-guardrails-name-toggle">
+<h4><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/admin/api/guardrails/{name}/toggle</span></code><a class="headerlink" href="#put-admin-api-guardrails-name-toggle" title="Link to this heading">¶</a></h4>
+<p>Enables or disables a guardrail.</p>
+</section>
+<hr class="docutils" />
+<section id="delete-admin-api-guardrails-name">
+<h4><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/admin/api/guardrails/{name}</span></code><a class="headerlink" href="#delete-admin-api-guardrails-name" title="Link to this heading">¶</a></h4>
+<p>Deletes a custom guardrail. Built-in guardrails cannot be deleted (only toggled).</p>
+</section>
+<hr class="docutils" />
+<section id="post-admin-api-guardrails-test">
+<h4><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/admin/api/guardrails/test</span></code><a class="headerlink" href="#post-admin-api-guardrails-test" title="Link to this heading">¶</a></h4>
+<p>Tests a guardrail with sample input without making an LLM call.</p>
+<p><strong>Request body:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;guardrail_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;no-profanity&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This is a test message.&quot;</span>
+</span><span data-line="4"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;triggered&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">&quot;matched_patterns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="get-admin-api-guardrail-logs">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/guardrail-logs</span></code><a class="headerlink" href="#get-admin-api-guardrail-logs" title="Link to this heading">¶</a></h4>
+<p>Returns guardrail execution logs showing which requests were blocked, warned, or passed.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="usage-audit-admin">
+<h3>Usage &amp; Audit (Admin)<a class="headerlink" href="#usage-audit-admin" title="Link to this heading">¶</a></h3>
+<section id="get-admin-api-usage">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/usage</span></code><a class="headerlink" href="#get-admin-api-usage" title="Link to this heading">¶</a></h4>
+<p>Returns paginated usage logs across all keys and users.</p>
+<p><strong>Query params:</strong> <code class="docutils literal notranslate"><span class="pre">page</span></code>, <code class="docutils literal notranslate"><span class="pre">page_size</span></code>, <code class="docutils literal notranslate"><span class="pre">provider</span></code>, <code class="docutils literal notranslate"><span class="pre">model</span></code>, <code class="docutils literal notranslate"><span class="pre">key_id</span></code></p>
+</section>
+<hr class="docutils" />
+<section id="get-admin-api-usage-summary">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/usage/summary</span></code><a class="headerlink" href="#get-admin-api-usage-summary" title="Link to this heading">¶</a></h4>
+<p>Returns aggregated usage statistics across all keys.</p>
+</section>
+<hr class="docutils" />
+<section id="get-admin-api-audit">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/audit</span></code><a class="headerlink" href="#get-admin-api-audit" title="Link to this heading">¶</a></h4>
+<p>Returns the audit log of admin actions (provider changes, key revocations, etc.).</p>
+<p><strong>Query params:</strong> <code class="docutils literal notranslate"><span class="pre">actor</span></code>, <code class="docutils literal notranslate"><span class="pre">action</span></code>, <code class="docutils literal notranslate"><span class="pre">resource_type</span></code>, <code class="docutils literal notranslate"><span class="pre">from</span></code>, <code class="docutils literal notranslate"><span class="pre">to</span></code></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="metrics-cooldowns">
+<h3>Metrics &amp; Cooldowns<a class="headerlink" href="#metrics-cooldowns" title="Link to this heading">¶</a></h3>
+<section id="get-admin-api-metrics">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/metrics</span></code><a class="headerlink" href="#get-admin-api-metrics" title="Link to this heading">¶</a></h4>
+<p>Returns gateway performance metrics (request counts, error rates, p50/p95/p99 latency, throughput) broken down by provider and model.</p>
+</section>
+<hr class="docutils" />
+<section id="get-admin-api-cooldowns">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/admin/api/cooldowns</span></code><a class="headerlink" href="#get-admin-api-cooldowns" title="Link to this heading">¶</a></h4>
+<p>Lists providers currently in cooldown (temporarily skipped due to errors).</p>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;until&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-05-10T12:35:30Z&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;429 rate limited&quot;</span>
+</span><span data-line="6"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="7"><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="delete-admin-api-cooldowns-provider">
+<h4><code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/admin/api/cooldowns/{provider}</span></code><a class="headerlink" href="#delete-admin-api-cooldowns-provider" title="Link to this heading">¶</a></h4>
+<p>Manually clears a provider’s cooldown so it is used immediately on the next request.</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="error-responses">
+<h2>Error Responses<a class="headerlink" href="#error-responses" title="Link to this heading">¶</a></h2>
+<p>All errors follow a consistent JSON envelope:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;API key not found or revoked&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;authentication_error&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">401</span>
+</span><span data-line="6"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="7"><span class="p">}</span>
+</span></pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>HTTP Status</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">400</span></code></p></td>
+<td><p>Bad request — invalid input or blocked by a guardrail</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">401</span></code></p></td>
+<td><p>Missing or invalid API key</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">403</span></code></p></td>
+<td><p>Key or user lacks permission for the requested model/provider</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">429</span></code></p></td>
+<td><p>Rate limit exceeded for your API key</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">500</span></code></p></td>
+<td><p>Gateway error or all upstream providers failed</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">502</span></code></p></td>
+<td><p>Upstream provider returned an unexpected response</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">503</span></code></p></td>
+<td><p>No healthy providers available for the requested model</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="rate-limiting">
+<h2>Rate Limiting<a class="headerlink" href="#rate-limiting" title="Link to this heading">¶</a></h2>
+<p>When rate limiting is enabled, the gateway returns standard rate limit headers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">X</span><span class="o">-</span><span class="n">RateLimit</span><span class="o">-</span><span class="n">Limit</span><span class="p">:</span> <span class="mi">60</span>
+</span><span data-line="2"><span class="n">X</span><span class="o">-</span><span class="n">RateLimit</span><span class="o">-</span><span class="n">Remaining</span><span class="p">:</span> <span class="mi">45</span>
+</span><span data-line="3"><span class="n">X</span><span class="o">-</span><span class="n">RateLimit</span><span class="o">-</span><span class="n">Reset</span><span class="p">:</span> <span class="mi">1715367090</span>
+</span><span data-line="4"><span class="n">Retry</span><span class="o">-</span><span class="n">After</span><span class="p">:</span> <span class="mi">15</span>
+</span></pre></div>
+</div>
+<p>Rate limits are applied per API key. The limit is set globally via the <code class="docutils literal notranslate"><span class="pre">RATE_LIMIT_RPM</span></code> environment variable.</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 21.05.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

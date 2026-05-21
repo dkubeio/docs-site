@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>User Guide - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Langflow on DKubeX" href="../langflow/index.html" /><link rel="prev" title="Getting Started with AgentX" href="getting-started.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/agentx/user-guide.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=9454f7d5" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/agentx/user-guide.html"/>
+  <meta property="og:title" content="User Guide"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="user-guide.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">AgentX</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">User Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../langflow/index.html">Langflow on DKubeX</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/building-flows.html">Building Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/deploying-flows.html">Deploying Flows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../lexpilot/index.html">LexPilot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../lexpilot/features.html">Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modelstudio/index.html">ModelStudio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/getting-started.html">Getting Started with ModelStudio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/deploying-models.html">Deploying Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/playground.html">Playground Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortiq/index.html">MortIQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/getting-started.html">Getting Started with MortIQ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ragflow/index.html">RAGFlow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#managing-assistants">Managing Assistants</a><ul>
+<li><a class="reference internal" href="#creating-an-assistant">Creating an Assistant</a></li>
+<li><a class="reference internal" href="#workspace-sources">Workspace Sources</a></li>
+<li><a class="reference internal" href="#assistant-configuration">Assistant Configuration</a></li>
+<li><a class="reference internal" href="#assistant-lifecycle">Assistant Lifecycle</a></li>
+<li><a class="reference internal" href="#coding-agent-terminals">Coding-Agent Terminals</a></li>
+<li><a class="reference internal" href="#viewing-logs">Viewing Logs</a></li>
+<li><a class="reference internal" href="#pinning-assistants">Pinning Assistants</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sharing-assistants">Sharing Assistants</a><ul>
+<li><a class="reference internal" href="#share-with-users">Share with Users</a></li>
+<li><a class="reference internal" href="#managing-shares">Managing Shares</a></li>
+<li><a class="reference internal" href="#accessing-shared-assistants">Accessing Shared Assistants</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#templates">Templates</a><ul>
+<li><a class="reference internal" href="#publishing-a-template">Publishing a Template</a></li>
+<li><a class="reference internal" href="#deploying-from-a-template">Deploying from a Template</a></li>
+<li><a class="reference internal" href="#template-versions">Template Versions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#admin-features">Admin Features</a><ul>
+<li><a class="reference internal" href="#system-health">System Health</a></li>
+<li><a class="reference internal" href="#user-management">User Management</a></li>
+<li><a class="reference internal" href="#assistant-management">Assistant Management</a></li>
+<li><a class="reference internal" href="#pod-metrics">Pod Metrics</a></li>
+<li><a class="reference internal" href="#audit-logs">Audit Logs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#best-practices">Best Practices</a><ul>
+<li><a class="reference internal" href="#naming">Naming</a></li>
+<li><a class="reference internal" href="#resource-management">Resource Management</a></li>
+<li><a class="reference internal" href="#security">Security</a></li>
+<li><a class="reference internal" href="#sharing-strategy">Sharing Strategy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#assistant-stuck-in-starting">Assistant stuck in <code class="docutils literal notranslate"><span class="pre">starting</span></code></a></li>
+<li><a class="reference internal" href="#cannot-share-with-a-user">Cannot share with a user</a></li>
+<li><a class="reference internal" href="#agent-terminal-shows-blank-or-error">Agent terminal shows blank or error</a></li>
+<li><a class="reference internal" href="#logs-not-streaming">Logs not streaming</a></li>
+<li><a class="reference internal" href="#template-deployment-fails">Template deployment fails</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">AgentX</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">User Guide</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/agentx/user-guide.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/agentx/user-guide.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/agentx/user-guide.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/agentx/user-guide.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/agentx/user-guide.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading">¶</a></h1>
+<section id="managing-assistants">
+<h2>Managing Assistants<a class="headerlink" href="#managing-assistants" title="Link to this heading">¶</a></h2>
+<section id="creating-an-assistant">
+<h3>Creating an Assistant<a class="headerlink" href="#creating-an-assistant" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Click <strong>“Create Assistant”</strong> in the top-right of the My Assistants tab</p></li>
+<li><p>Fill in:</p>
+<ul class="simple">
+<li><p><strong>Name</strong> — unique per user, lowercase, hyphens allowed (e.g. <code class="docutils literal notranslate"><span class="pre">my-project</span></code>)</p></li>
+<li><p><strong>Description</strong> <em>(optional)</em> — free-form text</p></li>
+<li><p><strong>Provider</strong> — select DKubeX; enter your API key; choose a model from the dropdown (the dropdown validates the key live)</p></li>
+<li><p><strong>Workspace source</strong> <em>(optional)</em> — blank project or git clone (see below)</p></li>
+</ul>
+</li>
+<li><p>Click <strong>“Create”</strong></p></li>
+</ol>
+<p>The assistant card immediately shows <code class="docutils literal notranslate"><span class="pre">starting</span></code>; status updates in real time via Server-Sent Events and transitions to <code class="docutils literal notranslate"><span class="pre">running</span></code> once the pod’s readiness probe passes.</p>
+</section>
+<section id="workspace-sources">
+<h3>Workspace Sources<a class="headerlink" href="#workspace-sources" title="Link to this heading">¶</a></h3>
+<p>Set the workspace source when creating an assistant to control what lives in <code class="docutils literal notranslate"><span class="pre">/home/&lt;user&gt;/&lt;dir&gt;/</span></code>:</p>
+<p><strong>Blank project:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;workspace_sources&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="3"><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;blank&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;dir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-project&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;git_init&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
+</span><span data-line="4"><span class="w">  </span><span class="p">]</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git_init:</span> <span class="pre">true</span></code> runs <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> in the directory after creation.</p></li>
+</ul>
+<p><strong>Clone from git (SSH):</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;workspace_sources&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="3"><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;git&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;dir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-project&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;git@github.com:org/repo.git&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;main&quot;</span><span class="w"> </span><span class="p">}</span>
+</span><span data-line="4"><span class="w">  </span><span class="p">]</span>
+</span><span data-line="5"><span class="p">}</span>
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p>Requires a DKubeX SSH key configured in your account settings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ref</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">main</span></code> if omitted.</p></li>
+</ul>
+</section>
+<section id="assistant-configuration">
+<h3>Assistant Configuration<a class="headerlink" href="#assistant-configuration" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">configuration</span></code> JSON object accepts:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">model_provider</span></code></p></td>
+<td><p>string</p></td>
+<td><p>—</p></td>
+<td><p>Provider ID (e.g. <code class="docutils literal notranslate"><span class="pre">securellm</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">model</span></code></p></td>
+<td><p>string</p></td>
+<td><p>—</p></td>
+<td><p>Model ID selected from the provider’s list</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">model_api_key</span></code></p></td>
+<td><p>string</p></td>
+<td><p>—</p></td>
+<td><p>API key (stored as a Kubernetes Secret; never returned in API responses)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">model_base_url</span></code></p></td>
+<td><p>string</p></td>
+<td><p>provider default</p></td>
+<td><p>Override the provider’s base URL</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">workspace_sources</span></code></p></td>
+<td><p>array</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+<td><p>Workspace initialization entries</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources.cpu_request</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">100m</span></code></p></td>
+<td><p>Pod CPU request</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resources.cpu_limit</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2000m</span></code></p></td>
+<td><p>Pod CPU limit</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources.memory_request</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">256Mi</span></code></p></td>
+<td><p>Pod memory request</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resources.memory_limit</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1Gi</span></code></p></td>
+<td><p>Pod memory limit</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="assistant-lifecycle">
+<h3>Assistant Lifecycle<a class="headerlink" href="#assistant-lifecycle" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action</p></th>
+<th class="head"><p>From status</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Start</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stopped</span></code></p></td>
+<td><p>Creates Kubernetes resources; status → <code class="docutils literal notranslate"><span class="pre">starting</span></code> → <code class="docutils literal notranslate"><span class="pre">running</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Stop</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">running</span></code></p></td>
+<td><p>Deletes Kubernetes resources; status → <code class="docutils literal notranslate"><span class="pre">stopping</span></code> → <code class="docutils literal notranslate"><span class="pre">stopped</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Restart</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">running</span></code></p></td>
+<td><p>Deletes then recreates resources; status → <code class="docutils literal notranslate"><span class="pre">starting</span></code> → <code class="docutils literal notranslate"><span class="pre">running</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Delete</strong></p></td>
+<td><p>any</p></td>
+<td><p>Deletes all Kubernetes resources and the database record</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>The workspace PVC is <strong>not</strong> deleted when an assistant is stopped — data persists. The PVC is removed only when the assistant is deleted.</p>
+</div></blockquote>
+</section>
+<section id="coding-agent-terminals">
+<h3>Coding-Agent Terminals<a class="headerlink" href="#coding-agent-terminals" title="Link to this heading">¶</a></h3>
+<p>Once an assistant is <code class="docutils literal notranslate"><span class="pre">running</span></code>, click its card to open it. The toolbar shows links for each agent TUI:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tab</p></th>
+<th class="head"><p>Path</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OpenClaw</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/agentx/&lt;uuid&gt;/webui/</span></code></p></td>
+<td><p>AI gateway web interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>Terminal</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/agentx/&lt;uuid&gt;/shell/</span></code></p></td>
+<td><p>Plain bash shell</p></td>
+</tr>
+<tr class="row-even"><td><p>Claude Code</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/agentx/&lt;uuid&gt;/claude/</span></code></p></td>
+<td><p>Anthropic Claude Code CLI</p></td>
+</tr>
+<tr class="row-odd"><td><p>OpenCode</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/agentx/&lt;uuid&gt;/opencode/</span></code></p></td>
+<td><p>anomalyco/opencode CLI</p></td>
+</tr>
+<tr class="row-even"><td><p>Gemini CLI</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/agentx/&lt;uuid&gt;/gemini/</span></code></p></td>
+<td><p>Google Gemini CLI</p></td>
+</tr>
+<tr class="row-odd"><td><p>Codex CLI</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/agentx/&lt;uuid&gt;/codex/</span></code></p></td>
+<td><p>OpenAI Codex CLI</p></td>
+</tr>
+<tr class="row-even"><td><p>Copilot CLI</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/agentx/&lt;uuid&gt;/copilot/</span></code></p></td>
+<td><p>GitHub Copilot CLI</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mistral Vibe</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/agentx/&lt;uuid&gt;/vibe/</span></code></p></td>
+<td><p>Mistral Vibe coding agent</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Each terminal is <strong>lazily activated</strong> — the process starts on your first click. If you close the browser tab, the session keeps running and reconnects when you return.</p>
+</section>
+<section id="viewing-logs">
+<h3>Viewing Logs<a class="headerlink" href="#viewing-logs" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Open an assistant card</p></li>
+<li><p>Click <strong>“View Logs”</strong></p></li>
+<li><p>Live log lines stream from the pod via SSE</p></li>
+<li><p>Stream automatically closes after 5 minutes of inactivity or when you close the panel</p></li>
+</ol>
+</section>
+<section id="pinning-assistants">
+<h3>Pinning Assistants<a class="headerlink" href="#pinning-assistants" title="Link to this heading">¶</a></h3>
+<p>Click the pin icon on any assistant card (owned or shared) to add it to your pinned section at the top of the list. Pins persist across sessions and are personal to your account.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="sharing-assistants">
+<h2>Sharing Assistants<a class="headerlink" href="#sharing-assistants" title="Link to this heading">¶</a></h2>
+<section id="share-with-users">
+<h3>Share with Users<a class="headerlink" href="#share-with-users" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Open an assistant card → click <strong>“Share”</strong></p></li>
+<li><p>Search by username or email</p></li>
+<li><p>Select the permission level:</p></li>
+</ol>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Permission</p></th>
+<th class="head"><p>What the recipient can do</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>VIEW</strong></p></td>
+<td><p>See assistant details and metadata</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>USE</strong></p></td>
+<td><p>Open terminals, view logs, interact with the assistant</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>MANAGE</strong></p></td>
+<td><p>Edit configuration, restart, start/stop, modify settings</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Click <strong>“Share”</strong></p></li>
+</ol>
+<p>The recipient sees the assistant immediately in their <strong>“Shared with Me”</strong> tab.</p>
+</section>
+<section id="managing-shares">
+<h3>Managing Shares<a class="headerlink" href="#managing-shares" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Update permission</strong>: open the Shares panel on an assistant → click “Edit” next to a share → change level → Save</p></li>
+<li><p><strong>Revoke</strong>: click “Remove” next to a share → confirm</p></li>
+</ul>
+</section>
+<section id="accessing-shared-assistants">
+<h3>Accessing Shared Assistants<a class="headerlink" href="#accessing-shared-assistants" title="Link to this heading">¶</a></h3>
+<p>Navigate to the <strong>“Shared with Me”</strong> tab to see all assistants shared with you. The permission level is shown on each card and determines which actions are available.</p>
+<p><strong>Shared assistant limitations:</strong></p>
+<ul class="simple">
+<li><p>Only the <strong>owner</strong> can delete, share with others, or publish as a template</p></li>
+<li><p>The owner retains full control regardless of what permission was granted to others</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="templates">
+<h2>Templates<a class="headerlink" href="#templates" title="Link to this heading">¶</a></h2>
+<p>Templates are saved assistant configurations that can be shared and redeployed.</p>
+<section id="publishing-a-template">
+<h3>Publishing a Template<a class="headerlink" href="#publishing-a-template" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Open a working assistant → click <strong>“Publish as Template”</strong></p></li>
+<li><p>Provide:</p>
+<ul class="simple">
+<li><p><strong>Name</strong> — template name (unique)</p></li>
+<li><p><strong>Description</strong></p></li>
+<li><p><strong>Tags</strong> — comma-separated, for filtering (e.g. <code class="docutils literal notranslate"><span class="pre">python,claude</span></code>)</p></li>
+<li><p><strong>Version</strong> — semantic version (e.g. <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code>)</p></li>
+<li><p><strong>Metadata</strong> <em>(optional)</em> — JSON object with arbitrary extra info</p></li>
+</ul>
+</li>
+<li><p>Click <strong>“Publish”</strong></p></li>
+</ol>
+</section>
+<section id="deploying-from-a-template">
+<h3>Deploying from a Template<a class="headerlink" href="#deploying-from-a-template" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Browse the Templates tab</p></li>
+<li><p>Click <strong>“Deploy”</strong> on a template</p></li>
+<li><p>Provide a unique assistant name</p></li>
+<li><p>Click <strong>“Create”</strong></p></li>
+</ol>
+</section>
+<section id="template-versions">
+<h3>Template Versions<a class="headerlink" href="#template-versions" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Each published template can have multiple versions</p></li>
+<li><p>Versions can be marked as deprecated with a message</p></li>
+<li><p>When deploying, the latest non-deprecated version is used by default</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="admin-features">
+<h2>Admin Features<a class="headerlink" href="#admin-features" title="Link to this heading">¶</a></h2>
+<p>The <strong>“Admin”</strong> tab is visible only to users with the <code class="docutils literal notranslate"><span class="pre">admin</span></code> role.</p>
+<section id="system-health">
+<h3>System Health<a class="headerlink" href="#system-health" title="Link to this heading">¶</a></h3>
+<p>Displays:</p>
+<ul class="simple">
+<li><p>Total users, total assistants, running/stopped/error counts</p></li>
+<li><p>Database health status</p></li>
+<li><p>Kubernetes status (enabled / disabled)</p></li>
+<li><p>API uptime</p></li>
+</ul>
+</section>
+<section id="user-management">
+<h3>User Management<a class="headerlink" href="#user-management" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action</p></th>
+<th class="head"><p>Steps</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>List users</p></td>
+<td><p>Admin → Users tab</p></td>
+</tr>
+<tr class="row-odd"><td><p>View user</p></td>
+<td><p>Click a user row</p></td>
+</tr>
+<tr class="row-even"><td><p>View user’s assistants</p></td>
+<td><p>Admin → <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/admin/users/{id}/assistants</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Update role</p></td>
+<td><p>Click user → Edit → change role → Save</p></td>
+</tr>
+<tr class="row-even"><td><p>Delete user</p></td>
+<td><p>Click user → Delete → confirm</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Role changes are written to the audit log.</p>
+</section>
+<section id="assistant-management">
+<h3>Assistant Management<a class="headerlink" href="#assistant-management" title="Link to this heading">¶</a></h3>
+<p>Admins can see, stop, and delete <strong>any</strong> assistant regardless of owner:</p>
+<ul class="simple">
+<li><p><strong>List</strong>: Admin → Assistants tab; filter by status, owner, or search by name</p></li>
+<li><p><strong>Stop</strong>: click Stop on any running assistant; action is logged</p></li>
+<li><p><strong>Delete</strong>: click Delete; action is logged</p></li>
+</ul>
+</section>
+<section id="pod-metrics">
+<h3>Pod Metrics<a class="headerlink" href="#pod-metrics" title="Link to this heading">¶</a></h3>
+<p>Admin → Metrics shows CPU (millicores) and memory (MiB) for every pod labeled <code class="docutils literal notranslate"><span class="pre">app=agentx</span></code>, mapped to their assistant name.</p>
+</section>
+<section id="audit-logs">
+<h3>Audit Logs<a class="headerlink" href="#audit-logs" title="Link to this heading">¶</a></h3>
+<p>Admin → Audit Logs shows all recorded admin actions (newest first). Filter by action type or search by resource ID / username.</p>
+<p>Current logged actions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">admin.assistant.stop</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">admin.assistant.delete</span></code></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
+<section id="naming">
+<h3>Naming<a class="headerlink" href="#naming" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Use lowercase with hyphens: <code class="docutils literal notranslate"><span class="pre">code-reviewer</span></code>, <code class="docutils literal notranslate"><span class="pre">data-pipeline</span></code></p></li>
+<li><p>Be project-specific: <code class="docutils literal notranslate"><span class="pre">my-project-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">my-project-prod</span></code></p></li>
+</ul>
+</section>
+<section id="resource-management">
+<h3>Resource Management<a class="headerlink" href="#resource-management" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Stop</strong> assistants when not actively used — the workspace PVC is preserved</p></li>
+<li><p>Monitor resource usage via the Admin metrics panel</p></li>
+<li><p>Set appropriate CPU/memory limits to avoid cluster resource starvation</p></li>
+</ul>
+</section>
+<section id="security">
+<h3>Security<a class="headerlink" href="#security" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Never put raw secrets in the <code class="docutils literal notranslate"><span class="pre">configuration</span></code> JSON beyond <code class="docutils literal notranslate"><span class="pre">model_api_key</span></code> (which is stored as a Kubernetes Secret and filtered from API responses)</p></li>
+<li><p>Use the SSH key feature for git workspace sources rather than embedding credentials</p></li>
+</ul>
+</section>
+<section id="sharing-strategy">
+<h3>Sharing Strategy<a class="headerlink" href="#sharing-strategy" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Grant <strong>VIEW</strong> to reviewers who just need to see the setup</p></li>
+<li><p>Grant <strong>USE</strong> to teammates who will interact with the assistant</p></li>
+<li><p>Grant <strong>MANAGE</strong> only when the recipient needs to modify configuration</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<section id="assistant-stuck-in-starting">
+<h3>Assistant stuck in <code class="docutils literal notranslate"><span class="pre">starting</span></code><a class="headerlink" href="#assistant-stuck-in-starting" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Check the pod’s events: <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">describe</span> <span class="pre">pod</span> <span class="pre">&lt;name&gt;</span> <span class="pre">-n</span> <span class="pre">&lt;namespace&gt;</span></code></p></li>
+<li><p>Check logs: <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">logs</span> <span class="pre">&lt;pod&gt;</span> <span class="pre">-n</span> <span class="pre">&lt;namespace&gt;</span></code></p></li>
+<li><p>Common causes: invalid API key (validated pre-flight but may fail at runtime), SSH key missing for git source, insufficient cluster resources</p></li>
+</ul>
+</section>
+<section id="cannot-share-with-a-user">
+<h3>Cannot share with a user<a class="headerlink" href="#cannot-share-with-a-user" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Verify the username/email exists in AgentX (users are provisioned on first login)</p></li>
+<li><p>Check if already shared (re-sharing the same user raises a conflict)</p></li>
+</ul>
+</section>
+<section id="agent-terminal-shows-blank-or-error">
+<h3>Agent terminal shows blank or error<a class="headerlink" href="#agent-terminal-shows-blank-or-error" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>The agent process lazy-starts; wait a few seconds on first open</p></li>
+<li><p>If status is <code class="docutils literal notranslate"><span class="pre">error</span></code>, the pod has crashed — check pod logs and events (<code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">describe</span> <span class="pre">pod</span></code>) for the specific failure</p></li>
+</ul>
+</section>
+<section id="logs-not-streaming">
+<h3>Logs not streaming<a class="headerlink" href="#logs-not-streaming" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Confirm the assistant status is <code class="docutils literal notranslate"><span class="pre">running</span></code></p></li>
+<li><p>Refresh the page</p></li>
+<li><p>Streams close after 5 minutes of inactivity; reopen via the Logs button</p></li>
+</ul>
+</section>
+<section id="template-deployment-fails">
+<h3>Template deployment fails<a class="headerlink" href="#template-deployment-fails" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Check that the template’s <code class="docutils literal notranslate"><span class="pre">model_api_key</span></code> is still valid (keys are stored in the template configuration)</p></li>
+<li><p>Ensure the workspace source (if any) is still accessible</p></li>
+<li><p>Check for naming conflicts with existing assistants</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="getting-started.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Getting Started with AgentX</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../langflow/index.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Langflow on DKubeX</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 21.05.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

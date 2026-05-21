@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Deploying Models - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Playground Guide" href="playground.html" /><link rel="prev" title="Getting Started with ModelStudio" href="getting-started.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/modelstudio/deploying-models.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=9454f7d5" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/modelstudio/deploying-models.html"/>
+  <meta property="og:title" content="Deploying Models"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="../../../applications/modelstudio/deploying-models.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../agentx/index.html">AgentX</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/overview.html">AgentX Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/getting-started.html">Getting Started with AgentX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../agentx/user-guide.html">User Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../langflow/index.html">Langflow on DKubeX</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/building-flows.html">Building Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/deploying-flows.html">Deploying Flows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../lexpilot/index.html">LexPilot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../lexpilot/features.html">Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">ModelStudio</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with ModelStudio</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Deploying Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="playground.html">Playground Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mortiq/index.html">MortIQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mortiq/getting-started.html">Getting Started with MortIQ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ragflow/index.html">RAGFlow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/index.html">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/ai_search.html">Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/manage_files.html">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/rag.html">What is Retrieval-Augmented-Generation (RAG)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/basics/agent_context_engine.html">What is Agent context engine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/models/llm_api_key_setup.html">Configure model API key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/start_chat.html">Start AI chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/implement_deep_research.html">Implement deep research</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat/set_chat_variables.html">Set variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_knowledge_base.html">Configure dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/run_retrieval_test.html">Run retrieval test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/use_tag_sets.html">Use tag set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/enable_excel2html.html">Enable Excel2HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_page_rank.html">Set page rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_metadata.html">Set metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/manage_metadata.html">Manage metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/configure_child_chunking_strategy.html">Configure child chunking strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/set_context_window.html">Set context window size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/select_pdf_parser.html">Select PDF parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/construct_knowledge_graph.html">Construct knowledge graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/enable_raptor.html">Enable RAPTOR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/extract_table_of_contents.html">Extract table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/advanced/auto_metadata.html">Auto-extract metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/dataset/add_data_source/add_google_drive.html">Add Google Drive as data source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/embed_agent_into_webpage.html">Embed Agent into webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/best_practices/accelerate_agent_question_answering.html">Accelerate answering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/build_ecommerce_customer_support_agent.html">Build Ecommerce customer support agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/ingestion_pipeline_quickstart.html">Ingestion pipeline quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_quickstarts/sandbox_quickstart.html">Sandbox quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/begin.html">Begin component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_title.html">Title chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/chunker_token.html">Token chunker component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/docs_generator.html">Docs Generator component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/execute_sql.html">Execute SQL tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/http.html">HTTP request component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/indexer.html">Indexer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/message.html">Message component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/parser.html">Parser component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agent/agent_component_reference/transformer.html">Transformer component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/configurations.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/backup_and_migration.html">Backup &amp; migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_service.html">Admin Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/admin_ui.html">Admin UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/administrator/admin/ragflow_cli.html">RAGFlow CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/memory/use_memory.html">Use memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/manage_team_members.html">Manage team members</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/join_or_leave_team.html">Join or leave a team</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_knowledge_bases.html">Share dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_chat_assistant.html">Share chat assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_agents.html">Share Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_model.html">Share models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team/share_memory.html">Share memory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#llm-models-kubeai">LLM Models (KubeAI)</a><ul>
+<li><a class="reference internal" href="#discovering-llm-models">Discovering LLM Models</a></li>
+<li><a class="reference internal" href="#the-llm-deploy-form">The LLM Deploy Form</a><ul>
+<li><a class="reference internal" href="#fields">Fields</a></li>
+<li><a class="reference internal" href="#resource-profiles">Resource Profiles</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#llm-deployment-lifecycle">LLM Deployment Lifecycle</a></li>
+<li><a class="reference internal" href="#managing-deployed-llm-models">Managing Deployed LLM Models</a><ul>
+<li><a class="reference internal" href="#edit-a-model">Edit a Model</a></li>
+<li><a class="reference internal" href="#delete-a-model">Delete a Model</a></li>
+<li><a class="reference internal" href="#promote-demote-scope">Promote / Demote Scope</a></li>
+<li><a class="reference internal" href="#open-in-playground">Open in Playground</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#llm-crd-naming-convention">LLM CRD Naming Convention</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ml-models-kserve">ML Models (KServe)</a><ul>
+<li><a class="reference internal" href="#discovering-ml-models">Discovering ML Models</a></li>
+<li><a class="reference internal" href="#the-ml-deploy-form">The ML Deploy Form</a><ul>
+<li><a class="reference internal" href="#id1">Fields</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ml-deployment-lifecycle">ML Deployment Lifecycle</a></li>
+<li><a class="reference internal" href="#managing-deployed-ml-models">Managing Deployed ML Models</a><ul>
+<li><a class="reference internal" href="#id2">Delete a Model</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#kserve-inferenceservice-naming">KServe InferenceService Naming</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nvidia-nim-models">NVIDIA NIM Models</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#discovering-nim-models">Discovering NIM Models</a></li>
+<li><a class="reference internal" href="#registering-a-nim-model">Registering a NIM Model</a><ul>
+<li><a class="reference internal" href="#id3">Fields</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nim-deployment-lifecycle">NIM Deployment Lifecycle</a></li>
+<li><a class="reference internal" href="#managing-registered-nim-models">Managing Registered NIM Models</a><ul>
+<li><a class="reference internal" href="#available-actions">Available Actions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nim-model-availability">NIM Model Availability</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">ModelStudio</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Deploying Models</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/modelstudio/deploying-models.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/modelstudio/deploying-models.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/modelstudio/deploying-models.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/modelstudio/deploying-models.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/modelstudio/deploying-models.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="deploying-models">
+<h1>Deploying Models<a class="headerlink" href="#deploying-models" title="Link to this heading">¶</a></h1>
+<p>ModelStudio supports three deployment paths:</p>
+<ul class="simple">
+<li><p><strong>LLM models</strong> — deployed as <a class="reference external" href="https://github.com/substratusai/kubeai">KubeAI</a> <code class="docutils literal notranslate"><span class="pre">Model</span></code> CRDs, sourced from HuggingFace Hub</p></li>
+<li><p><strong>ML models</strong> — deployed as <a class="reference external" href="https://kserve.github.io/website/">KServe</a> <code class="docutils literal notranslate"><span class="pre">InferenceService</span></code> CRDs, sourced from MLflow or HuggingFace Hub</p></li>
+<li><p><strong>NVIDIA NIM models</strong> — registered from the NVIDIA NGC catalog and deployed in-cluster on GPU nodes via the k8s-nim-operator</p></li>
+</ul>
+<hr class="docutils" />
+<section id="llm-models-kubeai">
+<h2>LLM Models (KubeAI)<a class="headerlink" href="#llm-models-kubeai" title="Link to this heading">¶</a></h2>
+<section id="discovering-llm-models">
+<h3>Discovering LLM Models<a class="headerlink" href="#discovering-llm-models" title="Link to this heading">¶</a></h3>
+<p>Use the <strong>LLM Catalog</strong> page to search HuggingFace. Models are shown across four tabs:</p>
+<ul class="simple">
+<li><p><strong>Trending</strong> — models gaining momentum</p></li>
+<li><p><strong>Most Downloaded</strong> — sorted by all-time download count</p></li>
+<li><p><strong>Recent</strong> — newest additions</p></li>
+<li><p><strong>Search Results</strong> — results for your query or HuggingFace URL/slug</p></li>
+</ul>
+<p>You can filter by:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Filter</p></th>
+<th class="head"><p>Options</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Task</p></td>
+<td><p>Text Generation, Embeddings, Reranking, Text to Speech <em>(Speech Recognition and Image Generation — coming in future KubeAI releases)</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>Precision</p></td>
+<td><p>GGUF (quantized), Safetensors, PyTorch</p></td>
+</tr>
+<tr class="row-even"><td><p>Quantization</p></td>
+<td><p>Q4_K_M, Q4_0, Q5_K_M, Q6_K, Q8_0, FP16, BF16</p></td>
+</tr>
+<tr class="row-odd"><td><p>Input modality</p></td>
+<td><p>Text, Image, Audio, Video, File</p></td>
+</tr>
+<tr class="row-even"><td><p>Output modality</p></td>
+<td><p>Text, Image, Audio, Embeddings, Video</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img alt="LLM Catalog filters" src="../../_images/catalog-filters.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="the-llm-deploy-form">
+<h3>The LLM Deploy Form<a class="headerlink" href="#the-llm-deploy-form" title="Link to this heading">¶</a></h3>
+<p>Clicking <strong>Deploy</strong> on a model card opens the deploy modal.</p>
+<p><img alt="Deploy modal form" src="../../_images/deploy-modal.png" /></p>
+<section id="fields">
+<h4>Fields<a class="headerlink" href="#fields" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Model</strong></p></td>
+<td><p>Pre-filled from the LLM Catalog card</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Qwen/Qwen2.5-0.5B-Instruct</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Quantization</strong></p></td>
+<td><p>Weight precision level; lower = smaller, faster, slightly less accurate</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Q4_K_M</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Engine</strong></p></td>
+<td><p>Inference runtime (auto-selected based on model type)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OLlama</span></code>, <code class="docutils literal notranslate"><span class="pre">vLLM</span></code>, <code class="docutils literal notranslate"><span class="pre">Infinity</span></code>, <code class="docutils literal notranslate"><span class="pre">FasterWhisper</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Features</strong></p></td>
+<td><p>Inference capabilities to enable</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TextGeneration</span></code>, <code class="docutils literal notranslate"><span class="pre">TextEmbedding</span></code>, <code class="docutils literal notranslate"><span class="pre">Reranking</span></code>, <code class="docutils literal notranslate"><span class="pre">TextToSpeech</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Resource Profile</strong></p></td>
+<td><p>CPU/GPU/memory allocation preset</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cpu-4c-8g</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Replicas</strong></p></td>
+<td><p>Number of serving pods</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Scope</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Private</span></code> (only you) or <code class="docutils literal notranslate"><span class="pre">Shared</span></code> (all workspace users)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Private</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Supported features in the current KubeAI release:</strong> <code class="docutils literal notranslate"><span class="pre">TextGeneration</span></code>, <code class="docutils literal notranslate"><span class="pre">TextEmbedding</span></code>, <code class="docutils literal notranslate"><span class="pre">Reranking</span></code>, <code class="docutils literal notranslate"><span class="pre">TextToSpeech</span></code>. Support for <code class="docutils literal notranslate"><span class="pre">SpeechToText</span></code>, <code class="docutils literal notranslate"><span class="pre">ImageText</span></code> (Vision), and <code class="docutils literal notranslate"><span class="pre">ImageGeneration</span></code> is planned for future KubeAI releases.</p>
+</div></blockquote>
+</section>
+<section id="resource-profiles">
+<h4>Resource Profiles<a class="headerlink" href="#resource-profiles" title="Link to this heading">¶</a></h4>
+<p>Resource profiles are cluster-defined presets. The list is fetched dynamically from <code class="docutils literal notranslate"><span class="pre">/api/resource-profiles</span></code> based on the nodes available in your cluster. Contact your cluster admin to add custom profiles.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="llm-deployment-lifecycle">
+<h3>LLM Deployment Lifecycle<a class="headerlink" href="#llm-deployment-lifecycle" title="Link to this heading">¶</a></h3>
+<p>After you click <strong>Deploy</strong>, the KubeAI <code class="docutils literal notranslate"><span class="pre">Model</span></code> CRD is created. KubeAI reconciles the resource:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">Pending → Downloading → Starting → Running
+</span></pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Pending</span></code></p></td>
+<td><p>CRD created, pods not yet scheduled</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Downloading</span></code></p></td>
+<td><p>Model weights being pulled from HuggingFace</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Starting</span></code></p></td>
+<td><p>Pods scheduled, inference server initializing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Running</span></code></p></td>
+<td><p>Model ready to serve requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Failed</span></code></p></td>
+<td><p>Pod could not start — check cluster logs</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Monitor progress in the <strong>Dashboard</strong> model table or the <strong>LLM Models</strong> page.</p>
+</section>
+<hr class="docutils" />
+<section id="managing-deployed-llm-models">
+<h3>Managing Deployed LLM Models<a class="headerlink" href="#managing-deployed-llm-models" title="Link to this heading">¶</a></h3>
+<p>All your LLM deployments are visible on the <strong>LLM Models</strong> page.</p>
+<section id="edit-a-model">
+<h4>Edit a Model<a class="headerlink" href="#edit-a-model" title="Link to this heading">¶</a></h4>
+<p>Click the <strong>Edit</strong> (pencil) icon to update:</p>
+<ul class="simple">
+<li><p>Resource profile</p></li>
+<li><p>Replica count</p></li>
+</ul>
+<p>The update is applied via a <code class="docutils literal notranslate"><span class="pre">PATCH</span> <span class="pre">/api/models/{id}</span></code> call and takes effect immediately.</p>
+</section>
+<section id="delete-a-model">
+<h4>Delete a Model<a class="headerlink" href="#delete-a-model" title="Link to this heading">¶</a></h4>
+<p>Click the <strong>Delete</strong> (trash) icon. The KubeAI CRD is removed and all pods are terminated. This action cannot be undone.</p>
+</section>
+<section id="promote-demote-scope">
+<h4>Promote / Demote Scope<a class="headerlink" href="#promote-demote-scope" title="Link to this heading">¶</a></h4>
+<p>Use the scope toggle button to move a model between <strong>Private</strong> and <strong>Shared</strong>:</p>
+<ul class="simple">
+<li><p><strong>Promote to Shared</strong> — the model becomes visible and usable by all workspace users</p></li>
+<li><p><strong>Demote to Private</strong> — the model is restricted back to your account</p></li>
+</ul>
+<blockquote>
+<div><p>Note: promoting renames the CRD from <code class="docutils literal notranslate"><span class="pre">{username}--{model-id}</span></code> to <code class="docutils literal notranslate"><span class="pre">shared--{model-id}</span></code>.</p>
+</div></blockquote>
+</section>
+<section id="open-in-playground">
+<h4>Open in Playground<a class="headerlink" href="#open-in-playground" title="Link to this heading">¶</a></h4>
+<p>Click the <strong>Playground</strong> icon on any running model to jump directly to the inference workbench with that model pre-selected.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="llm-crd-naming-convention">
+<h3>LLM CRD Naming Convention<a class="headerlink" href="#llm-crd-naming-convention" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Scope</p></th>
+<th class="head"><p>CRD Name Pattern</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Private</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{username}--{model-id}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alice--qwen2-0-5b</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Shared</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">shared--{model-id}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">shared--qwen2-0-5b</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Model IDs are sanitized to be Kubernetes-safe (lowercase alphanumeric and <code class="docutils literal notranslate"><span class="pre">-</span></code>, max 63 characters). Colons, slashes, underscores, and dots in the original HuggingFace model ID are converted to <code class="docutils literal notranslate"><span class="pre">-</span></code>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ml-models-kserve">
+<h2>ML Models (KServe)<a class="headerlink" href="#ml-models-kserve" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>ML model deployment requires KServe to be enabled in the platform. The <strong>ML Registry</strong> and <strong>ML Models</strong> pages are hidden when KServe is not available.</p>
+</div></blockquote>
+<section id="discovering-ml-models">
+<h3>Discovering ML Models<a class="headerlink" href="#discovering-ml-models" title="Link to this heading">¶</a></h3>
+<p>Use the <strong>ML Registry</strong> page. It has two tabs:</p>
+<ul>
+<li><p><strong>MLflow</strong> — lists registered models from your connected MLflow model registry. Each model shows its registered versions and lifecycle stages (<code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">Staging</span></code>, <code class="docutils literal notranslate"><span class="pre">Production</span></code>, <code class="docutils literal notranslate"><span class="pre">Archived</span></code>). Requires MLflow to be configured in the platform. All MLflow model formats (sklearn, XGBoost, LightGBM, TensorFlow, PyTorch, ONNX, MLflow pyfunc, HuggingFace) are deployable.</p></li>
+<li><p><strong>HuggingFace ML</strong> — HuggingFace models filtered to ML-oriented task types. <strong>Only text-based pipeline tasks are currently supported</strong> by <code class="docutils literal notranslate"><span class="pre">kserve-huggingfaceserver</span></code>. Models with vision, audio, tabular, or multimodal pipeline tags show a <strong>Coming Soon</strong> badge and cannot be deployed yet.</p>
+<p><strong>Supported HuggingFace ML pipeline tasks:</strong>
+<code class="docutils literal notranslate"><span class="pre">text-generation</span></code>, <code class="docutils literal notranslate"><span class="pre">text2text-generation</span></code>, <code class="docutils literal notranslate"><span class="pre">text-classification</span></code>, <code class="docutils literal notranslate"><span class="pre">token-classification</span></code>, <code class="docutils literal notranslate"><span class="pre">fill-mask</span></code>, <code class="docutils literal notranslate"><span class="pre">question-answering</span></code>, <code class="docutils literal notranslate"><span class="pre">summarization</span></code>, <code class="docutils literal notranslate"><span class="pre">translation</span></code>, <code class="docutils literal notranslate"><span class="pre">feature-extraction</span></code></p>
+<p><strong>Coming Soon (not yet deployable):</strong>
+<code class="docutils literal notranslate"><span class="pre">image-classification</span></code>, <code class="docutils literal notranslate"><span class="pre">object-detection</span></code>, <code class="docutils literal notranslate"><span class="pre">tabular-classification</span></code>, <code class="docutils literal notranslate"><span class="pre">tabular-regression</span></code>, <code class="docutils literal notranslate"><span class="pre">image-segmentation</span></code>, <code class="docutils literal notranslate"><span class="pre">audio-classification</span></code>, and other vision/audio/multimodal tasks</p>
+</li>
+</ul>
+<p>Click <strong>Deploy</strong> on any supported model card to open the ML deploy form.</p>
+</section>
+<hr class="docutils" />
+<section id="the-ml-deploy-form">
+<h3>The ML Deploy Form<a class="headerlink" href="#the-ml-deploy-form" title="Link to this heading">¶</a></h3>
+<section id="id1">
+<h4>Fields<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Model Name</strong></p></td>
+<td><p>Auto-filled from MLflow model name or HuggingFace model ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">my-classifier</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Model Format</strong></p></td>
+<td><p>Framework used to train the model</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sklearn</span></code>, <code class="docutils literal notranslate"><span class="pre">xgboost</span></code>, <code class="docutils literal notranslate"><span class="pre">lightgbm</span></code>, <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>, <code class="docutils literal notranslate"><span class="pre">pytorch</span></code>, <code class="docutils literal notranslate"><span class="pre">onnx</span></code>, <code class="docutils literal notranslate"><span class="pre">mlflow</span></code>, <code class="docutils literal notranslate"><span class="pre">huggingface</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Source</strong></p></td>
+<td><p>Where the model artifact lives</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlflow</span></code>, <code class="docutils literal notranslate"><span class="pre">huggingface</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Min Replicas</strong></p></td>
+<td><p>Minimum number of serving pods</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Max Replicas</strong></p></td>
+<td><p>Maximum pods for autoscaling</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>CPU Request / Limit</strong></p></td>
+<td><p>Pod CPU allocation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">500m</span></code> / <code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Memory Request / Limit</strong></p></td>
+<td><p>Pod memory allocation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">512Mi</span></code> / <code class="docutils literal notranslate"><span class="pre">4Gi</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>GPU</strong></p></td>
+<td><p>Optional GPU resource key and count</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nvidia.com/gpu:</span> <span class="pre">1</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>ModelStudio automatically resolves the correct KServe runtime based on the model format:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Format</p></th>
+<th class="head"><p>KServe Runtime</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sklearn</span></code></p></td>
+<td><p>kserve-sklearnserver</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xgboost</span></code></p></td>
+<td><p>kserve-xgbserver</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lightgbm</span></code></p></td>
+<td><p>kserve-lgbserver</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tensorflow</span></code></p></td>
+<td><p>kserve-tensorflow-serving</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pytorch</span></code></p></td>
+<td><p>kserve-torchserve</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">onnx</span></code></p></td>
+<td><p>kserve-tritonserver</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mlflow</span></code></p></td>
+<td><p>kserve-mlserver (pyfunc)</p></td>
+<td><p>Auto-detects framework flavor from MLmodel file</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">huggingface</span></code></p></td>
+<td><p>kserve-huggingfaceserver</p></td>
+<td><p>Text-based pipeline tasks only; vision/audio/multimodal coming soon</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For MLflow-sourced models, leaving the format as <code class="docutils literal notranslate"><span class="pre">mlflow</span></code> enables auto-detection: the backend reads the <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code> artifact file and selects the purpose-built runtime (e.g. <code class="docutils literal notranslate"><span class="pre">kserve-sklearnserver</span></code> for sklearn flavors) instead of the generic mlserver.</p>
+<blockquote>
+<div><p><strong>HuggingFace ML models</strong> are limited to text-based pipeline tasks by the current <code class="docutils literal notranslate"><span class="pre">kserve-huggingfaceserver</span></code> runtime. Attempting to deploy a vision, audio, or multimodal HuggingFace model is blocked in the UI with a <strong>Coming Soon</strong> indicator.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ml-deployment-lifecycle">
+<h3>ML Deployment Lifecycle<a class="headerlink" href="#ml-deployment-lifecycle" title="Link to this heading">¶</a></h3>
+<p>After clicking <strong>Deploy</strong>, a KServe <code class="docutils literal notranslate"><span class="pre">InferenceService</span></code> CRD is created:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">Pending → Running
+</span><span data-line="2">         → Failed
+</span></pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Pending</span></code></p></td>
+<td><p>InferenceService created, model not yet loaded</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Running</span></code></p></td>
+<td><p>Model loaded and ready to serve requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Failed</span></code></p></td>
+<td><p>Pod could not start or model failed to load</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Monitor progress in the <strong>ML Models</strong> table.</p>
+</section>
+<hr class="docutils" />
+<section id="managing-deployed-ml-models">
+<h3>Managing Deployed ML Models<a class="headerlink" href="#managing-deployed-ml-models" title="Link to this heading">¶</a></h3>
+<p>All your KServe deployments are visible on the <strong>ML Models</strong> page.</p>
+<p>You can filter by format, source, status, and owner.</p>
+<section id="id2">
+<h4>Delete a Model<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
+<p>Click the <strong>Delete</strong> icon. The KServe <code class="docutils literal notranslate"><span class="pre">InferenceService</span></code> CRD is removed. You can only delete models you own.</p>
+<blockquote>
+<div><p>Shared ML models are visible to all workspace users but can only be deleted by the model owner.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="kserve-inferenceservice-naming">
+<h3>KServe InferenceService Naming<a class="headerlink" href="#kserve-inferenceservice-naming" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Scope</p></th>
+<th class="head"><p>Name Pattern</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Private</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ml-p-{model_name}-{user_hash8}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ml-p-myclassifier-a1b2c3d4</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Shared</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ml-s-{model_name}-{user_hash8}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ml-s-myclassifier-a1b2c3d4</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Model names are truncated and sanitized to fit Kubernetes naming constraints. The 8-character user hash ensures uniqueness when multiple users deploy the same model name.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="nvidia-nim-models">
+<h2>NVIDIA NIM Models<a class="headerlink" href="#nvidia-nim-models" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>NIM requires the NIM feature to be enabled in the platform. The <strong>NIM</strong> tab in Catalog and NGC API Keys in Settings are hidden when NIM is not available.</p>
+</div></blockquote>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>An <a class="reference external" href="https://org.ngc.nvidia.com/setup/personal-keys">NGC Personal API Key</a> — add it in <strong>Settings → NGC API Keys</strong></p></li>
+<li><p>GPU-enabled nodes and the k8s-nim-operator installed by your cluster admin. Contact your admin to confirm availability.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="discovering-nim-models">
+<h3>Discovering NIM Models<a class="headerlink" href="#discovering-nim-models" title="Link to this heading">¶</a></h3>
+<p>Go to the <strong>Catalog</strong> page and select the <strong>NIM</strong> tab. The NIM catalog shows models available from NVIDIA NGC, organized by category:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Examples</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LLM</p></td>
+<td><p>LLaMA 3.1, Mistral, Gemma, Phi</p></td>
+</tr>
+<tr class="row-odd"><td><p>Embedding</p></td>
+<td><p>NV-Embed, E5-Mistral</p></td>
+</tr>
+<tr class="row-even"><td><p>Reranking</p></td>
+<td><p>NV-RerankQA</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vision-Language</p></td>
+<td><p>VILA, PaliGemma</p></td>
+</tr>
+<tr class="row-even"><td><p>Speech</p></td>
+<td><p>Parakeet ASR</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Use the search bar to find a specific model by name.</p>
+</section>
+<hr class="docutils" />
+<section id="registering-a-nim-model">
+<h3>Registering a NIM Model<a class="headerlink" href="#registering-a-nim-model" title="Link to this heading">¶</a></h3>
+<p>Click <strong>Register</strong> on any NIM catalog card to open the registration form.</p>
+<section id="id3">
+<h4>Fields<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Display Name</strong></p></td>
+<td><p>Human-readable name shown in Playground and model lists</p></td>
+<td><p>model id basename</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>GPU Count</strong></p></td>
+<td><p>Number of GPUs per replica</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Replicas</strong></p></td>
+<td><p>Number of serving instances</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Inference Engine</strong> <em>(advanced)</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">auto</span></code> (vLLM for LLMs, operator picks for non-LLMs), <code class="docutils literal notranslate"><span class="pre">vllm</span></code>, or <code class="docutils literal notranslate"><span class="pre">tensorrt_llm</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">auto</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>NIM inference runs on your cluster’s GPU nodes. The NGC API Key saved in <strong>Settings</strong> is used for both NGC catalog metadata and the in-cluster image-pull secret. Click <strong>Register</strong> to create the registration.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="nim-deployment-lifecycle">
+<h3>NIM Deployment Lifecycle<a class="headerlink" href="#nim-deployment-lifecycle" title="Link to this heading">¶</a></h3>
+<p>After registering a NIM model, the deployment goes through several phases:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">Pending → Deploying (cache) → Deploying (service) → Running
+</span></pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Typical Duration</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Pending</span></code></p></td>
+<td><p>Registration created, deployment initializing</p></td>
+<td><p>Seconds</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Deploying</span></code> (cache)</p></td>
+<td><p>Model weights being downloaded to cluster storage</p></td>
+<td><p>10–25 min for LLM models</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Deploying</span></code> (service)</p></td>
+<td><p>Inference container starting, TRT engines compiling</p></td>
+<td><p>2–5 min on first start</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Running</span></code></p></td>
+<td><p>Ready to serve inference requests</p></td>
+<td><p>—</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The Playground shows a status banner and disables inference for NIM models that are not yet Running.</p>
+<blockquote>
+<div><p><strong>First-time deployment:</strong> TRT engine compilation happens on the first start and takes 2–5 minutes. Subsequent restarts on the same node are faster because compiled engines are cached.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="managing-registered-nim-models">
+<h3>Managing Registered NIM Models<a class="headerlink" href="#managing-registered-nim-models" title="Link to this heading">¶</a></h3>
+<p>All registered NIM models are shown in the <strong>NIM Models</strong> section of the <strong>Dashboard</strong> and on the <strong>LLM Models</strong> page.</p>
+<section id="available-actions">
+<h4>Available Actions<a class="headerlink" href="#available-actions" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>View status</p></td>
+<td><p>Live status with ready replica count</p></td>
+</tr>
+<tr class="row-odd"><td><p>Scale replicas</p></td>
+<td><p>Change replica count up or down (set to 0 to release GPU)</p></td>
+</tr>
+<tr class="row-even"><td><p>Restart pods</p></td>
+<td><p>Rolling restart of inference pods</p></td>
+</tr>
+<tr class="row-odd"><td><p>View logs</p></td>
+<td><p>Tail the last N lines from the container</p></td>
+</tr>
+<tr class="row-even"><td><p>View events</p></td>
+<td><p>Recent events from the deployment</p></td>
+</tr>
+<tr class="row-odd"><td><p>Unregister</p></td>
+<td><p>Removes registration and all cluster resources</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Unregister:</strong> Unregistering removes the inference deployment and cached model weights from the cluster. This action cannot be undone.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="nim-model-availability">
+<h3>NIM Model Availability<a class="headerlink" href="#nim-model-availability" title="Link to this heading">¶</a></h3>
+<p>Registered NIM models are visible to all authenticated workspace users, but inference is only available once the deployment reaches Running status.</p>
+<p>There is no private/shared scope toggle for NIM models — all registered NIM models are workspace-wide.</p>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="getting-started.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Getting Started with ModelStudio</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="playground.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Playground Guide</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 21.05.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>
