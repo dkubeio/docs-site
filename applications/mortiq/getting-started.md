@@ -323,13 +323,13 @@ ANTHROPIC_API_KEY=your_key_here
 
 ## Next Steps
 
-- Read the [Architecture Guide](./architecture.md) to understand system design
-- Explore the [API Reference](./api-reference.md) for integration
-- Check [Deployment Guide](./deployment.md) for production setup
+- Return to the [MortIQ overview](./index.md) for a tour of the agents, pipelines, and
+  privacy model.
+- Try all three pipelines — run the demo applications through Underwriting, then explore
+  the Servicing and Quality Control workflows from the pipeline selector.
 
 ## Support
 
-For additional help:
-- Check the [Troubleshooting Guide](../internal/troubleshooting.md)
-- Review [Development Guide](../internal/development.md)
+For additional help, open an issue in the
+[MortIQ repository](https://github.com/dkubeio/mortiq).
 - Open an issue in the project repository

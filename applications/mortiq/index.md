@@ -1,152 +1,77 @@
-# MortIQ Overview
+# MortIQ
 
-![MortIQ Icon](./media/mortiq-icon.svg)
+![MortIQ](./media/icon.svg)
 
-**MortIQ** is an AI-powered mortgage underwriting assistant that automates document processing, validation, and compliance checking for mortgage applications. Built with privacy-first principles, it uses a multi-agent architecture to process mortgage packets efficiently while maintaining strict data security.
+**MortIQ** is an AI-powered mortgage underwriting assistant that automates document
+processing, validation, and compliance checking for mortgage applications. Built with
+privacy-first principles, it uses a multi-agent architecture to process mortgage packets
+in minutes while keeping sensitive borrower data on your own infrastructure.
 
-## Key Features
+![MortIQ Command Center dashboard](./media/screenshot-1.png)
 
-### 🤖 Eight Specialized AI Agents
-- **Iris** - Document intake and classification (all pipelines)
-- **Rex** - Multi-engine OCR extraction (all pipelines)
-- **Val** - Deterministic validation (underwriting)
-- **Ana** - Local LLM analysis (underwriting)
-- **Claire** - Cloud-based compliance checking (underwriting)
-- **Servo** - Servicing transfer validator (servicing)
-- **Auditor** - Post-close QC auditor (quality control)
-- **Max** - Final delivery and notifications (all pipelines)
+## What MortIQ does
 
-### 🔒 Privacy-First Architecture
-- **Local Processing**: Sensitive data processed on-premises with local LLMs
-- **Anonymization**: PII automatically anonymized before cloud processing
-- **Ephemeral Mappings**: Anonymization mappings destroyed after use
-- **Zero PII Exposure**: Cloud services never see real personal information
+MortIQ takes a mortgage packet — W-2s, bank statements, tax returns, pay stubs,
+appraisals, and ID documents — and runs it through a pipeline of specialized AI agents
+that classify, extract, validate, analyze, and compliance-check the application. It
+supports three workflows:
 
-### ⚡ Performance
-- **4x Faster**: Process applications in ~4 minutes vs industry standard of 4 days
-- **Cost Efficient**: 60% reduction in cloud AI costs through intelligent routing
-- **Parallel Processing**: Multi-document concurrent extraction
-- **Shift-Left Validation**: Catch errors early with deterministic checks
+- **Underwriting** — automate review of purchase, refinance, FHA, VA, and HELOC loans.
+- **Servicing transfer** — validate data integrity when loans change servicer.
+- **Quality control** — audit closed loan files for defects before delivery.
 
-### 📊 Comprehensive Features
-- **Multi-Pipeline Support**: Underwriting, Servicing Transfer, and Quality Control
-- **Real-time Kanban Board**: Track applications across pipeline stages
-- **PDF Document Viewer**: Inline document preview with field highlighting
-- **Anomaly Detection**: Severity classification (critical/warning/info)
-- **Compliance Checking**: Fannie Mae, FHA, VA, and Freddie Mac guidelines
-- **Executive Summary**: Cross-document synthesis with AI
-- **Audit Trail**: Complete processing history with timestamps
-- **Telegram Notifications**: Critical event alerts
+![Applications Kanban board](./media/screenshot-2.png)
 
-## Use Cases
+## Main components
 
-### 1. Mortgage Underwriting
-Automate the review of mortgage applications including:
-- Purchase loans
-- Refinance applications
-- FHA loans
-- VA loans
-- HELOC applications
+MortIQ is built around eight specialized agents that hand work off to one another:
 
-### 2. Loan Servicing Transfer
-Validate data integrity during loan servicing transfers:
-- Principal balance reconciliation
-- Payment history completeness
-- Escrow balance verification
-- Interest rate consistency
-- Insurance and tax certificate currency
+| Agent | Role | Pipelines |
+| --- | --- | --- |
+| **Iris** | Document intake and classification | All |
+| **Rex** | Multi-engine OCR extraction | All |
+| **Val** | Deterministic validation | Underwriting |
+| **Ana** | Local LLM analysis | Underwriting |
+| **Claire** | Cloud-based compliance checking | Underwriting |
+| **Servo** | Servicing transfer validator | Servicing |
+| **Auditor** | Post-close QC auditor | Quality control |
+| **Max** | Final delivery and notifications | All |
 
-### 3. Post-Close Quality Control
-Audit closed loan files for defects:
-- Missing signatures detection
-- Stale appraisal checks (>120 days)
-- Income calculation verification
-- Document completeness validation
-- TRID tolerance compliance
+## Key features
 
-### Document Processing
-Extract and validate data from:
-- W-2 forms
-- 1099 forms
-- Bank statements
-- Tax returns
-- Pay stubs
-- Appraisals
-- ID documents
+- **Privacy-first processing** — sensitive data is handled on-premises by local LLMs,
+  and PII is anonymized before any cloud service sees it. Anonymization mappings are
+  ephemeral and destroyed after use.
+- **Fast turnaround** — applications are processed in roughly four minutes instead of
+  the industry-standard several days.
+- **Real-time Kanban board** — track every application as it moves through pipeline
+  stages.
+- **PDF document viewer** — inline document preview with flagged fields highlighted by
+  bounding box.
+- **Anomaly detection** — issues are surfaced with severity classification
+  (critical / warning / info).
+- **Compliance checking** — applications are checked against Fannie Mae, FHA, VA, and
+  Freddie Mac guidelines.
+- **Audit trail** — a complete, timestamped history of every processing step.
+- **Telegram notifications** — optional alerts for critical events.
 
-### Compliance Verification
-Automatically check applications against:
-- Debt-to-Income (DTI) ratios
-- Loan-to-Value (LTV) ratios
-- Credit score requirements
-- Required documentation
-- Regulatory guidelines
+## How privacy works
 
-## Architecture Highlights
+MortIQ separates processing into trust zones so cloud services never see real personal
+information:
 
-### Underwriting Pipeline
-```
-UPLOAD → Iris → Rex → Val → Ana → [ANONYMIZE] → Claire → [DEANONYMIZE] → Max → DONE
-         ↓       ↓      ↓      ↓                   ↓                         ↓
-      Classify  OCR   Validate Analyze          Comply                    Deliver
-```
+- **Local zone** — Iris, Rex, Val, and Ana process raw PII on local infrastructure.
+- **Anonymization boundary** — data is sanitized before any cloud processing.
+- **Cloud zone** — Claire receives only anonymized data for compliance analysis.
+- **Deanonymization** — results are restored with real identities for final delivery.
 
-### Servicing Pipeline
-```
-RECEIVED → Iris → Rex → Servo → Max → TRANSFERRED
-           ↓       ↓      ↓        ↓
-        Classify  OCR  Reconcile Deliver
-```
+## Tutorials
 
-### Quality Control Pipeline
-```
-SAMPLED → Iris → Rex → Auditor → Max → CLEARED/DEFECT
-          ↓       ↓      ↓          ↓
-       Classify  OCR   Audit     Deliver
-```
-
-### Privacy Boundaries
-- **Local Zone**: Iris, Rex, Val, Ana process raw PII on local infrastructure
-- **Anonymization Boundary**: Data sanitized before cloud processing
-- **Cloud Zone**: Claire receives only anonymized data
-- **Deanonymization**: Results restored with real identities for delivery
-
-## Technology Stack
-
-- **Backend**: FastAPI (Python 3.12+)
-- **Database**: SQLite (dev) / PostgreSQL (production)
-- **AI Models**: 
-  - Claude (Anthropic) for compliance
-  - Qwen 3.5 (local) for analysis
-  - GLM-OCR for document extraction
-- **Frontend**: HTMX + TailwindCSS
-- **Deployment**: Docker, Kubernetes (Helm charts included)
-
-## Quick Start
-
-See [Getting Started](./getting-started.md) for installation and setup instructions.
-
-## Documentation
-
-- [Getting Started](./getting-started.md) - Installation and first steps
-- [Architecture](./architecture.md) - System design and components
-- [API Reference](./api-reference.md) - REST API documentation
-- [Deployment](./deployment.md) - Production deployment guide
-
-## Support
-
-For issues, questions, or contributions, please refer to the project repository.
-
-## License
-
-See LICENSE file in the repository root.
+- [Getting started](./getting-started.md) — install MortIQ, load the demo data, and run
+  your first application through a pipeline.
 
 ```{toctree}
 :hidden:
 
 getting-started
-architecture
-deployment
-securellm-integration
-api-reference
 ```
