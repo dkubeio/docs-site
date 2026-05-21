@@ -8,7 +8,7 @@ LexPilot automates legal due diligence for corporate and securities transactions
 - **Text extraction** — reads both digital and scanned PDF documents.
 - **Field extraction** — pulls the key details out of every document — parties, dates, dollar amounts, valuations, share counts, and more — and records a confidence level for each value.
 
-## Multi-ahttps://github.com/dkubeio/law-lite/pull/20/conflict?name=docs%252Fpublic%252Ffeatures.md&base_oid=0962163ac2c4d5b8a71681ed8f7ff7eb2c60a869&head_oid=1d76d324de710da0803c4623302a61a650e6d6d6gent review
+## Multi-agent review
 
 Each deal package is reviewed by a team of specialized agents, each responsible for one part of the job:
 

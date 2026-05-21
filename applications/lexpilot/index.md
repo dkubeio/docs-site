@@ -15,12 +15,10 @@ LexPilot is an AI-powered legal document analysis platform that automates contra
 
 ## Tutorials
 
-
 - [Features](./features.md) — everything LexPilot can do, from document understanding to compliance checking.
 
 ```{toctree}
 :hidden:
 
 features
-
 ```
