@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 60" fill="none">
+  <defs>
+    <filter id="wl-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .wl-wordmark { fill: #0f172a; }
+      .wl-sub      { fill: #818cf8; }
+      @media (prefers-color-scheme: dark) {
+        .wl-wordmark { fill: #f1f5f9; }
+      }
+    </style>
+  </defs>
+
+  <!-- Terminal screen / window frame -->
+  <rect x="2" y="4" width="52" height="52" rx="7"
+        fill="#131722" stroke="#818cf8" stroke-width="1.5" stroke-opacity="0.3"/>
+
+  <!-- Title-bar divider -->
+  <line x1="2" y1="18" x2="54" y2="18"
+        stroke="#818cf8" stroke-width="1" stroke-opacity="0.22"/>
+
+  <!-- Traffic-light dots -->
+  <circle cx="9"  cy="11" r="3"   fill="#818cf8" fill-opacity="0.7"/>
+  <circle cx="17" cy="11" r="3"   fill="#818cf8" fill-opacity="0.4"/>
+  <circle cx="25" cy="11" r="3"   fill="#818cf8" fill-opacity="0.18"/>
+
+  <!-- >_ prompt inside the frame -->
+  <g filter="url(#wl-glow)">
+    <!-- ">" chevron -->
+    <polyline points="8,22 24,33 8,44"
+      fill="none" stroke="#818cf8" stroke-width="4"
+      stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- "_" block cursor, lower position -->
+    <rect x="27" y="40" width="18" height="5" rx="2" fill="#818cf8"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="64" y="35"
+    font-family="'Inter','Segoe UI','Helvetica Neue',Arial,sans-serif"
+    font-size="23" font-weight="700" letter-spacing="-0.4"
+    class="wl-wordmark">workspace</text>
+
+  <!-- Sub-brand -->
+  <text x="65" y="50"
+    font-family="'Inter','Segoe UI','Helvetica Neue',Arial,sans-serif"
+    font-size="8.5" font-weight="500" letter-spacing="3.2"
+    class="wl-sub">DKUBEX</text>
+</svg>
