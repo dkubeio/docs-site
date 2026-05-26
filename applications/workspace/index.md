@@ -17,7 +17,7 @@ After logging in, the **Home** page is your central hub. It shows two sections:
 - **Your Workspaces** — workspaces you own
 - **Shared with You** — workspaces others have shared with you
 
-![Home Dashboard showing Your Workspaces and Shared with You sections](./media/Screenshot%20from%202026-04-30%2010-04-29.png)
+![Home Dashboard showing Your Workspaces and Shared with You sections](./media/screenshot-1.png)
 
 Each workspace card shows its name, current status, resource configuration, and quick-action buttons. Use the **search bar** at the top to filter by name, description, or owner.
 
@@ -31,11 +31,11 @@ The new workspace wizard walks you through four steps:
 
 **Step 2 — Applications:** Pick an **application bundle** — a template that determines which apps come pre-installed (e.g., the *Minimal* bundle includes JupyterLab, Terminal, and FileBrowser).
 
-![New Workspace Step 2 — picking an application bundle template](./media/Screenshot%20from%202026-04-30%2010-05-17.png)
+![New Workspace Step 2 — picking an application bundle template](./media/screenshot-2.png)
 
 **Step 3 — Performance:** Choose a **compute profile** that sets the CPU, GPU, and RAM allocated to your workspace.
 
-![New Workspace Step 3 — choosing compute capacity](./media/Screenshot%20from%202026-04-30%2010-05-27.png)
+![New Workspace Step 3 — choosing compute capacity](./media/screenshot-3.png)
 
 | Profile | CPU | RAM | GPU |
 |---|---|---|---|
