@@ -2,10 +2,11 @@
 name: Build docs and publish site files branch
 
 on:
-  # Run on docs-related pushes (any branch/tag), tag create/delete, and manual dispatch.
+  # Rebuild and publish whenever anything on main changes. Also on tag
+  # create/delete (version list changes) and manual dispatch.
   push:
     branches:
-      - '**'
+      - main
   create:
   delete:
   workflow_dispatch:
