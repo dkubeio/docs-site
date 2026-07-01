@@ -208,8 +208,6 @@ def _format_slug(slug):
 # Canonical display names for slugs whose folder name doesn't match the
 # brand name. Overrides both the visible list label and the sidebar entry.
 APPLICATION_DISPLAY_NAMES = {
-	"lexpilot": "LexPilot",
-	"mortiq": "MortIQ",
 	"modelstudio": "ModelStudio",
 	"mlflow": "MLflow",
 	"ragflow": "RAGFlow",
