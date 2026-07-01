@@ -1,4 +1,4 @@
-# Langflow on DKubeX
+# Langflow
 
 Langflow on DKubeX is a visual AI workflow builder integrated directly into the DKubeX platform. It lets you design, run, and deploy AI pipelines — from simple LLM chains to multi-step retrieval-augmented generation (RAG) systems — using a drag-and-drop canvas, without writing boilerplate code. On DKubeX, Langflow comes pre-configured with single sign-on, cluster-local LLM and embedding models via **SecureLLM**, and a built-in one-click deployment system that promotes any flow into a persistent API endpoint.
 
