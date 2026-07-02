@@ -69,8 +69,6 @@ Generate a vector embedding for a piece of text.
 
 Rerank a list of passages by relevance to a query.
 
-![Playground reranking](./media/playground-reranking.png)
-
 - Enter a **query**
 - Enter one passage per line in the **Documents** field
 - Click **Rerank**
@@ -81,8 +79,6 @@ Rerank a list of passages by relevance to a query.
 ## Text to Speech
 
 Synthesize speech from text.
-
-![Playground text to speech](./media/playground-tts.png)
 
 - Enter text in the input field
 - Click **Synthesize**

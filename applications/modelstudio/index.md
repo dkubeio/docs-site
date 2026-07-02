@@ -13,7 +13,8 @@ ModelStudio is a web application for discovering, deploying, and running inferen
 
 ## Tutorials
 
-- [Getting started](./getting-started.md) — an overview of every page and how to deploy your first model.
+- [Getting started](./getting-started.md) — an overview of every page.
+- [Workflows](./tutorials.md) — deploy your first LLM, ML, and NIM model, step by step.
 - [Deploying models](./deploying-models.md) — LLM, ML, and NIM deployment paths in depth.
 - [Playground guide](./playground.md) — every inference mode walked through end-to-end.
 
@@ -21,6 +22,7 @@ ModelStudio is a web application for discovering, deploying, and running inferen
 :hidden:
 
 getting-started
+tutorials
 deploying-models
 playground
 ```
