@@ -20,6 +20,7 @@ Langflow on DKubeX is a visual AI workflow builder integrated directly into the 
 - [Building flows](./building-flows.md) — Canvas navigation, component configuration, variables, and version control.
 - [Components](./components.md) — Component catalog overview, DKubeX Providers (LLM and Embeddings), and custom components.
 - [Deploying flows](./deploying-flows.md) — Promote a flow to a standalone API endpoint and manage deployments.
+- [Workflows](./tutorials.md) — Build, test, and deploy a chat flow with DKubeX models, end to end.
 
 ```{toctree}
 :hidden:
@@ -28,4 +29,5 @@ getting-started
 building-flows
 components
 deploying-flows
+tutorials
 ```
