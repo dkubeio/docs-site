@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Playground Guide - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="RAGFlow" href="../ragflow/index.html" /><link rel="prev" title="Deploying Models" href="deploying-models.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/modelstudio/playground.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=9454f7d5" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/modelstudio/playground.html"/>
+  <meta property="og:title" content="Playground Guide"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="../../../applications/modelstudio/playground.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../langflow/index.html">Langflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/building-flows.html">Building Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/deploying-flows.html">Deploying Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">ModelStudio</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deploying-models.html">Deploying Models</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Playground Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ragflow/index.html">RAGFlow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/models.html">Using Models on DKubeX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/knowledge-bases.html">Knowledge Bases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat.html">Chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agents.html">Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team-and-sharing.html">Team &amp; Sharing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/build-a-qa-assistant.html">Build a Document Q&amp;A Assistant</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/user-features.html">Core Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/admin-features.html">Administrator Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../workspace/index.html">Workspace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/managing-workspaces.html">Managing Workspaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/using-your-workspace.html">Using Your Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#chat-text-generation">Chat (Text Generation)</a></li>
+<li><a class="reference internal" href="#rag-document-grounded-chat">RAG (Document-Grounded Chat)</a></li>
+<li><a class="reference internal" href="#embeddings">Embeddings</a></li>
+<li><a class="reference internal" href="#reranking">Reranking</a></li>
+<li><a class="reference internal" href="#text-to-speech">Text to Speech</a></li>
+<li><a class="reference internal" href="#coming-in-future-kubeai-releases">Coming in Future KubeAI Releases</a><ul>
+<li><a class="reference internal" href="#vision-image-text">Vision (Image + Text)</a></li>
+<li><a class="reference internal" href="#image-generation">Image Generation</a></li>
+<li><a class="reference internal" href="#speech-to-text">Speech to Text</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tips">Tips</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">ModelStudio</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Playground Guide</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/modelstudio/playground.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/modelstudio/playground.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/modelstudio/playground.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/modelstudio/playground.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/modelstudio/playground.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="playground-guide">
+<h1>Playground Guide<a class="headerlink" href="#playground-guide" title="Link to this heading">¶</a></h1>
+<p>The <strong>Playground</strong> is a unified inference workbench where you can test your deployed LLM models and registered NVIDIA NIM models.</p>
+<p>Select a model from the dropdown at the top, then choose a tab for the capability you want to test.</p>
+<p><strong>Supported model types:</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tab</p></th>
+<th class="head"><p>KubeAI LLM</p></th>
+<th class="head"><p>NVIDIA NIM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Chat (Text Generation)</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes (LLM models)</p></td>
+</tr>
+<tr class="row-odd"><td><p>RAG (Document-Grounded Chat)</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes (NIM LLM models)</p></td>
+</tr>
+<tr class="row-even"><td><p>Embeddings</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes (NIM Embedding models)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reranking</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes (NIM Reranking models)</p></td>
+</tr>
+<tr class="row-even"><td><p>Text to Speech</p></td>
+<td><p>Yes</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vision (Image + Text)</p></td>
+<td><p>Coming in a future KubeAI release</p></td>
+<td><p>Yes (NIM Vision-Language models)</p></td>
+</tr>
+<tr class="row-even"><td><p>Image Generation</p></td>
+<td><p>Coming in a future KubeAI release</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>Speech to Text</p></td>
+<td><p>Coming in a future KubeAI release</p></td>
+<td><p>—</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Self-hosted NIM models that are still deploying:</strong> A status banner appears above the input when a selected self-hosted NIM model is not yet Running. The input and Send button are disabled until the model becomes ready. The status updates automatically every 15 seconds.</p>
+</div></blockquote>
+<hr class="docutils" />
+<section id="chat-text-generation">
+<h2>Chat (Text Generation)<a class="headerlink" href="#chat-text-generation" title="Link to this heading">¶</a></h2>
+<p>Stream responses from a text-generation model.</p>
+<p><img alt="Playground chat" src="../../_images/playground-chat.png" /></p>
+<ul class="simple">
+<li><p>Type a message and press <strong>Enter</strong> or click <strong>Send</strong></p></li>
+<li><p>Responses stream in real time</p></li>
+<li><p>Token usage (prompt / completion / total) is shown after each response</p></li>
+<li><p>Use the <strong>Copy</strong> button to copy the last response to clipboard</p></li>
+<li><p><strong>Clear</strong> resets the conversation history</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="rag-document-grounded-chat">
+<h2>RAG (Document-Grounded Chat)<a class="headerlink" href="#rag-document-grounded-chat" title="Link to this heading">¶</a></h2>
+<p>Upload documents and have the model answer questions using content from them.</p>
+<p><img alt="Playground RAG" src="../../_images/playground-rag.png" /></p>
+<p><strong>Supported file types:</strong> PDF, DOCX, TXT</p>
+<p><strong>How it works:</strong></p>
+<ol class="arabic simple">
+<li><p>Upload one or more documents using the file picker</p></li>
+<li><p>The app extracts text, splits it into chunks, and embeds each chunk using a deployed embedding model</p></li>
+<li><p>When you send a message, the most relevant chunks are retrieved and injected into the model’s context as grounding</p></li>
+<li><p>The response includes <strong>source attribution</strong> — which document passages were used</p></li>
+</ol>
+<blockquote>
+<div><p>You need a deployed <strong>embedding model</strong> in addition to the text-generation model for RAG to work.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="embeddings">
+<h2>Embeddings<a class="headerlink" href="#embeddings" title="Link to this heading">¶</a></h2>
+<p>Generate a vector embedding for a piece of text.</p>
+<p><img alt="Playground embeddings" src="../../_images/playground-embeddings.png" /></p>
+<ul class="simple">
+<li><p>Enter text in the input field and click <strong>Generate</strong></p></li>
+<li><p>The embedding vector (array of floats) is displayed</p></li>
+<li><p>Useful for verifying that your embedding model is working correctly</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="reranking">
+<h2>Reranking<a class="headerlink" href="#reranking" title="Link to this heading">¶</a></h2>
+<p>Rerank a list of passages by relevance to a query.</p>
+<ul class="simple">
+<li><p>Enter a <strong>query</strong></p></li>
+<li><p>Enter one passage per line in the <strong>Documents</strong> field</p></li>
+<li><p>Click <strong>Rerank</strong></p></li>
+<li><p>Passages are returned sorted by relevance score (highest first)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="text-to-speech">
+<h2>Text to Speech<a class="headerlink" href="#text-to-speech" title="Link to this heading">¶</a></h2>
+<p>Synthesize speech from text.</p>
+<ul class="simple">
+<li><p>Enter text in the input field</p></li>
+<li><p>Click <strong>Synthesize</strong></p></li>
+<li><p>An audio player appears — click play to listen or download the audio file</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="coming-in-future-kubeai-releases">
+<h2>Coming in Future KubeAI Releases<a class="headerlink" href="#coming-in-future-kubeai-releases" title="Link to this heading">¶</a></h2>
+<p>The following tabs are present in the UI but require KubeAI model types that are not yet available. They will become functional once the corresponding KubeAI support ships.</p>
+<section id="vision-image-text">
+<h3>Vision (Image + Text)<a class="headerlink" href="#vision-image-text" title="Link to this heading">¶</a></h3>
+<p>Send images alongside text to vision-capable models.</p>
+<ul class="simple">
+<li><p>Click the <strong>Attach Image</strong> button to upload an image</p></li>
+<li><p>Type a question or instruction about the image</p></li>
+<li><p>The model receives both the image and text in the same message</p></li>
+</ul>
+</section>
+<section id="image-generation">
+<h3>Image Generation<a class="headerlink" href="#image-generation" title="Link to this heading">¶</a></h3>
+<p>Generate images from a text prompt.</p>
+<ul class="simple">
+<li><p>Enter a text prompt describing the image</p></li>
+<li><p>Click <strong>Generate</strong></p></li>
+<li><p>The generated image is displayed inline</p></li>
+</ul>
+</section>
+<section id="speech-to-text">
+<h3>Speech to Text<a class="headerlink" href="#speech-to-text" title="Link to this heading">¶</a></h3>
+<p>Transcribe audio to text.</p>
+<ul class="simple">
+<li><p>Click <strong>Record</strong> to capture audio from your microphone, or upload an audio file</p></li>
+<li><p>Click <strong>Transcribe</strong></p></li>
+<li><p>The transcription appears in the output panel</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="tips">
+<h2>Tips<a class="headerlink" href="#tips" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>The model dropdown only shows models that match the selected tab’s required features</p></li>
+<li><p>Token usage is tracked per request for all text-generation modes</p></li>
+<li><p>The Chat tab retains message history for multi-turn conversations; all other tabs are single-turn</p></li>
+</ul>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="deploying-models.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Deploying Models</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../ragflow/index.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">RAGFlow</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 02.07.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Knowledge Bases - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Chat" href="chat.html" /><link rel="prev" title="Using Models on DKubeX" href="models.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/ragflow/knowledge-bases.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=9454f7d5" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/ragflow/knowledge-bases.html"/>
+  <meta property="og:title" content="Knowledge Bases"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="../../../applications/ragflow/knowledge-bases.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../langflow/index.html">Langflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/building-flows.html">Building Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/deploying-flows.html">Deploying Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modelstudio/index.html">ModelStudio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/tutorials.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/deploying-models.html">Deploying Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/playground.html">Playground Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">RAGFlow</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html">Using Models on DKubeX</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Knowledge Bases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chat.html">Chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agents.html">Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team-and-sharing.html">Team &amp; Sharing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-a-qa-assistant.html">Build a Document Q&amp;A Assistant</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/user-features.html">Core Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/admin-features.html">Administrator Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../workspace/index.html">Workspace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/managing-workspaces.html">Managing Workspaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/using-your-workspace.html">Using Your Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#create-a-dataset">Create a dataset</a></li>
+<li><a class="reference internal" href="#configure-a-dataset">Configure a dataset</a><ul>
+<li><a class="reference internal" href="#select-a-chunking-method">Select a chunking method</a></li>
+<li><a class="reference internal" href="#select-an-embedding-model">Select an embedding model</a></li>
+<li><a class="reference internal" href="#select-a-pdf-parser">Select a PDF parser</a></li>
+<li><a class="reference internal" href="#enable-excel-to-html">Enable Excel to HTML</a></li>
+<li><a class="reference internal" href="#set-a-parent-child-chunking-strategy">Set a parent-child chunking strategy</a></li>
+<li><a class="reference internal" href="#set-the-image-table-context-window">Set the image &amp; table context window</a></li>
+<li><a class="reference internal" href="#set-page-rank">Set page rank</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#upload-and-parse-files">Upload and parse files</a><ul>
+<li><a class="reference internal" href="#intervene-with-parsing-results">Intervene with parsing results</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#manage-metadata">Manage metadata</a></li>
+<li><a class="reference internal" href="#use-tag-sets">Use tag sets</a></li>
+<li><a class="reference internal" href="#run-a-retrieval-test">Run a retrieval test</a><ul>
+<li><a class="reference internal" href="#similarity-threshold">Similarity threshold</a></li>
+<li><a class="reference internal" href="#vector-similarity-weight">Vector similarity weight</a></li>
+<li><a class="reference internal" href="#rerank-model">Rerank model</a></li>
+<li><a class="reference internal" href="#cross-language-search">Cross-language search</a></li>
+<li><a class="reference internal" href="#test-text-and-procedure">Test text and procedure</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#manage-files">Manage files</a></li>
+<li><a class="reference internal" href="#search-for-and-delete-a-dataset">Search for and delete a dataset</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">RAGFlow</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Knowledge Bases</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/knowledge-bases.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/knowledge-bases.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/ragflow/knowledge-bases.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/knowledge-bases.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/knowledge-bases.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="knowledge-bases">
+<h1>Knowledge Bases<a class="headerlink" href="#knowledge-bases" title="Link to this heading">¶</a></h1>
+<p>Most of RAGFlow’s chat assistants and agents are built on <strong>datasets</strong> (knowledge bases). A dataset parses the files you upload into real “knowledge” that future AI chats draw on. This page covers creating a dataset, configuring how it parses and chunks your files, tuning retrieval, and managing files.</p>
+<p>Before you begin, make sure you have set up chat, embedding, and (optionally) rerank models — see <a class="reference internal" href="models.html"><span class="std std-doc">Using models on DKubeX</span></a>.</p>
+<section id="create-a-dataset">
+<h2>Create a dataset<a class="headerlink" href="#create-a-dataset" title="Link to this heading">¶</a></h2>
+<p>With multiple datasets, you can build more flexible, diversified question answering.</p>
+<p><img alt="create dataset" src="../../_images/create_knowledge_base.jpg" /></p>
+</section>
+<section id="configure-a-dataset">
+<h2>Configure a dataset<a class="headerlink" href="#configure-a-dataset" title="Link to this heading">¶</a></h2>
+<p>A proper configuration is crucial: choosing the wrong embedding model or chunking method can cause semantic loss or mismatched answers.</p>
+<p><img alt="dataset configuration" src="../../_images/configure_knowledge_base.jpg" /></p>
+<section id="select-a-chunking-method">
+<h3>Select a chunking method<a class="headerlink" href="#select-a-chunking-method" title="Link to this heading">¶</a></h3>
+<p>RAGFlow offers multiple built-in chunking templates to handle files of different layouts while preserving semantic integrity. From the <strong>Built-in</strong> chunking method dropdown under <strong>Parse type</strong>, choose the template that suits your files:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Template</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>File format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>General</p></td>
+<td><p>Files are consecutively chunked based on a preset chunk token number.</p></td>
+<td><p>MD, MDX, DOCX, XLSX, XLS (Excel 97-2003), PPT, PDF, TXT, JPEG, JPG, PNG, TIF, GIF, CSV, JSON, EML, HTML</p></td>
+</tr>
+<tr class="row-odd"><td><p>Q&amp;A</p></td>
+<td><p>Retrieves relevant information and generates answers to respond to questions.</p></td>
+<td><p>XLSX, XLS (Excel 97-2003), CSV/TXT</p></td>
+</tr>
+<tr class="row-even"><td><p>Resume</p></td>
+<td><p>Enterprise edition only.</p></td>
+<td><p>DOCX, PDF, TXT</p></td>
+</tr>
+<tr class="row-odd"><td><p>Manual</p></td>
+<td><p></p></td>
+<td><p>PDF</p></td>
+</tr>
+<tr class="row-even"><td><p>Table</p></td>
+<td><p>The table mode uses TSI technology for efficient data parsing.</p></td>
+<td><p>XLSX, XLS (Excel 97-2003), CSV/TXT</p></td>
+</tr>
+<tr class="row-odd"><td><p>Paper</p></td>
+<td><p></p></td>
+<td><p>PDF</p></td>
+</tr>
+<tr class="row-even"><td><p>Book</p></td>
+<td><p></p></td>
+<td><p>DOCX, PDF, TXT</p></td>
+</tr>
+<tr class="row-odd"><td><p>Laws</p></td>
+<td><p></p></td>
+<td><p>DOCX, PDF, TXT</p></td>
+</tr>
+<tr class="row-even"><td><p>Presentation</p></td>
+<td><p></p></td>
+<td><p>PDF, PPTX</p></td>
+</tr>
+<tr class="row-odd"><td><p>Picture</p></td>
+<td><p></p></td>
+<td><p>JPEG, JPG, PNG, TIF, GIF</p></td>
+</tr>
+<tr class="row-even"><td><p>One</p></td>
+<td><p>Each document is chunked in its entirety (as one).</p></td>
+<td><p>DOCX, XLSX, XLS (Excel 97-2003), PDF, TXT</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tag</p></td>
+<td><p>The dataset functions as a tag set for the others.</p></td>
+<td><p>XLSX, CSV/TXT</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>You can also change a file’s chunking method later on the <strong>Files</strong> page.</p>
+<p><img alt="change chunking method" src="../../_images/change_chunking_method.jpg" /></p>
+</section>
+<section id="select-an-embedding-model">
+<h3>Select an embedding model<a class="headerlink" href="#select-an-embedding-model" title="Link to this heading">¶</a></h3>
+<p>An embedding model converts chunks into embeddings. On DKubeX, choose an embedding model from the DKubeX provider (see <a class="reference internal" href="models.html"><span class="std std-doc">Using models on DKubeX</span></a>).</p>
+<p>The embedding model <strong>cannot be changed once the dataset has chunks</strong> — to switch, you must first delete all existing chunks in the dataset. This ensures every file in a dataset is embedded in the same embedding space.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Some embedding models are optimized for specific languages, so performance may be compromised if you use them to embed documents in other languages.</p>
+</div></blockquote>
+</section>
+<section id="select-a-pdf-parser">
+<h3>Select a PDF parser<a class="headerlink" href="#select-a-pdf-parser" title="Link to this heading">¶</a></h3>
+<p>From v0.17.0 onward, RAGFlow decouples data extraction from chunking <strong>for PDF files</strong>, so you can choose a visual model for OCR (Optical Character Recognition), TSR (Table Structure Recognition), and DLR (Document Layout Recognition). If your PDFs contain only plain text, select <strong>Naive</strong> to skip these tasks and reduce parsing time.</p>
+<p><img alt="data extraction" src="../../_images/data_extraction.jpg" /></p>
+<p>The <strong>PDF parser</strong> dropdown appears only when you select a chunking method compatible with PDFs (<strong>General</strong>, <strong>Manual</strong>, <strong>Paper</strong>, <strong>Book</strong>, <strong>Laws</strong>, <strong>Presentation</strong>, <strong>One</strong>). Options:</p>
+<ul class="simple">
+<li><p><strong>DeepDoc</strong> — (Default) The default visual model performing OCR, TSR, and DLR tasks on PDFs; thorough but can be time-consuming.</p></li>
+<li><p><strong>Naive</strong> — Skip OCR, TSR, and DLR if <em>all</em> your PDFs are plain text.</p></li>
+<li><p><strong>MinerU</strong> — (Experimental) An open-source tool that converts PDF into machine-readable formats.</p></li>
+<li><p><strong>Docling</strong> — (Experimental) An open-source document processing tool for gen AI.</p></li>
+<li><p>A third-party visual model from a model provider.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> To use a third-party visual model, set a default VLM under <strong>Set default models</strong> on the <strong>Model providers</strong> page. Third-party visual models are marked <strong>Experimental</strong>.</p>
+</div></blockquote>
+</section>
+<section id="enable-excel-to-html">
+<h3>Enable Excel to HTML<a class="headerlink" href="#enable-excel-to-html" title="Link to this heading">¶</a></h3>
+<p>When using the <strong>General</strong> chunking method, enable the <strong>Excel to HTML</strong> toggle to convert spreadsheet files into HTML tables. If disabled, spreadsheet tables are represented as key-value pairs. For complex tables (multiple columns, merged cells, or multiple tables in one sheet) that cannot be represented that way, enable this feature.</p>
+<blockquote>
+<div><p><strong>Warning:</strong> This feature is disabled by default and applies only to spreadsheet files (XLSX or XLS). If your dataset has complex tables and you do not enable it, RAGFlow will not error, but your tables are likely to be garbled. When enabled, spreadsheet tables with more than 12 rows are split into chunks of 12 rows each.</p>
+</div></blockquote>
+</section>
+<section id="set-a-parent-child-chunking-strategy">
+<h3>Set a parent-child chunking strategy<a class="headerlink" href="#set-a-parent-child-chunking-strategy" title="Link to this heading">¶</a></h3>
+<p>A single chunk must serve both precise recall (fine-grained chunks) and answer generation (coherent, complete context) — two conflicting goals. RAGFlow’s parent-child chunking resolves this: a document is first segmented into larger <strong>parent chunks</strong> (complete semantic units), each subdivided into <strong>child chunks</strong> for precise recall. During retrieval, the system locates the most relevant child chunk and automatically associates and recalls its parent chunk — keeping recall precise while providing ample context for generation.</p>
+<p>On your dataset’s <strong>Configuration</strong> page, find the <strong>Child chunks are used for retrieval</strong> toggle and set the delimiter for child chunks.</p>
+<p><img alt="child chunking" src="../../_images/child_chunking.png" /></p>
+</section>
+<section id="set-the-image-table-context-window">
+<h3>Set the image &amp; table context window<a class="headerlink" href="#set-the-image-table-context-window" title="Link to this heading">¶</a></h3>
+<p>By default, images and tables extracted from a document’s layout are treated as independent chunks, so they are not retrieved unless the query matches them directly. The <strong>Image &amp; table context window</strong> feature groups surrounding text with adjacent visuals into a single chunk based on a configurable window size, so they are retrieved together — improving recall for charts and tables.</p>
+<p><img alt="image and table context window" src="../../_images/image_table_context_window.png" /></p>
+<p>Adjust the number of context tokens with the slider. Approximately that many tokens of text from above and below the image/table are captured and inserted into its chunk as context; boundaries are optimized at punctuation marks to preserve meaning.</p>
+</section>
+<section id="set-page-rank">
+<h3>Set page rank<a class="headerlink" href="#set-page-rank" title="Link to this heading">¶</a></h3>
+<p>If you want information from certain datasets to take precedence during retrieval, use page rank to boost the ranking of chunks from those datasets. For example, with a chat assistant drawing from dataset A (2024 news) and dataset B (2023 news), you can prioritize 2024 news.</p>
+<p>On the <strong>Configuration</strong> page, drag the <strong>Page rank</strong> slider (or type a value in the field next to it).</p>
+<blockquote>
+<div><p><strong>Note:</strong> Page rank operates at the level of the entire dataset, not individual files. The value must be an integer in the range [0, 100] — <code class="docutils literal notranslate"><span class="pre">0</span></code> disables it (default), a specific value enables it.</p>
+</div></blockquote>
+<p><strong>Scoring:</strong> If a chat assistant’s <strong>similarity threshold</strong> is 0.2, only chunks with a hybrid score above 0.2 × 100 = 20 are retrieved. If dataset A has page rank 1 and dataset B has 0, a chunk from A with an initial score of 50 gets a boost of 1 × 100 = 100, for a final score of 150 — so chunks from A always precede chunks from B.</p>
+</section>
+</section>
+<section id="upload-and-parse-files">
+<h2>Upload and parse files<a class="headerlink" href="#upload-and-parse-files" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>RAGFlow’s File system lets you link one file to multiple datasets, where each dataset holds a <em>reference</em> to the file.</p></li>
+<li><p>In a dataset you can also upload a single file or a folder (bulk upload) from your local machine, in which case the dataset holds file <em>copies</em>.</p></li>
+</ul>
+<blockquote>
+<div><p>We recommend uploading files to RAGFlow’s File system and then linking them to your datasets. That way you can delete parsed files or a whole dataset without permanently losing the originals.</p>
+</div></blockquote>
+<p>File parsing does two things: chunking files based on layout, and building embedding and full-text (keyword) indexes on those chunks. After selecting the chunking method and embedding model, start parsing:</p>
+<p><img alt="parse file" src="../../_images/parse_file.jpg" /></p>
+<p>You can use a different chunking method for a particular file, and enable or disable individual files for finer control.</p>
+<section id="intervene-with-parsing-results">
+<h3>Intervene with parsing results<a class="headerlink" href="#intervene-with-parsing-results" title="Link to this heading">¶</a></h3>
+<p>RAGFlow lets you view chunking results and intervene where necessary:</p>
+<ol class="arabic">
+<li><p>Click a file that has finished parsing to open the <strong>Chunk</strong> page and view its chunks.</p>
+<p><img alt="chunks" src="../../_images/file_chunks.jpg" /></p>
+</li>
+<li><p>Hover over each snapshot for a quick view of a chunk.</p></li>
+<li><p>Double-click a chunk to add keywords, questions, tags, or make manual changes.</p>
+<p><img alt="update chunk" src="../../_images/add_keyword_question.jpg" /></p>
+</li>
+<li><p>In <strong>Retrieval testing</strong>, ask a quick question in <strong>Test text</strong> to confirm your configuration works.</p></li>
+</ol>
+<blockquote>
+<div><p><strong>Note:</strong> Adding keywords to a chunk increases its keyword weight and can improve its position in the search list for queries containing those keywords.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="manage-metadata">
+<h2>Manage metadata<a class="headerlink" href="#manage-metadata" title="Link to this heading">¶</a></h2>
+<p>From v0.23.0 onward, you can manage metadata at the dataset level and for individual files. Metadata such as URL, author, or date is sent to the LLM together with the retrieved chunks during generation — for example, add a <code class="docutils literal notranslate"><span class="pre">url</span></code> field so the model can cite the source.</p>
+<ol class="arabic">
+<li><p>Click <strong>Metadata</strong> within your dataset to open the <strong>Manage Metadata</strong> page.</p>
+<p><img alt="manage metadata" src="../../_images/manage_metadata.png" /></p>
+</li>
+<li><p>Here you can <strong>edit values</strong> (renaming two values to be identical merges them) or <strong>delete</strong> specific values or entire fields (applies to all associated files).</p></li>
+<li><p>To manage metadata for a single file, open the file’s details, click the parsing method (e.g. <strong>General</strong>), then <strong>Set Metadata</strong> to add, delete, or modify fields for that file.</p>
+<p><img alt="set metadata" src="../../_images/set_metadata.jpg" /></p>
+<blockquote>
+<div><p><strong>Note:</strong> Metadata must be in JSON format, otherwise your updates will not be applied.</p>
+</div></blockquote>
+</li>
+<li><p>Use the <strong>Filter</strong> button in a dataset to see how many files are linked to each metadata value and to display those files.</p>
+<p><img alt="filter metadata" src="../../_images/filter_metadata.png" /></p>
+</li>
+<li><p>Metadata filtering is also supported during retrieval. In <strong>Chat</strong>, after configuring a knowledge base, you can set metadata filtering rules:</p>
+<p><img alt="metadata filtering rules" src="../../_images/metadata_filtering_rules.png" /></p>
+<ul class="simple">
+<li><p><strong>Automatic</strong> — the system filters documents based on the query and existing metadata.</p></li>
+<li><p><strong>Semi-automatic</strong> — you define the filtering scope at the field level (e.g. <strong>Author</strong>), then the system filters within that range.</p></li>
+<li><p><strong>Manual</strong> — you set precise, value-specific conditions with operators such as <strong>Equals</strong>, <strong>Not equals</strong>, <strong>In</strong>, and <strong>Not in</strong>.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="use-tag-sets">
+<h2>Use tag sets<a class="headerlink" href="#use-tag-sets" title="Link to this heading">¶</a></h2>
+<p>A <strong>tag set</strong> automatically maps user-defined tags to relevant chunks based on similarity — an extra layer of domain knowledge, useful when many chunks are so similar that the intended ones are hard to distinguish (e.g. a few chunks about “iPhone” among many about “iPhone case”).</p>
+<blockquote>
+<div><p><strong>Important:</strong> A tag set is <em>not</em> involved in indexing or retrieval directly. Do not select a tag set when configuring a chat assistant or agent.</p>
+</div></blockquote>
+<p><strong>1. Create a tag set.</strong> Prepare a tag table file (XLSX, CSV, or TXT) with two columns — <strong>Description</strong> (example chunks or queries; similarity is computed against each chunk) and <strong>Tag</strong> (tags to apply, comma-separated for multiple). Then:</p>
+<ol class="arabic simple">
+<li><p>Click <strong>+ Create dataset</strong>.</p></li>
+<li><p>On its <strong>Configuration</strong> page, select <strong>Built-in</strong> in <strong>Ingestion pipeline</strong>, then choose <strong>Tag</strong> as the chunking method.</p></li>
+<li><p>Upload and parse your table file. A tag cloud appears under <strong>Tag view</strong>, and the <strong>Table</strong> tab shows the tag frequency table.</p></li>
+</ol>
+<p><strong>2. Tag chunks.</strong> On your dataset’s <strong>Configuration</strong> page, select the tag set from the <strong>Tag sets</strong> dropdown, click <strong>Save</strong>, then re-parse your documents to start auto-tagging. In chats, each query is tagged with the tag set, and chunks with matching tags have a higher chance of retrieval.</p>
+<p><strong>3. Update a tag set.</strong> Edit tag names or delete tags in the tag frequency table (<strong>Table</strong> tab), or add new table files. After updating a tag set, re-parse your documents so their tags update accordingly.</p>
+</section>
+<section id="run-a-retrieval-test">
+<h2>Run a retrieval test<a class="headerlink" href="#run-a-retrieval-test" title="Link to this heading">¶</a></h2>
+<p>After files are uploaded and parsed, run a retrieval test before configuring a chat assistant — it verifies whether the intended chunks can be recovered, so you can quickly pinpoint what to improve.</p>
+<p><img alt="retrieval test" src="../../_images/retrieval_test.jpg" /></p>
+<p>During a test, chunks are retrieved using hybrid search combining weighted keyword similarity with either weighted vector cosine similarity or a weighted reranking score:</p>
+<section id="similarity-threshold">
+<h3>Similarity threshold<a class="headerlink" href="#similarity-threshold" title="Link to this heading">¶</a></h3>
+<p>Chunks with similarities below the threshold are filtered out. Default: <strong>0.2</strong> — only chunks with a hybrid score of 20 or higher are retrieved.</p>
+</section>
+<section id="vector-similarity-weight">
+<h3>Vector similarity weight<a class="headerlink" href="#vector-similarity-weight" title="Link to this heading">¶</a></h3>
+<p>The weight of vector similarity in the composite score. Default: <strong>0.3</strong>, making the weight of keyword similarity 0.7 (1 − 0.3).</p>
+</section>
+<section id="rerank-model">
+<h3>Rerank model<a class="headerlink" href="#rerank-model" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>If left empty, RAGFlow combines weighted keyword similarity with weighted vector cosine similarity.</p></li>
+<li><p>If a rerank model is selected, weighted keyword similarity is combined with the weighted vector reranking score.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Important:</strong> Using a rerank model significantly increases response time.</p>
+</div></blockquote>
+</section>
+<section id="cross-language-search">
+<h3>Cross-language search<a class="headerlink" href="#cross-language-search" title="Link to this heading">¶</a></h3>
+<p>Select one or more target languages from the dropdown to have the default chat model translate your query into those languages, ensuring accurate semantic matching across languages.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Ensure the selected languages are present in the dataset. If no target language is selected, the system searches only in the language of your query.</p>
+</div></blockquote>
+</section>
+<section id="test-text-and-procedure">
+<h3>Test text and procedure<a class="headerlink" href="#test-text-and-procedure" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>On the <strong>Retrieval testing</strong> page, enter your query in <strong>Test text</strong> and click <strong>Testing</strong>.</p></li>
+<li><p>If results are unsatisfactory, tune the options above and rerun.</p></li>
+</ol>
+<blockquote>
+<div><p><strong>Warning:</strong> Changes you make here (such as keyword similarity weight or similarity threshold) are not saved automatically. Apply them to your chat assistant settings or the <strong>Retrieval</strong> agent component settings.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="manage-files">
+<h2>Manage files<a class="headerlink" href="#manage-files" title="Link to this heading">¶</a></h2>
+<p>RAGFlow’s file management lets you upload files individually or in bulk and link an uploaded file to multiple datasets. Uploading to file management and then linking (rather than uploading directly to a dataset) lets you delete parsed files or a whole dataset while keeping the originals.</p>
+<ul class="simple">
+<li><p><strong>Create folders</strong> to organize your file system with nested structures.</p></li>
+<li><p><strong>Upload files</strong> from your local machine, individually or in bulk.</p></li>
+<li><p><strong>Preview files</strong> — Documents (PDF, DOCX), Tables (XLSX), and Pictures (JPEG, JPG, PNG, TIF, GIF).</p></li>
+<li><p><strong>Link a file to datasets</strong> — creates a reference in each target dataset. Deleting a file in file management automatically removes all related references across datasets.</p></li>
+<li><p><strong>Move, search, rename, and delete</strong> files or folders (search matches names in the current directory only).</p></li>
+</ul>
+<blockquote>
+<div><p>Deleting files that have been linked to datasets <strong>automatically removes</strong> all associated references across those datasets.</p>
+</div></blockquote>
+</section>
+<section id="search-for-and-delete-a-dataset">
+<h2>Search for and delete a dataset<a class="headerlink" href="#search-for-and-delete-a-dataset" title="Link to this heading">¶</a></h2>
+<p>Use the search bar to find a dataset by name.</p>
+<p><img alt="search dataset" src="../../_images/search_datasets.jpg" /></p>
+<p>To delete a dataset, hover over the three-dot menu on its card and click <strong>Delete</strong>. Deleting a dataset removes the files uploaded directly to it; file <em>references</em> created from RAGFlow’s File system are removed, but the underlying files still exist.</p>
+<p><img alt="delete dataset" src="../../_images/delete_datasets.jpg" /></p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="models.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Using Models on DKubeX</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="chat.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Chat</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 02.07.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

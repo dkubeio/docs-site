@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Chat - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Agents" href="agents.html" /><link rel="prev" title="Knowledge Bases" href="knowledge-bases.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/ragflow/chat.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=9454f7d5" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/ragflow/chat.html"/>
+  <meta property="og:title" content="Chat"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="chat.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../langflow/index.html">Langflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/building-flows.html">Building Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/deploying-flows.html">Deploying Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modelstudio/index.html">ModelStudio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/tutorials.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/deploying-models.html">Deploying Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/playground.html">Playground Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">RAGFlow</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html">Using Models on DKubeX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="knowledge-bases.html">Knowledge Bases</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="agents.html">Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team-and-sharing.html">Team &amp; Sharing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-a-qa-assistant.html">Build a Document Q&amp;A Assistant</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/user-features.html">Core Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/admin-features.html">Administrator Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../workspace/index.html">Workspace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/managing-workspaces.html">Managing Workspaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/using-your-workspace.html">Using Your Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#create-a-chat-assistant">Create a chat assistant</a><ul>
+<li><a class="reference internal" href="#assistant-settings">Assistant settings</a></li>
+<li><a class="reference internal" href="#prompt-settings">Prompt settings</a></li>
+<li><a class="reference internal" href="#model-settings">Model settings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#update-an-existing-chat-assistant">Update an existing chat assistant</a></li>
+<li><a class="reference internal" href="#variables">Variables</a></li>
+<li><a class="reference internal" href="#deep-research">Deep research</a></li>
+<li><a class="reference internal" href="#ai-search">AI search</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">RAGFlow</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Chat</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/chat.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/chat.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/ragflow/chat.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/chat.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/chat.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="chat">
+<h1>Chat<a class="headerlink" href="#chat" title="Link to this heading">¶</a></h1>
+<p>Chats in RAGFlow are based on one or more datasets. Once you have created a dataset, parsed its files, and <a class="reference internal" href="knowledge-bases.html#run-a-retrieval-test"><span class="std std-ref">run a retrieval test</span></a>, you can start an AI conversation by creating a <strong>chat assistant</strong>. Each assistant is a dialogue with its own combination of datasets, prompts, hybrid-search settings, and model settings.</p>
+<section id="create-a-chat-assistant">
+<h2>Create a chat assistant<a class="headerlink" href="#create-a-chat-assistant" title="Link to this heading">¶</a></h2>
+<p>Click the <strong>Chat</strong> tab at the top of the page, then <strong>Create an assistant</strong> to open the <strong>Chat Configuration</strong> dialogue.</p>
+<section id="assistant-settings">
+<h3>Assistant settings<a class="headerlink" href="#assistant-settings" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Assistant name</strong> — the name of your chat assistant.</p></li>
+<li><p><strong>Empty response</strong>:</p>
+<ul>
+<li><p>To <em>confine</em> answers to your datasets, enter a response here. When nothing is retrieved, the assistant uniformly replies with it.</p></li>
+<li><p>To let the assistant <em>improvise</em> when nothing is retrieved, leave it blank (this may lead to hallucinations).</p></li>
+</ul>
+</li>
+<li><p><strong>Show quote</strong> — a key RAGFlow feature, enabled by default. It clearly shows the sources each response is based on.</p></li>
+<li><p><strong>Datasets</strong> — select one or more datasets. Ensure they use the same embedding model, otherwise an error occurs.</p></li>
+</ul>
+</section>
+<section id="prompt-settings">
+<h3>Prompt settings<a class="headerlink" href="#prompt-settings" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>System</strong> — the system prompt for your LLM. You can leave the default as-is to start.</p></li>
+<li><p><strong>Similarity threshold</strong> — chunks with a similarity below this bar are filtered out. Default: <strong>0.2</strong>.</p></li>
+<li><p><strong>Vector similarity weight</strong> — the weight of vector similarity in the hybrid score. Default: <strong>0.3</strong> (so keyword similarity weight is 0.7). If a rerank model is selected, the reranker score is combined with keyword similarity instead.</p></li>
+<li><p><strong>Top N</strong> — the maximum number of chunks fed to the LLM, even if more are retrieved.</p></li>
+<li><p><strong>Multi-turn optimization</strong> — enhances queries using prior context in multi-round conversations. Enabled by default; consumes extra tokens and increases response time.</p></li>
+<li><p><strong>Reasoning</strong> — generate answers through reasoning (like Deepseek-R1 / OpenAI o1). When enabled, the model integrates deep research for unknown topics. See <a class="reference internal" href="#deep-research"><span class="xref myst">Deep research</span></a> below.</p></li>
+<li><p><strong>Rerank model</strong> — the reranker to use. Empty by default. Selecting one significantly increases response time.</p></li>
+<li><p><strong>Cross-language search</strong> — select one or more target languages; the default chat model translates your query into them for accurate matching across languages. Ensure those languages are present in the dataset.</p></li>
+<li><p><strong>Variable</strong> — variables used in the system prompt. See <a class="reference internal" href="#variables"><span class="xref myst">Variables</span></a> below.</p></li>
+</ul>
+</section>
+<section id="model-settings">
+<h3>Model settings<a class="headerlink" href="#model-settings" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Model</strong> — the chat model for this assistant (from the DKubeX provider; see <a class="reference internal" href="models.html"><span class="std std-doc">Using models on DKubeX</span></a>). You can pick a different model per assistant.</p></li>
+<li><p><strong>Creativity</strong> — a shortcut preset for <strong>Temperature</strong>, <strong>Top P</strong>, <strong>Presence penalty</strong>, and <strong>Frequency penalty</strong>:</p>
+<ul>
+<li><p><strong>Improvise</strong> — more creative responses.</p></li>
+<li><p><strong>Precise</strong> — (Default) more conservative responses.</p></li>
+<li><p><strong>Balance</strong> — a middle ground.</p></li>
+</ul>
+</li>
+<li><p><strong>Temperature</strong> — randomness of output. Default <strong>0.1</strong>. Lower is more deterministic; zero gives the same output for the same prompt.</p></li>
+<li><p><strong>Top P</strong> — nucleus sampling threshold. Default <strong>0.3</strong>.</p></li>
+<li><p><strong>Presence penalty</strong> — encourages a more diverse range of tokens. Default <strong>0.4</strong>.</p></li>
+<li><p><strong>Frequency penalty</strong> — discourages repeating the same words or phrases. Default <strong>0.7</strong>.</p></li>
+</ul>
+<p>Then start chatting:</p>
+<p><img alt="chat assistant" src="../../_images/chat_thermal_solution.jpg" /></p>
+<blockquote>
+<div><p><strong>Tip:</strong> Click the light-bulb icon above an answer to view the expanded system prompt (available for the current dialogue only), and scroll down it to see the time consumed for each task.</p>
+<p><img alt="prompt display" src="../../_images/prompt_display.jpg" /></p>
+</div></blockquote>
+</section>
+</section>
+<section id="update-an-existing-chat-assistant">
+<h2>Update an existing chat assistant<a class="headerlink" href="#update-an-existing-chat-assistant" title="Link to this heading">¶</a></h2>
+<p>Hover over an assistant and edit it to update its settings.</p>
+<p><img alt="chat settings" src="../../_images/chat_setting.jpg" /></p>
+</section>
+<section id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Link to this heading">¶</a></h2>
+<p>Variables let you dynamically adjust the system prompt.</p>
+<p><img alt="chat variables" src="../../_images/chat_variables.jpg" /></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">{knowledge}</span></code></strong> — the system’s reserved variable, representing the chunks retrieved from the datasets selected under <strong>Assistant settings</strong>. Keep it if your assistant is associated with datasets. From v0.17.0 onward you can chat without specifying datasets — in that case, remove <code class="docutils literal notranslate"><span class="pre">{knowledge}</span></code> and keep <strong>Empty response</strong> blank to avoid errors.</p></li>
+<li><p><strong>Custom variables</strong> — variables you define to pair with the system prompt. The <strong>Optional</strong> toggle controls whether a variable is required (disabled = mandatory, enabled = optional).</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Important:</strong> Variables are closely linked to the system prompt. When you add a variable, include it in the system prompt; when you delete one, remove it from the prompt too, otherwise an error occurs.</p>
+</div></blockquote>
+</section>
+<section id="deep-research">
+<h2>Deep research<a class="headerlink" href="#deep-research" title="Link to this heading">¶</a></h2>
+<p>From v0.17.0 onward, RAGFlow can integrate agentic reasoning into a chat. To activate it:</p>
+<ol class="arabic">
+<li><p>Enable the <strong>Reasoning</strong> toggle in the chat settings.</p>
+<p><img alt="reasoning toggle" src="../../_images/chat_reasoning.jpg" /></p>
+</li>
+<li><p>Enter a valid Tavily API key to enable Tavily-based web search.</p>
+<p><img alt="tavily key" src="../../_images/chat_tavily.jpg" /></p>
+</li>
+</ol>
+</section>
+<section id="ai-search">
+<h2>AI search<a class="headerlink" href="#ai-search" title="Link to this heading">¶</a></h2>
+<p>An <strong>AI search</strong> is a single-turn conversation using a predefined retrieval strategy (a hybrid search of weighted keyword similarity and weighted vector similarity) and the default chat model. Unlike a chat assistant, it does not use advanced strategies like knowledge graph, auto-keyword, or auto-question, and the related chunks are listed below the answer in descending order of similarity.</p>
+<p><img alt="create search app" src="../../_images/create_search_app.jpg" /></p>
+<p><img alt="search view" src="../../_images/search_view.jpg" /></p>
+<p>Before using it, ensure your default models are set on the <strong>Model providers</strong> page (see <a class="reference internal" href="models.html"><span class="std std-doc">Using models on DKubeX</span></a>) and that your datasets are configured and parsed.</p>
+<blockquote>
+<div><p><strong>Tip:</strong> When debugging a chat assistant, use AI search as a reference to verify your model settings and retrieval strategy. The key difference: a chat is multi-turn with configurable retrieval and model choice (and retrieved chunks are not shown alongside the answer), whereas an AI search is single-turn with a fixed strategy that lists the retrieved chunks.</p>
+</div></blockquote>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="knowledge-bases.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Knowledge Bases</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="agents.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Agents</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 02.07.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

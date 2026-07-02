@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="./">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Contributing Application Documentation - DKubeX Documentation</title><link rel="shortcut icon" href="_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/CONTRIBUTING.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=9454f7d5" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/CONTRIBUTING.html"/>
+  <meta property="og:title" content="Contributing Application Documentation"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="CONTRIBUTING.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications/index.html">Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="applications/langflow/index.html">Langflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applications/langflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/langflow/building-flows.html">Building Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/langflow/components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/langflow/deploying-flows.html">Deploying Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/langflow/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applications/modelstudio/index.html">ModelStudio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applications/modelstudio/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/modelstudio/tutorials.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/modelstudio/deploying-models.html">Deploying Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/modelstudio/playground.html">Playground Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applications/ragflow/index.html">RAGFlow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applications/ragflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/ragflow/models.html">Using Models on DKubeX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/ragflow/knowledge-bases.html">Knowledge Bases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/ragflow/chat.html">Chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/ragflow/agents.html">Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/ragflow/team-and-sharing.html">Team &amp; Sharing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/ragflow/build-a-qa-assistant.html">Build a Document Q&amp;A Assistant</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applications/securellm/index.html">SecureLLM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applications/securellm/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/securellm/user-features.html">Core Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/securellm/admin-features.html">Administrator Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/securellm/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="applications/workspace/index.html">Workspace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="applications/workspace/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/workspace/managing-workspaces.html">Managing Workspaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/workspace/using-your-workspace.html">Using Your Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applications/workspace/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#what-to-publish-scope-policy">What to publish (scope policy)</a></li>
+<li><a class="reference internal" href="#where-your-documentation-lives-in-docs-site">Where your documentation lives in docs-site</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#step-1-add-secrets-to-your-component-repo">Step 1 &#8212; Add secrets to your component repo</a></li>
+<li><a class="reference internal" href="#step-2-add-the-github-action-to-your-component-repo">Step 2 &#8212; Add the GitHub Action to your component repo</a></li>
+<li><a class="reference internal" href="#step-3-organize-your-component-repo-s-docs">Step 3 &#8212; Organize your component repo&#8217;s docs</a><ul>
+<li><a class="reference internal" href="#folder-layout">Folder layout</a></li>
+<li><a class="reference internal" href="#application-homepage-index-md">Application homepage (<code class="docutils literal notranslate">md</span></code>)</a></li>
+<li><a class="reference internal" href="#images">Images</a></li>
+<li><a class="reference internal" href="#videos-and-other-media">Videos and other media</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Contributing Application Documentation</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/CONTRIBUTING.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/CONTRIBUTING.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/CONTRIBUTING.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/CONTRIBUTING.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/CONTRIBUTING.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="contributing-application-documentation">
+<h1>Contributing Application Documentation<a class="headerlink" href="#contributing-application-documentation" title="Link to this heading">¶</a></h1>
+<p>This is the <strong>central user-facing documentation site</strong> for DKubeX applications. As a contributor, you do <strong>not</strong> edit files in this repository directly. Instead:</p>
+<ul class="simple">
+<li><p>You write and maintain your documentation in <strong>your own component repo</strong>.</p></li>
+<li><p>A GitHub Action automatically publishes your public docs to this site on every push to your repo’s <code class="docutils literal notranslate"><span class="pre">main</span></code> branch.</p></li>
+</ul>
+<p>This guide walks you through setting that action up and structuring your docs so they render correctly here.</p>
+<hr class="docutils" />
+<section id="what-to-publish-scope-policy">
+<h2>What to publish (scope policy)<a class="headerlink" href="#what-to-publish-scope-policy" title="Link to this heading">¶</a></h2>
+<p>This docs site is the <strong>user guide</strong> for DKubeX applications. Only user-facing documentation belongs here.</p>
+<p><strong>Publish these:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">index.md</span></code> — your application’s homepage. Describes what the app is, what it does, and what its main components and features are. Contains a <code class="docutils literal notranslate"><span class="pre">toctree</span></code> that links to the other published pages.</p></li>
+<li><p>Tutorials and how-to guides — task-oriented pages explaining how an end user actually uses the application.</p></li>
+</ul>
+<p><strong>Do not publish these</strong> (keep them in your component repo, outside <code class="docutils literal notranslate"><span class="pre">docs/public/</span></code>):</p>
+<ul class="simple">
+<li><p>API references.</p></li>
+<li><p>Developer guides, contributor docs, internal architecture deep-dives.</p></li>
+<li><p>Build, deploy, or operations runbooks aimed at engineers, not end users.</p></li>
+</ul>
+<p>Rule of thumb: if an end user reading the product documentation needs the page, publish it. If it’s for someone <em>building or operating</em> the application internally, keep it out.</p>
+</section>
+<hr class="docutils" />
+<section id="where-your-documentation-lives-in-docs-site">
+<h2>Where your documentation lives in docs-site<a class="headerlink" href="#where-your-documentation-lives-in-docs-site" title="Link to this heading">¶</a></h2>
+<p>You do <strong>not</strong> create or edit any files in this docs-site repo directly. The GitHub Action you’ll configure in the next steps publishes your docs from your component repo into a dedicated folder under <code class="docutils literal notranslate"><span class="pre">applications/</span></code>. Every component is self-contained:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">applications/
+</span><span data-line="2">├── index.md                        # Platform-managed landing page (do not edit)
+</span><span data-line="3">├── &lt;your-component-slug&gt;/          # Your application&#39;s folder — one per component
+</span><span data-line="4">│   ├── index.md                    # Application homepage
+</span><span data-line="5">│   ├── getting-started.md          # Tutorial
+</span><span data-line="6">│   ├── advanced-usage.md           # Tutorial
+</span><span data-line="7">│   └── media/                      # All binary assets — icons, screenshots, videos
+</span><span data-line="8">│       ├── icon.svg
+</span><span data-line="9">│       ├── screenshot.png
+</span><span data-line="10">│       └── demo.mp4
+</span><span data-line="11">└── &lt;other-components&gt;/             # Same layout, one folder per component
+</span></pre></div>
+</div>
+<p>The next sections explain how to set up your component repo so the action populates this folder automatically.</p>
+</section>
+<hr class="docutils" />
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>The docs GitHub App credentials (App ID and Private Key) are provided to you by the platform team.</p></li>
+<li><p>Your component repo is on GitHub.</p></li>
+<li><p>You have admin access to add secrets to your repo.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="step-1-add-secrets-to-your-component-repo">
+<h2>Step 1 — Add secrets to your component repo<a class="headerlink" href="#step-1-add-secrets-to-your-component-repo" title="Link to this heading">¶</a></h2>
+<p>In your component repo, go to <strong>Settings → Secrets and variables → Actions</strong> and add:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Secret</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DOCS_APP_ID</span></code></p></td>
+<td><p>Provided by the platform team</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DOCS_APP_PRIVATE_KEY</span></code></p></td>
+<td><p>Provided by the platform team</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="step-2-add-the-github-action-to-your-component-repo">
+<h2>Step 2 — Add the GitHub Action to your component repo<a class="headerlink" href="#step-2-add-the-github-action-to-your-component-repo" title="Link to this heading">¶</a></h2>
+<p>Create <code class="docutils literal notranslate"><span class="pre">.github/workflows/push-docs.yml</span></code> in your component repo:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Push Component Docs</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="nt">on</span><span class="p">:</span>
+</span><span data-line="4"><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+</span><span data-line="7"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;docs/public/**&quot;</span>
+</span><span data-line="8">
+</span><span data-line="9"><span class="nt">jobs</span><span class="p">:</span>
+</span><span data-line="10"><span class="w">  </span><span class="nt">publish</span><span class="p">:</span>
+</span><span data-line="11"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+</span><span data-line="12"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+</span><span data-line="13"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+</span><span data-line="14">
+</span><span data-line="15"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Push docs</span>
+</span><span data-line="16"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dkubeio/docs-site/.github/actions/push-docs@main</span>
+</span><span data-line="17"><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+</span><span data-line="18"><span class="w">          </span><span class="nt">component-slug</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my-component&quot;</span>
+</span><span data-line="19"><span class="w">          </span><span class="nt">public-docs-dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;docs/public&quot;</span>
+</span><span data-line="20"><span class="w">          </span><span class="nt">public-media-dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;docs/public/media&quot;</span>
+</span><span data-line="21"><span class="w">          </span><span class="nt">docs-target-repo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/dkubeio/docs-site&quot;</span>
+</span><span data-line="22"><span class="w">          </span><span class="nt">app-id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DOCS_APP_ID }}</span>
+</span><span data-line="23"><span class="w">          </span><span class="nt">app-private-key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DOCS_APP_PRIVATE_KEY }}</span>
+</span><span data-line="24"><span class="w">          </span><span class="nt">pr-enabled</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;false&quot;</span>
+</span></pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">my-component</span></code> with your application’s slug (kebab-case, unique across all components — e.g. <code class="docutils literal notranslate"><span class="pre">auth-service</span></code>, <code class="docutils literal notranslate"><span class="pre">mortgage-lite</span></code>).</p>
+</section>
+<hr class="docutils" />
+<section id="step-3-organize-your-component-repo-s-docs">
+<h2>Step 3 — Organize your component repo’s docs<a class="headerlink" href="#step-3-organize-your-component-repo-s-docs" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>Important:</strong> The directory layout described below lives <strong>inside your own component repo</strong>, not inside this docs-site repo. You never create or edit <code class="docutils literal notranslate"><span class="pre">applications/&lt;your-component-slug&gt;/</span></code> here by hand.</p>
+</div></blockquote>
+<p>The GitHub Action you configured in Step 2 watches <code class="docutils literal notranslate"><span class="pre">docs/public/</span></code> in your component repo on every push to <code class="docutils literal notranslate"><span class="pre">main</span></code> and automatically copies its contents into docs-site:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>In your component repo</p></th>
+<th class="head"><p>Lands in docs-site</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">docs/public/*.md</span></code> (and any subdirectories)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">applications/&lt;your-component-slug&gt;/*.md</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">docs/public/media/*</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">applications/&lt;your-component-slug&gt;/media/*</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The action <strong>wipes <code class="docutils literal notranslate"><span class="pre">applications/&lt;your-component-slug&gt;/</span></code> completely before each push</strong>, so removing a file from <code class="docutils literal notranslate"><span class="pre">docs/public/</span></code> in your repo removes it from the published site on the next push.</p>
+<p>Only files under <code class="docutils literal notranslate"><span class="pre">docs/public/</span></code> are published. Keep private, internal, or developer-only docs anywhere else in your repo (e.g. <code class="docutils literal notranslate"><span class="pre">docs/internal/</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/api/</span></code>).</p>
+<section id="folder-layout">
+<h3>Folder layout<a class="headerlink" href="#folder-layout" title="Link to this heading">¶</a></h3>
+<p>Keep all of your published markdown files <strong>flat</strong> under <code class="docutils literal notranslate"><span class="pre">docs/public/</span></code>. Do not nest tutorials in a subfolder — it just adds an extra <code class="docutils literal notranslate"><span class="pre">index.md</span></code> step. The only subdirectory inside <code class="docutils literal notranslate"><span class="pre">docs/public/</span></code> is <code class="docutils literal notranslate"><span class="pre">media/</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">docs/
+</span><span data-line="2">├── public/                    # ← Published to docs-site
+</span><span data-line="3">│   ├── index.md               # Application homepage (required)
+</span><span data-line="4">│   ├── getting-started.md     # Tutorial
+</span><span data-line="5">│   ├── advanced-usage.md      # Tutorial
+</span><span data-line="6">│   ├── configuration.md       # Tutorial
+</span><span data-line="7">│   └── media/                 # All binary assets — icons, screenshots, diagrams, videos
+</span><span data-line="8">│       ├── icon.svg
+</span><span data-line="9">│       ├── screenshot.png
+</span><span data-line="10">│       └── demo.mp4
+</span><span data-line="11">└── internal/                  # Never published
+</span><span data-line="12">    ├── api-reference.md
+</span><span data-line="13">    ├── architecture-notes.md
+</span><span data-line="14">    └── runbook.md
+</span></pre></div>
+</div>
+</section>
+<section id="application-homepage-index-md">
+<h3>Application homepage (<code class="docutils literal notranslate"><span class="pre">index.md</span></code>)<a class="headerlink" href="#application-homepage-index-md" title="Link to this heading">¶</a></h3>
+<p>Your <code class="docutils literal notranslate"><span class="pre">index.md</span></code> is the homepage for your application’s section of the docs site. It is required.</p>
+<p>It must:</p>
+<ul class="simple">
+<li><p>Use an appropriate top-level heading for your application.</p></li>
+<li><p>Describe what the application is, what it does, and what its main components and features are.</p></li>
+<li><p>Include a <strong>visible “Tutorials” section</strong> (or similarly named section) with markdown links to every other published page, so users can discover them directly from the page body.</p></li>
+<li><p>Include a <strong>hidden <code class="docutils literal notranslate"><span class="pre">toctree</span></code></strong> that lists those same pages so Sphinx can build the sidebar navigation, breadcrumbs, and previous/next links.</p></li>
+</ul>
+<p>Sample homepage template:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gh"># My Application</span>
+</span><span data-line="2">
+</span><span data-line="3">My Application is a … (one-paragraph description of what the app is and does).
+</span><span data-line="4">
+</span><span data-line="5"><span class="gu">## Key features</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="k">-</span><span class="w"> </span>Feature one — short description.
+</span><span data-line="8"><span class="k">-</span><span class="w"> </span>Feature two — short description.
+</span><span data-line="9">
+</span><span data-line="10"><span class="gu">## Tutorials</span>
+</span><span data-line="11">
+</span><span data-line="12"><span class="k">-</span><span class="w"> </span>[<span class="nt">Getting started</span>](<span class="na">./getting-started.md</span>) — install and run your first workflow.
+</span><span data-line="13"><span class="k">-</span><span class="w"> </span>[<span class="nt">Advanced usage</span>](<span class="na">./advanced-usage.md</span>) — common patterns and tips.
+</span><span data-line="14"><span class="k">-</span><span class="w"> </span>[<span class="nt">Configuration</span>](<span class="na">./configuration.md</span>) — every option you can set.
+</span><span data-line="15">
+</span><span data-line="16">```{toctree}
+</span><span data-line="17">:hidden:
+</span><span data-line="18">
+</span><span data-line="19">getting-started
+</span><span data-line="20">advanced-usage
+</span><span data-line="21">configuration
+</span><span data-line="22">```
+</span></pre></div>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>The visible “Tutorials” section and the hidden <code class="docutils literal notranslate"><span class="pre">toctree</span></code> should list the <strong>same</strong> pages — the visible section is what users click; the hidden toctree is what Sphinx uses to build navigation.</p></li>
+<li><p>List pages without <code class="docutils literal notranslate"><span class="pre">.md</span></code> in <code class="docutils literal notranslate"><span class="pre">toctree</span></code> entries.</p></li>
+<li><p>Paths in the <code class="docutils literal notranslate"><span class="pre">toctree</span></code> are relative to your <code class="docutils literal notranslate"><span class="pre">index.md</span></code>.</p></li>
+</ul>
+</section>
+<section id="images">
+<h3>Images<a class="headerlink" href="#images" title="Link to this heading">¶</a></h3>
+<p>Put every image into <code class="docutils literal notranslate"><span class="pre">docs/public/media/</span></code> and reference it with a path <strong>relative to the markdown file</strong> where the image appears.</p>
+<p>Examples:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gh"># From docs/public/index.md</span>
+</span><span data-line="2">![<span class="nt">Architecture</span>](<span class="na">./media/architecture.png</span>)
+</span><span data-line="3">
+</span><span data-line="4"><span class="gh"># From docs/public/advanced-usage.md</span>
+</span><span data-line="5">![<span class="nt">Architecture</span>](<span class="na">./media/architecture.png</span>)
+</span></pre></div>
+</div>
+<p>If the relative path to <code class="docutils literal notranslate"><span class="pre">media/</span></code> is wrong, the image will not render.</p>
+<p>Supported image formats: <code class="docutils literal notranslate"><span class="pre">.png</span></code>, <code class="docutils literal notranslate"><span class="pre">.jpg</span></code>/<code class="docutils literal notranslate"><span class="pre">.jpeg</span></code>, <code class="docutils literal notranslate"><span class="pre">.svg</span></code>, <code class="docutils literal notranslate"><span class="pre">.webp</span></code>, <code class="docutils literal notranslate"><span class="pre">.gif</span></code>.</p>
+</section>
+<section id="videos-and-other-media">
+<h3>Videos and other media<a class="headerlink" href="#videos-and-other-media" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">media/</span></code> is <strong>not just for images</strong> — it is the single home for any binary asset referenced by your docs: icons, screenshots, diagrams, and videos.</p>
+<p>To embed a video, use the MyST <code class="docutils literal notranslate"><span class="pre">{video}</span></code> directive (provided by <code class="docutils literal notranslate"><span class="pre">sphinxcontrib-video</span></code>, already enabled on this site):</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span data-line="1">```{video} ./media/demo.mp4
+</span><span data-line="2">:width: 100%
+</span><span data-line="3">```
+</span></pre></div>
+</div>
+<p>Supported options include <code class="docutils literal notranslate"><span class="pre">:autoplay:</span></code>, <code class="docutils literal notranslate"><span class="pre">:loop:</span></code>, <code class="docutils literal notranslate"><span class="pre">:muted:</span></code>, <code class="docutils literal notranslate"><span class="pre">:poster:</span></code>, <code class="docutils literal notranslate"><span class="pre">:width:</span></code>, <code class="docutils literal notranslate"><span class="pre">:height:</span></code>, and <code class="docutils literal notranslate"><span class="pre">:nocontrols:</span></code>.</p>
+<p>Recommended video formats: <code class="docutils literal notranslate"><span class="pre">.mp4</span></code> (H.264) for broad browser support, or <code class="docutils literal notranslate"><span class="pre">.webm</span></code>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">component-slug</span></code></strong>: Must be unique across all component repos (kebab-case recommended). New slugs are picked up automatically — as soon as your first push includes an <code class="docutils literal notranslate"><span class="pre">index.md</span></code>, your component appears in the site navigation. No manual registration is required.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">pr-enabled</span></code></strong>: Set to <code class="docutils literal notranslate"><span class="pre">&quot;true&quot;</span></code> in your workflow if you want the action to open a PR for review on docs-site instead of pushing directly to <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p></li>
+<li><p><strong>Only <code class="docutils literal notranslate"><span class="pre">docs/public/</span></code> is published</strong> — anything outside that directory stays private in your repo.</p></li>
+<li><p>Pushes to docs-site’s <code class="docutils literal notranslate"><span class="pre">main</span></code> branch automatically trigger a documentation build and live-site deploy.</p></li>
+</ul>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 02.07.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/shibuya.js?v=50760d75"></script>
+      <script src="_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="_static/version-badge.js?v=433fc88a"></script></body>
+</html>

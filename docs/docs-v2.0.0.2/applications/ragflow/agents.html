@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Agents - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Team &amp; Sharing" href="team-and-sharing.html" /><link rel="prev" title="Chat" href="chat.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/ragflow/agents.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=9454f7d5" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/ragflow/agents.html"/>
+  <meta property="og:title" content="Agents"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="../../../applications/ragflow/agents.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../langflow/index.html">Langflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/building-flows.html">Building Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/deploying-flows.html">Deploying Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modelstudio/index.html">ModelStudio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/tutorials.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/deploying-models.html">Deploying Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/playground.html">Playground Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">RAGFlow</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html">Using Models on DKubeX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="knowledge-bases.html">Knowledge Bases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chat.html">Chat</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="team-and-sharing.html">Team &amp; Sharing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-a-qa-assistant.html">Build a Document Q&amp;A Assistant</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/user-features.html">Core Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/admin-features.html">Administrator Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../workspace/index.html">Workspace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/managing-workspaces.html">Managing Workspaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/using-your-workspace.html">Using Your Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../workspace/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#create-an-agent">Create an agent</a></li>
+<li><a class="reference internal" href="#quickstart-an-e-commerce-customer-support-agent">Quickstart: an e-commerce customer support agent</a><ul>
+<li><a class="reference internal" href="#create-the-agent-app">1. Create the agent app</a></li>
+<li><a class="reference internal" href="#add-a-categorize-component">2. Add a Categorize component</a></li>
+<li><a class="reference internal" href="#build-a-product-feature-comparison-workflow">3. Build a product feature comparison workflow</a></li>
+<li><a class="reference internal" href="#build-a-product-user-guide-workflow">4. Build a product user guide workflow</a></li>
+<li><a class="reference internal" href="#build-an-installation-booking-assistant">5. Build an installation booking assistant</a></li>
+<li><a class="reference internal" href="#connect-a-message-component-and-run">6. Connect a Message component and run</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">RAGFlow</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Agents</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/agents.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/ragflow/agents.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/ragflow/agents.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/agents.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/ragflow/agents.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="agents">
+<h1>Agents<a class="headerlink" href="#agents" title="Link to this heading">¶</a></h1>
+<p>Agents and RAG are complementary. On top of its RAG features, RAGFlow provides an <strong>agent</strong> mechanism — a no-code workflow editor on the front end and a graph-based task-orchestration framework on the back end. It lets you orchestrate techniques such as query intent classification, conversation leading, and query rewriting to handle more complex scenarios.</p>
+<p>Before building an agent, make sure you have <a class="reference internal" href="models.html"><span class="std std-doc">set up your models</span></a> and have a <a class="reference internal" href="knowledge-bases.html"><span class="std std-doc">dataset configured and parsed</span></a>.</p>
+<section id="create-an-agent">
+<h2>Create an agent<a class="headerlink" href="#create-an-agent" title="Link to this heading">¶</a></h2>
+<p>Click the <strong>Agent</strong> tab at the top of the page to open the <strong>Agent</strong> page. The cards there represent your existing agents.</p>
+<p><img alt="agent list" src="../../_images/agent_list.jpg" /></p>
+<p>RAGFlow also provides templates for different business scenarios. You can build from a template or from scratch:</p>
+<ol class="arabic">
+<li><p>Click <strong>+ Create agent</strong> to open the agent template page.</p>
+<p><img alt="agent templates" src="../../_images/agent_template_list.jpg" /></p>
+</li>
+<li><p>To start from scratch, click <strong>Create Agent</strong>. To use a template, click a card (e.g. <strong>Deep Research</strong>), name your agent, and click <strong>OK</strong>. You are taken to the no-code workflow editor.</p>
+<p><img alt="add component" src="../../_images/add_component.jpg" /></p>
+</li>
+<li><p>Click the <strong>+</strong> button on the <strong>Begin</strong> component to add the components you want in your workflow.</p></li>
+<li><p>Click <strong>Save</strong> to apply your changes.</p></li>
+</ol>
+<blockquote>
+<div><p>Agents can use a <strong>Memory</strong> module to accumulate context across interactions — configured through the agent’s <strong>Retrieval</strong> and <strong>Message</strong> components. Memory can also be shared with your team (see <a class="reference internal" href="team-and-sharing.html"><span class="std std-doc">Team &amp; sharing</span></a>).</p>
+</div></blockquote>
+</section>
+<section id="quickstart-an-e-commerce-customer-support-agent">
+<h2>Quickstart: an e-commerce customer support agent<a class="headerlink" href="#quickstart-an-e-commerce-customer-support-agent" title="Link to this heading">¶</a></h2>
+<p>This quickstart builds an agent that routes common customer requests — product comparisons, usage instructions, and installation bookings — to the right workflow.</p>
+<p><strong>Prerequisites:</strong> two datasets, <strong>Product Information</strong> and <strong>User Guide</strong>, with documents uploaded and parsed using the <strong>Manual</strong> chunking method.</p>
+<section id="create-the-agent-app">
+<h3>1. Create the agent app<a class="headerlink" href="#create-the-agent-app" title="Link to this heading">¶</a></h3>
+<p>Navigate to the <strong>Agent</strong> page and create an agent app to enter the canvas. A <strong>Begin</strong> component appears. Configure a greeting in it, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">Hi! What can I do for you?
+</span></pre></div>
+</div>
+</section>
+<section id="add-a-categorize-component">
+<h3>2. Add a Categorize component<a class="headerlink" href="#add-a-categorize-component" title="Link to this heading">¶</a></h3>
+<p>The <strong>Categorize</strong> component uses an LLM to recognize user intent and route the conversation to the correct workflow.</p>
+<p><img alt="add categorize" src="../../_images/add_categorize.png" /></p>
+</section>
+<section id="build-a-product-feature-comparison-workflow">
+<h3>3. Build a product feature comparison workflow<a class="headerlink" href="#build-a-product-feature-comparison-workflow" title="Link to this heading">¶</a></h3>
+<p><img alt="feature comparison workflow" src="../../_images/feature_comparison_workflow.png" /></p>
+<ol class="arabic">
+<li><p>Add a <strong>Retrieval</strong> component named “Feature Comparison Knowledge Base” and connect it to the <strong>Product Information</strong> dataset.</p></li>
+<li><p>Add an <strong>Agent</strong> component named “Feature Comparison Agent” after the Retrieval component.</p></li>
+<li><p>Set its <strong>System Prompt</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">You</span> <span class="n">are</span> <span class="n">a</span> <span class="n">product</span> <span class="n">specification</span> <span class="n">comparison</span> <span class="n">assistant</span><span class="o">.</span> <span class="n">Help</span> <span class="n">the</span> <span class="n">user</span> <span class="n">compare</span> <span class="n">products</span> <span class="n">by</span> <span class="n">confirming</span> <span class="n">the</span> <span class="n">models</span> <span class="ow">and</span> <span class="n">presenting</span> <span class="n">differences</span> <span class="n">clearly</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">structured</span> <span class="nb">format</span><span class="o">.</span>
+</span></pre></div>
+</div>
+</li>
+<li><p>Set its <strong>User Prompt</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">User</span><span class="s1">&#39;s query is /(Begin Input) sys.query</span>
+</span><span data-line="2"><span class="n">Schema</span> <span class="ow">is</span> <span class="o">/</span><span class="p">(</span><span class="n">Feature</span> <span class="n">Comparison</span> <span class="n">Knowledge</span> <span class="n">Base</span><span class="p">)</span> <span class="n">formalized_content</span>
+</span></pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="build-a-product-user-guide-workflow">
+<h3>4. Build a product user guide workflow<a class="headerlink" href="#build-a-product-user-guide-workflow" title="Link to this heading">¶</a></h3>
+<p><img alt="product user guide workflow" src="../../_images/product_user_guide_workflow.png" /></p>
+<ol class="arabic">
+<li><p>Add a <strong>Retrieval</strong> component named “Usage Guide Knowledge Base” and link it to the <strong>User Guide</strong> dataset.</p></li>
+<li><p>Add an <strong>Agent</strong> component named “Usage Guide Agent” with the System Prompt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">You</span> <span class="n">are</span> <span class="n">a</span> <span class="n">product</span> <span class="n">usage</span> <span class="n">guide</span> <span class="n">assistant</span><span class="o">.</span> <span class="n">Provide</span> <span class="n">step</span><span class="o">-</span><span class="n">by</span><span class="o">-</span><span class="n">step</span> <span class="n">instructions</span> <span class="k">for</span> <span class="n">setup</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="ow">and</span> <span class="n">troubleshooting</span><span class="o">.</span>
+</span></pre></div>
+</div>
+</li>
+<li><p>Set its User Prompt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">User</span><span class="s1">&#39;s query is /(Begin Input) sys.query</span>
+</span><span data-line="2"><span class="n">Schema</span> <span class="ow">is</span> <span class="o">/</span><span class="p">(</span><span class="n">Usage</span> <span class="n">Guide</span> <span class="n">Knowledge</span> <span class="n">Base</span><span class="p">)</span> <span class="n">formalized_content</span>
+</span></pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="build-an-installation-booking-assistant">
+<h3>5. Build an installation booking assistant<a class="headerlink" href="#build-an-installation-booking-assistant" title="Link to this heading">¶</a></h3>
+<p><img alt="installation booking assistant" src="../../_images/installation_booking_assistant.png" /></p>
+<ol class="arabic simple">
+<li><p>Add an <strong>Agent</strong> component named “Installation Booking Agent.”</p></li>
+<li><p>Configure its System Prompt to collect three details — contact number, preferred installation time, and installation address — then confirm them and notify the user that a technician will call.</p></li>
+</ol>
+</section>
+<section id="connect-a-message-component-and-run">
+<h3>6. Connect a Message component and run<a class="headerlink" href="#connect-a-message-component-and-run" title="Link to this heading">¶</a></h3>
+<p>Connect a <strong>Message</strong> component after the three agent branches to display the final response.</p>
+<p><img alt="reply message" src="../../_images/reply_message.png" /></p>
+<p>Click <strong>Save</strong> → <strong>Run</strong> and test the workflow with product comparison, usage guidance, and installation booking requests to verify each is routed and answered correctly.</p>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="chat.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Chat</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="team-and-sharing.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Team &amp; Sharing</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 02.07.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+  <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+</a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>
