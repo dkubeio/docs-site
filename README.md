@@ -64,7 +64,7 @@ The documentation system follows a strict source/build/publish split:
 
 ## Prerequisites
 
-- Python 3.11 or newer.
+- Python 3.12 or newer.
 - Dependencies installed from `requirements.txt`.
 
 ## Local Development Workflow
