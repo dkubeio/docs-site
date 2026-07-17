@@ -1,4 +1,4 @@
-# DKubeX Documentation
+# DKubeX2.0 Documentation
 
 <p align="right">
   <a href="#developer-cheatsheet">
