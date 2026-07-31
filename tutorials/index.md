@@ -12,6 +12,7 @@ deploying-models-on-dkubex-using-model-studio
 testing-and-deploying-guardrail-policies-in-securellm
 creating-and-using-api-keys-in-securellm
 configuring-and-enabling-ai-providers-in-securellm
+building-a-contract-qa-assistant-on-dkubex
 ```
 
 ## How to Use These Tutorials
