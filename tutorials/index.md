@@ -13,6 +13,10 @@ testing-and-deploying-guardrail-policies-in-securellm
 creating-and-using-api-keys-in-securellm
 configuring-and-enabling-ai-providers-in-securellm
 building-a-contract-qa-assistant-on-dkubex
+training-and-deploying-an-ml-model-on-dkubex
+using-claude-code-in-dkubex-workspace-with-a-claude-subscription
+using-claude-code-in-dkubex-workspace-with-dkubex-or-openrouter-models
+building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent
 ```
 
 ## How to Use These Tutorials
