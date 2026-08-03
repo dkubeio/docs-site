@@ -1,57 +1,95 @@
 # Using Your Workspace
 
-Once your workspace is **Running**, you can launch development apps inside it, work with persistent files, and share it with teammates.
+Once your workspace is **Running**, its apps appear in **Apps**, and you can work with files, run your own services, and connect over SSH.
 
 ## Using Apps
 
-Each workspace can run multiple development tools, called **apps**, side by side.
+Your workspace ships twelve apps. Each one appears as its own tile in **Apps** while the workspace is running.
 
-### Available Apps
+![The Apps page, where the workspace's twelve apps appear as tiles alongside the other applications you have access to](./media/workspace-apps.png)
 
 | App | What it is |
 |---|---|
-| **JupyterLab** | Interactive notebook environment for Python, R, and more |
-| **Terminal** | Browser-based command-line terminal |
-| **FileBrowser** | Graphical file manager for your workspace files |
+| **JupyterLab** | Notebooks and interactive Python |
+| **VS Code** | code-server IDE in the browser |
+| **Terminal** | Interactive bash shell |
+| **FileBrowser** | Browse and manage your files |
+| **Claude Code** | Anthropic's agentic coding CLI |
+| **OpenCode** | Open-source terminal coding agent |
+| **Antigravity** | Google's terminal coding agent (`agy`) |
+| **Codex** | OpenAI's coding agent CLI |
+| **Copilot CLI** | GitHub Copilot in the terminal |
+| **Mistral Vibe** | Mistral's coding agent CLI |
+| **OpenClaw** | Multi-model agent gateway and web UI |
+| **Hermes** | Nous Research's agent |
 
-### Launching an App
+The eight coding agents have their own page — see [Working with AI agents](./working-with-agents.md).
 
-1. Open your workspace card and click **Add App** (or the **+** button).
-2. Select the app you want to launch.
-3. Click on **Launch**.
+### Opening an App
 
-The app starts inside the workspace pod and an access link appears on the workspace card. Click the link to open it in a new tab.
+Click its tile in **Apps**. The app opens inside DKubeX, so you stay in the same browser tab.
 
-### Stopping an App
+Apps are **started on demand**: the first time you open one, it takes a few seconds to launch and shows a loading screen, then appears. Afterwards it opens immediately. An app you never open never runs, which is why an idle workspace costs almost nothing.
 
-Click the **Stop** button next to an app's link on the workspace card. The app process inside the pod is stopped; other apps continue running.
+Every app you open keeps running while you use others, so switching between JupyterLab, a terminal and an agent does not lose your state.
 
-> **Note:** Apps open in your browser over a secure, authenticated route — you do not need to manage ports or SSH tunnels.
+> **Note:** Apps are reached over a secure, authenticated route. You never manage ports or SSH tunnels to open them.
 
 ## Workspace Files
 
-Every workspace has a persistent volume mounted at `/home/workspace`. Files saved here survive pod restarts and stops. Use the **FileBrowser** app or the **Terminal** to manage files.
+Your files live in your home directory, which is on persistent per-user storage. Anything you save there survives restarts, and survives uninstalling and reinstalling your workspace. See [What persists](./managing-workspaces.md#what-persists).
 
-To transfer files from your laptop:
-- Use the **FileBrowser** app's upload button.
-- Use `scp` or `rsync` from the Terminal (if SSH is configured by your admin).
+Use **FileBrowser** for a graphical view, or the **Terminal** for a shell.
 
-## Sharing a Workspace
+To move files between your laptop and the workspace:
 
-You can give other users access to your workspace (read-and-execute, not ownership).
+- Use **FileBrowser**'s upload and download buttons, or
+- Use `scp` or `rsync` over [SSH](#ssh-access).
 
-**To share:**
+## Running Your Own Services
 
-1. Open the actions menu → **Share**.
-2. Enter the username(s) or email(s) of the people you want to share with.
-3. Click **Share**.
+If you start a server inside your workspace — a dev server, an API, a dashboard — you can reach it through your workspace URL by appending its port:
 
-Shared users will see the workspace in the **Shared with Me** section on their Home page and can open apps in it.
+```
+<your-workspace-url>/<port>/
+```
 
-**To remove access:**
+For example, start something on port 3000 and open `<your-workspace-url>/3000/`.
 
-1. Open the actions menu → **Share**.
-2. Find the user in the shared-access list.
-3. Click **Remove** next to their name.
+This works for any port you have listening, with no configuration. Two caveats:
 
-> **Note:** Only the workspace owner can share or unshare it. Shared users cannot modify workspace settings or delete it.
+- The app must serve **relative** asset and redirect URLs, or be told it is running under a sub-path. Apps that assume they are at the root will load a blank or broken page.
+- Nothing is started for you here — if the port is not listening you get a gateway error.
+
+## SSH Access
+
+You can connect to your workspace from your own terminal or from an IDE's remote-development feature.
+
+1. Go to **Settings** → **SSH access**. It shows a ready-made **command**, plus the **host**, **port** and **username** individually.
+2. Add your own public key. Open the **Terminal** app and append it to `~/.ssh/authorized_keys` in your home directory:
+
+   ```bash
+   echo "ssh-ed25519 AAAA... you@laptop" >> ~/.ssh/authorized_keys
+   ```
+
+3. Connect using the command shown on the settings page.
+
+![Settings → SSH access, showing the connection command, host, port and username](./media/settings-ssh-access.png)
+
+Access is by SSH key only — there is no password login. Because `~/.ssh/authorized_keys` is in your home directory, your key persists across restarts.
+
+> **Note:** If **Settings** → **SSH access** says SSH is not available, make sure your workspace is **Running**, then reload the page.
+
+## Environment Variables
+
+To set environment variables for your workspace, go to **Settings** → **Workspace** → **Environment variables**, add name/value pairs, and click **Apply and restart**.
+
+Names are upper-cased automatically. Applying **restarts your workspace**, so save your work first.
+
+A few names are reserved by the workspace and rejected: `HOME`, `UUID`, `WORKSPACE_NAME`, `USERNAME`, `WORKSPACE_PUBLIC_PREFIX`, `WORKSPACE_SYSOVERLAY_DIR`, `DEFAULT_MODEL`, `SECURELLM_API_KEY`, and the `MLFLOW_*` variables.
+
+## Getting Access to Other Apps
+
+Your workspace is private to you and cannot be shared. Other applications in the App Store are granted by an administrator.
+
+If you open the App Store and find an app you cannot install, use **Request access** on that app. An administrator reviews the request and approves or denies it; once approved, the app appears in **Apps**.

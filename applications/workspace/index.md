@@ -1,39 +1,39 @@
 # Workspace
 
-DKubeX Workspace is your personal, on-demand development environment in the cloud. Instead of setting up tools locally or sharing a shared server, you get an isolated workspace running in the cluster — with JupyterLab, VS Code, a terminal, and more pre-installed. Spin one up in seconds, share it with a teammate, and tear it down when you're done.
+DKubeX Workspace is your personal, on-demand development environment in the cluster. Install it once from the App Store and you get an isolated environment with JupyterLab, VS Code, a terminal, a file browser, and a set of pre-configured AI coding agents.
 
 ## Key features
 
-- **On-demand and isolated** — Spin up a personal development environment running in the cluster in seconds, and tear it down when you are done.
-- **Single sign-on** — Log in automatically with your organization's existing credentials; no separate account or password.
-- **Choose your compute** — Pick a compute profile (CPU, RAM, GPU) when you create a workspace, and edit it later without losing your data.
-- **Multiple apps side by side** — Run JupyterLab, Terminal, and FileBrowser in the same workspace over secure, authenticated routes.
-- **Persistent storage** — Files under `/home/workspace` survive pod restarts and stops.
-- **Lifecycle control** — Start, stop, restart, archive, restore, or delete workspaces from the actions menu.
-- **Sharing** — Give teammates read-and-execute access to your workspace.
+- **One-click install** — Install your workspace from the App Store; no configuration wizard and nothing to size up front.
+- **Single sign-on** — Log in with your organization's existing credentials; no separate account or password.
+- **Twelve apps, ready to use** — JupyterLab, VS Code, Terminal and FileBrowser, plus eight AI coding agents.
+- **Two ways to configure models** — Point every coding agent at the platform's own models by choosing a default model in workspace settings, or leave the default model set to none and sign in to the agents with your own subscriptions.
+- **Apps start on demand** — An app starts the first time you open it, so an idle workspace uses almost nothing.
+- **Persistent home directory** — Everything in your home directory survives restarts, and survives uninstalling and reinstalling.
+- **SSH access** — Connect from your own terminal or IDE with your own SSH key.
+- **Reach your own services** — Start a dev server on any port and open it through your workspace URL.
 
-## Tutorials
+## Guides
 
-- [Getting started](./getting-started.md) — Log in and create your first workspace.
-- [Managing workspaces](./managing-workspaces.md) — Statuses and the full workspace lifecycle.
-- [Using your workspace](./using-your-workspace.md) — Apps, files, and sharing.
+- [Getting started](./getting-started.md) — Log in and install your workspace.
+- [Managing your workspace](./managing-workspaces.md) — Statuses, what persists, and uninstalling.
+- [Using your workspace](./using-your-workspace.md) — Apps, files, ports, and SSH.
+- [Working with AI agents](./working-with-agents.md) — The coding agents and how to choose a model.
 - [Workflows](./tutorials.md) — End-to-end walkthroughs for common tasks.
 
 ## At a glance
 
 | Action | How to do it |
 |---|---|
-| Create a workspace | Home → **New Workspace** |
-| Start a workspace | Workspace card → **Start** |
-| Stop a workspace | Actions menu (⋮) → **Stop** |
-| Restart a workspace | Actions menu → **Restart** |
-| Open an app | Workspace card → app link or **Add App** |
-| Edit compute resources | Actions menu → **Edit** |
-| View logs | Actions menu → **Logs** |
-| Share with a teammate | Actions menu → **Share** |
-| Archive (soft-delete) | Actions menu → **Archive** |
-| Restore archived workspace | **Archived** tab → **Restore** |
-| Permanently delete | Actions menu → **Delete** (irreversible) |
+| Install your workspace | **App Store** → **Workspace** → **Install** |
+| Open an app | **Apps** → click the app's tile |
+| Choose your default model | **Settings** → **Workspace** → **Default model** |
+| Set environment variables | **Settings** → **Workspace** → **Environment variables** |
+| Connect over SSH | **Settings** → **SSH access** |
+| Remove your workspace | **App Store** → **Workspace** → **Uninstall** |
+| Start or stop the pod | Ask your administrator — these are admin-only actions |
+
+> **Note:** You have one workspace. There is no workspace creation wizard, no compute-profile picker, and no workspace sharing — your administrator sets the CPU, memory and GPU defaults for everyone.
 
 ```{toctree}
 :hidden:
@@ -41,5 +41,6 @@ DKubeX Workspace is your personal, on-demand development environment in the clou
 getting-started
 managing-workspaces
 using-your-workspace
+working-with-agents
 tutorials
 ```

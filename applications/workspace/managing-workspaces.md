@@ -1,63 +1,63 @@
-# Managing Workspaces
+# Managing Your Workspace
 
-Every workspace moves through a lifecycle — from creation, through running and stopping, to archiving or deletion. This page covers the statuses a workspace can have and the actions available on each workspace card.
+This page covers the statuses your workspace can have, which actions are yours and which belong to an administrator, what survives a restart, and how to remove your workspace.
 
 ## Workspace Statuses
 
 | Status | What it means |
 |---|---|
-| **Creating** | The workspace pod is being provisioned |
-| **Running** | The workspace is active and apps are accessible |
-| **Stopped** | The pod is shut down; your data is preserved |
-| **Archived** | The workspace is soft-deleted; pod is stopped but data is retained |
-| **Error** | Something went wrong; check logs for details |
+| **Provisioning** | The workspace is being created; wait for it to finish |
+| **Running** | The workspace is up and its apps are available in Apps |
+| **Stopped** | The pod is scaled down; your home directory is untouched |
+| **Failed** | Something went wrong — contact your administrator |
 
-## Managing Your Workspace
+To see your workspace's status, open the **App Store** and click the **Workspace** card — the status is shown on its detail page.
 
-Each workspace card has an actions menu (⋮) with the following options:
+## What You Can Do
 
-### Start / Stop / Restart
+You have two actions, both on the **Workspace** page in the App Store:
 
-- **Start** — wakes a stopped workspace; the pod starts and your previous session is restored.
-- **Stop** — shuts down the pod cleanly; data on the persistent volume is preserved.
-- **Restart** — stops and immediately restarts the pod; useful when an app becomes unresponsive.
+- **Install** — creates your workspace.
+- **Uninstall** — removes it (see below).
 
-### Edit
+## What Only an Administrator Can Do
 
-Click **Edit** (pencil icon) to change the workspace's compute resources (CPU, GPU, memory, storage). Changes take effect on the next start.
+The following are **admin-only** and are not available to you, even for your own workspace:
 
-### Logs
+- **Start** and **Stop** the pod
+- **Edit** CPU, memory, GPU, image version and tolerations
 
-Click the **Logs** button to view live logs from the workspace pod — useful for diagnosing startup failures or app errors.
+If your workspace is **Stopped** and you need it running again, ask your administrator to start it. Uninstalling and reinstalling also gets you a running workspace, but it deletes the workspace volume — see the warning below before doing that.
 
-### Archive
+Administrators manage every workspace from the admin console, where they can see its status and resources and start or stop it:
 
-Archiving is a soft-delete: the workspace pod is stopped and the workspace is moved off your main dashboard. Your data is preserved on the persistent volume.
+![The admin console's Workspaces table, listing each user's workspace with its status and resources](./media/admin-workspaces.png)
 
-1. Open the actions menu → **Archive**.
-2. Confirm the action.
+## What Persists
 
-To view archived workspaces, use the **Archived** tab on the Home page.
+This is the most important thing to know about your workspace.
 
-### Restore
+**Your home directory persists.** Everything you save there survives pod restarts, stops, and even uninstalling and reinstalling your workspace.
 
-To bring an archived workspace back:
+## Uninstalling
 
-1. Go to the **Archived** tab.
-2. Find the workspace and click **Restore**.
+Uninstall from the **Workspace** page in the App Store. You will be asked to confirm.
 
-The workspace returns to the **Stopped** status and can be started normally.
+- **Your home files are kept.** They live on your user storage, which the workspace does not own.
+- **The workspace's own volume is deleted.**
+- **Anything you installed outside your home directory is gone.** System packages from `sudo apt install`, anything added to the default `python`/`pip` environment, and any Docker images you built or pulled are all removed with the workspace.
 
-### Delete
+Your home directory is the exception, so it is the safest place for an environment you do not want to rebuild. A virtual environment there survives an uninstall and is still ready to use after you reinstall:
 
-Permanently removes the workspace and all its data. This action **cannot be undone**.
+```bash
+source ~/.venvs/myproject/bin/activate
+python -c "import pandas"    # still installed
+```
 
-1. Open the actions menu → **Delete**.
-2. Type the workspace name to confirm.
-3. Click **Delete**.
+Before uninstalling, make sure anything you want to keep lives under your home directory.
 
-> **Warning:** Deleting a workspace destroys its persistent volume. Archive it instead if you might need the data later.
+> **Warning:** Uninstall is the only way for you to remove a workspace, and it is also the only way to recover from a **Stopped** workspace without an administrator.
 
 ## Getting Help
 
-If your workspace is stuck in **Creating** or **Error** state for more than a few minutes, click **Logs** to see what went wrong and share the output with your platform administrator.
+If your workspace stays in **Provisioning** for more than a few minutes, or reaches **Failed**, contact your platform administrator — they can look into what went wrong and restart or resize your workspace.
