@@ -2,7 +2,7 @@
 
 *Version {{ doc_version }}*
 
-Consolidated specification sheet for the DKubeX 2.0 platform; the five live applications are summarized at the end, each with its own dedicated page.
+Consolidated specification sheet for the DKubeX 2.0 platform; the six live applications are summarized at the end, each with its own dedicated page.
 
 ## At a glance
 
@@ -20,7 +20,7 @@ Consolidated specification sheet for the DKubeX 2.0 platform; the five live appl
 | **GPU** | NVIDIA GPU Operator, per-model resource profiles, scale-to-zero |
 | **Observability** | ClickStack + OpenTelemetry (GPU / vLLM dashboards) |
 | **Interfaces** | React web UI · REST API (`/api/v1`, Swagger/ReDoc) · `Application` CRD (`kubectl`) |
-| **Live applications** | Workspace · ModelStudio · SecureLLM · RAGFlow · Langflow |
+| **Live applications** | Workspace · ModelStudio · MLflow · SecureLLM · RAGFlow · Langflow |
 | **Core license** | MIT (platform core) |
 
 ## What DKubeX is
@@ -49,22 +49,13 @@ DKubeX 2.0 platform architecture at a glance.
 
 | Component | Technology | Role |
 |---|---|---|
-| **Backend** | Python **FastAPI** (SQLModel ORM, Alembic migrations) | REST API under `/api/v1` (users, applications, catalog/My Apps, config, stats, auth/login, licenses, seats, access requests, cluster, platform); publishes Swagger (`/docs`) and ReDoc (`/redoc`) |
-| **Frontend** | **React 19 + TypeScript + Vite** (TanStack Router & Query, Radix UI + shadcn/ui + Tailwind CSS 4), served via **Nginx** | Admin/user dashboard; API client auto-generated from the backend OpenAPI schema, so UI and API never drift |
-| **Operator** | **Kopf** (Python Kubernetes operator) | Watches the `Application` CRD and drives Helm install / upgrade / uninstall, reconciling status back onto each resource |
+| **Backend** | Python FastAPI | REST API for the platform (Swagger and ReDoc) |
+| **Frontend** | React 19 + Vite, served via Nginx | Admin and user dashboard |
+| **Operator** | Kopf (Python Kubernetes operator) | Reconciles the `Application` CRD to Helm releases |
 
 ### Application CRD & operator
 
-The `applications.application.dkubex.io/v1alpha1` custom resource is the central abstraction of the platform — installs are declarative Kubernetes resources you can inspect and script with `kubectl get applications` alongside the web UI.
-
-| Aspect | Detail |
-|---|---|
-| **Spec fields** | `applicationName` (Helm chart or platform-tool identifier), chart `version`, `repoUrl`, custom Helm `values`, `installedBy` (installing user's UUID), `reinstall` / `upgrade` / `cancelRequested` flags |
-| **User-installed path** | Full Helm install path driven by the operator |
-| **Platform-managed path** | Entries marked `platformManaged: true` are built-in admin tools; the controller skips Helm and reports readiness from whether the app's Traefik `HTTPRoute` exists |
-| **Status phase machine** | `Installing → Starting → Deployed → Upgrading → Ready / Failed`, with progress %, deployed version, and resolved access URL / NodePort |
-
-> **Tip:** The CRD lives in the chart's `crds/` directory so Helm registers the `Application` kind before rendering templates — this lets the platform instantiate its own built-in tools as `Application` resources during the same install.
+Installs are declarative Kubernetes resources — the `Application` custom resource (`applications.application.dkubex.io/v1alpha1`) that the Kopf operator reconciles to a running Helm release. You can inspect and script them with `kubectl get applications` alongside the web UI, and each carries a live status phase (`Installing → Starting → Deployed → Ready / Failed`) with progress and access URL.
 
 ### Data & storage layer
 
@@ -87,7 +78,7 @@ The `applications.application.dkubex.io/v1alpha1` custom resource is the central
 | Component | Technology | Role |
 |---|---|---|
 | **Cluster policy** | **Kyverno** (3.3.7) | Enforces policy and synchronizes the registry pull-secret into each application namespace |
-| **TLS** | **cert-manager** (1.17.1) | Issues and manages TLS certificates (or you supply your own) |
+| **TLS** | Supplied certificate | You provide the TLS certificate; configured at the ingress |
 
 ### Model & compute infrastructure
 
@@ -113,7 +104,7 @@ DKubeX installs onto a single Kubernetes cluster, on-premises or in the cloud.
 | **Install method** | Helmfile-orchestrated meta-installer — `helm/installer` runs an in-cluster install/uninstall Job that coordinates ~15 Helm releases |
 | **Chart versions** | Centralized in `config/chart_versions.yaml` |
 | **Kubernetes** | Single running cluster with Traefik ingress; k3s-compatible defaults |
-| **TLS** | cert-manager or a supplied certificate |
+| **TLS** | Supplied certificate (you provide it) |
 | **Registry** | Configurable private registry (`ghcr.io/dkubeio/…`) with a Kyverno-synced pull-secret |
 | **Networking** | Firewall-aware — images come from your registry, and the design avoids reliance on external CDNs |
 | **GPU** | NVIDIA GPU Operator; per-model GPU resource profiles; scale-to-zero (`minReplicas: 0`); NFS-backed model caching |
@@ -136,7 +127,6 @@ DKubeX covers the full path from training to governed inference:
 - **Authentication** — local password (JWT, Argon2/Bcrypt) plus OAuth2 (GitHub, generic OIDC) and OAuth2 Proxy.
 - **Single sign-on** — the backend `/auth/cookie` endpoint is a Traefik ForwardAuth target; it validates the DKubeX session, checks per-app assignment, and injects identity headers (`X-Auth-Request-User`, `-Email`, `-Role`, `-User-Namespace`) into downstream requests, so every app trusts one identity.
 - **RBAC & multi-tenancy** — per-application roles (`admin` / `user`, in an `app_roles` table); each user gets an isolated namespace and a per-user `user-storage` PVC; apps deploy into a dedicated `dkubex-apps` namespace.
-- **Secrets & policy** — Kyverno propagates registry pull-secrets and enforces cluster policy; TLS via cert-manager; MLflow tokens delivered as mounted secrets.
 - **Model governance** — SecureLLM is the mandatory, auditable choke point for all model traffic; API keys are required, and every request is recorded and billable.
 - **Licensing** — a built-in **License Manager** enforces seat-based entitlements per application, with license upload/expiry and access-request workflows.
 
@@ -169,7 +159,6 @@ DKubeX exposes several surfaces over the same control plane:
 | MinIO (chart) | 5.4.0 |
 | Traefik (chart) | 40.1.0 |
 | Kyverno (chart) | 3.3.7 |
-| cert-manager | 1.17.1 |
 | csi-driver-nfs | 4.13.1 |
 | NVIDIA GPU Operator | v25.3.0 |
 | ClickStack | 1.1.2 |
@@ -184,12 +173,13 @@ DKubeX exposes several surfaces over the same control plane:
 
 ## Applications
 
-DKubeX ships five live applications as first-class catalog entries. They share one identity layer (SSO), one model plane (KubeAI/KServe + MLflow), and one gateway (SecureLLM). The summaries below are intentionally brief — **each application has its own dedicated page under [`applications/`](./applications/index.md) for full specifications.**
+DKubeX ships six live applications as first-class catalog entries. They share one identity layer (SSO), one model plane (KubeAI/KServe + MLflow), and one gateway (SecureLLM). The summaries below are intentionally brief — **each application has its own dedicated page under [`applications/`](./applications/index.md) for full specifications.**
 
 | Application | What it is | Served at |
 |---|---|---|
 | **Workspace** | On-demand, isolated cloud dev environment with built-in AI coding agents | `/workspace/<user>/…` |
 | **ModelStudio** | Browse, deploy, and test open-source & NVIDIA models on your cluster | `/modelstudio` |
+| **MLflow** | Experiment tracking and model registry | `/mlflow` |
 | **SecureLLM** | Governed, OpenAI-compatible AI gateway fronting every model | `/securellm` |
 | **RAGFlow** | Document-grounded RAG — knowledge bases, hybrid search, cited chat | `/ragflow` |
 | **Langflow** | Visual, low-code builder for AI workflows and agents | `/langflow` |
@@ -197,6 +187,8 @@ DKubeX ships five live applications as first-class catalog entries. They share o
 **Workspace** — a personal, on-demand development environment running as an isolated pod, reachable entirely in the browser over SSO-authenticated routes. It bundles JupyterLab, VS Code, a terminal, and FileBrowser, plus built-in AI coding agents (Claude Code, Codex, Copilot, Antigravity, Mistral Vibe, OpenCode, Hermes) auto-wired to SecureLLM. Any service a user starts on a port is auto-exposed at an authenticated URL, and CPU/RAM/GPU is selectable.
 
 **ModelStudio** — a browser app to browse, deploy, and interactively test open-source and NVIDIA models on the cluster, across four engines (Ollama, vLLM, Infinity, FasterWhisper). Every deployed model gets an OpenAI-compatible endpoint, and the Playground supports chat, embeddings, reranking, and speech-to-text with client-side document RAG.
+
+**MLflow** — experiment tracking and a model registry for the platform. Log training runs and metrics, compare results, and register the model versions that ModelStudio deploys through KServe.
 
 **SecureLLM** — the governed, OpenAI-compatible AI gateway that fronts every model on the platform. It issues and revokes keys with per-key, per-user, and org restrictions, applies PII / injection / content guardrails, provides resilient multi-provider routing, and meters and audits all usage. It is the mandatory, auditable path for model traffic.
 
