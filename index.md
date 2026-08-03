@@ -35,6 +35,7 @@ Turn platform components on or off from the UI to adapt DKubeX to different infr
 
 self
 installation
+specifications
 applications/index
 tutorials/index
 ```
