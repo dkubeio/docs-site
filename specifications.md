@@ -1,6 +1,4 @@
-# DKubeX 2.0 — Platform Specifications
-
-*Version {{ doc_version }}*
+# Platform Specifications
 
 Consolidated specification sheet for the DKubeX 2.0 platform; the six live applications are summarized at the end, each with its own dedicated page.
 
