@@ -11,5 +11,5 @@ Start here if you want to stand up a model and put a question-answering applicat
 :maxdepth: 1
 
 deploying-models-on-dkubex-using-model-studio
-building-a-contract-qa-assistant-on-dkubex
+building-a-legal-contract-qa-assistant-on-dkubex
 ```
