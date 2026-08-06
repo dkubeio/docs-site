@@ -1,4 +1,4 @@
-# Building a Contract Q&A Assistant on DKubeX
+# Building a Legal Contract Q&A Assistant on DKubeX
 
 This tutorial shows how to build a document Q&A assistant on DKubeX. You deploy a chat model
 and an embedding model in **Model Studio**, expose them through the **SecureLLM** gateway, and
@@ -118,7 +118,7 @@ FORMAT RULES:
 
 ## Step 5 — Try some questions
 
-Ask a few questions in the chat and check that each answer cites specific contracts:
+Ask a few questions in the chat and check that each answer cites specific legal contracts:
 
 1. What are personal and confidential information?
 2. Briefly explain what a termination clause is.
