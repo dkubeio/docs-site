@@ -2,7 +2,7 @@
 
 Once you have a coding agent running in DKubeX Workspace, you can have it build an app and host
 it straight from the workspace — reachable in the browser through the workspace's built-in reverse
-proxy. This tutorial walks through it end to end using a **scientific calculator** as the worked
+proxy. This tutorial walks through it end to end using a **data-analysis workbench** as the worked
 example, but the same flow builds and hosts any app.
 
 The flow is two steps. First you give the agent the workspace's app-hosting rules **once**, as
@@ -345,68 +345,61 @@ it will build them prefix-aware without you having to spell the rules out again.
 With the hosting rules loaded, prompt and converse with your coding agent to build your app —
 describe what you want in plain language and iterate as you go. Because the agent already has the
 hosting rules from Step 2, your prompts stay focused on what the app does, not on the proxy, prefix,
-or port. For example, this prompt builds a scientific calculator:
+or port. For example, this prompt builds a DuckDB data-analysis workbench:
 
 ```
-mkdir -p ~/projects/scientific-calculator && cd ~/projects/scientific-calculator
+mkdir -p ~/projects/data-workbench && cd ~/projects/data-workbench
 
-Build a FastAPI scientific calculator web app. Requirements:
+Build a FastAPI data-analysis workbench web app powered by DuckDB. Requirements:
 
-Backend (single app.py):
-- GET /api/history — return the last N saved calculations (id, expression,
-  result, timestamp), most recent first
-- POST /api/history — accepts { expression, result } and appends it to a
-  JSON file at ~/.scientific-calculator.json (cap stored history at 200
-  entries)
-- DELETE /api/history — clear all saved history
-- No other backend logic is needed — the calculator itself evaluates
-  expressions entirely in the frontend (see below), the backend only
-  persists history
+Backend (single app.py, using an in-process DuckDB database):
+- Dataset upload: accept a CSV or Parquet file upload and load it into a
+  DuckDB table named "dataset" (replacing any previous one), using DuckDB's
+  native read_csv_auto / read_parquet. Save the uploaded file under
+  ~/.data-workbench/datasets/ so it can be reloaded later. Return the inferred
+  schema (column names + types) and the row count.
+- Recent datasets: list previously uploaded datasets from that folder and
+  allow reloading one by name.
+- Schema: return the current dataset's columns and DuckDB types.
+- Profiling: for the current dataset, compute per-column stats via SQL —
+  data type, non-null count, null %, distinct count; for numeric columns also
+  min / max / mean / stddev / median (approx quantile); for text columns the
+  top 5 most frequent values with counts.
+- Correlation: compute a Pearson correlation matrix across the numeric
+  columns (DuckDB corr()), returned as a matrix for heatmap rendering.
+- SQL query: accept an arbitrary SQL string, run it against the DuckDB
+  database, and return column names + rows. Cap returned rows at 500 and also
+  return the total row count. Return any SQL error as a normal JSON field
+  (do NOT return a 500) so the UI can show it inline.
+- Chart data: given a chart type (histogram, scatter, or line) and the
+  relevant column(s), return the aggregated data points computed in DuckDB —
+  equal-width bins + counts for a histogram, x/y pairs for scatter, ordered
+  x/y for a line chart.
+- Query history: persist executed queries (text + timestamp) to a JSON file
+  at ~/.data-workbench/history.json (cap 200), with endpoints to list and
+  clear it.
+- CSV export: return the current query's result set as a downloadable CSV.
 
 Frontend (single inline HTML page):
-- Evaluate expressions with a HAND-WRITTEN recursive-descent parser in
-  JavaScript — do NOT use eval() or new Function(). The parser must
-  correctly handle:
-  - Standard operator precedence: + - lowest, then * / %, then unary +/-,
-    then ^ (exponentiation, right-associative, e.g. 2^3^2 = 512), then
-    postfix ! (factorial), then parentheses
-  - Functions: sin, cos, tan, asin, acos, atan, log (base 10), ln (natural
-    log), sqrt, cbrt, abs, exp — each takes one parenthesized argument
-  - Constants: pi, e
-  - A DEG/RAD toggle that converts trig function arguments (and inverse trig
-    results) between degrees and radians
-  - Factorial (n!) must reject negative or non-integer input with a clear
-    error
-- Calculator UI:
-  - A display showing the expression being typed and a live-updated result
-    preview below it (recomputed on every keypress, best-effort — don't
-    error out mid-typing)
-  - Button grid: digits 0-9, decimal point, + - * / (as × ÷ symbols), ^
-    (x^y), parentheses, %, backspace, clear (C), equals (=)
-  - Scientific function buttons: sin, cos, tan, log, ln, sqrt (√), factorial
-    (n!), pi (π), e
-  - DEG/RAD toggle buttons, visually indicating which is active
-  - Memory buttons: M+, M-, MR, MC, with a small indicator showing the
-    current memory value when non-zero
-  - Full keyboard support: digit and operator keys type into the
-    expression, Enter/= evaluates, Backspace deletes the last character,
-    Escape clears
-  - On evaluating (=), POST the expression and formatted result to
-    /api/history, then clear the input
-  - A history panel alongside the calculator (or below it on narrow
-    screens) showing past calculations, loaded from /api/history on page
-    load — clicking a history entry re-inserts its expression into the
-    display
-  - A "Clear" button on the history panel that calls DELETE /api/history
-  - Display errors (e.g. "Expected ')'", division by zero showing Infinity)
-    inline in the result area without crashing the page
-  - Dark/light theme via prefers-color-scheme
-  - Responsive layout: history panel moves below the calculator on narrow
-    screens
+- Panels: a Dataset panel (drag-and-drop upload for CSV/Parquet, current
+  schema, and a list of recent datasets to reload); a SQL console (multiline
+  editor + Run button, results in a sortable, paginated table, inline error
+  display, and an Export CSV button); a Profile view (per-column stats table);
+  a Correlation view (numeric-column heatmap); and a Chart builder (pick chart
+  type + columns and render the returned data).
+- Render every chart and the correlation heatmap as HAND-WRITTEN inline SVG —
+  do NOT load any charting library or external CDN.
+- Ctrl/Cmd+Enter runs the SQL query.
+- A query-history panel listing recent queries; clicking one loads it back
+  into the editor; a Clear button empties the history.
+- Show friendly errors (bad SQL, unsupported file) inline without crashing
+  the page.
+- Dark/light theme via prefers-color-scheme; responsive layout.
 
-Serve the app on port 8505.
+Serve the app on port 8506.
 
-Add a requirements.txt with fastapi, uvicorn, and pydantic.
+Add a requirements.txt with fastapi, uvicorn, duckdb, pyarrow, and
+python-multipart.
 ```
 
 :::{admonition} If the app isn't running
@@ -415,7 +408,7 @@ Add a requirements.txt with fastapi, uvicorn, and pydantic.
 The agent installs and starts the app for you in most cases. If not, run it yourself:
 
 ```bash
-cd ~/projects/scientific-calculator
+cd ~/projects/data-workbench
 python3 -m venv .venv
 ./.venv/bin/pip install -r requirements.txt
 ./.venv/bin/python app.py
@@ -431,8 +424,8 @@ disown
 
 ## Step 4 — Access your app
 
-Open a browser and go to your workspace URL, using the port the app binds to (`8505` for the
-calculator):
+Open a browser and go to your workspace URL, using the port the app binds to (`8506` for the
+workbench):
 
 ```
 https://<host>/workspace/<your-username>/<port>/
@@ -441,5 +434,5 @@ https://<host>/workspace/<your-username>/<port>/
 For example:
 
 ```
-https://dkubex.example.com/workspace/johndoe/8505/
+https://dkubex.example.com/workspace/johndoe/8506/
 ```
