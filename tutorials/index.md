@@ -6,14 +6,32 @@ Hands-on guides for completing specific tasks on DKubeX 2.0. Use this section wh
 
 ```{toctree}
 :maxdepth: 2
-:caption: DKubeX 2.0 Tutorials
+:caption: Governing LLM Access
+
+configuring-and-enabling-ai-providers-in-securellm
+creating-and-using-api-keys-in-securellm
+testing-and-deploying-guardrail-policies-in-securellm
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: LLMs and RAG
 
 deploying-models-on-dkubex-using-model-studio
-testing-and-deploying-guardrail-policies-in-securellm
-creating-and-using-api-keys-in-securellm
-configuring-and-enabling-ai-providers-in-securellm
 building-a-contract-qa-assistant-on-dkubex
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: MLOps
+
 training-and-deploying-an-ml-model-on-dkubex
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Coding Agents
+
 using-claude-code-in-dkubex-workspace-with-a-claude-subscription
 using-claude-code-in-dkubex-workspace-with-dkubex-or-openrouter-models
 building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent
