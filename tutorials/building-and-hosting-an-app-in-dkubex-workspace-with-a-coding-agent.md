@@ -5,8 +5,9 @@ it straight from the workspace — reachable in the browser through the workspac
 proxy. This tutorial walks through it end to end using a **scientific calculator** as the worked
 example, but the same flow builds and hosts any app.
 
-You give the agent one prompt, it writes the app, you run it on a port, and you open it at your
-workspace URL.
+The flow is two steps. First you give the agent the workspace's app-hosting rules **once**, as
+standing instructions. Then you describe your app in plain language — the agent applies the hosting
+rules for you, so your app prompts stay focused on what the app does, not on how the proxy works.
 
 To get a coding agent set up first, see
 [Using Claude Code in DKubeX Workspace with a Claude subscription](./using-claude-code-in-dkubex-workspace-with-a-claude-subscription.md)
@@ -36,17 +37,14 @@ straight to `127.0.0.1:<port>` with the full path intact — your app receives r
 every request through the public URL, even though `curl localhost:<port>/` works fine from inside
 the workspace.
 
-So both sides of your app must be **prefix-aware**:
+So both sides of your app must be **prefix-aware** — the backend must mount its routes under the
+prefix, and the frontend must load its assets and call its APIs under the prefix too. Getting either
+side wrong is the single most common reason a newly built app "works when I test it locally but 404s
+in the browser."
 
-- **Backend** — all API routes and the HTML-serving route must be mounted under the prefix path, so
-  the server recognizes incoming requests. See [Rule 1](#rules-for-workspace-compatible-apps).
-- **Frontend** — the page must load its assets (stylesheets, scripts, images) and navigate to other
-  pages under the prefix. See [Rule 2](#rules-for-workspace-compatible-apps). A single inline page
-  with no external assets can get by with relative URLs alone, but multi-page apps or apps that load
-  separate asset files break without proper prefix configuration.
-
-Getting either side wrong is the single most common reason a newly built app "works when I test it
-locally but 404s in the browser."
+Rather than restate these rules in every app prompt, you load them once as standing instructions
+(Step 2). The full rule set lives in a single file, `APP_HOSTING.md`, that the agent reads and
+follows for everything it builds in the workspace.
 
 ## Step 1 — Open a coding agent
 
@@ -63,11 +61,57 @@ work:
 | **Mistral Vibe** | Mistral-powered coding |
 | **Hermes** | Nous Research models |
 
-## Step 2 — Build the app
+## Step 2 — Load the app-hosting rules as standing instructions
 
-Paste the prompt below into the agent. It creates the project directory and describes the whole app,
-including the workspace-proxy rules the app must follow, so the agent builds something that works
-behind the proxy on the first try.
+Give the agent the workspace's app-hosting rules before you ask it to build anything. Fetch the file
+with `wget`, or paste its contents in directly if the workspace can't reach GitHub.
+
+::::{tab-set}
+
+:::{tab-item} Download with wget
+
+Run this in the workspace terminal — or ask the agent to run it for you — to pull the rules file into
+your home directory:
+
+```bash
+wget https://raw.githubusercontent.com/dkubeio/docs-site/app-hosting-example/APP_HOSTING.md
+```
+
+Then tell the agent to adopt it as standing instructions:
+
+```
+Read the file APP_HOSTING.md in my home directory. Treat it as your standing
+instructions for hosting apps in this workspace — follow these rules for every
+app you build here.
+```
+
+:::
+
+:::{tab-item} Copy and paste
+
+If the workspace can't reach GitHub, open
+[`APP_HOSTING.md`](https://raw.githubusercontent.com/dkubeio/docs-site/app-hosting-example/APP_HOSTING.md)
+in your browser, copy its full contents, and paste them into the agent with this framing:
+
+```
+Here are the app-hosting rules for this workspace. Treat them as your standing
+instructions and follow them for every app you build here:
+
+<paste the full contents of APP_HOSTING.md here>
+```
+
+:::
+
+::::
+
+The agent now knows how the workspace proxy works. From here on, describe apps in plain language and
+it will build them prefix-aware without you having to spell the rules out again.
+
+## Step 3 — Build the app
+
+With the hosting rules loaded, paste the prompt below into the agent. Notice it describes only what
+the calculator *does* — no proxy, prefix, or port-binding instructions — because the agent already
+has those from Step 2.
 
 ```
 mkdir -p ~/projects/scientific-calculator && cd ~/projects/scientific-calculator
@@ -75,13 +119,6 @@ mkdir -p ~/projects/scientific-calculator && cd ~/projects/scientific-calculator
 Build a FastAPI scientific calculator web app. Requirements:
 
 Backend (single app.py):
-- Mount all routes under the workspace prefix — nginx does NOT strip it.
-  Build PATH_PREFIX = "/workspace/{USERNAME}/{APP_PORT}" from the USERNAME
-  environment variable (pre-configured by the platform) and an APP_PORT
-  constant defined at the top of the file (the port you choose for your app),
-  create an APIRouter(prefix=PATH_PREFIX), register every route on it (the
-  /api/history routes and the HTML "/" route), and call
-  app.include_router(router). Do NOT add path-stripping middleware.
 - GET /api/history — return the last N saved calculations (id, expression,
   result, timestamp), most recent first
 - POST /api/history — accepts { expression, result } and appends it to a
@@ -92,7 +129,7 @@ Backend (single app.py):
   expressions entirely in the frontend (see below), the backend only
   persists history
 
-Frontend (single inline HTML page served at /):
+Frontend (single inline HTML page):
 - Evaluate expressions with a HAND-WRITTEN recursive-descent parser in
   JavaScript — do NOT use eval() or new Function(). The parser must
   correctly handle:
@@ -130,17 +167,15 @@ Frontend (single inline HTML page served at /):
   - Display errors (e.g. "Expected ')'", division by zero showing Infinity)
     inline in the result area without crashing the page
   - Dark/light theme via prefers-color-scheme
-  - Add a <base href="{PATH_PREFIX}/"> tag in the HTML <head> and use
-    RELATIVE URLs everywhere (fetch('api/history'), not '/api/history') so
-    every request resolves under the workspace prefix
   - Responsive layout: history panel moves below the calculator on narrow
     screens
-  - Bind to 0.0.0.0 on port 8505
+
+Serve the app on port 8505.
 
 Add a requirements.txt with fastapi, uvicorn, and pydantic.
 ```
 
-## Step 3 — Install dependencies and run
+## Step 4 — Install dependencies and run
 
 The agent installs and starts the app for you in most cases. If not, run it yourself:
 
@@ -158,7 +193,7 @@ nohup ./.venv/bin/python app.py > app.log 2>&1 &
 disown
 ```
 
-## Step 4 — Access your app
+## Step 5 — Access your app
 
 Open a browser and go to your workspace URL, using the port the app binds to (`8505` for the
 calculator):
@@ -173,7 +208,7 @@ For example:
 https://dkubex.example.com/workspace/johndoe/8505/
 ```
 
-## Step 5 — Try it
+## Step 6 — Try it
 
 1. Open the calculator at your workspace URL.
 2. Type `2^10` and press Enter — it should show `1024`.
@@ -196,110 +231,25 @@ Export calculation history as CSV
 Add scientific notation formatting for very large/small results
 ```
 
-## Rules for workspace-compatible apps
+## Building other apps
 
-When you build a **different** app, include these rules in your prompt so the agent produces
-something that works behind the workspace proxy.
+The scientific calculator is just the worked example. To build anything else, keep the same
+two-step flow: load `APP_HOSTING.md` as standing instructions once (Step 2), then describe your app
+in plain language (Step 3). Because the hosting rules already live in the agent's context, your app
+prompts stay focused on what the app does — the agent applies the proxy, prefix, port, and asset
+rules for you.
 
-1. **Mount backend routes under the workspace prefix — nginx doesn't strip it.** Every request your
-   app receives arrives with the full path `/workspace/<user>/<port>/api/data`, not `/api/data`, so
-   your backend must expect routes at that prefix. For FastAPI, use `APIRouter(prefix=…)` instead of
-   defining routes directly on the app:
-
-   ```python
-   import os
-   from fastapi import FastAPI, APIRouter
-   from fastapi.responses import HTMLResponse
-
-   APP_PORT = 8501  # the port your app binds to
-   # USERNAME is pre-configured by the platform
-   PATH_PREFIX = "/workspace/{}/{}".format(
-       os.environ.get("USERNAME", "user"),
-       APP_PORT,
-   )
-
-   app = FastAPI()
-   router = APIRouter(prefix=PATH_PREFIX)
-
-   @router.get("/api/data")
-   async def get_data():
-       return {"items": []}
-
-   # Serve the HTML page under the prefix too
-   @router.get("/")
-   async def index():
-       return HTMLResponse(html_content)
-
-   app.include_router(router)
-   ```
-
-   The app then natively serves at `/workspace/<user>/<port>/...` with no custom middleware. For
-   Express, use `app.use(PATH_PREFIX, router)`; for Flask, use a `Blueprint` with `url_prefix`.
-
-2. **Make the frontend prefix-aware too.** Your UI is served from `/workspace/<username>/<port>/`,
-   not `/`, so every URL the browser loads — stylesheets, scripts, images, navigations, API calls —
-   must resolve under that prefix. Two approaches:
-
-   **Option A — `<base href>` tag** (simplest for single-file / inline apps). Set a `<base href>` in
-   the `<head>` so the browser resolves all relative URLs from the prefix, then use relative URLs
-   everywhere:
-
-   ```python
-   html_content = f"""
-   <html>
-   <head><base href="{PATH_PREFIX}/"></head>
-   <body>
-     <link href="style.css" rel="stylesheet">
-     <script src="app.js"></script>
-     <img src="images/logo.png">
-   </body>
-   </html>
-   """
-   ```
-
-   **Option B — framework prefix config** (React, Vue, Vite, Next.js, etc.):
-
-   | Framework | Setting |
-   | --- | --- |
-   | Vite | `base: '/workspace/user/port/'` in `vite.config.js` |
-   | React Router | `<BrowserRouter basename="/workspace/user/port">` |
-   | Vue Router | `createRouter({ history: createWebHistory('/workspace/user/port') })` |
-   | Next.js | `basePath: '/workspace/user/port'` in `next.config.js` |
-
-   What breaks without prefix configuration:
-
-   | What | Wrong (absolute) | Right (relative, with base href or prefix) |
-   | --- | --- | --- |
-   | API fetch | `fetch('/api/data')` | `fetch('api/data')` |
-   | Stylesheet | `<link href="/style.css">` | `<link href="style.css">` |
-   | Script | `<script src="/app.js">` | `<script src="app.js">` |
-   | Image | `<img src="/logo.png">` | `<img src="logo.png">` |
-   | Navigation | `<a href="/about">` | `<a href="about">` |
-   | CSS asset | `url('/fonts/icon.woff')` | `url('fonts/icon.woff')` |
-
-   A single inline page (all HTML/CSS/JS in one file, no external assets) can work with just relative
-   `fetch()` calls. The moment your app loads a separate stylesheet, script, or image, or has
-   multi-page navigation, use one of the approaches above.
-
-3. **Bind to `0.0.0.0`**, not `localhost` or `127.0.0.1` — nginx proxies from within the same pod
-   but as a separate process.
-
-4. **Avoid reserved ports.** These are already in use: `8080` (nginx), `9100` (app loader), `9001`
-   (supervisord), `17681–17688` (terminal apps), `18443` (VS Code), `18888` (JupyterLab), `19000`
-   (FileBrowser), `28789` (OpenClaw). Safe choices: `3000`, `5000`, `8000`, `8501`–`8510`, `9000`,
-   or anything above `30000`.
-
-5. **WebSockets work.** nginx passes `Upgrade`/`Connection` headers, so real-time apps work
-   natively — the prefix handling in rules 1–2 just needs to apply to the WebSocket path too.
-
-6. **Bundle all assets.** Inline CSS/JS or install packages locally; don't rely on external CDNs if
-   the cluster is behind a firewall.
+To see exactly what those rules are — the nginx prefix, prefix-aware backend and frontend, binding
+to `0.0.0.0`, reserved ports, WebSockets, and asset bundling — read
+[`APP_HOSTING.md`](https://raw.githubusercontent.com/dkubeio/docs-site/app-hosting-example/APP_HOSTING.md)
+directly.
 
 ## Troubleshooting
 
 - Nothing loads at the workspace URL: check `app.log` for a "port already in use" error and pick a
-  different unreserved port (see rule 4), then update both the `port=...` in the app and the URL you
-  visit.
+  different unreserved port (see the reserved-ports rule in `APP_HOSTING.md`), then update both the
+  `port=...` in the app and the URL you visit.
 - Works on `localhost:<port>` but 404s in the browser: the backend isn't serving under the workspace
-  prefix — apply rule 1.
-- Page loads but styles, scripts, or API calls 404: the frontend isn't prefix-aware — apply rule 2.
+  prefix — re-check that the agent applied Rule 1 from `APP_HOSTING.md`.
+- Page loads but styles, scripts, or API calls 404: the frontend isn't prefix-aware — re-check
+  Rule 2 from `APP_HOSTING.md`.
