@@ -1,11 +1,11 @@
-# Using Claude Code in DKubeX Workspace with DKubeX or OpenRouter Models
+# Using Claude Code in DKubeX Workspace with DKubeX or Cloud Provider Models
 
 DKubeX Workspace ships with several coding agents built in — including **Claude Code**, **Codex**,
 **Copilot CLI**, **OpenCode**, **Antigravity**, and **Mistral Vibe**. Instead of a Claude
 subscription, you can run Claude Code in DKubeX Workspace against a model served through the
-platform — either a model you **deployed in Model Studio** or a model reached through an
-**OpenRouter key in SecureLLM**. The workspace injects your chosen model into the coding agent, and
-all requests are governed and billed through the platform.
+platform — either a model you **deployed in Model Studio** or a model from a **cloud provider
+(such as Anthropic, OpenAI, or OpenRouter) added in SecureLLM**. The workspace injects your chosen
+model into the coding agent, and all requests are governed and billed through the platform.
 
 Use this flow when you want the coding agent to run on platform-served models. To use your own
 Claude subscription instead, see
@@ -16,7 +16,8 @@ Claude subscription instead, see
 - DKubeX Workspace, installed from the app catalog.
 - At least one model available to your DKubeX user key, provided by either:
   - a model **deployed in Model Studio**, or
-  - an **OpenRouter key added in SecureLLM**, which exposes OpenRouter models to you.
+  - a **cloud provider added in SecureLLM** (such as Anthropic, OpenAI, or OpenRouter), which
+    exposes that provider's models to you.
 
 ## Step 1 — Make a model available
 
@@ -25,8 +26,8 @@ Choose one of the following so a model shows up under your key:
 - **Deploy a model in Model Studio** — deploy a coding-capable model and wait until it reaches the
   running state. See
   [Deploying models on DKubeX using Model Studio](../llms-and-rag/deploying-models-on-dkubex-using-model-studio.md).
-- **Add an OpenRouter key in SecureLLM** — add your OpenRouter key so OpenRouter models become
-  available to your key. See
+- **Add a cloud provider in SecureLLM** — add a provider such as Anthropic, OpenAI, or OpenRouter so
+  its models become available to your key. See
   [Configuring and enabling AI providers in SecureLLM](../governing-llm-access/configuring-and-enabling-ai-providers-in-securellm.md).
 
 ## Step 2 — Set the workspace default model
@@ -43,14 +44,15 @@ Workspace settings — the default model starts at None.
 ```
 
 Open the **Default model** dropdown and pick a model. The list shows the models available to your
-key — DKubeX-deployed models appear under the `dkubex/` prefix, and OpenRouter models under the
-`openrouter/` prefix. Choose a coding-capable model.
+key — DKubeX-deployed models appear under the `dkubex/` prefix, and cloud-provider models under
+their own provider prefix (for example, `anthropic/`, `openai/`, or `openrouter/`). Choose a
+coding-capable model.
 
 ```{figure} media/workspace-settings-select-model.png
-:alt: Workspace default model dropdown listing dkubex and openrouter models
+:alt: Workspace default model dropdown listing DKubeX-deployed and cloud-provider models
 :width: 100%
 
-Pick a model from those available to your key — `dkubex/` for deployed models, `openrouter/` for OpenRouter models.
+Pick a model from those available to your key — `dkubex/` for deployed models, and each cloud provider under its own prefix.
 ```
 
 With the model selected, click **Apply and restart**. Applying restarts your workspace so the new
@@ -92,8 +94,8 @@ Code returns to your original Claude subscription login. See
 
 ## Troubleshooting
 
-- No models in the dropdown: confirm a model is deployed and running in Model Studio, or that an
-  OpenRouter key is added in SecureLLM, so a model is available to your key.
+- No models in the dropdown: confirm a model is deployed and running in Model Studio, or that a
+  cloud provider is added in SecureLLM, so a model is available to your key.
 - `/model` still shows the old model: make sure you clicked **Apply and restart** and waited for the
   workspace pod to finish restarting.
 - Agent behaves poorly: pick a coding-capable model — small embedding-only models are not suited to

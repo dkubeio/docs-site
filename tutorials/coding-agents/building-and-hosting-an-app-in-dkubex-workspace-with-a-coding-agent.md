@@ -1,6 +1,6 @@
 # Building and Hosting an App in DKubeX Workspace with a Coding Agent
 
-Once you have a coding agent running in DKubeX Workspace, you can have it build a web app and host
+Once you have a coding agent running in DKubeX Workspace, you can have it build an app and host
 it straight from the workspace — reachable in the browser through the workspace's built-in reverse
 proxy. This tutorial walks through it end to end using a **scientific calculator** as the worked
 example, but the same flow builds and hosts any app.
@@ -12,7 +12,7 @@ rules for you, so your app prompts stay focused on what the app does, not on how
 To get a coding agent set up first, see
 [Using Claude Code in DKubeX Workspace with a Claude subscription](./using-claude-code-in-dkubex-workspace-with-a-claude-subscription.md)
 or
-[Using Claude Code in DKubeX Workspace with DKubeX or OpenRouter models](./using-claude-code-in-dkubex-workspace-with-dkubex-or-openrouter-models.md).
+[Using Claude Code in DKubeX Workspace with DKubeX or cloud provider models](./using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.md).
 
 ## Prerequisites
 

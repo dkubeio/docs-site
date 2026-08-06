@@ -11,6 +11,6 @@ Start here if you want to code with an AI agent inside your Workspace and ship w
 :maxdepth: 1
 
 using-claude-code-in-dkubex-workspace-with-a-claude-subscription
-using-claude-code-in-dkubex-workspace-with-dkubex-or-openrouter-models
+using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models
 building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent
 ```
