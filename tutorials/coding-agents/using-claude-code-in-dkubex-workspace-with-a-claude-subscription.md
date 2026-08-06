@@ -8,7 +8,7 @@ platform-served model.
 
 Use this flow when you already have a Claude subscription and want to use it inside DKubeX Workspace.
 To run Claude Code against a DKubeX-deployed model or an OpenRouter model instead, see
-[Using Claude Code in DKubeX Workspace with DKubeX or OpenRouter models](./using-claude-code-in-dkubex-workspace-with-dkubex-or-openrouter-models.md).
+[Using Claude Code in DKubeX Workspace with DKubeX or cloud provider models](./using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.md).
 
 ## Prerequisites
 
@@ -99,7 +99,7 @@ Claude Code is now active with your subscription, and you can start prompting it
 
 To switch this workspace to a platform-served model later, set a default model in your workspace
 settings — see
-[Using Claude Code in DKubeX Workspace with DKubeX or OpenRouter models](./using-claude-code-in-dkubex-workspace-with-dkubex-or-openrouter-models.md).
+[Using Claude Code in DKubeX Workspace with DKubeX or cloud provider models](./using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.md).
 Setting the default model back to **None** restores your Claude subscription login.
 
 ## Troubleshooting
