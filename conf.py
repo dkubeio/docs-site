@@ -43,6 +43,7 @@ extensions = [
 	"sphinx_copybutton",
 	"sphinx_multiversion",
 	"sphinxcontrib.video",
+	"sphinx_design",
 ]
 
 smv_tag_whitelist = r"^.+$"
@@ -55,6 +56,7 @@ smv_disable_warnings = True
 
 myst_enable_extensions = [
 	"substitution",
+	"colon_fence",
 ]
 
 myst_substitutions = {

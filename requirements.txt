@@ -4,3 +4,4 @@ shibuya
 sphinx-copybutton
 sphinx-multiversion
 sphinxcontrib-video
+sphinx-design
