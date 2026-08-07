@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Working with AI Agents - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Workflows" href="tutorials.html" /><link rel="prev" title="Using Your Workspace" href="using-your-workspace.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/workspace/working-with-agents.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/workspace/working-with-agents.html"/>
+  <meta property="og:title" content="Working with AI Agents"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="../../../applications/workspace/working-with-agents.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a>
+  <a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+    <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../specifications.html">Platform Specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../langflow/index.html">Langflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/building-flows.html">Building Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/deploying-flows.html">Deploying Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modelstudio/index.html">ModelStudio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/tutorials.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/deploying-models.html">Deploying Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/playground.html">Playground Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ragflow/index.html">RAGFlow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/models.html">Using Models on DKubeX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/knowledge-bases.html">Knowledge Bases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat.html">Chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agents.html">Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team-and-sharing.html">Team &amp; Sharing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/build-a-qa-assistant.html">Build a Document Q&amp;A Assistant</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/user-features.html">Core Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/admin-features.html">Administrator Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Workspace</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="managing-workspaces.html">Managing Your Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-your-workspace.html">Using Your Workspace</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Working with AI Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials.html">Workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/governing-llm-access/index.html">Governing LLM Access</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/governing-llm-access/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/governing-llm-access/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/governing-llm-access/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/llms-and-rag/index.html">LLMs and RAG</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/llms-and-rag/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/llms-and-rag/building-a-legal-contract-qa-assistant-on-dkubex.html">Building a Legal Contract Q&amp;A Assistant on DKubeX</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/mlops/index.html">MLOps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/mlops/training-and-deploying-an-ml-model-on-dkubex.html">Training and Deploying an ML Model on DKubeX</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/coding-agents/index.html">Coding Agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/coding-agents/using-claude-code-in-dkubex-workspace-with-a-claude-subscription.html">Using Claude Code in DKubeX Workspace with a Claude Subscription</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/coding-agents/using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.html">Using Claude Code in DKubeX Workspace with DKubeX or Cloud Provider Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/coding-agents/building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.html">Building and Hosting an App in DKubeX Workspace with a Coding Agent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#the-agents">The Agents</a></li>
+<li><a class="reference internal" href="#using-your-organization-s-models">Using Your Organization&#8217;s Models</a></li>
+<li><a class="reference internal" href="#using-your-own-subscription-instead">Using Your Own Subscription Instead</a></li>
+<li><a class="reference internal" href="#your-configuration-edits-are-kept">Your Configuration Edits Are Kept</a></li>
+<li><a class="reference internal" href="#antigravity-is-the-exception">Antigravity Is the Exception</a></li>
+<li><a class="reference internal" href="#usage-is-recorded">Usage Is Recorded</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">Workspace</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Working with AI Agents</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/workspace/working-with-agents.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/workspace/working-with-agents.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/workspace/working-with-agents.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/workspace/working-with-agents.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/workspace/working-with-agents.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="working-with-ai-agents">
+<h1>Working with AI Agents<a class="headerlink" href="#working-with-ai-agents" title="Link to this heading">#</a></h1>
+<p>Your workspace ships eight AI coding agents, and you choose how they get their models. Pick a <strong>default model</strong> in your workspace settings and every agent is pointed at your organization’s models automatically — nothing to paste, no account to sign into. Leave the default model unset and the agents keep their own sign-in, so you can use a personal subscription instead.</p>
+<section id="the-agents">
+<h2>The Agents<a class="headerlink" href="#the-agents" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Agent</p></th>
+<th class="head"><p>What it is</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Claude Code</strong></p></td>
+<td><p>Anthropic’s agentic coding CLI</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>OpenCode</strong></p></td>
+<td><p>Open-source terminal coding agent</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Codex</strong></p></td>
+<td><p>OpenAI’s coding agent CLI</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Copilot CLI</strong></p></td>
+<td><p>GitHub Copilot in the terminal</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Mistral Vibe</strong></p></td>
+<td><p>Mistral’s coding agent CLI</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Hermes</strong></p></td>
+<td><p>Nous Research’s agent</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>OpenClaw</strong></p></td>
+<td><p>Multi-model agent gateway and web UI</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Antigravity</strong></p></td>
+<td><p>Google’s terminal coding agent (<code class="docutils literal notranslate"><span class="pre">agy</span></code>) — see the exception below</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Seven of them run as terminal apps: open the tile in <strong>Apps</strong> and you land in the agent’s CLI, ready for a prompt. <strong>OpenClaw</strong> is a web UI rather than a terminal.</p>
+<p>You can also run the agents from a shell — open the <strong>Terminal</strong> app and run <code class="docutils literal notranslate"><span class="pre">claude</span></code>, <code class="docutils literal notranslate"><span class="pre">opencode</span></code>, <code class="docutils literal notranslate"><span class="pre">codex</span></code>, <code class="docutils literal notranslate"><span class="pre">copilot</span></code>, <code class="docutils literal notranslate"><span class="pre">vibe</span></code> or <code class="docutils literal notranslate"><span class="pre">hermes</span></code> directly. They read the same configuration.</p>
+</section>
+<section id="using-your-organization-s-models">
+<h2>Using Your Organization’s Models<a class="headerlink" href="#using-your-organization-s-models" title="Link to this heading">#</a></h2>
+<p>Set a default model and every agent is configured against your organization’s model gateway automatically:</p>
+<ol class="arabic simple">
+<li><p>Go to <strong>Settings</strong> → <strong>Workspace</strong>.</p></li>
+<li><p>Under <strong>Default model</strong>, pick one of the models available to you.</p></li>
+<li><p>Click <strong>Apply and restart</strong>.</p></li>
+</ol>
+<p><img alt="The Default model picker open, listing None and the models available to your key" src="../../_images/settings-default-model.png" /></p>
+<p>Applying <strong>restarts your workspace</strong>, so save your work first. When it comes back, the agents are pointed at the gateway and authenticated with your key — you can start prompting straight away.</p>
+<p>The models on offer are the ones your organization has enabled for your key. If the list is empty or fails to load, your gateway may still be starting; wait a moment and reload.</p>
+<p>Within an agent you can usually switch models for a session using that agent’s own model picker or <code class="docutils literal notranslate"><span class="pre">/model</span></code> command. The setting above is the default each agent starts from.</p>
+</section>
+<section id="using-your-own-subscription-instead">
+<h2>Using Your Own Subscription Instead<a class="headerlink" href="#using-your-own-subscription-instead" title="Link to this heading">#</a></h2>
+<p>If you have your own Claude, ChatGPT or other subscription, set <strong>Default model</strong> to <strong>None</strong>. Your workspace then injects no model settings at all, so each agent keeps its normal first-run behaviour — you sign in with your own account and your usage bills to your own subscription.</p>
+<ol class="arabic simple">
+<li><p>Go to <strong>Settings</strong> → <strong>Workspace</strong>.</p></li>
+<li><p>Open <strong>Default model</strong> and choose <strong>None</strong>.</p></li>
+<li><p>Click <strong>Apply and restart</strong>.</p></li>
+</ol>
+<p><img alt="Settings → Workspace with Default model set to None" src="../../_images/settings-workspace.png" /></p>
+<p>Two things to know:</p>
+<ul class="simple">
+<li><p><strong>None is the starting state.</strong> A freshly installed workspace has no default model, so the agents are on their own sign-in until you choose one. You can switch between <strong>None</strong> and a platform model whenever you like; each change takes effect once the workspace restarts.</p></li>
+<li><p><strong>It is all-or-nothing.</strong> The default model applies to every agent at once; you cannot put some agents on the platform’s models and others on a personal subscription.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> If your administrator changes the organization-wide default model, your workspace restarts and <strong>your saved model choice is replaced by the new default</strong>. This is deliberate — it is how a model that is being retired gets rolled off every workspace. Just pick your preferred model again afterwards.</p>
+</div></blockquote>
+</section>
+<section id="your-configuration-edits-are-kept">
+<h2>Your Configuration Edits Are Kept<a class="headerlink" href="#your-configuration-edits-are-kept" title="Link to this heading">#</a></h2>
+<p>Each agent’s config file lives in your home directory, so it persists across restarts and you are free to edit it. Your workspace only rewrites the parts that point the agent at the gateway — the provider and endpoint settings — and leaves everything else you have set alone: your permissions, hooks, custom commands and other preferences all survive.</p>
+</section>
+<section id="antigravity-is-the-exception">
+<h2>Antigravity Is the Exception<a class="headerlink" href="#antigravity-is-the-exception" title="Link to this heading">#</a></h2>
+<p><strong>Antigravity (<code class="docutils literal notranslate"><span class="pre">agy</span></code>) cannot use your organization’s models.</strong> Google publishes no supported way to point the CLI at a custom endpoint or supply your own key, so it stays on Google’s own sign-in. To use it, log in with a Google account when it prompts you.</p>
+<p>This also means Antigravity’s usage does not appear in your organization’s model usage reporting at all, since its requests never reach the gateway.</p>
+</section>
+<section id="usage-is-recorded">
+<h2>Usage Is Recorded<a class="headerlink" href="#usage-is-recorded" title="Link to this heading">#</a></h2>
+<p>Requests the agents make through your organization’s gateway are recorded and attributed to you and your workspace. Your administrator can see usage and cost per user — this is how model spend is tracked.</p>
+<p>Coverage is not uniform:</p>
+<ul class="simple">
+<li><p><strong>Claude Code</strong>, <strong>Copilot CLI</strong>, <strong>Codex</strong> and <strong>OpenClaw</strong> report detailed telemetry.</p></li>
+<li><p><strong>Mistral Vibe</strong> and <strong>OpenCode</strong> do not export telemetry, though their requests still pass through the gateway.</p></li>
+<li><p><strong>Antigravity</strong> is not covered at all, as described above.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> Agent telemetry is set up independently of the model gateway, so it is still collected when you run on your <strong>own subscription</strong>. Your organization does not see your personal billing, but the agents you use in the workspace remain visible to your administrator.</p>
+</div></blockquote>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<p><strong>An agent asks me to log in or for an API key.</strong> That is expected if no <strong>Default model</strong> is set — the agents are on their own sign-in. To use your organization’s models instead, pick a model in <strong>Settings</strong> → <strong>Workspace</strong> and click <strong>Apply and restart</strong>. If the model list is empty, your gateway may not be reachable yet; reload after a moment. Antigravity always asks for a Google login regardless.</p>
+<p><strong>An agent reports a model that no longer exists.</strong> Pick a current model in <strong>Settings</strong> → <strong>Workspace</strong> and click <strong>Apply and restart</strong>.</p>
+<p><strong>An agent prompts me to trust the folder.</strong> Accept it once; the choice is saved in your home directory and persists.</p>
+<p><strong>I want to use my own Claude or ChatGPT subscription.</strong> Set <strong>Default model</strong> to <strong>None</strong> in <strong>Settings</strong> → <strong>Workspace</strong>, click <strong>Apply and restart</strong>, then sign in to each agent with your own account. See <a class="reference internal" href="#using-your-own-subscription-instead"><span class="xref myst">Using your own subscription instead</span></a>.</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="using-your-workspace.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Using Your Workspace</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="tutorials.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Workflows</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 07.08.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a>
+  <a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+    <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+  </a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

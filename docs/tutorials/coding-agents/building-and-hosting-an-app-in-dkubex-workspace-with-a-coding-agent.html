@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Building and Hosting an App in DKubeX Workspace with a Coding Agent - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="prev" title="Using Claude Code in DKubeX Workspace with DKubeX or Cloud Provider Models" href="using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/tutorials/coding-agents/building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/tutorials/coding-agents/building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.html"/>
+  <meta property="og:title" content="Building and Hosting an App in DKubeX Workspace with a Coding Agent"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">v2.0.0.2</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="../../../docs-v2.0.0/index.html">v2.0.0</a></li><li><a href="../../../docs-v2.0.0.1/index.html">v2.0.0.1</a></li><li><a href="building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.html">v2.0.0.2</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a>
+  <a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+    <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../specifications.html">Platform Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/index.html">Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/langflow/index.html">Langflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/langflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/langflow/building-flows.html">Building Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/langflow/components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/langflow/deploying-flows.html">Deploying Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/langflow/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/modelstudio/index.html">ModelStudio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/modelstudio/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/modelstudio/tutorials.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/modelstudio/deploying-models.html">Deploying Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/modelstudio/playground.html">Playground Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/ragflow/index.html">RAGFlow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/models.html">Using Models on DKubeX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/knowledge-bases.html">Knowledge Bases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/chat.html">Chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/agents.html">Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/team-and-sharing.html">Team &amp; Sharing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/build-a-qa-assistant.html">Build a Document Q&amp;A Assistant</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/securellm/index.html">SecureLLM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/securellm/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/securellm/user-features.html">Core Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/securellm/admin-features.html">Administrator Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/securellm/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/workspace/index.html">Workspace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/workspace/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/workspace/managing-workspaces.html">Managing Your Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/workspace/using-your-workspace.html">Using Your Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/workspace/working-with-agents.html">Working with AI Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/workspace/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../governing-llm-access/index.html">Governing LLM Access</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../governing-llm-access/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../governing-llm-access/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../governing-llm-access/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../llms-and-rag/index.html">LLMs and RAG</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../llms-and-rag/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../llms-and-rag/building-a-legal-contract-qa-assistant-on-dkubex.html">Building a Legal Contract Q&amp;A Assistant on DKubeX</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mlops/index.html">MLOps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mlops/training-and-deploying-an-ml-model-on-dkubex.html">Training and Deploying an ML Model on DKubeX</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Coding Agents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="using-claude-code-in-dkubex-workspace-with-a-claude-subscription.html">Using Claude Code in DKubeX Workspace with a Claude Subscription</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.html">Using Claude Code in DKubeX Workspace with DKubeX or Cloud Provider Models</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Building and Hosting an App in DKubeX Workspace with a Coding Agent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#how-app-hosting-works">How app hosting works</a></li>
+<li><a class="reference internal" href="#step-1-open-a-coding-agent">Step 1 &#8212; Open a coding agent</a></li>
+<li><a class="reference internal" href="#step-2-load-the-app-hosting-rules-as-standing-instructions">Step 2 &#8212; Load the app-hosting rules as standing instructions</a></li>
+<li><a class="reference internal" href="#step-3-build-the-app">Step 3 &#8212; Build the app</a></li>
+<li><a class="reference internal" href="#step-4-access-your-app">Step 4 &#8212; Access your app</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Tutorials</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">Coding Agents</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Building and Hosting an App in DKubeX Workspace with a Coding Agent</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/tutorials/coding-agents/building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/tutorials/coding-agents/building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/tutorials/coding-agents/building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/tutorials/coding-agents/building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/tutorials/coding-agents/building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent">
+<h1>Building and Hosting an App in DKubeX Workspace with a Coding Agent<a class="headerlink" href="#building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent" title="Link to this heading">#</a></h1>
+<p>Once you have a coding agent running in DKubeX Workspace, you can have it build an app and host
+it straight from the workspace — reachable in the browser through the workspace’s built-in reverse
+proxy. This tutorial walks through it end to end using a <strong>data-analysis workbench</strong> as the worked
+example, but the same flow builds and hosts any app.</p>
+<p>The flow is two steps. First you give the agent the workspace’s app-hosting rules <strong>once</strong>, as
+standing instructions. Then you describe your app in plain language — the agent applies the hosting
+rules for you, so your app prompts stay focused on what the app does, not on how the proxy works.</p>
+<p>To get a coding agent set up first, see
+<a class="reference internal" href="using-claude-code-in-dkubex-workspace-with-a-claude-subscription.html"><span class="std std-doc">Using Claude Code in DKubeX Workspace with a Claude subscription</span></a>
+or
+<a class="reference internal" href="using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.html"><span class="std std-doc">Using Claude Code in DKubeX Workspace with DKubeX or cloud provider models</span></a>.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A running DKubeX Workspace.</p></li>
+<li><p>A coding agent set up in the workspace — Claude Code, Codex, OpenCode, Copilot CLI, Antigravity,
+Mistral Vibe, or Hermes. See the two tutorials linked above.</p></li>
+</ul>
+</section>
+<section id="how-app-hosting-works">
+<h2>How app hosting works<a class="headerlink" href="#how-app-hosting-works" title="Link to this heading">#</a></h2>
+<p>Every workspace has an <strong>nginx reverse proxy</strong>. When you start a web server on a port inside the
+workspace, it becomes reachable at:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">https</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">host</span><span class="o">&gt;/</span><span class="n">workspace</span><span class="o">/&lt;</span><span class="n">username</span><span class="o">&gt;/&lt;</span><span class="n">port</span><span class="o">&gt;/</span>
+</span></pre></div>
+</div>
+<p>One thing determines whether your app works through that URL:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>nginx does <em>not</em> strip the <code class="docutils literal notranslate"><span class="pre">/workspace/&lt;username&gt;/&lt;port&gt;</span></code> prefix before forwarding.</strong> It proxies
+straight to <code class="docutils literal notranslate"><span class="pre">127.0.0.1:&lt;port&gt;</span></code> with the full path intact — your app receives requests for
+<code class="docutils literal notranslate"><span class="pre">/workspace/&lt;username&gt;/&lt;port&gt;/...</span></code>, not <code class="docutils literal notranslate"><span class="pre">/...</span></code>. An app that only knows how to serve <code class="docutils literal notranslate"><span class="pre">/</span></code> will 404 on
+every request through the public URL, even though <code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">localhost:&lt;port&gt;/</span></code> works fine from inside
+the workspace.</p>
+<p>So both sides of your app must be <strong>prefix-aware</strong> — the backend must mount its routes under the
+prefix, and the frontend must load its assets and call its APIs under the prefix too. Getting either
+side wrong is the single most common reason a newly built app “works when I test it locally but 404s
+in the browser.”</p>
+<p>Rather than restate these rules in every app prompt, you load them once as standing instructions
+(Step 2). The full rule set lives in a single file, <code class="docutils literal notranslate"><span class="pre">APP_HOSTING.md</span></code>, that the agent reads and
+follows for everything it builds in the workspace.</p>
+</div>
+</section>
+<section id="step-1-open-a-coding-agent">
+<h2>Step 1 — Open a coding agent<a class="headerlink" href="#step-1-open-a-coding-agent" title="Link to this heading">#</a></h2>
+<p>From the workspace launcher, open a coding agent (for example, <strong>Claude Code</strong>). Any of the agents
+work:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Agent</p></th>
+<th class="head"><p>Best for</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Claude Code</strong></p></td>
+<td><p>Full-stack apps, complex logic</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Codex</strong></p></td>
+<td><p>Quick prototyping, OpenAI models</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>OpenCode</strong></p></td>
+<td><p>Open-source model workflows</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Copilot CLI</strong></p></td>
+<td><p>GitHub-integrated development</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Antigravity</strong></p></td>
+<td><p>Google model exploration</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Mistral Vibe</strong></p></td>
+<td><p>Mistral-powered coding</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Hermes</strong></p></td>
+<td><p>Nous Research models</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="step-2-load-the-app-hosting-rules-as-standing-instructions">
+<h2>Step 2 — Load the app-hosting rules as standing instructions<a class="headerlink" href="#step-2-load-the-app-hosting-rules-as-standing-instructions" title="Link to this heading">#</a></h2>
+<p>Give the agent the workspace’s app-hosting rules before you ask it to build anything. Fetch the file
+with <code class="docutils literal notranslate"><span class="pre">wget</span></code>, or paste its contents in directly if the workspace can’t reach GitHub.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Download with wget</label><div class="sd-tab-content docutils">
+<p>Run this in the workspace terminal — or ask the agent to run it for you — to pull the rules file into
+your home directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">wget<span class="w"> </span>https://raw.githubusercontent.com/dkubeio/docs-site/app-hosting-example/APP_HOSTING.md
+</span></pre></div>
+</div>
+<p>Then tell the agent to adopt it as standing instructions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">Read the file APP_HOSTING.md in my home directory. Treat it as your standing
+</span><span data-line="2">instructions for hosting apps in this workspace — follow these rules for every
+</span><span data-line="3">app you build here.
+</span></pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Copy and paste</label><div class="sd-tab-content docutils">
+<p>Paste the following directly into the agent — the framing line followed by the full rules:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">Here are the app-hosting rules for this workspace. Treat them as your standing
+</span><span data-line="2">instructions and follow them for every app you build here:
+</span><span data-line="3">
+</span><span data-line="4"># Hosting Apps in Your DKubeX Workspace
+</span><span data-line="5">
+</span><span data-line="6">This guide covers how app hosting works in this workspace, and the rules any
+</span><span data-line="7">app needs to follow to work behind the workspace&#39;s reverse proxy — regardless
+</span><span data-line="8">of which app you&#39;re building or which coding agent you use to build it.
+</span><span data-line="9">
+</span><span data-line="10">## Prerequisites
+</span><span data-line="11">
+</span><span data-line="12">- A running DKubeX Workspace
+</span><span data-line="13">- A coding model deployed via SecureLLM (the platform configures agents automatically)
+</span><span data-line="14">
+</span><span data-line="15">## How App Hosting Works
+</span><span data-line="16">
+</span><span data-line="17">Every workspace has an nginx reverse proxy. When you start any web server on a
+</span><span data-line="18">port inside the workspace, it becomes accessible at:
+</span><span data-line="19">
+</span><span data-line="20">```
+</span><span data-line="21">https://&lt;host&gt;/workspace/&lt;username&gt;/&lt;port&gt;/
+</span><span data-line="22">```
+</span><span data-line="23">
+</span><span data-line="24">**Important: nginx does NOT strip that prefix before forwarding to your app.**
+</span><span data-line="25">It proxies straight to `127.0.0.1:&lt;port&gt;` with the full path intact — your app
+</span><span data-line="26">receives requests for `/workspace/&lt;username&gt;/&lt;port&gt;/...`, not `/...`. An app
+</span><span data-line="27">that only knows how to serve `/` will 404 on every real request through the
+</span><span data-line="28">public URL, even though `curl localhost:&lt;port&gt;/` works fine from inside the
+</span><span data-line="29">workspace.
+</span><span data-line="30">
+</span><span data-line="31">This means both the **backend** and the **frontend** must be prefix-aware:
+</span><span data-line="32">
+</span><span data-line="33">- **Backend:** All API routes and the HTML-serving route must be mounted
+</span><span data-line="34">  under the prefix path so the server recognizes incoming requests — see
+</span><span data-line="35">  Rule 1.
+</span><span data-line="36">- **Frontend:** The HTML page must load all assets (stylesheets, scripts,
+</span><span data-line="37">  images) and navigate to other pages using the correct prefix — see
+</span><span data-line="38">  Rule 2. A single inline page with no external assets may work with just
+</span><span data-line="39">  relative URLs, but multi-page apps or apps that load separate asset files
+</span><span data-line="40">  will break without proper prefix configuration.
+</span><span data-line="41">
+</span><span data-line="42">Getting either side wrong is the single most common reason a newly built app
+</span><span data-line="43">&quot;works when I test it locally but 404s in the browser.&quot;
+</span><span data-line="44">
+</span><span data-line="45">---
+</span><span data-line="46">
+</span><span data-line="47">## Step-by-Step: Build and Host Any App
+</span><span data-line="48">
+</span><span data-line="49">### Step 1 — Open a Coding Agent
+</span><span data-line="50">
+</span><span data-line="51">From the workspace launcher, click any agent card:
+</span><span data-line="52">
+</span><span data-line="53">| Agent | Best for |
+</span><span data-line="54">|-------|----------|
+</span><span data-line="55">| **Claude Code** | Full-stack apps, complex logic |
+</span><span data-line="56">| **Codex** | Quick prototyping, OpenAI models |
+</span><span data-line="57">| **OpenCode** | Open-source model workflows |
+</span><span data-line="58">| **Copilot** | GitHub-integrated development |
+</span><span data-line="59">| **Antigravity** | Google model exploration |
+</span><span data-line="60">| **Vibe** | Mistral-powered coding |
+</span><span data-line="61">| **Hermes** | Nous Research models |
+</span><span data-line="62">
+</span><span data-line="63">### Step 2 — Ask the Agent to Build Your App
+</span><span data-line="64">
+</span><span data-line="65">Create a project directory first, then give the agent a prompt describing
+</span><span data-line="66">your app. **Always include the rules below** in your prompt so the agent
+</span><span data-line="67">builds something that actually works behind the proxy.
+</span><span data-line="68">
+</span><span data-line="69">### Step 3 — Install Dependencies and Run
+</span><span data-line="70">
+</span><span data-line="71">The agent will typically include install instructions. If not:
+</span><span data-line="72">
+</span><span data-line="73">```bash
+</span><span data-line="74"># Python apps
+</span><span data-line="75">python3 -m venv .venv
+</span><span data-line="76">./.venv/bin/pip install -r requirements.txt
+</span><span data-line="77">./.venv/bin/python app.py
+</span><span data-line="78">
+</span><span data-line="79"># Node.js apps
+</span><span data-line="80">npm install
+</span><span data-line="81">node server.js
+</span><span data-line="82">```
+</span><span data-line="83">
+</span><span data-line="84">Keep it running after closing the agent terminal:
+</span><span data-line="85">
+</span><span data-line="86">```bash
+</span><span data-line="87">nohup ./.venv/bin/python app.py &gt; app.log 2&gt;&amp;1 &amp;
+</span><span data-line="88">disown
+</span><span data-line="89">```
+</span><span data-line="90">
+</span><span data-line="91">### Step 4 — Access Your App
+</span><span data-line="92">
+</span><span data-line="93">Open a browser and go to:
+</span><span data-line="94">
+</span><span data-line="95">```
+</span><span data-line="96">https://&lt;host&gt;/workspace/&lt;your-username&gt;/&lt;port&gt;/
+</span><span data-line="97">```
+</span><span data-line="98">
+</span><span data-line="99">For example, if your app runs on port 8501:
+</span><span data-line="100">```
+</span><span data-line="101">https://dkubex.example.com/workspace/johndoe/8501/
+</span><span data-line="102">```
+</span><span data-line="103">
+</span><span data-line="104">---
+</span><span data-line="105">
+</span><span data-line="106">## Rules for Workspace-Compatible Apps
+</span><span data-line="107">
+</span><span data-line="108">These rules ensure your app works behind the workspace&#39;s nginx proxy. **Include
+</span><span data-line="109">them in your prompt to the coding agent** so it builds the app correctly.
+</span><span data-line="110">
+</span><span data-line="111">1. **Mount backend routes under the workspace prefix — nginx doesn&#39;t strip
+</span><span data-line="112">   it.** Every request your app receives arrives with the full path:
+</span><span data-line="113">   `/workspace/&lt;user&gt;/&lt;port&gt;/api/data`, not `/api/data`. Your backend must
+</span><span data-line="114">   expect routes at that prefix.
+</span><span data-line="115">
+</span><span data-line="116">   For FastAPI, use `APIRouter(prefix=...)` instead of defining routes
+</span><span data-line="117">   directly on the app:
+</span><span data-line="118">
+</span><span data-line="119">   ```python
+</span><span data-line="120">   import os
+</span><span data-line="121">   from fastapi import FastAPI, APIRouter
+</span><span data-line="122">
+</span><span data-line="123">   # Build prefix from workspace env vars (pre-configured by the platform)
+</span><span data-line="124">   PATH_PREFIX = &quot;/workspace/{}/{}&quot;.format(
+</span><span data-line="125">       os.environ.get(&quot;USERNAME&quot;, &quot;user&quot;),
+</span><span data-line="126">       os.environ.get(&quot;APP_PORT&quot;, &quot;8501&quot;),
+</span><span data-line="127">   )
+</span><span data-line="128">
+</span><span data-line="129">   app = FastAPI()
+</span><span data-line="130">   router = APIRouter(prefix=PATH_PREFIX)
+</span><span data-line="131">
+</span><span data-line="132">   @router.get(&quot;/api/data&quot;)
+</span><span data-line="133">   async def get_data():
+</span><span data-line="134">       return {&quot;items&quot;: []}
+</span><span data-line="135">
+</span><span data-line="136">   # Serve the HTML page under the prefix too
+</span><span data-line="137">   @router.get(&quot;/&quot;)
+</span><span data-line="138">   async def index():
+</span><span data-line="139">       return HTMLResponse(html_content)
+</span><span data-line="140">
+</span><span data-line="141">   app.include_router(router)
+</span><span data-line="142">   ```
+</span><span data-line="143">
+</span><span data-line="144">   This way the app natively serves at `/workspace/&lt;user&gt;/&lt;port&gt;/...` with
+</span><span data-line="145">   no custom middleware. For Express, use `app.use(PATH_PREFIX, router)`;
+</span><span data-line="146">   for Flask, use `Blueprint` with `url_prefix`. Tell your coding agent to
+</span><span data-line="147">   use this pattern explicitly — it&#39;s easy to skip if you only test against
+</span><span data-line="148">   `localhost:&lt;port&gt;` directly, since that always works regardless.
+</span><span data-line="149">
+</span><span data-line="150">2. **Frontend must also be prefix-aware.** Your app&#39;s UI is served from
+</span><span data-line="151">   `/workspace/&lt;username&gt;/&lt;port&gt;/`, not `/`. Every URL the browser loads —
+</span><span data-line="152">   stylesheets, scripts, images, page navigations, API calls — must resolve
+</span><span data-line="153">   under that prefix. There are two approaches:
+</span><span data-line="154">
+</span><span data-line="155">   **Option A — `&lt;base href&gt;` tag (simplest for single-file / inline apps):**
+</span><span data-line="156">
+</span><span data-line="157">   Set a `&lt;base href&gt;` in your HTML `&lt;head&gt;` so the browser resolves all
+</span><span data-line="158">   relative URLs from the prefix path:
+</span><span data-line="159">
+</span><span data-line="160">   ```html
+</span><span data-line="161">   &lt;base href=&quot;/workspace/johndoe/8501/&quot;&gt;
+</span><span data-line="162">   ```
+</span><span data-line="163">
+</span><span data-line="164">   Then use relative URLs everywhere — `fetch(&#39;api/data&#39;)`, `&lt;link
+</span><span data-line="165">   href=&quot;style.css&quot;&gt;`, `&lt;img src=&quot;logo.png&quot;&gt;`, `&lt;a href=&quot;about&quot;&gt;`.
+</span><span data-line="166">
+</span><span data-line="167">   For a FastAPI app, inject the prefix dynamically so it works for any
+</span><span data-line="168">   user/port:
+</span><span data-line="169">
+</span><span data-line="170">   ```python
+</span><span data-line="171">   html_content = f&quot;&quot;&quot;
+</span><span data-line="172">   &lt;html&gt;
+</span><span data-line="173">   &lt;head&gt;&lt;base href=&quot;{PATH_PREFIX}/&quot;&gt;&lt;/head&gt;
+</span><span data-line="174">   &lt;body&gt;
+</span><span data-line="175">     &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot;&gt;
+</span><span data-line="176">     &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+</span><span data-line="177">     &lt;img src=&quot;images/logo.png&quot;&gt;
+</span><span data-line="178">   &lt;/body&gt;
+</span><span data-line="179">   &lt;/html&gt;
+</span><span data-line="180">   &quot;&quot;&quot;
+</span><span data-line="181">   ```
+</span><span data-line="182">
+</span><span data-line="183">   **Option B — Framework prefix config (for React, Vue, Vite, etc.):**
+</span><span data-line="184">
+</span><span data-line="185">   | Framework | Setting |
+</span><span data-line="186">   |-----------|---------|
+</span><span data-line="187">   | Vite | `base: &#39;/workspace/user/port/&#39;` in `vite.config.js` |
+</span><span data-line="188">   | React Router | `&lt;BrowserRouter basename=&quot;/workspace/user/port&quot;&gt;` |
+</span><span data-line="189">   | Vue Router | `createRouter({ history: createWebHistory(&#39;/workspace/user/port&#39;) })` |
+</span><span data-line="190">   | Next.js | `basePath: &#39;/workspace/user/port&#39;` in `next.config.js` |
+</span><span data-line="191">
+</span><span data-line="192">   **What breaks without prefix configuration:**
+</span><span data-line="193">
+</span><span data-line="194">   | What | Wrong (absolute) | Right (relative, with base href or prefix) |
+</span><span data-line="195">   |------|-------------------|---------------------------------------------|
+</span><span data-line="196">   | API fetch | `fetch(&#39;/api/data&#39;)` | `fetch(&#39;api/data&#39;)` |
+</span><span data-line="197">   | Stylesheet | `&lt;link href=&quot;/style.css&quot;&gt;` | `&lt;link href=&quot;style.css&quot;&gt;` |
+</span><span data-line="198">   | Script | `&lt;script src=&quot;/app.js&quot;&gt;` | `&lt;script src=&quot;app.js&quot;&gt;` |
+</span><span data-line="199">   | Image | `&lt;img src=&quot;/logo.png&quot;&gt;` | `&lt;img src=&quot;logo.png&quot;&gt;` |
+</span><span data-line="200">   | Navigation | `&lt;a href=&quot;/about&quot;&gt;` | `&lt;a href=&quot;about&quot;&gt;` |
+</span><span data-line="201">   | CSS asset | `url(&#39;/fonts/icon.woff&#39;)` | `url(&#39;fonts/icon.woff&#39;)` |
+</span><span data-line="202">
+</span><span data-line="203">   A single inline page (all HTML/CSS/JS in one file, no external assets)
+</span><span data-line="204">   may work with just relative `fetch()` calls. But the moment your app
+</span><span data-line="205">   loads a separate stylesheet, script, image, or has multi-page navigation,
+</span><span data-line="206">   you need one of the prefix approaches above.
+</span><span data-line="207">
+</span><span data-line="208">3. **Bind to `0.0.0.0`**, not `localhost` or `127.0.0.1` — nginx proxies from
+</span><span data-line="209">   within the same pod but as a separate process.
+</span><span data-line="210">
+</span><span data-line="211">4. **Avoid reserved ports.** These are already in use:
+</span><span data-line="212">   - `8080` — nginx (the public entry point)
+</span><span data-line="213">   - `9100` — app loader
+</span><span data-line="214">   - `9001` — supervisord API
+</span><span data-line="215">   - `17681–17688` — built-in terminal apps
+</span><span data-line="216">   - `18443` — VS Code
+</span><span data-line="217">   - `18888` — JupyterLab
+</span><span data-line="218">   - `19000` — FileBrowser
+</span><span data-line="219">   - `28789` — OpenClaw
+</span><span data-line="220">
+</span><span data-line="221">   Safe choices: `3000`, `5000`, `8000`, `8501`–`8510`, `9000`, or anything above `30000`.
+</span><span data-line="222">
+</span><span data-line="223">5. **WebSockets work.** nginx passes `Upgrade`/`Connection` headers, so
+</span><span data-line="224">   real-time apps (chat, live dashboards, hot-reload) work natively — no
+</span><span data-line="225">   special handling needed beyond rule 1 applying to the WebSocket path too.
+</span><span data-line="226">
+</span><span data-line="227">6. **Bundle all assets.** Inline CSS/JS or install packages locally. Don&#39;t rely
+</span><span data-line="228">   on external CDNs if the cluster is behind a firewall.
+</span><span data-line="229">
+</span><span data-line="230">---
+</span><span data-line="231">
+</span><span data-line="232">## Iterating with the Agent
+</span><span data-line="233">
+</span><span data-line="234">Once the app is running, use the same agent to extend it — describe the new
+</span><span data-line="235">feature in plain language, e.g. &quot;Add a search bar that filters tasks by
+</span><span data-line="236">title.&quot; The agent edits files in place. Restart the server to pick up
+</span><span data-line="237">changes (`Ctrl+C` then re-run), or use a framework with hot-reload.
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>The agent now knows how the workspace proxy works. From here on, describe apps in plain language and
+it will build them prefix-aware without you having to spell the rules out again.</p>
+</section>
+<section id="step-3-build-the-app">
+<h2>Step 3 — Build the app<a class="headerlink" href="#step-3-build-the-app" title="Link to this heading">#</a></h2>
+<p>With the hosting rules loaded, prompt and converse with your coding agent to build your app —
+describe what you want in plain language and iterate as you go. Because the agent already has the
+hosting rules from Step 2, your prompts stay focused on what the app does, not on the proxy, prefix,
+or port. For example, this prompt builds a DuckDB data-analysis workbench:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">mkdir -p ~/projects/data-workbench &amp;&amp; cd ~/projects/data-workbench
+</span><span data-line="2">
+</span><span data-line="3">Build a FastAPI data-analysis workbench web app powered by DuckDB. Requirements:
+</span><span data-line="4">
+</span><span data-line="5">Backend (single app.py, using an in-process DuckDB database):
+</span><span data-line="6">- Dataset upload: accept a CSV or Parquet file upload and load it into a
+</span><span data-line="7">  DuckDB table named &quot;dataset&quot; (replacing any previous one), using DuckDB&#39;s
+</span><span data-line="8">  native read_csv_auto / read_parquet. Save the uploaded file under
+</span><span data-line="9">  ~/.data-workbench/datasets/ so it can be reloaded later. Return the inferred
+</span><span data-line="10">  schema (column names + types) and the row count.
+</span><span data-line="11">- Recent datasets: list previously uploaded datasets from that folder and
+</span><span data-line="12">  allow reloading one by name.
+</span><span data-line="13">- Schema: return the current dataset&#39;s columns and DuckDB types.
+</span><span data-line="14">- Profiling: for the current dataset, compute per-column stats via SQL —
+</span><span data-line="15">  data type, non-null count, null %, distinct count; for numeric columns also
+</span><span data-line="16">  min / max / mean / stddev / median (approx quantile); for text columns the
+</span><span data-line="17">  top 5 most frequent values with counts.
+</span><span data-line="18">- Correlation: compute a Pearson correlation matrix across the numeric
+</span><span data-line="19">  columns (DuckDB corr()), returned as a matrix for heatmap rendering.
+</span><span data-line="20">- SQL query: accept an arbitrary SQL string, run it against the DuckDB
+</span><span data-line="21">  database, and return column names + rows. Cap returned rows at 500 and also
+</span><span data-line="22">  return the total row count. Return any SQL error as a normal JSON field
+</span><span data-line="23">  (do NOT return a 500) so the UI can show it inline.
+</span><span data-line="24">- Chart data: given a chart type (histogram, scatter, or line) and the
+</span><span data-line="25">  relevant column(s), return the aggregated data points computed in DuckDB —
+</span><span data-line="26">  equal-width bins + counts for a histogram, x/y pairs for scatter, ordered
+</span><span data-line="27">  x/y for a line chart.
+</span><span data-line="28">- Query history: persist executed queries (text + timestamp) to a JSON file
+</span><span data-line="29">  at ~/.data-workbench/history.json (cap 200), with endpoints to list and
+</span><span data-line="30">  clear it.
+</span><span data-line="31">- CSV export: return the current query&#39;s result set as a downloadable CSV.
+</span><span data-line="32">
+</span><span data-line="33">Frontend (single inline HTML page):
+</span><span data-line="34">- Panels: a Dataset panel (drag-and-drop upload for CSV/Parquet, current
+</span><span data-line="35">  schema, and a list of recent datasets to reload); a SQL console (multiline
+</span><span data-line="36">  editor + Run button, results in a sortable, paginated table, inline error
+</span><span data-line="37">  display, and an Export CSV button); a Profile view (per-column stats table);
+</span><span data-line="38">  a Correlation view (numeric-column heatmap); and a Chart builder (pick chart
+</span><span data-line="39">  type + columns and render the returned data).
+</span><span data-line="40">- Render every chart and the correlation heatmap as HAND-WRITTEN inline SVG —
+</span><span data-line="41">  do NOT load any charting library or external CDN.
+</span><span data-line="42">- Ctrl/Cmd+Enter runs the SQL query.
+</span><span data-line="43">- A query-history panel listing recent queries; clicking one loads it back
+</span><span data-line="44">  into the editor; a Clear button empties the history.
+</span><span data-line="45">- Show friendly errors (bad SQL, unsupported file) inline without crashing
+</span><span data-line="46">  the page.
+</span><span data-line="47">- Dark/light theme via prefers-color-scheme; responsive layout.
+</span><span data-line="48">
+</span><span data-line="49">Serve the app on port 8506.
+</span><span data-line="50">
+</span><span data-line="51">Add a requirements.txt with fastapi, uvicorn, duckdb, pyarrow, and
+</span><span data-line="52">python-multipart.
+</span></pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">If the app isn’t running</p>
+<p>The agent installs and starts the app for you in most cases. If not, run it yourself:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nb">cd</span><span class="w"> </span>~/projects/data-workbench
+</span><span data-line="2">python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+</span><span data-line="3">./.venv/bin/pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span><span data-line="4">./.venv/bin/python<span class="w"> </span>app.py
+</span></pre></div>
+</div>
+<p>To keep it running after you close the agent terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">nohup<span class="w"> </span>./.venv/bin/python<span class="w"> </span>app.py<span class="w"> </span>&gt;<span class="w"> </span>app.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
+</span><span data-line="2"><span class="nb">disown</span>
+</span></pre></div>
+</div>
+</div>
+</section>
+<section id="step-4-access-your-app">
+<h2>Step 4 — Access your app<a class="headerlink" href="#step-4-access-your-app" title="Link to this heading">#</a></h2>
+<p>Open a browser and go to your workspace URL, using the port the app binds to (<code class="docutils literal notranslate"><span class="pre">8506</span></code> for the
+workbench):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">https</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">host</span><span class="o">&gt;/</span><span class="n">workspace</span><span class="o">/&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/&lt;</span><span class="n">port</span><span class="o">&gt;/</span>
+</span></pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">dkubex</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">johndoe</span><span class="o">/</span><span class="mi">8506</span><span class="o">/</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Using Claude Code in DKubeX Workspace with DKubeX or Cloud Provider Models</div></div>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 07.08.2026. Documentation version: v2.0.0.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a>
+  <a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+    <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+  </a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>
