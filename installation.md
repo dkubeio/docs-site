@@ -43,14 +43,14 @@ export REGISTRY_TOKEN="<github_pat_with_access_to_dkubex_repo>"
 ## Install DKubeX 2.0
 
 ```bash
-helm repo add dkubeio \
+helm repo add dkubeio-main \
 	--username "${GITHUB_TOKEN}" \
 	--password "${GITHUB_TOKEN}" \
 	"https://raw.githubusercontent.com/dkubeio/helm-charts/main/"
 
 helm repo update
 
-helm install -n dkubex --create-namespace dkubex-installer dkubeio/dkubex-installer \
+helm install -n dkubex --create-namespace dkubex-installer dkubeio-main/dkubex-installer \
 	--set registry.token="${REGISTRY_TOKEN}" \
 	--set dkubex.env.helm_token="${GITHUB_TOKEN}"
 ```
