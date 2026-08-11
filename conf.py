@@ -226,7 +226,7 @@ def auto_app_toctree(app, docname, source):
 	if docname != "applications/index":
 		return
 
-	apps_dir = os.path.join(os.path.dirname(__file__), "applications")
+	apps_dir = os.path.join(str(app.srcdir), "applications")
 	if not os.path.isdir(apps_dir):
 		return
 
