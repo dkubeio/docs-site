@@ -1,6 +1,6 @@
 # Applications
 
-The Applications section provides user documentation for applications integrated with DKubeX 2.0.
+The Applications section provides user documentation for applications integrated with DKubeX.
 
 These guides are focused on practical usage, including setup, configuration, common workflows, and operational best practices for each integrated application.
 

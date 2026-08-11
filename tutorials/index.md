@@ -1,6 +1,6 @@
 # Tutorials
 
-Hands-on, end-to-end guides for completing real tasks on DKubeX 2.0. Where the Applications section
+Hands-on, end-to-end guides for completing real tasks on DKubeX. Where the Applications section
 explains what each component does, the tutorials show you how to put those components together to
 finish a concrete piece of work — from governing model access to training a model or building and
 hosting an app.
