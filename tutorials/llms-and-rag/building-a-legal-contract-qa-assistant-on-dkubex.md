@@ -11,7 +11,7 @@ works the same way.
 
 ## Prerequisites
 
-- A DKubeX 2.0 deployment with the **Model Studio**, **SecureLLM**, and **RAGFlow** applications
+- A DKubeX deployment with the **Model Studio**, **SecureLLM**, and **RAGFlow** applications
   installed. To add an application, a user requests access to it from the dashboard's **Add app**
   section, and an administrator approves the request.
 - The documents you want to query, downloaded and unzipped **on your computer** — RAGFlow uploads

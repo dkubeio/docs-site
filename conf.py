@@ -72,7 +72,9 @@ suppress_warnings = [
 ]
 
 templates_path = ["_templates"]
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "README.md"]
+# specifications.md is intentionally kept in the repo but excluded from the
+# build/nav (retained for later use; folded content now lives on the homepage).
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "README.md", "specifications.md"]
 
 html_theme = "shibuya"
 html_title = "DKubeX Documentation"
@@ -254,6 +256,19 @@ APPLICATION_DISPLAY_NAMES = {
 }
 
 
+# Preferred order for applications in the list and sidebar. Slugs listed here
+# come first in this order; any others (e.g. apps only present in older
+# versions) follow alphabetically.
+APPLICATION_ORDER = ["workspace", "modelstudio", "securellm", "ragflow", "langflow"]
+
+
+def _ordered_app_slugs(slugs):
+	slugs = list(slugs)
+	ordered = [s for s in APPLICATION_ORDER if s in slugs]
+	rest = sorted(s for s in slugs if s not in APPLICATION_ORDER)
+	return ordered + rest
+
+
 # Append an auto-generated bulleted list of applications plus a hidden toctree
 # to applications/index.md. The visible list keeps the page discoverable for
 # end users; the hidden toctree drives the sidebar navigation and document
@@ -267,17 +282,22 @@ def auto_app_toctree(app, docname, source):
 	if not os.path.isdir(apps_dir):
 		return
 
+	available = [
+		entry
+		for entry in os.listdir(apps_dir)
+		if os.path.isdir(os.path.join(apps_dir, entry))
+		and os.path.isfile(os.path.join(apps_dir, entry, "index.md"))
+	]
+
 	entries = []
-	for entry in sorted(os.listdir(apps_dir)):
-		entry_path = os.path.join(apps_dir, entry)
-		index_path = os.path.join(entry_path, "index.md")
-		if os.path.isdir(entry_path) and os.path.isfile(index_path):
-			title = (
-				APPLICATION_DISPLAY_NAMES.get(entry)
-				or _read_h1(index_path)
-				or _format_slug(entry)
-			)
-			entries.append((entry, title))
+	for entry in _ordered_app_slugs(available):
+		index_path = os.path.join(apps_dir, entry, "index.md")
+		title = (
+			APPLICATION_DISPLAY_NAMES.get(entry)
+			or _read_h1(index_path)
+			or _format_slug(entry)
+		)
+		entries.append((entry, title))
 
 	if not entries:
 		return

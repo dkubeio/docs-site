@@ -1,6 +1,6 @@
-# Installing DKubeX 2.0
+# Installing DKubeX
 
-This guide installs DKubeX 2.0 using the Helm chart.
+This guide installs DKubeX using the Helm chart.
 
 ## Prerequisites
 
@@ -30,8 +30,8 @@ helm version
 
 You need two GitHub PATs:
 
-1. `GITHUB_TOKEN` and `dkubex.env.helm_token`: the same fine-grained read-only token used to read the DKubeX 2.0 Helm chart repository.
-2. `registry.token`: a GitHub PAT for registry access. The user must have access to the DKubeX 2.0 repository on GitHub.
+1. `GITHUB_TOKEN` and `dkubex.env.helm_token`: the same fine-grained read-only token used to read the DKubeX Helm chart repository.
+2. `registry.token`: a GitHub PAT for registry access. The user must have access to the DKubeX repository on GitHub.
 
 Export them:
 
@@ -40,7 +40,7 @@ export GITHUB_TOKEN="<finegrained_readonly_token_for_helm_repo>"
 export REGISTRY_TOKEN="<github_pat_with_access_to_dkubex_repo>"
 ```
 
-## Install DKubeX 2.0
+## Install DKubeX
 
 ```bash
 helm repo add dkubeio \

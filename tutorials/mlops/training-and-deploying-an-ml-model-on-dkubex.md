@@ -1,6 +1,6 @@
 # Training and Deploying an ML Model on DKubeX
 
-This tutorial walks through the end-to-end machine learning workflow on DKubeX 2.0:
+This tutorial walks through the end-to-end machine learning workflow on DKubeX:
 training a model from the **Terminal**, tracking and registering it in **MLflow**, and
 deploying and testing it in **Model Studio**.
 
@@ -13,7 +13,7 @@ Only three DKubeX applications are used in this tutorial: **Terminal**, **MLflow
 
 ## Prerequisites
 
-- Access to a DKubeX 2.0 workspace with the **Terminal**, **MLflow**, and **Model Studio**
+- Access to a DKubeX workspace with the **Terminal**, **MLflow**, and **Model Studio**
   applications enabled.
 - An MLflow tracking token. In a DKubeX workspace this is supplied automatically as a file
   (see [Step 2](#step-2-configure-the-environment-variables)).
