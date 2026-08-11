@@ -189,6 +189,43 @@ def fix_version_html(app, exception):
 			pass
 
 
+# Build a clean version list for shibuya's nav dropdown. Connected at a high
+# priority so it runs AFTER sphinx-multiversion (default priority), whose
+# handler overwrites context["versions"] with its own ascending VersionInfo.
+# We read that final value and expose a normalized, newest-first list plus the
+# latest tag name, consumed by _templates/components/nav-versions.html.
+def prepare_nav_versions(app, pagename, templatename, context, doctree):
+	raw = context.get("versions")
+	if not raw:
+		return
+
+	current = context.get("current_version")
+	current_name = getattr(current, "name", None) or (str(current) if current else "")
+	# Ensure the button label is the plain tag name, not a namedtuple repr.
+	context["current_version"] = current_name
+
+	items = []
+	for v in raw:
+		# smv Version is a namedtuple ([0]=name, [1]=url); be tolerant of dicts.
+		name = getattr(v, "name", None) or (v[0] if not isinstance(v, dict) else v.get("name"))
+		url = getattr(v, "url", None) or (v[1] if not isinstance(v, dict) else v.get("url"))
+		if name:
+			items.append({"name": name, "url": url})
+
+	def _key(item):
+		parts = _version_parts(item["name"])
+		return (1 if parts is not None else 0, parts or tuple(), item["name"])
+
+	items.sort(key=_key, reverse=True)
+	latest_name = items[0]["name"] if items else ""
+	for item in items:
+		item["is_latest"] = item["name"] == latest_name
+		item["is_current"] = item["name"] == current_name
+
+	context["nav_versions"] = items
+	context["nav_latest_name"] = latest_name
+
+
 # Read the first level-1 heading from a markdown file. Used to derive a
 # human-readable display title from each application's index.md.
 def _read_h1(path):
@@ -267,4 +304,6 @@ def auto_app_toctree(app, docname, source):
 def setup(app):
 	app.connect("source-read", auto_app_toctree)
 	app.connect("html-page-context", format_version)
+	# High priority => runs after sphinx-multiversion's own context handler.
+	app.connect("html-page-context", prepare_nav_versions, priority=900)
 	app.connect("build-finished", fix_version_html)

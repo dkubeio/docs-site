@@ -1,0 +1,24 @@
+{#- Overrides shibuya's built-in version switcher. Consumes nav_versions /
+    nav_latest_name prepared in conf.py (prepare_nav_versions), which run
+    after sphinx-multiversion so the list is final. Behaviour:
+      - current version is shown only in the button, not the dropdown list
+      - versions are ordered newest-first (descending)
+      - the newest version carries a "Latest" pill next to its number -#}
+{%- if nav_versions -%}
+  <div class="nav-versions">
+    <button type="button" aria-label="{{ _("Versions") }}">
+      <span class="md:hidden">{{ _("Versions") }}</span>
+      <span class="hidden md:inline version-label">{{ current_version }}{%- if nav_latest_name and current_version == nav_latest_name %} <span class="version-latest-badge">Latest</span>{%- endif -%}</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices">
+      <ul>
+        {%- for v in nav_versions -%}
+          {%- if not v.is_current -%}
+          <li><a href="{{ v.url }}">{{ v.name }}{%- if v.is_latest %} <span class="version-latest-badge">Latest</span>{%- endif -%}</a></li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+{%- endif -%}
