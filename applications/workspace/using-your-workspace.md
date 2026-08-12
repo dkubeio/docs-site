@@ -22,8 +22,9 @@ Your workspace ships twelve apps. Each one appears as its own tile in **Apps** w
 | **Mistral Vibe** | Mistral's coding agent CLI |
 | **OpenClaw** | Multi-model agent gateway and web UI |
 | **Hermes** | Nous Research's agent |
+| **Pi** | Minimal, extensible coding agent harness |
 
-The eight coding agents have their own page — see [Working with AI agents](./working-with-agents.md).
+The nine coding agents have their own page — see [Working with AI agents](./working-with-agents.md).
 
 ### Opening an App
 

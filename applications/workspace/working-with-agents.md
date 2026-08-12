@@ -1,6 +1,6 @@
 # Working with AI Agents
 
-Your workspace ships eight AI coding agents, and you choose how they get their models. Pick a **default model** in your workspace settings and every agent is pointed at your organization's models automatically — nothing to paste, no account to sign into. Leave the default model unset and the agents keep their own sign-in, so you can use a personal subscription instead.
+Your workspace ships nine AI coding agents, and you choose how they get their models. Pick a **default model** in your workspace settings and every agent is pointed at your organization's models automatically — nothing to paste, no account to sign into. Leave the default model unset and the agents keep their own sign-in, so you can use a personal subscription instead.
 
 ## The Agents
 
@@ -12,12 +12,13 @@ Your workspace ships eight AI coding agents, and you choose how they get their m
 | **Copilot CLI** | GitHub Copilot in the terminal |
 | **Mistral Vibe** | Mistral's coding agent CLI |
 | **Hermes** | Nous Research's agent |
+| **Pi** | Minimal, extensible coding agent harness |
 | **OpenClaw** | Multi-model agent gateway and web UI |
 | **Antigravity** | Google's terminal coding agent (`agy`) — see the exception below |
 
-Seven of them run as terminal apps: open the tile in **Apps** and you land in the agent's CLI, ready for a prompt. **OpenClaw** is a web UI rather than a terminal.
+Eight of them run as terminal apps: open the tile in **Apps** and you land in the agent's CLI, ready for a prompt. **OpenClaw** is a web UI rather than a terminal.
 
-You can also run the agents from a shell — open the **Terminal** app and run `claude`, `opencode`, `codex`, `copilot`, `vibe` or `hermes` directly. They read the same configuration.
+You can also run the agents from a shell — open the **Terminal** app and run `claude`, `opencode`, `codex`, `copilot`, `vibe`, `hermes` or `pi` directly. They read the same configuration.
 
 ## Using Your Organization's Models
 
@@ -69,7 +70,7 @@ Requests the agents make through your organization's gateway are recorded and at
 Coverage is not uniform:
 
 - **Claude Code**, **Copilot CLI**, **Codex** and **OpenClaw** report detailed telemetry.
-- **Mistral Vibe** and **OpenCode** do not export telemetry, though their requests still pass through the gateway.
+- **Mistral Vibe**, **OpenCode** and **Pi** do not export telemetry, though their requests still pass through the gateway.
 - **Antigravity** is not covered at all, as described above.
 
 > **Note:** Agent telemetry is set up independently of the model gateway, so it is still collected when you run on your **own subscription**. Your organization does not see your personal billing, but the agents you use in the workspace remain visible to your administrator.

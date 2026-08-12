@@ -51,8 +51,9 @@ Each app keeps running while you switch between others, so you can move between 
 | **Mistral Vibe** | Mistral's coding agent CLI |
 | **OpenClaw** | Multi-model agent gateway and web UI |
 | **Hermes** | Nous Research's agent |
+| **Pi** | Minimal, extensible coding agent harness |
 
-The eight coding agents can be pointed at your organization's models by picking a default model in your workspace settings, or left on their own sign-in so you can use a personal subscription — see [Working with AI agents](./working-with-agents.md).
+The nine coding agents can be pointed at your organization's models by picking a default model in your workspace settings, or left on their own sign-in so you can use a personal subscription — see [Working with AI agents](./working-with-agents.md).
 
 ## Next Steps
 

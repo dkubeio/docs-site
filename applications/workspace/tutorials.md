@@ -23,7 +23,7 @@ These walkthroughs chain together the individual tasks described in [Getting sta
 3. From **Apps**, open the agent you want — for example **Claude Code**. Because you set a default model in step 2, it starts already connected to your organization's models and there is no key to enter. (Skip step 2 and the agent will ask you to sign in with your own account instead.)
 4. Point it at your project and start prompting. If it asks you to trust the folder, accept once — the choice persists.
 
-To use an agent from a shell instead, open the **Terminal** app and run `claude`, `opencode`, `codex`, `copilot`, `vibe` or `hermes` from your project directory.
+To use an agent from a shell instead, open the **Terminal** app and run `claude`, `opencode`, `codex`, `copilot`, `vibe`, `hermes` or `pi` from your project directory.
 
 ## Install Python packages in your own environment
 
