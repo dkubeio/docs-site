@@ -5,7 +5,7 @@ This end-to-end walkthrough chains the steps from [Using models on DKubeX](./mod
 ## 1. Set up your models
 
 1. Open the **Model providers** page (avatar → **Model providers**).
-2. Set up the **DKubeX** provider with your **SecureLLM API key**, then open **Set Default Models** and choose your default chat and embedding models.
+2. In the **Available models** column, add the built-in **DKubeX** provider, then in the **Set default models** column choose your default chat and embedding models.
 
 ## 2. Create and populate a knowledge base
 

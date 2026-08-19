@@ -11,8 +11,8 @@ RAGFlow uses DKubeX single sign-on. Open the app from your DKubeX dashboard and 
 RAGFlow needs models to embed your documents and generate answers. On DKubeX these come from the built-in **DKubeX** provider, backed by SecureLLM.
 
 1. Click your avatar in the top-right and open the **Model providers** page.
-2. Find the **DKubeX** provider, start its setup, paste your **SecureLLM API key**, and confirm. RAGFlow registers the chat, embedding, and rerank models your key permits.
-3. Open **Set Default Models** and choose your default chat and embedding models.
+2. In the **Available models** column, find the built-in **DKubeX** provider and click **Add**. RAGFlow registers the chat, embedding, and rerank models you have access to.
+3. In the **Set default models** column, choose your default chat and embedding models.
 
 See [Using models on DKubeX](./models.md) for details.
 
@@ -35,6 +35,5 @@ See [Chat](./chat.md) for all assistant settings.
 
 ## Next steps
 
-- [Build a document Q&A assistant](./build-a-qa-assistant.md) — the full workflow, end to end.
 - [Agents](./agents.md) — build multi-step agents on top of your knowledge bases.
 - [Team & sharing](./team-and-sharing.md) — share your work with teammates.

@@ -1,6 +1,6 @@
 # RAGFlow
 
-RAGFlow on DKubeX is a retrieval-augmented generation (RAG) engine built on deep document understanding. It turns your documents into searchable knowledge bases and lets you chat with them, returning truthful answers backed by citations from your own data. On DKubeX, RAGFlow is pre-integrated with platform single sign-on and with cluster-local chat, embedding, and rerank models served through **SecureLLM** — so you provide only a SecureLLM API key, not separate model provider accounts.
+RAGFlow on DKubeX is a retrieval-augmented generation (RAG) engine built on deep document understanding. It turns your documents into searchable knowledge bases and lets you chat with them, returning truthful answers backed by citations from your own data. On DKubeX, RAGFlow is pre-integrated with platform single sign-on and with cluster-local chat, embedding, and rerank models served through **SecureLLM** — so the built-in DKubeX model provider is preconfigured with your DKubeX credentials and ready to use out of the box.
 
 ## Key features
 
@@ -14,12 +14,11 @@ RAGFlow on DKubeX is a retrieval-augmented generation (RAG) engine built on deep
 ## Tutorials
 
 - [Getting started](./getting-started.md) — Sign in, connect the DKubeX model provider, and build your first knowledge base and chat.
-- [Using models on DKubeX](./models.md) — Set up the DKubeX provider with your SecureLLM key.
+- [Using models on DKubeX](./models.md) — Add the built-in DKubeX provider and set your default models.
 - [Knowledge bases](./knowledge-bases.md) — Create and tune datasets: parsing, chunking, metadata, and retrieval testing.
 - [Chat](./chat.md) — Create chat assistants and configure their behavior.
 - [Agents](./agents.md) — Build an agent on top of your knowledge bases.
 - [Team & sharing](./team-and-sharing.md) — Share your work with teammates.
-- [Build a document Q&A assistant](./build-a-qa-assistant.md) — An end-to-end workflow.
 
 ```{toctree}
 :hidden:
@@ -30,5 +29,4 @@ knowledge-bases
 chat
 agents
 team-and-sharing
-build-a-qa-assistant
 ```
