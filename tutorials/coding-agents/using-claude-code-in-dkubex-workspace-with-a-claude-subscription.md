@@ -10,6 +10,17 @@ Use this flow when you already have a Claude subscription and want to use it ins
 To run Claude Code against a DKubeX-deployed model or an OpenRouter model instead, see
 [Using Claude Code in DKubeX Workspace with DKubeX or cloud provider models](./using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.md).
 
+```{raw} html
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:1.5rem 0;border-radius:8px;">
+  <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+    src="https://www.youtube-nocookie.com/embed/80gOr-YobJc" title="Claude Code with a Claude subscription in DKubeX Workspace"
+    loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
+```
+
+> 📺 Prefer to watch? See the walkthrough on YouTube: <https://youtu.be/80gOr-YobJc>
+
 ## Prerequisites
 
 - DKubeX Workspace, installed from the app catalog.
