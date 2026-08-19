@@ -1,40 +1,66 @@
 # Deploying Models on DKubeX Using Model Studio
 
-This page combines the main DKubeX Model Studio deployment flows for both Large Language Models (LLMs) and machine learning (ML) models.
+This page walks through deploying models on DKubeX using Model Studio. Text-generation, embedding, and reranking models all use the same LLM deployment flow.
 
-Model Studio supports discovering models from HuggingFace, deploying them through a guided form, and validating them in Playground.
+Model Studio supports discovering models from **HuggingFace** and **NVIDIA NIM**, deploying them through a guided form, and validating them in Playground.
 
 ## Shared Deployment Lifecycle
 
-Both LLM and ML deployments follow the same platform lifecycle:
+Deployments follow this platform lifecycle:
 
 Pending -> Downloading -> Starting -> Running
 
-Use the Deployed Models page to monitor status, edit resources, scale replicas, and manage model scope (Private/Shared).
+Use the **LLM Models** page to monitor status, edit resources, scale replicas, and manage model scope (Private/Shared).
 
 ## Deploying LLM Models
 
-Use this flow for text-generation and instruction-following models, such as Qwen/Llama-class chat models.
+Use this flow for text-generation, embedding, and reranking models — it's the same whether you're deploying a chat model or the embedding model behind a RAG assistant.
 
 ### Prerequisites
 
 - DKubeX workspace access with Model Studio enabled.
-- Cluster resource profile for the model size you plan to run.
-- Access to the HuggingFace model card you want to deploy.
+- Access to the HuggingFace or NVIDIA NIM model you want to deploy.
 
 ### Deployment Process
 
-1. Open Model Studio and go to Catalog.
-2. Set Task to Text Generation.
-3. Search for your model, such as a Qwen2-family model.
-4. Click Deploy on the model card.
-5. In the deploy form, configure:
-   - Quantization, for example Q4_K_M for a smaller footprint
-   - Resource Profile, such as a CPU or GPU preset
-   - Replicas, usually starting with 1
-   - Scope, either Private or Shared
-6. Submit the deployment.
-7. Track status in Deployed Models or Dashboard until the model reaches Running.
+This walkthrough deploys `qwen3-8b` on a GPU; the same flow works for any LLM.
+
+1. **Create a resource profile.** Because we're serving on a GPU, provision one first. From the top
+   navigation, open **Resource Profiles** and click **New Profile**. Give the profile a name, set it
+   to provision a single **GPU** instance, and pick your **instance type** (for example,
+   `g5.4xlarge`). Leave the remaining settings at their defaults and click **Save Profile**.
+2. Open the **LLM Catalog** and browse models from **HuggingFace** or **NVIDIA NIM**.
+3. In the search bar, type the model you want — here, `qwen3-8b` — and click its card. A **Deploy
+   Model** panel opens on the right.
+4. On the **Deploy** tab, configure:
+   - **Deployment Name** — a name for this deployment (leave blank to use the model's own name).
+   - **Source Model ID** — the HuggingFace path used to pull the weights (for example,
+     `Qwen/Qwen3-8B`).
+   - **Inference Engine** — choose how you're serving the model: **vLLM** for GPU serving, or
+     **Ollama** for CPU or quantized (GGUF) models.
+   - **Resources** — make sure **Use GPU** is checked, then select the **resource profile** you
+     created in step 1.
+   - **Replicas** — usually start with 1.
+   - **Scope** — either **Private** or **Shared**.
+5. For finer control, open the **Advanced** tab and set engine parameters as needed:
+   - **Max context length** — for example, `16384`.
+   - **GPU memory utilization** — for example, `0.90`.
+   - **Quantization** — leave at **none** for a full-precision vLLM deployment, or pick a method
+     (for example, `Q4_K_M`) for a quantized GGUF model on Ollama.
+   - **Data type**, **prefix caching**, and any **additional arguments** to pass to the engine.
+6. Click **Deploy**. You're taken to the **LLM Models** page, where the deployment appears while
+   DKubeX pulls the model into a shared cache — it downloads once and remounts instantly on future
+   restarts. Wait until the status reaches **Running**.
+
+### Inspect the Deployment
+
+Once the model is **Running**, click it on the **LLM Models** page to open its details:
+
+- **Overview** — the OpenAI-compatible endpoint URL you use to call the model.
+- **Config** — the deployment's full configuration.
+- **Pods** — the running pod and its status.
+- **Logs** — the live serving logs.
+- **Events** — everything that happened during scheduling and startup.
 
 ### Validate the Deployment
 
@@ -62,64 +88,3 @@ Use this flow for text-generation and instruction-following models, such as Qwen
 - Stuck in Downloading: verify outbound registry/network access and image pull status.
 - Stuck in Starting: check resource profile capacity and pod scheduling.
 - Failed: review model runtime logs and deployment events in the cluster.
-
-## Deploying ML Models
-
-Use this flow for task-oriented ML inference models where the output is not long-form chat generation.
-
-### Typical ML Tasks
-
-- Embeddings
-- Reranking
-- Speech Recognition (ASR)
-
-### Prerequisites
-
-- DKubeX workspace access with Model Studio enabled.
-- A suitable resource profile in the cluster.
-- A HuggingFace model that matches the target task.
-
-### Deployment Process
-
-1. Open Model Studio and go to Catalog.
-2. Choose the relevant Task filter:
-   - Embeddings
-   - Reranking
-   - Speech Recognition
-3. Pick a model and click Deploy.
-4. In the deploy form, set:
-   - Precision or quantization, as applicable
-   - Resource Profile
-   - Replicas
-   - Scope, either Private or Shared
-5. Submit the deployment.
-6. Wait for status to reach Running.
-
-### Validate by Task in Playground
-
-Use Open Playground from Deployed Models and validate according to task type:
-
-- Embeddings: run sample text and verify vector output is returned.
-- Reranking: provide a query and passages and verify ranked ordering.
-- Speech to Text: upload audio and verify transcript output.
-
-### Operate and Scale
-
-- Scale up replicas for higher throughput.
-- Resize the resource profile for latency or memory improvements.
-- Promote the model to Shared when team-wide reuse is needed.
-- Delete deployments that are no longer serving traffic.
-
-### LLM vs ML Deployment Differences
-
-| Area | LLM Flow | ML Flow |
-| --- | --- | --- |
-| Primary task | Text generation and chat | Embeddings, reranking, and ASR |
-| Primary validation | Chat response quality | Task-specific functional output |
-| Typical optimization | Prompt latency and context handling | Throughput, ranking, and embedding quality |
-
-### Troubleshooting
-
-- Wrong output type in Playground: confirm the deployed model task matches the selected tab.
-- No model in selector: ensure model status is Running and the tab supports that feature.
-- Poor latency: increase profile resources or reduce replica contention.

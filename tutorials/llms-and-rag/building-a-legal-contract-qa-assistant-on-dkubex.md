@@ -1,9 +1,9 @@
 # Building a Legal Contract Q&A Assistant on DKubeX
 
 This tutorial shows how to build a document Q&A assistant on DKubeX. You deploy a chat model
-and an embedding model in **Model Studio**, expose them through the **SecureLLM** gateway, and
-use them in **RAGFlow** to turn a set of documents into a chat assistant that answers questions
-with citations.
+and an embedding model in **Model Studio**, route all requests and responses through the
+**SecureLLM** gateway, and use them in **RAGFlow** to turn a set of documents into a chat assistant
+that answers questions with citations.
 
 The example corpus is a set of non-disclosure agreements (the
 [ContractNLI](https://stanfordnlp.github.io/contract-nli/) dataset), but any set of documents
@@ -23,15 +23,16 @@ works the same way.
 ## Step 1 — Deploy the models in Model Studio
 
 RAGFlow needs two models: a **chat** model to write answers and an **embedding** model to index
-and retrieve document chunks. Deploy both in Model Studio.
+and retrieve document chunks. Deploy both in Model Studio, each on a **GPU** resource profile for
+good extraction and query quality.
 
-1. Open **Model Studio**.
-2. Go to **Resource Profiles** and create a profile for the deployment. For better extraction and
-   query quality, a **GPU** profile is recommended.
-3. Go to **LLM Catalog**, search for a chat model (for example, `qwen2-5-7b-instruct`), and click
-   **Deploy**. Select your resource profile, then deploy.
-4. Deploy an **embedding model** the same way (for example, `jina-embeddings-v3`).
-5. Track both under **LLM Models** until each reaches the running state.
+1. In **Model Studio**, deploy a **chat** model (this example uses `qwen3-8b`).
+2. Deploy an **embedding** model the same way (this example uses `bge-m3`).
+3. Wait until both reach the **running** state under **LLM Models**.
+
+For the full deployment walkthrough — creating a resource profile, choosing the inference engine,
+and setting deployment arguments — see
+[Deploying Models on DKubeX Using Model Studio](./deploying-models-on-dkubex-using-model-studio.md).
 
 ## Step 2 — Connect the models in RAGFlow
 
@@ -42,37 +43,30 @@ every model you have access to appears automatically.
 2. In the **Available models** column on the right, find the built-in **DKubeX** provider and click
    **Add**. The chat and embedding models you deployed in Model Studio are registered automatically.
 3. In the **Set default models** column, select the models you just added:
-   - **LLM** — your chat model (for example, `qwen2-5-7b-instruct`)
-   - **Embedding** — your embedding model (for example, `jina-embeddings-v3`)
-
-> **Note:** All requests routed through the models are recorded by SecureLLM and can be monitored in
-> its **Usage** tab.
+   - **LLM** — your chat model (`qwen3-8b`)
+   - **Embedding** — your embedding model (`bge-m3`)
 
 ## Step 3 — Create the knowledge base
 
-1. Go to **Dataset** and create a dataset. Give it a name.
-2. On the dataset's **Configuration**, confirm the **embedding model** and choose a document
-   parser:
-   - **Naive** — fast text extraction; a good fit for clean, digital documents.
-   - **DeepDoc** — runs OCR, table, and layout recognition for better results on scanned or
-     layout-heavy documents, but is slower.
-3. Open **Upload file**, choose the **Files** or **Folder** tab, and drag and drop your documents
-   from your computer. Enable **Parse on creation** in the upload dialog to start parsing on
-   upload. Otherwise, once the upload completes, select the uploaded documents and click **Parse**
-   to start parsing.
+1. Go to **Dataset** and create a dataset. Give it a name (for example, `legal-contracts`), select
+   your **embedding model** (`bge-m3`), and choose a **chunking method** (**General** works well for
+   these contracts). Save to create the empty dataset.
+2. Open the dataset's **Configuration** and set the **PDF parser**. Select **Naive** — fast text
+   extraction that suits clean, digital documents. Save.
+3. Open the **Files** tab, click **+ Add file**, and drag and drop your documents from your
+   computer. Enable **Parse on creation** so ingestion starts as soon as the files finish
+   uploading, then **Save**. Otherwise, select the uploaded files and click **Parse**.
 4. When parsing completes, open a file to review its **chunks**.
 
 ## Step 4 — Create the chat assistant
 
-1. Go to **Chat** and click **Create chat**. Give the assistant a name.
+1. Go to **Chat** and click **Create chat**. Name the assistant (for example, `legal-chat`), then
+   open its settings.
 2. In **Chat setting**, configure:
-   - **Datasets** — select the dataset you created.
-   - **System prompt** — the system prompt used by the chat application. You can keep the default
-     or provide your own. If your prompt includes the `{knowledge}` variable, enable that variable
-     in the settings. See the example prompt below.
-   - **Similarity threshold** — `0.2` by default.
-   - **Vector similarity weight** — `0.3` by default.
-   - **Top N** — `8` by default; set it to `3`–`5` for better results.
+   - **Datasets** — select the dataset you created (`legal-contracts`).
+   - **System prompt** — the system prompt used by the assistant. Keep the default or provide your
+     own (see the example below). If your prompt includes the `{knowledge}` variable, scroll down
+     and **enable that variable** so retrieved chunks are injected as context.
 3. **Save**, then ask questions in the chat. Each answer cites the document chunks it used.
 
 Example system prompt:
@@ -121,3 +115,11 @@ Ask a few questions in the chat and check that each answer cites specific legal 
 4. How do I frame a confidential information clause?
 5. What is the difference between a unilateral and mutual NDA?
 6. What are some common exceptions to confidential information clauses?
+
+## Step 6 — Monitor usage in SecureLLM
+
+Every request the assistant makes is routed through SecureLLM and recorded there.
+
+1. Open the **SecureLLM** app from your workspace.
+2. Go to the **Usage** tab to review the requests you have made. Each entry shows the prompt, the
+   question, the answer, and metrics such as token usage.

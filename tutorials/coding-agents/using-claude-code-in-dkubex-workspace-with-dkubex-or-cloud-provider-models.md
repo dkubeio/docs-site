@@ -44,8 +44,9 @@ Workspace settings — the default model starts at None.
 ```
 
 Open the **Default model** dropdown and pick a model. The list shows the models available to your
-key — DKubeX-deployed models appear under the `dkubex/` prefix, and cloud-provider models under
-their own provider prefix (for example, `anthropic/`, `openai/`, or `openrouter/`). Choose a
+key — DKubeX-deployed models appear under the `dkubex/` prefix, and each cloud provider's models
+appear under the **name you gave that provider** in SecureLLM (for example, a provider named
+`openrouter-1` exposes models like `openrouter-1/anthropic/claude-opus-4.8`). Choose a
 coding-capable model.
 
 ```{figure} media/workspace-settings-select-model.png
