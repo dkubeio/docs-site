@@ -17,7 +17,19 @@ To run Claude Code against a DKubeX-deployed model or an OpenRouter model instea
   API-usage billing.
 - A browser you can use to complete the Claude sign-in.
 
-## Step 1 — Open Claude Code in your workspace
+## Step 1 — Clear the workspace default model
+
+Claude Code prompts for a subscription login only when no platform model is injected into the
+workspace. Make sure the workspace **default model** is unset first:
+
+1. Open **Profile → Settings → Workspace**.
+2. Set the **Default model** to **None**, then click **Apply and restart**.
+3. Wait for the workspace pod to finish restarting.
+
+With no default model set, the workspace injects no model settings, so Claude Code signs in with
+your own account instead of using a platform-served model.
+
+## Step 2 — Open Claude Code in your workspace
 
 1. Log in to DKubeX and open **Workspace**.
 2. Create or start a workspace, then open the **Claude Code** app from the workspace.
@@ -30,10 +42,11 @@ To run Claude Code against a DKubeX-deployed model or an OpenRouter model instea
 Claude Code first-run screen — choose the text style that suits your terminal.
 ```
 
-## Step 2 — Select the subscription login method
+## Step 3 — Select the subscription login method
 
-When Claude Code starts, it asks how you want to authenticate. Choose the option that matches your
-account:
+When Claude Code starts with no default model, it asks how you want to authenticate. If you don't
+see this prompt — for example, the workspace was already in use — type `/login` to open it. Choose
+the option that matches your account:
 
 - **Claude account with subscription** — Pro, Max, Team, or Enterprise.
 - **Anthropic Console account** — API-usage billing.
@@ -48,7 +61,7 @@ For a subscription, select **Claude account with subscription**.
 Select the login method that matches your Claude account.
 ```
 
-## Step 3 — Authenticate in the browser
+## Step 4 — Authenticate in the browser
 
 Claude Code opens a Claude sign-in page in your browser. If the browser does not open
 automatically, copy the sign-in URL shown in the terminal and open it yourself.
@@ -69,7 +82,7 @@ On the Claude authorization screen, review the access being requested and approv
 Approve Claude Code's request to connect to your Claude account.
 ```
 
-## Step 4 — Paste the code back into the terminal
+## Step 5 — Paste the code back into the terminal
 
 After you approve, Claude gives you an authorization code. Copy it from the browser and paste it
 into the **Paste code here if prompted** field in the terminal.
@@ -81,7 +94,7 @@ into the **Paste code here if prompted** field in the terminal.
 Paste the code from the browser back into the terminal.
 ```
 
-## Step 5 — Trust the workspace folder and start
+## Step 6 — Trust the workspace folder and start
 
 Claude Code asks whether it can work in the current folder. Confirm **Yes, I trust this folder** to
 let the agent read, edit, and run files in your workspace.
@@ -94,6 +107,7 @@ Confirm that Claude Code can work in your workspace folder.
 ```
 
 Claude Code is now active with your subscription, and you can start prompting it in the terminal.
+To confirm, run `/model` — it lists the models included with your Claude subscription.
 
 ## Reverting
 
