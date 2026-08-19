@@ -74,7 +74,7 @@ suppress_warnings = [
 templates_path = ["_templates"]
 # specifications.md is intentionally kept in the repo but excluded from the
 # build/nav (retained for later use; folded content now lives on the homepage).
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "README.md", "specifications.md"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "README.md", "specifications.md", "applications/ragflow/build-a-qa-assistant.md"]
 
 html_theme = "shibuya"
 html_title = "DKubeX Documentation"

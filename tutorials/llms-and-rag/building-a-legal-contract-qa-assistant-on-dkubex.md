@@ -39,16 +39,11 @@ RAGFlow reaches the models through the SecureLLM gateway using your default DKub
 every model you have access to appears automatically.
 
 1. Open **RAGFlow**, click the profile icon in the top-right, and open **Model Providers**.
-2. On the **DKubeX** provider, the models you have access to are listed automatically. Assign each
-   one a type and adjust the max-token limits if needed, then **Save**. For example:
-
-   | Model | Type |
-   | --- | --- |
-   | `qwen2-5-7b-instruct` | chat |
-   | `jina-embeddings-v3` | embedding |
-
-3. In the **Set Default Models** section on the same page, choose your default **LLM**
-   (`qwen2-5-7b-instruct`) and **Embedding** (`jina-embeddings-v3`) model.
+2. In the **Available models** column on the right, find the built-in **DKubeX** provider and click
+   **Add**. The chat and embedding models you deployed in Model Studio are registered automatically.
+3. In the **Set default models** column, select the models you just added:
+   - **LLM** — your chat model (for example, `qwen2-5-7b-instruct`)
+   - **Embedding** — your embedding model (for example, `jina-embeddings-v3`)
 
 > **Note:** All requests routed through the models are recorded by SecureLLM and can be monitored in
 > its **Usage** tab.
