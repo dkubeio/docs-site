@@ -14,6 +14,17 @@ To get a coding agent set up first, see
 or
 [Using Claude Code in DKubeX Workspace with DKubeX or cloud provider models](./using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.md).
 
+```{raw} html
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:1.5rem 0;border-radius:8px;">
+  <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+    src="https://www.youtube-nocookie.com/embed/ioNd2PoguBc" title="Building and hosting an app in DKubeX Workspace with a coding agent"
+    loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
+```
+
+> 📺 Prefer to watch? See the walkthrough on YouTube: <https://youtu.be/ioNd2PoguBc>
+
 ## Prerequisites
 
 - A running DKubeX Workspace.

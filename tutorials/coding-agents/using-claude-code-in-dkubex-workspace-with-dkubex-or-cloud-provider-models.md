@@ -11,6 +11,17 @@ Use this flow when you want the coding agent to run on platform-served models. T
 Claude subscription instead, see
 [Using Claude Code in DKubeX Workspace with a Claude subscription](./using-claude-code-in-dkubex-workspace-with-a-claude-subscription.md).
 
+```{raw} html
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:1.5rem 0;border-radius:8px;">
+  <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+    src="https://www.youtube-nocookie.com/embed/5DJhP9rYS6o" title="Claude Code with DKubeX or cloud provider models"
+    loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
+```
+
+> 📺 Prefer to watch? See the walkthrough on YouTube: <https://youtu.be/5DJhP9rYS6o>
+
 ## Prerequisites
 
 - DKubeX Workspace, installed from the app catalog.
