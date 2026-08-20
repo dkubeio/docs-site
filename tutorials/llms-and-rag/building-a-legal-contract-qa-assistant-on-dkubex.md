@@ -9,6 +9,17 @@ The example corpus is a set of non-disclosure agreements (the
 [ContractNLI](https://stanfordnlp.github.io/contract-nli/) dataset), but any set of documents
 works the same way.
 
+```{raw} html
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:1.5rem 0;border-radius:8px;">
+  <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+    src="https://www.youtube-nocookie.com/embed/Jb1XRYxlbmo" title="Building a Legal Contract Q&amp;A Assistant on DKubeX"
+    loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
+```
+
+> 📺 Prefer to watch? See the walkthrough on YouTube: <https://youtu.be/Jb1XRYxlbmo>
+
 ## Prerequisites
 
 - A DKubeX deployment with the **Model Studio**, **SecureLLM**, and **RAGFlow** applications

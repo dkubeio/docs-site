@@ -4,6 +4,17 @@ This page walks through deploying models on DKubeX using Model Studio. Text-gene
 
 Model Studio supports discovering models from **HuggingFace** and **NVIDIA NIM**, deploying them through a guided form, and validating them in Playground.
 
+```{raw} html
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:1.5rem 0;border-radius:8px;">
+  <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+    src="https://www.youtube-nocookie.com/embed/ahTeYTSyPV8" title="Deploying Models on DKubeX Using Model Studio"
+    loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
+```
+
+> 📺 Prefer to watch? See the walkthrough on YouTube: <https://youtu.be/ahTeYTSyPV8>
+
 ## Shared Deployment Lifecycle
 
 Deployments follow this platform lifecycle:
