@@ -7,13 +7,13 @@ Model Studio supports discovering models from **HuggingFace** and **NVIDIA NIM**
 ```{raw} html
 <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:1.5rem 0;border-radius:8px;">
   <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
-    src="https://www.youtube-nocookie.com/embed/ahTeYTSyPV8" title="Deploying Models on DKubeX Using Model Studio"
+    src="https://www.youtube-nocookie.com/embed/jEo_fabL-ZU" title="Deploying Models on DKubeX Using Model Studio"
     loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen></iframe>
 </div>
 ```
 
-> 📺 Prefer to watch? See the walkthrough on YouTube: <https://youtu.be/ahTeYTSyPV8>
+> 📺 Prefer to watch? See the walkthrough on YouTube: <https://youtu.be/jEo_fabL-ZU>
 
 ## Shared Deployment Lifecycle
 
