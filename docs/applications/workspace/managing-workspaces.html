@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Managing Your Workspace - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Using Your Workspace" href="using-your-workspace.html" /><link rel="prev" title="Getting Started" href="getting-started.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/applications/workspace/managing-workspaces.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/applications/workspace/managing-workspaces.html"/>
+  <meta property="og:title" content="Managing Your Workspace"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline version-label">v0.2.2 <span class="version-latest-badge">Latest</span></span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices">
+      <ul><li><a href="../../../docs-v0.2.0/index.html">v0.2.0</a></li><li><a href="../../../docs-v0.1.5/index.html">v0.1.5</a></li><li><a href="../../../docs-v0.1/index.html">v0.1</a></li></ul>
+    </div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a>
+  <a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+    <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Applications</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Workspace</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Managing Your Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-your-workspace.html">Using Your Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working-with-agents.html">Working with AI Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modelstudio/index.html">ModelStudio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/tutorials.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/deploying-models.html">Deploying Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modelstudio/playground.html">Playground Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../securellm/index.html">SecureLLM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/user-features.html">Core Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/admin-features.html">Administrator Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../securellm/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ragflow/index.html">RAGFlow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/models.html">Using Models on DKubeX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/knowledge-bases.html">Knowledge Bases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/chat.html">Chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/agents.html">Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ragflow/team-and-sharing.html">Team &amp; Sharing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../langflow/index.html">Langflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/building-flows.html">Building Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/deploying-flows.html">Deploying Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langflow/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../vke/index.html">VKE — Virtual Kubernetes Engineer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vke/getting-started.html">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vke/user-features.html">Core features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vke/admin-features.html">Administrator features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vke/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/governing-llm-access/index.html">Governing LLM Access</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/governing-llm-access/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/governing-llm-access/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/governing-llm-access/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/llms-and-rag/index.html">LLMs and RAG</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/llms-and-rag/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/llms-and-rag/building-a-legal-contract-qa-assistant-on-dkubex.html">Building a Legal Contract Q&amp;A Assistant on DKubeX</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/mlops/index.html">MLOps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/mlops/training-and-deploying-an-ml-model-on-dkubex.html">Training and Deploying an ML Model on DKubeX</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/coding-agents/index.html">Coding Agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/coding-agents/using-claude-code-in-dkubex-workspace-with-a-claude-subscription.html">Using Claude Code in DKubeX Workspace with a Claude Subscription</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/coding-agents/using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.html">Using Claude Code in DKubeX Workspace with DKubeX or Cloud Provider Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/coding-agents/building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.html">Building and Hosting an App in DKubeX Workspace with a Coding Agent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#workspace-statuses">Workspace Statuses</a></li>
+<li><a class="reference internal" href="#what-you-can-do">What You Can Do</a></li>
+<li><a class="reference internal" href="#what-only-an-administrator-can-do">What Only an Administrator Can Do</a></li>
+<li><a class="reference internal" href="#what-persists">What Persists</a></li>
+<li><a class="reference internal" href="#uninstalling">Uninstalling</a></li>
+<li><a class="reference internal" href="#getting-help">Getting Help</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Applications</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">Workspace</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Managing Your Workspace</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/applications/workspace/managing-workspaces.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/applications/workspace/managing-workspaces.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/applications/workspace/managing-workspaces.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/workspace/managing-workspaces.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/applications/workspace/managing-workspaces.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="managing-your-workspace">
+<h1>Managing Your Workspace<a class="headerlink" href="#managing-your-workspace" title="Link to this heading">#</a></h1>
+<p>This page covers the statuses your workspace can have, which actions are yours and which belong to an administrator, what survives a restart, and how to remove your workspace.</p>
+<section id="workspace-statuses">
+<h2>Workspace Statuses<a class="headerlink" href="#workspace-statuses" title="Link to this heading">#</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status</p></th>
+<th class="head"><p>What it means</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Provisioning</strong></p></td>
+<td><p>The workspace is being created; wait for it to finish</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Running</strong></p></td>
+<td><p>The workspace is up and its apps are available in Apps</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Stopped</strong></p></td>
+<td><p>The pod is scaled down; your home directory is untouched</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Failed</strong></p></td>
+<td><p>Something went wrong — contact your administrator</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To see your workspace’s status, open the <strong>App Store</strong> and click the <strong>Workspace</strong> card — the status is shown on its detail page.</p>
+</section>
+<section id="what-you-can-do">
+<h2>What You Can Do<a class="headerlink" href="#what-you-can-do" title="Link to this heading">#</a></h2>
+<p>You have two actions, both on the <strong>Workspace</strong> page in the App Store:</p>
+<ul class="simple">
+<li><p><strong>Install</strong> — creates your workspace.</p></li>
+<li><p><strong>Uninstall</strong> — removes it (see below).</p></li>
+</ul>
+</section>
+<section id="what-only-an-administrator-can-do">
+<h2>What Only an Administrator Can Do<a class="headerlink" href="#what-only-an-administrator-can-do" title="Link to this heading">#</a></h2>
+<p>The following are <strong>admin-only</strong> and are not available to you, even for your own workspace:</p>
+<ul class="simple">
+<li><p><strong>Start</strong> and <strong>Stop</strong> the pod</p></li>
+<li><p><strong>Edit</strong> CPU, memory, GPU, image version and tolerations</p></li>
+</ul>
+<p>If your workspace is <strong>Stopped</strong> and you need it running again, ask your administrator to start it. Uninstalling and reinstalling also gets you a running workspace, but it deletes the workspace volume — see the warning below before doing that.</p>
+<p>Administrators manage every workspace from the admin console, where they can see its status and resources and start or stop it:</p>
+<p><img alt="The admin console's Workspaces table, listing each user's workspace with its status and resources" src="../../_images/admin-workspaces.png" /></p>
+</section>
+<section id="what-persists">
+<h2>What Persists<a class="headerlink" href="#what-persists" title="Link to this heading">#</a></h2>
+<p>This is the most important thing to know about your workspace.</p>
+<p><strong>Your home directory persists.</strong> Everything you save there survives pod restarts, stops, and even uninstalling and reinstalling your workspace.</p>
+</section>
+<section id="uninstalling">
+<h2>Uninstalling<a class="headerlink" href="#uninstalling" title="Link to this heading">#</a></h2>
+<p>Uninstall from the <strong>Workspace</strong> page in the App Store. You will be asked to confirm.</p>
+<ul class="simple">
+<li><p><strong>Your home files are kept.</strong> They live on your user storage, which the workspace does not own.</p></li>
+<li><p><strong>The workspace’s own volume is deleted.</strong></p></li>
+<li><p><strong>Anything you installed outside your home directory is gone.</strong> System packages from <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span></code>, anything added to the default <code class="docutils literal notranslate"><span class="pre">python</span></code>/<code class="docutils literal notranslate"><span class="pre">pip</span></code> environment, and any Docker images you built or pulled are all removed with the workspace.</p></li>
+</ul>
+<p>Your home directory is the exception, so it is the safest place for an environment you do not want to rebuild. A virtual environment there survives an uninstall and is still ready to use after you reinstall:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nb">source</span><span class="w"> </span>~/.venvs/myproject/bin/activate
+</span><span data-line="2">python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import pandas"</span><span class="w">    </span><span class="c1"># still installed</span>
+</span></pre></div>
+</div>
+<p>Before uninstalling, make sure anything you want to keep lives under your home directory.</p>
+<blockquote>
+<div><p><strong>Warning:</strong> Uninstall is the only way for you to remove a workspace, and it is also the only way to recover from a <strong>Stopped</strong> workspace without an administrator.</p>
+</div></blockquote>
+</section>
+<section id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading">#</a></h2>
+<p>If your workspace stays in <strong>Provisioning</strong> for more than a few minutes, or reaches <strong>Failed</strong>, contact your platform administrator — they can look into what went wrong and restart or resize your workspace.</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="getting-started.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Getting Started</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="using-your-workspace.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Using Your Workspace</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 21.08.2026. Documentation version: v0.2.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a>
+  <a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+    <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+  </a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Using Claude Code in DKubeX Workspace with a Claude Subscription - DKubeX Documentation</title><link rel="shortcut icon" href="../../_static/DKube_Icon_512x512.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Using Claude Code in DKubeX Workspace with DKubeX or Cloud Provider Models" href="using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.html" /><link rel="prev" title="Coding Agents" href="index.html" />
+      <link rel="canonical" href="https://dkubex2.dkube.io/tutorials/coding-agents/using-claude-code-in-dkubex-workspace-with-a-claude-subscription.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8db3b08d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://dkubex2.dkube.io/tutorials/coding-agents/using-claude-code-in-dkubex-workspace-with-a-claude-subscription.html"/>
+  <meta property="og:title" content="Using Claude Code in DKubeX Workspace with a Claude Subscription"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/DKube_Icon_512x512.svg" alt="DKubeX Documentation" height="28" loading="lazy" />
+      <strong>DKubeX Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline version-label">v0.2.2 <span class="version-latest-badge">Latest</span></span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices">
+      <ul><li><a href="../../../docs-v0.2.0/index.html">v0.2.0</a></li><li><a href="../../../docs-v0.1.5/index.html">v0.1.5</a></li><li><a href="../../../docs-v0.1/index.html">v0.1</a></li></ul>
+    </div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a>
+  <a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+    <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">DKubeX Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installing DKubeX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/index.html">Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/workspace/index.html">Workspace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/workspace/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/workspace/managing-workspaces.html">Managing Your Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/workspace/using-your-workspace.html">Using Your Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/workspace/working-with-agents.html">Working with AI Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/workspace/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/modelstudio/index.html">ModelStudio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/modelstudio/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/modelstudio/tutorials.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/modelstudio/deploying-models.html">Deploying Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/modelstudio/playground.html">Playground Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/securellm/index.html">SecureLLM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/securellm/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/securellm/user-features.html">Core Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/securellm/admin-features.html">Administrator Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/securellm/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/ragflow/index.html">RAGFlow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/models.html">Using Models on DKubeX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/knowledge-bases.html">Knowledge Bases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/chat.html">Chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/agents.html">Agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/ragflow/team-and-sharing.html">Team &amp; Sharing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/langflow/index.html">Langflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/langflow/getting-started.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/langflow/building-flows.html">Building Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/langflow/components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/langflow/deploying-flows.html">Deploying Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/langflow/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/vke/index.html">VKE — Virtual Kubernetes Engineer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/vke/getting-started.html">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/vke/user-features.html">Core features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/vke/admin-features.html">Administrator features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../applications/vke/tutorials.html">Workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../governing-llm-access/index.html">Governing LLM Access</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../governing-llm-access/configuring-and-enabling-ai-providers-in-securellm.html">Configuring and Enabling AI Providers in SecureLLM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../governing-llm-access/creating-and-using-api-keys-in-securellm.html">Creating and Using API Keys in SecureLLM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../governing-llm-access/testing-and-deploying-guardrail-policies-in-securellm.html">Test and Deploy a Guardrail Policy in SecureLLM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../llms-and-rag/index.html">LLMs and RAG</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../llms-and-rag/deploying-models-on-dkubex-using-model-studio.html">Deploying Models on DKubeX Using Model Studio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../llms-and-rag/building-a-legal-contract-qa-assistant-on-dkubex.html">Building a Legal Contract Q&amp;A Assistant on DKubeX</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mlops/index.html">MLOps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mlops/training-and-deploying-an-ml-model-on-dkubex.html">Training and Deploying an ML Model on DKubeX</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Coding Agents</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Using Claude Code in DKubeX Workspace with a Claude Subscription</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.html">Using Claude Code in DKubeX Workspace with DKubeX or Cloud Provider Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.html">Building and Hosting an App in DKubeX Workspace with a Coding Agent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#step-1-clear-the-workspace-default-model">Step 1 &#8212; Clear the workspace default model</a></li>
+<li><a class="reference internal" href="#step-2-open-claude-code-in-your-workspace">Step 2 &#8212; Open Claude Code in your workspace</a></li>
+<li><a class="reference internal" href="#step-3-select-the-subscription-login-method">Step 3 &#8212; Select the subscription login method</a></li>
+<li><a class="reference internal" href="#step-4-authenticate-in-the-browser">Step 4 &#8212; Authenticate in the browser</a></li>
+<li><a class="reference internal" href="#step-5-paste-the-code-back-into-the-terminal">Step 5 &#8212; Paste the code back into the terminal</a></li>
+<li><a class="reference internal" href="#step-6-trust-the-workspace-folder-and-start">Step 6 &#8212; Trust the workspace folder and start</a></li>
+<li><a class="reference internal" href="#reverting">Reverting</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li><a class="reference internal" href="#next-steps">Next steps</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">DKubeX Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Tutorials</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">Coding Agents</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Using Claude Code in DKubeX Workspace with a Claude Subscription</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://dkubex2.dkube.io/_sources/tutorials/coding-agents/using-claude-code-in-dkubex-workspace-with-a-claude-subscription.md.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://dkubex2.dkube.io/_sources/tutorials/coding-agents/using-claude-code-in-dkubex-workspace-with-a-claude-subscription.md.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://dkubex2.dkube.io/_sources/tutorials/coding-agents/using-claude-code-in-dkubex-workspace-with-a-claude-subscription.md.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:markdown"></iconify-icon>
+            <span>View as Markdown</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//dkubex2.dkube.io/_sources/tutorials/coding-agents/using-claude-code-in-dkubex-workspace-with-a-claude-subscription.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//dkubex2.dkube.io/_sources/tutorials/coding-agents/using-claude-code-in-dkubex-workspace-with-a-claude-subscription.md.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="using-claude-code-in-dkubex-workspace-with-a-claude-subscription">
+<h1>Using Claude Code in DKubeX Workspace with a Claude Subscription<a class="headerlink" href="#using-claude-code-in-dkubex-workspace-with-a-claude-subscription" title="Link to this heading">#</a></h1>
+<p>DKubeX Workspace ships with several coding agents built in — including <strong>Claude Code</strong>, <strong>Codex</strong>,
+<strong>Copilot CLI</strong>, <strong>OpenCode</strong>, <strong>Antigravity</strong>, and <strong>Mistral Vibe</strong>. This tutorial shows how
+to run Claude Code in DKubeX Workspace against your own <strong>Claude subscription</strong> (Pro, Max, Team, or
+Enterprise), so the agent is billed through your Anthropic account rather than through a
+platform-served model.</p>
+<p>Use this flow when you already have a Claude subscription and want to use it inside DKubeX Workspace.
+To run Claude Code against a DKubeX-deployed model or an OpenRouter model instead, see
+<a class="reference internal" href="using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.html"><span class="std std-doc">Using Claude Code in DKubeX Workspace with DKubeX or cloud provider models</span></a>.</p>
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:1.5rem 0;border-radius:8px;">
+  <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+    src="https://www.youtube-nocookie.com/embed/80gOr-YobJc" title="Claude Code with a Claude subscription in DKubeX Workspace"
+    loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div><blockquote>
+<div><p>📺 Prefer to watch? See the walkthrough on YouTube: <a class="reference external" href="https://youtu.be/80gOr-YobJc">https://youtu.be/80gOr-YobJc</a></p>
+</div></blockquote>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>DKubeX Workspace, installed from the app catalog.</p></li>
+<li><p>A Claude subscription (Pro, Max, Team, or Enterprise), or an Anthropic Console account for
+API-usage billing.</p></li>
+<li><p>A browser you can use to complete the Claude sign-in.</p></li>
+</ul>
+</section>
+<section id="step-1-clear-the-workspace-default-model">
+<h2>Step 1 — Clear the workspace default model<a class="headerlink" href="#step-1-clear-the-workspace-default-model" title="Link to this heading">#</a></h2>
+<p>Claude Code prompts for a subscription login only when no platform model is injected into the
+workspace. Make sure the workspace <strong>default model</strong> is unset first:</p>
+<ol class="arabic simple">
+<li><p>Open <strong>Profile → Settings → Workspace</strong>.</p></li>
+<li><p>Set the <strong>Default model</strong> to <strong>None</strong>, then click <strong>Apply and restart</strong>.</p></li>
+<li><p>Wait for the workspace pod to finish restarting.</p></li>
+</ol>
+<p>With no default model set, the workspace injects no model settings, so Claude Code signs in with
+your own account instead of using a platform-served model.</p>
+</section>
+<section id="step-2-open-claude-code-in-your-workspace">
+<h2>Step 2 — Open Claude Code in your workspace<a class="headerlink" href="#step-2-open-claude-code-in-your-workspace" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Log in to DKubeX and open <strong>Workspace</strong>.</p></li>
+<li><p>Create or start a workspace, then open the <strong>Claude Code</strong> app from the workspace.</p></li>
+<li><p>On first launch, choose a terminal text style when prompted.</p></li>
+</ol>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../../_images/claude-code-choose-theme.png"><img alt="Claude Code first-run theme selection" src="../../_images/claude-code-choose-theme.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Claude Code first-run screen — choose the text style that suits your terminal.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="step-3-select-the-subscription-login-method">
+<h2>Step 3 — Select the subscription login method<a class="headerlink" href="#step-3-select-the-subscription-login-method" title="Link to this heading">#</a></h2>
+<p>When Claude Code starts with no default model, it asks how you want to authenticate. If you don’t
+see this prompt — for example, the workspace was already in use — type <code class="docutils literal notranslate"><span class="pre">/login</span></code> to open it. Choose
+the option that matches your account:</p>
+<ul class="simple">
+<li><p><strong>Claude account with subscription</strong> — Pro, Max, Team, or Enterprise.</p></li>
+<li><p><strong>Anthropic Console account</strong> — API-usage billing.</p></li>
+<li><p><strong>3rd-party platform</strong> — Amazon Bedrock, Microsoft Foundry, or Vertex AI.</p></li>
+</ul>
+<p>For a subscription, select <strong>Claude account with subscription</strong>.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../../_images/claude-code-select-login-method.png"><img alt="Claude Code login method selection" src="../../_images/claude-code-select-login-method.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Select the login method that matches your Claude account.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="step-4-authenticate-in-the-browser">
+<h2>Step 4 — Authenticate in the browser<a class="headerlink" href="#step-4-authenticate-in-the-browser" title="Link to this heading">#</a></h2>
+<p>Claude Code opens a Claude sign-in page in your browser. If the browser does not open
+automatically, copy the sign-in URL shown in the terminal and open it yourself.</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="../../_images/claude-code-signin-url.png"><img alt="Claude Code sign-in URL and paste-code prompt" src="../../_images/claude-code-signin-url.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">If the browser does not open, use the sign-in URL from the terminal.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>On the Claude authorization screen, review the access being requested and approve the connection.</p>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="../../_images/claude-code-authorize.png"><img alt="Claude authorization screen for Claude Code" src="../../_images/claude-code-authorize.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Approve Claude Code’s request to connect to your Claude account.</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="step-5-paste-the-code-back-into-the-terminal">
+<h2>Step 5 — Paste the code back into the terminal<a class="headerlink" href="#step-5-paste-the-code-back-into-the-terminal" title="Link to this heading">#</a></h2>
+<p>After you approve, Claude gives you an authorization code. Copy it from the browser and paste it
+into the <strong>Paste code here if prompted</strong> field in the terminal.</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="../../_images/claude-code-paste-code.png"><img alt="Pasting the authorization code into Claude Code" src="../../_images/claude-code-paste-code.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Paste the code from the browser back into the terminal.</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="step-6-trust-the-workspace-folder-and-start">
+<h2>Step 6 — Trust the workspace folder and start<a class="headerlink" href="#step-6-trust-the-workspace-folder-and-start" title="Link to this heading">#</a></h2>
+<p>Claude Code asks whether it can work in the current folder. Confirm <strong>Yes, I trust this folder</strong> to
+let the agent read, edit, and run files in your workspace.</p>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="../../_images/claude-code-trust-folder.png"><img alt="Claude Code trust-folder confirmation" src="../../_images/claude-code-trust-folder.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Confirm that Claude Code can work in your workspace folder.</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Claude Code is now active with your subscription, and you can start prompting it in the terminal.
+To confirm, run <code class="docutils literal notranslate"><span class="pre">/model</span></code> — it lists the models included with your Claude subscription.</p>
+</section>
+<section id="reverting">
+<h2>Reverting<a class="headerlink" href="#reverting" title="Link to this heading">#</a></h2>
+<p>To switch this workspace to a platform-served model later, set a default model in your workspace
+settings — see
+<a class="reference internal" href="using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.html"><span class="std std-doc">Using Claude Code in DKubeX Workspace with DKubeX or cloud provider models</span></a>.
+Setting the default model back to <strong>None</strong> restores your Claude subscription login.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Browser did not open: copy the sign-in URL from the terminal and open it manually.</p></li>
+<li><p>Code rejected: make sure you copied the entire code, with no trailing spaces, and that it has not
+expired — restart the login if needed.</p></li>
+<li><p>Wrong account: on the authorization screen, use <strong>Switch account</strong> to sign in with the correct
+Claude account.</p></li>
+</ul>
+</section>
+<section id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<p>With Claude Code running, have it build and host an app straight from your workspace — see
+<a class="reference internal" href="building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.html"><span class="std std-doc">Building and hosting an app in DKubeX Workspace with a coding agent</span></a>.</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="index.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Coding Agents</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Using Claude Code in DKubeX Workspace with DKubeX or Cloud Provider Models</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>&copy; 2026, dkube.io. All rights reserved. Last updated on: 21.08.2026. Documentation version: v0.2.2</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/dkubeio/docs-site/" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a>
+  <a href="https://www.youtube.com/@DKube_OC" aria-label="YouTube">
+    <iconify-icon icon="simple-icons:youtube"></iconify-icon>
+  </a><a href="https://www.dkube.io" aria-label="Website" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=7d6d678b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/footer-dkube-link.js?v=47e90260"></script>
+      <script src="../../_static/version-badge.js?v=433fc88a"></script></body>
+</html>
