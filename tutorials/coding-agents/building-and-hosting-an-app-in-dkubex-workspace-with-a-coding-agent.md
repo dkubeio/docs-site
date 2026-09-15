@@ -78,9 +78,18 @@ of publishing it.
 
 For anything beyond a quick prototype, the cleanest approach is to write your requirements into a
 **specification file** and point the agent at it, so the build is driven by one reviewable source of
-truth. The walkthrough builds a **document data-extraction app** — a tool that takes a PDF, extracts
-the fields you define using a vision model, and returns structured results — from a spec file, with
-this prompt:
+truth. For this walkthrough we use a ready-made spec file, `document_extraction_prompt.md`, that describes a
+**document data-extraction app** — a tool that takes a PDF, extracts the fields you define using a
+vision model, and returns structured results. If you were building something else, you would write
+your own spec file the same way and point the agent at that; here we use this one.
+
+For this example, download the spec file and place it — using the FileBrowser application on your
+DKubeX workspace — in the directory where you'll run the build, so the agent can read it when you
+reference `@document_extraction_prompt.md`:
+
+- {download}`document_extraction_prompt.md <../../example-files/prompts/document_extraction_prompt.md>`
+
+Then give the agent this prompt:
 
 ```
 Build a dkubex app for PDF document extraction using the specification in
