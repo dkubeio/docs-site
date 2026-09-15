@@ -2,6 +2,15 @@
 
 This guide installs DKubeX using the Helm chart.
 
+## Before you begin
+
+Make sure your cluster meets the minimum hardware and software requirements before installing.
+DKubeX runs on a single Kubernetes cluster and needs, at minimum, **8 CPU cores, 32 GB RAM, 200 GB SSD,
+one node, and an external NFS server**; 16 cores / 64 GB RAM / 500 GB SSD is recommended for comfortable
+headroom. GPUs are optional and only needed to serve your own models on-prem. See
+[Architecture & Specifications](../platform-guide/architecture-and-specifications.md#system-requirements)
+for the full requirements, including how to size additional user workspaces.
+
 ## Prerequisites
 
 Install Helm (Helm 3.x).

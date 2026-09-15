@@ -1,4 +1,4 @@
-# Governing LLM Access
+# LLM Governing
 
 SecureLLM is the gateway every request to a language model passes through on DKubeX. These tutorials
 walk you through the three things you do to put a model safely in front of your users: connect the

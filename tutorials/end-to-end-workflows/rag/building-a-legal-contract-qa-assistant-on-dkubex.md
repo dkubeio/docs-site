@@ -43,7 +43,7 @@ good extraction and query quality.
 
 For the full deployment walkthrough — creating a resource profile, choosing the inference engine,
 and setting deployment arguments — see
-[Deploying Models on DKubeX Using Model Studio](./deploying-models-on-dkubex-using-model-studio.md).
+[Deploying Models on DKubeX Using Model Studio](../model-management/index.md).
 
 ## Step 2 — Connect the models in RAGFlow
 
