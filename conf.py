@@ -74,7 +74,7 @@ suppress_warnings = [
 templates_path = ["_templates"]
 # specifications.md is intentionally kept in the repo but excluded from the
 # build/nav (retained for later use; folded content now lives on the homepage).
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "README.md", "specifications.md", "applications/ragflow/build-a-qa-assistant.md", "example-files/**"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "README.md", "specifications.md", "home-page-audit.md", "applications/ragflow/build-a-qa-assistant.md", "example-files/**"]
 
 html_theme = "shibuya"
 html_title = "DKubeX Documentation"
@@ -259,7 +259,7 @@ APPLICATION_DISPLAY_NAMES = {
 # Preferred order for applications in the list and sidebar. Slugs listed here
 # come first in this order; any others (e.g. apps only present in older
 # versions) follow alphabetically.
-APPLICATION_ORDER = ["workspace", "modelstudio", "securellm", "ragflow", "langflow"]
+APPLICATION_ORDER = ["workspace", "modelstudio", "mlflow", "securellm", "ragflow", "langflow", "vke"]
 
 
 def _ordered_app_slugs(slugs):

@@ -36,10 +36,10 @@ Choose one of the following so a model shows up under your key:
 
 - **Deploy a model in Model Studio** — deploy a coding-capable model and wait until it reaches the
   running state. See
-  [Deploying models on DKubeX using Model Studio](../llms-and-rag/deploying-models-on-dkubex-using-model-studio.md).
+  [Deploying models on DKubeX using Model Studio](../end-to-end-workflows/model-management/index.md).
 - **Add a cloud provider in SecureLLM** — add a provider such as Anthropic, OpenAI, or OpenRouter so
   its models become available to your key. See
-  [Configuring and enabling AI providers in SecureLLM](../governing-llm-access/configuring-and-enabling-ai-providers-in-securellm.md).
+  [Configuring and enabling AI providers in SecureLLM](../end-to-end-workflows/llm-governing/configuring-and-enabling-ai-providers-in-securellm.md).
 
 ## Step 2 — Set the workspace default model
 
