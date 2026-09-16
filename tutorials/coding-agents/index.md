@@ -6,7 +6,8 @@ point it at DKubeX or OpenRouter models through the platform — and then have t
 app and publish it straight from the Workspace as its own tile on the Apps page, no manual
 deployment required.
 
-Start here if you want to code with an AI agent inside your Workspace and ship what it builds.
+Start here if you want to code with an AI agent inside your Workspace and ship what it builds — from a
+quick tile in your Workspace to a full application published to the DKubeX App Store.
 
 ```{toctree}
 :maxdepth: 1
@@ -14,4 +15,5 @@ Start here if you want to code with an AI agent inside your Workspace and ship w
 using-claude-code-in-dkubex-workspace-with-a-claude-subscription
 using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models
 building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent
+publishing-an-app-to-the-dkubex-app-store
 ```
