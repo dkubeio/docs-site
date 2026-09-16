@@ -5,61 +5,84 @@ gets your app running in the workspace as a tile — a fast way to build and tes
 first-class DKubeX application that **any user can install from the App Store**, you package it as a
 Helm chart, publish that chart to a repository, and register the repository with DKubeX.
 
-A coding agent's **package-app skill** automates the packaging — it creates the Helm chart, wires in
-the platform resources your app uses (PostgreSQL, Redis, MinIO), packages the chart, and publishes it
-to a Helm repository.
+A coding agent's **package-app skill** does the packaging — it creates the Helm chart (wiring in the
+platform resources your app uses, such as PostgreSQL), builds and pushes the container images, and
+publishes the chart to a Helm repository. This tutorial uses a **todo-list app that stores its data in
+PostgreSQL** as the worked example.
 
 ## Prerequisites
 
-- An app built and tested in your workspace (see the tutorial linked above).
-- A **GitHub account** and a container registry — GitHub Container Registry (GHCR) or Docker Hub.
 - A coding agent open in your workspace **Terminal**.
+- A **GitHub account** and a container registry — GitHub Container Registry (GHCR) or Docker Hub.
 
-## Step 1 — Create a GitHub token
+## Step 1 — Build the app
 
-You need a GitHub token to push container images and publish the Helm chart.
+Have the agent build the app. For the example, prompt it:
 
-1. In GitHub, go to **Settings → Developer settings → Personal access tokens → Tokens (classic)**.
-2. Click **Generate new token (classic)**, give it a name, and set an expiry.
-3. Under **Select scopes**, enable **`repo`** and **`write:packages`** (this also enables
-   `read:packages`).
-4. Generate the token and copy it — you will not be able to see it again.
+```
+create a dkubex app called todo list app which uses postgress to store the data
+```
 
-## Step 2 — Authenticate in the terminal
+The agent builds and hosts the app in your workspace as a tile so you can test it. For the details of
+this step, see
+[Building and hosting an app](./building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent.md).
 
-In the workspace Terminal, sign in to GitHub and refresh your token so it can push packages:
+## Step 2 — Package the app
+
+Once the app works, package it. Start by prompting the agent:
+
+```
+package this app
+```
+
+Packaging pushes images and publishes a chart to GitHub, so authenticate first, then run the remaining
+prompts.
+
+### Authenticate GitHub in the terminal
+
+In the workspace Terminal, sign in and refresh your token so it can push packages (this creates a
+token with read and write permission to packages):
 
 ```bash
-gh auth login
+gh auth login --web
 gh auth refresh -h github.com -s write:packages,read:packages
 ```
 
-## Step 3 — Build and push the container images
+### Build and push the container images
 
-Have the agent build your app's container images and push them to your registry (GHCR or Docker Hub).
-For example, prompt the agent:
-
-```
-Build and push the Docker images for this app to my GitHub Container Registry (GHCR).
-```
-
-## Step 4 — Package the app with the package-app skill
-
-Have the agent package the app. It creates the **Helm chart** (with the `dkubex` chart annotation,
-base-path routing, the identity-header auth contract, and provisioning for any platform resources the
-app uses), packages it, and publishes the chart to a **Helm repository**.
-
-The standard layout is **two separate repositories** (or a separate branch) — one for the application
-**code**, and one for the **Helm repository**, which holds an `index.yaml` and the packaged chart
-(`.tgz`) files. Prompt the agent, for example:
+Prompt the agent to build and push the images to your registry:
 
 ```
-Package this app as a DKubeX application. Create a GitHub repo and push the code, and create a
-separate Helm repository (index.yaml + packaged chart) so it can be added to the DKubeX app store.
+build and push the docker images using gh to my ghcr
 ```
 
-The agent publishes the Helm repository (for example, to a `gh-pages` branch) and prints the repository
-URL.
+### Create the code repo and the Helm repo branch
+
+Prompt the agent to publish the code and the Helm chart:
+
+```
+Also create a github repo and push this code. create a separate branch for helm repo index with the helm package.tgz file
+```
+
+This creates the code repository and a **`helm-repo`** branch that holds the Helm repository index
+(`index.yaml`) and the packaged chart (`.tgz`) file.
+
+## Step 3 — Copy the Helm repo raw URL
+
+1. In GitHub, open the app's repository and switch to the **`helm-repo`** branch — for example,
+   `https://github.com/<your-github-username>/todo-list-app/tree/helm-repo`.
+2. Take its **raw** URL. It must start with `https://raw.githubusercontent.com/…`, **not**
+   `https://github.com/…` — for example:
+
+   ```
+   https://raw.githubusercontent.com/<your-github-username>/todo-list-app/helm-repo
+   ```
+
+## Step 4 — Create a classic token for DKubeX
+
+DKubeX uses a token to download and install the chart, so create a **classic** personal access token
+with **`repo`** and **`read:packages`** access (GitHub → **Settings → Developer settings → Personal
+access tokens → Tokens (classic)**).
 
 ## Step 5 — Add the repository in DKubeX
 
@@ -68,8 +91,8 @@ URL.
    | Field | Value |
    |---|---|
    | **Name** | A name using lowercase letters, digits, and hyphens (used as the Helm repo name). |
-   | **Repository URL** | The **raw** GitHub URL of the Helm repository — it must start with `https://raw.githubusercontent.com/…`, **not** `https://github.com/…`. |
-   | **Token / Password** | Your classic token from Step 1 (needed for a private repository). |
+   | **Repository URL** | The **raw** `helm-repo` URL from Step 3. |
+   | **Token / Password** | The classic token from Step 4. |
    | **This repo's charts use private images** | Check this if your container images are private. |
 3. Click **Add & Verify**.
 
@@ -77,8 +100,8 @@ Your application now appears in the App Store under **Browse Catalog**, tagged w
 
 ## Step 6 — Install the application
 
-1. **Stop the development version** of the app first — if you are still running it from the workspace,
-   stop it so it does not conflict with the installed app on the same port.
+1. **Stop the development version** of the app first — if it is still running from the workspace, stop
+   it so it does not conflict with the installed app on the same port.
 2. In the admin console → **Applications → Browse Catalog**, find your app and click **Install**
    (installing is an administrator action).
 3. Track the install on the **Applications** tab until it is **Ready**.
