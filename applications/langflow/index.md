@@ -7,7 +7,7 @@ Langflow on DKubeX is a visual AI workflow builder integrated directly into the 
 ## Key features
 
 - **Visual canvas** — Build flows by connecting components with typed ports. No boilerplate required.
-- **DKubeX Providers** — Drop-in LLM and embedding components backed by the cluster-local SecureLLM service. No external API keys needed.
+- **SecureLLM models** — Language and embedding models from the cluster-local SecureLLM service, with your API key configured automatically.
 - **One-click deployment** — Promote any flow to a standalone Kubernetes pod with its own internal API endpoint.
 - **Platform SSO** — Automatically authenticated via DKubeX. No separate Langflow login.
 - **Global variables** — Store and encrypt secrets once; reference them from any component in any flow.
@@ -16,9 +16,9 @@ Langflow on DKubeX is a visual AI workflow builder integrated directly into the 
 
 ## Tutorials
 
-- [Getting started](./getting-started.md) — Launch Langflow, build your first flow, and use DKubeX LLM components.
+- [Getting started](./getting-started.md) — Launch Langflow, build your first flow, and use SecureLLM models.
 - [Building flows](./building-flows.md) — Canvas navigation, component configuration, variables, and version control.
-- [Components](./components.md) — Component catalog overview, DKubeX Providers (LLM and Embeddings), and custom components.
+- [Components](./components.md) — Component catalog overview, SecureLLM models, and custom components.
 - [Deploying flows](./deploying-flows.md) — Promote a flow to a standalone API endpoint and manage deployments.
 - [Workflows](./tutorials.md) — Build, test, and deploy a chat flow with DKubeX models, end to end.
 

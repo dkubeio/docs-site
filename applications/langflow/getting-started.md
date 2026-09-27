@@ -36,19 +36,15 @@ The header at the top of every page provides:
 
 ![Simple flow on the canvas](./media/Langflow-canvas.png)
 
-## Using DKubeX LLM and Embedding Components
+## Using SecureLLM Models
 
-DKubeX includes built-in components that connect to the cluster-local **SecureLLM** service without requiring an external API key:
+DKubeX connects Langflow to the cluster-local **SecureLLM** service. Your SecureLLM API key is set up automatically from your DKubeX account the first time you open Langflow — there is nothing to enter.
 
-1. In the left sidebar, open the **DKubeX Providers** category.
-2. Drop **DKubeX LLM** or **DKubeX Embeddings** onto the canvas.
-3. Enter your **SecureLLM API Key** in the component's side panel.
-4. Click on **Model Name** and then click **Refresh list** to load the available models.
-5. Select a model and wire the component into your flow.
+1. Open **Settings → Model Providers → SecureLLM** and enable the models you want.
+2. Drop a **Language Model** (chat) or **Embedding Model** component onto the canvas.
+3. Select a SecureLLM model in the component and wire it into your flow.
 
-> Contact your cluster administrator if you do not have a SecureLLM API key.
-
-![DKubeX LLM components](./media/Langflow-dkubex-providers.png)
+See [Components](./components.md#securellm-models) for details.
 
 ## Next Steps
 

@@ -69,5 +69,5 @@ Flows live inside **projects** (folders). Create a project from the main flows p
 
 ## See also
 
-- [Components](./components.md) — full component catalog and DKubeX Providers.
+- [Components](./components.md) — full component catalog and SecureLLM models.
 - [Deploying Flows](./deploying-flows.md) — promote a flow to a production endpoint.

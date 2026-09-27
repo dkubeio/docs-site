@@ -1,6 +1,6 @@
 # Components
 
-Components are the building blocks of a flow. Langflow ships with a wide catalog covering inputs, models, memory, retrieval, tools, and outputs. On DKubeX, additional **DKubeX Providers** components are available that connect directly to the cluster-local SecureLLM service.
+Components are the building blocks of a flow. Langflow ships with a wide catalog covering inputs, models, memory, retrieval, tools, and outputs. On DKubeX, the **SecureLLM** model provider connects Langflow's model components to the cluster-local SecureLLM service.
 
 ## Categories
 
@@ -16,69 +16,29 @@ Components are the building blocks of a flow. Langflow ships with a wide catalog
 | **Utilities** | Python REPL, custom tools, web search |
 | **Prototypes** | Experimental components |
 | **Tools** | Agents with tool-calling capabilities |
-| **DKubeX Providers** | DKubeX-native LLM and embedding components backed by SecureLLM |
 
 
 ![Component categories](./media/Langflow-component-categories.png)
 
-## DKubeX Providers
+## SecureLLM Models
 
-These components are built into every DKubeX Langflow instance and connect to the **SecureLLM** service running in the same cluster. They appear in the sidebar under **DKubeX Providers**.
+On DKubeX, language and embedding models come from the **SecureLLM** service running in the same cluster. Use them through Langflow's standard model components:
 
-![DKubeX components](./media/Langflow-dkubex-providers.png)
+| Component | Category | Use it for |
+|-----------|----------|------------|
+| **Language Model** | Models & Agents | Chat and text generation (also the model used by **Agent**) |
+| **Embedding Model** | Models & Agents | Vector embeddings for Vector Store, Knowledge Base and retrieval flows |
 
-### DKubeX LLM
-
-Generates text using language models served by SecureLLM.
-
-![DKubeX LLM component](./media/Langflow-dkubex-llm.png)
-
-**Configuration:**
-
-| Field | Description |
-|-------|-------------|
-| SecureLLM API Key | Your API key for the SecureLLM service (masked; stored once) |
-| Model Name | Dropdown of available `TextGeneration` models — click the refresh button to populate |
-| Max Tokens | Maximum tokens to generate (default 256) |
-| Temperature | Sampling temperature 0–1 (default 0.1) |
-| JSON Mode | Force JSON output format |
-| Timeout | Request timeout in seconds (default 700) |
-| Max Retries | Retries on transient failure (default 5) |
+**Your API key is configured automatically.** When you open Langflow, your SecureLLM key is fetched from your DKubeX account and stored as the `SECURELLM_API_KEY` global variable. It is shown as *Managed by DKubeX* and cannot be edited or removed — you never need to enter it.
 
 **How to use:**
 
-1. Drop **DKubeX LLM** component onto the canvas.
-2. Enter your **SecureLLM API Key**.
-3. Click on **Model Name** and then click **Refresh list**  to load the available models.
-4. Select a model and connect the component to your flow.
-5. Click the component to open its side panel and configure the advanced options.
+1. Open **Settings → Model Providers → SecureLLM** and turn on the models you want to use (the first few are enabled by default). Only the models configured by your administrator in SecureLLM are listed.
+2. Drop a **Language Model** or **Embedding Model** component onto the canvas.
+3. In the component's model selector, pick a SecureLLM model — chat models appear in **Language Model**, embedding models in **Embedding Model**.
+4. Connect the component to your flow.
 
-### DKubeX Embeddings
-
-Generates vector embeddings using embedding models served by SecureLLM. Use this component with a Vector Store component to index and retrieve documents.
-
-
-![DKubeX Embeddings component](./media/Langflow-dkubex-embeddings.png)
-
-**Configuration:**
-
-| Field | Description |
-|-------|-------------|
-| SecureLLM API Key | Your API key for the SecureLLM service (masked; stored once) |
-| Model Name | Dropdown of available `TextEmbedding` models — click refresh to populate |
-| Chunk Size | Number of texts per embedding batch (default 256) |
-| Request Timeout | Timeout in seconds |
-| Max Retries | Retries on failure (default 3) |
-
-**How to use:**
-
-1. Drop **DKubeX Embeddings** onto the canvas.
-2. Enter your **SecureLLM API Key**.
-3. Click on **Model Name** and then click **Refresh list**  to load the available models.
-4. Select a model and connect the component to a Vector Store component to index documents.
-5. Click the component to open its side panel and configure the advanced options.
-
-> **Note:** The model dropdowns in DKubeX components show only models whose type matches the component — text generation models for **DKubeX LLM** and embedding models for **DKubeX Embeddings**. If the dropdown is empty after refreshing, verify your API key or contact your cluster administrator.
+> **Note:** If a model you expect is missing, enable it under **Settings → Model Providers → SecureLLM**. If SecureLLM lists no embedding models, ask your cluster administrator to add one in SecureLLM.
 
 ## Configuring Any Component
 
