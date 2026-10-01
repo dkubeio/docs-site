@@ -15,5 +15,4 @@ quick tile in your Workspace to a full application published to the DKubeX App S
 using-claude-code-in-dkubex-workspace-with-a-claude-subscription
 using-claude-code-in-dkubex-workspace-with-dkubex-or-cloud-provider-models
 building-and-hosting-an-app-in-dkubex-workspace-with-a-coding-agent
-publishing-an-app-to-the-dkubex-app-store
 ```
