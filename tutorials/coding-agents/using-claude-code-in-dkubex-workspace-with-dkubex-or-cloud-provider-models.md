@@ -11,6 +11,12 @@ Use this flow when you want the coding agent to run on platform-served models. T
 Claude subscription instead, see
 [Using Claude Code in DKubeX Workspace with a Claude subscription](./using-claude-code-in-dkubex-workspace-with-a-claude-subscription.md).
 
+```{note}
+**Antigravity does not support locally-deployed models.** Antigravity's model picker surfaces only a
+limited subset of the SecureLLM catalog and does not list DKubeX-deployed (locally served) models. To
+drive a coding agent with a locally-deployed model, use a different agent such as Claude Code.
+```
+
 ```{raw} html
 <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:1.5rem 0;border-radius:8px;">
   <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
@@ -89,8 +95,6 @@ model.
 
 Run `/model` to confirm the active model in Claude Code.
 ```
-
-You can change the model at any time from within the agent using the `/model` command.
 
 ```{note}
 All requests routed through the models are recorded by SecureLLM and can be monitored in its
