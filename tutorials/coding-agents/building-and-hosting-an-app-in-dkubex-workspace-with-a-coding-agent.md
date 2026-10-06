@@ -56,38 +56,38 @@ skill, the agent takes care of hosting and publishing.
 
 For anything beyond a quick prototype, the cleanest approach is to write your requirements into a
 **specification file** and point the agent at it, so the build is driven by one reviewable source of
-truth. For this walkthrough we use a ready-made spec file, `document_extraction_prompt.md`, that describes a
+truth. For this walkthrough we use a ready-made spec file, `document_extraction_specs.md`, that describes a
 **document data-extraction app** — a tool that takes a PDF, extracts the fields you define using a
 vision model, and returns structured results. If you were building something else, you would write
 your own spec file the same way and point the agent at that; here we use this one.
 
 For this example, download the spec file and place it — using the FileBrowser application on your
 DKubeX workspace — in the directory where you'll run the build, so the agent can read it when you
-reference `@document_extraction_prompt.md`:
+reference `@document_extraction_specs.md`:
 
-- {download}`document_extraction_prompt.md <../../example-files/prompts/document_extraction_prompt.md>`
+- {download}`document_extraction_specs.md <../../example-files/prompts/document_extraction_specs.md>`
 
 Then give the agent this prompt:
 
 ```
 Build a dkubex app for PDF document extraction using the specification in
-`@document_extraction_prompt.md`. Implement the complete application described
+`@document_extraction_specs.md`. Implement the complete application described
 in the specification.
 
 Constraints:
-- Create a fresh project directory for this build.
+- Create a fresh project directory for this build in the current directory.
 - Create a dedicated Python virtual environment — do not use any existing venvs.
 - Build everything from scratch based solely on this reference file — do not
   reference or depend on any other folders or files in this workspace.
 
 Read the reference file, then build and run the application.
-
-Once the application is running, a tile with the app name will appear in the
-apps launcher (Apps page).
-
-SecureLLM endpoint to be used for fetching the models deployed locally is
-https://<dkubex-host>/securellm/v1
 ```
+
+Once the application is running, a tile with the app name will appear in the apps launcher
+(**Apps** page).
+
+The SecureLLM endpoint to be used for fetching the models deployed locally is
+`https://<dkubex-host>/securellm/v1`.
 
 The agent reads the specification and builds the complete application — frontend, backend, and
 everything the spec calls for — then applies the dkubex-app skill to host and publish it. A build
@@ -137,10 +137,10 @@ same **document data-extraction app** as the worked example.
 
 ### Step 1 — Package the app
 
-With the app built and GitHub authenticated, package it. Prompt the agent:
+With the app built and GitHub authenticated, package it with the package-app skill. Prompt the agent:
 
 ```
-package this app
+/package-app package this app
 ```
 
 The package-app skill creates the Helm chart and packages it — it generates the Helm repository index
