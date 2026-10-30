@@ -19,7 +19,7 @@ DKubeX runs on a single Kubernetes cluster.
 - **Per additional user workspace**, add **1 CPU core, 8 GB RAM, and 20 GB storage**.
 - **GPUs are optional and model-dependent.** The core platform runs on CPU only. GPUs are required
   only when you want to deploy and serve your own models on-premises.
-- An **external NFS server** is required in every configuration for shared and per-user storage.
+- An **external NFS server** is required in every configuration for shared and per-user storage, with **1 TB** of storage recommended.
 ```
 
 ### Additional requirements
