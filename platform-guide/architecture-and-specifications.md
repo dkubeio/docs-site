@@ -43,7 +43,6 @@ A single node running all services:
 | Memory | 32 GB RAM |
 | Storage | 200 GB SSD |
 | Nodes | 1 |
-| Storage backend | External NFS server |
 
 ### Recommended
 
@@ -55,7 +54,6 @@ Comfortable headroom for all applications plus a few user workspaces on a single
 | Memory | 64 GB RAM |
 | Storage | 500 GB SSD |
 | Nodes | 1 |
-| Storage backend | External NFS server |
 
 ### Sizing notes
 
