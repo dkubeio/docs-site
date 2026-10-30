@@ -2,40 +2,55 @@
 
 This guide installs DKubeX using the Helm chart.
 
-## Before you begin
-
-Make sure your cluster meets the minimum hardware and software requirements before installing.
-DKubeX runs on a single Kubernetes cluster and needs, at minimum, **8 CPU cores, 32 GB RAM, 200 GB SSD,
-one node, and an external NFS server**; 16 cores / 64 GB RAM / 500 GB SSD is recommended for comfortable
-headroom. GPUs are optional and only needed to serve your own models on-prem. See
-[Architecture & Specifications](../platform-guide/architecture-and-specifications.md#system-requirements)
-for the full requirements, including how to size additional user workspaces.
-
 ## Prerequisites
 
-Install Helm (Helm 3.x).
+### Hardware requirements
 
-### Install Helm
+DKubeX runs on a single Kubernetes cluster.
 
-macOS (Homebrew):
+| Resource | Minimum | Recommended |
+|---|---|---|
+| CPU | 8 cores | 16 cores |
+| Memory | 32 GB RAM | 64 GB RAM |
+| Storage | 200 GB SSD | 500 GB SSD |
+| Nodes | 1 | 1 |
 
+```{note}
+- **Per additional user workspace**, add **1 CPU core, 8 GB RAM, and 20 GB storage**.
+- **GPUs are optional and model-dependent.** The core platform runs on CPU only. GPUs are required
+  only when you want to deploy and serve your own models on-premises.
+- An **external NFS server** is required in every configuration for shared and per-user storage.
+```
+
+### Additional requirements
+
+#### Install Helm
+
+DKubeX is installed with Helm 3.x. Install it on the machine you will run the install from:
+
+::::{tab-set}
+
+:::{tab-item} macOS
 ```bash
 brew install helm
 ```
+:::
 
-Linux:
-
+:::{tab-item} Linux
 ```bash
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 ```
+:::
 
-Verify Helm:
+::::
+
+Then confirm Helm is installed and reports a 3.x version:
 
 ```bash
 helm version
 ```
 
-## Tokens
+#### Tokens
 
 You need two GitHub PATs:
 
@@ -51,7 +66,7 @@ export REGISTRY_TOKEN="<github_pat_with_access_to_dkubex_repo>"
 
 ## Install DKubeX
 
-Run these commands in order. Each is a separate step with its own copy button.
+Run these commands in order.
 
 1. Add the DKubeX Helm repository:
 
@@ -76,3 +91,29 @@ Run these commands in order. Each is a separate step with its own copy button.
    	--set dkubex.env.helm_token="${GITHUB_TOKEN}"
    ```
 
+````{note}
+The recommended setup is an **external NFS server** for storage with the **internal PostgreSQL**.
+To install with an external NFS server and an external PostgreSQL, first export their values:
+
+```bash
+export PG_USER="<postgres_user>"
+export PG_PASSWORD="<postgres_password>"
+export PG_HOST="<postgres_host>"
+export NFS_SERVER="<nfs_server_address>"
+export NFS_PATH="<nfs_export_path>"
+```
+
+Then run:
+
+```bash
+helm install -n dkubex --create-namespace dkubex-installer dkubeio/dkubex-installer \
+	--set registry.token="${REGISTRY_TOKEN}" \
+	--set dkubex.env.helm_token="${GITHUB_TOKEN}" \
+	--set postgres.enabled=false \
+	--set pgadmin.enabled=false \
+	--set db_url="postgresql+psycopg://${PG_USER}:${PG_PASSWORD}@${PG_HOST}:5432/dkubex?sslmode=require" \
+	--set nfs.enabled=true \
+	--set nfs.server="${NFS_SERVER}" \
+	--set nfs.path="${NFS_PATH}"
+```
+````
