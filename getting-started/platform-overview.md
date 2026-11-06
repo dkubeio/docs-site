@@ -46,7 +46,7 @@ gateway:
 | **SecureLLM** | Governed, OpenAI-compatible AI gateway fronting every model |
 | **RAGFlow** | Document-grounded RAG — knowledge bases, hybrid search, cited chat |
 | **Langflow** | Visual, low-code builder for AI workflows and agents |
-| **VKE** | Virtual Kubernetes Engineer — an SRE console for the cluster |
+| **SRE** | Site Reliability Engineer — a self-improving reliability console for the cluster |
 
 Each application has its own guide under [Applications](../applications/index.md).
 

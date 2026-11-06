@@ -5,9 +5,9 @@ End-to-end walkthroughs for common tasks.
 ## Investigate an incident
 
 1. Open **Incidents** and select an active one.
-2. Read the grounded summary and the signature VKE assigned.
+2. Read the grounded summary and the signature SRE assigned.
 3. Ask follow-up questions in **Chat** — answers cite the live resources involved.
-4. If VKE proposes a fix, it appears in **Approvals**.
+4. If SRE proposes a fix, it appears in **Approvals**.
 
 ## Approve and apply a fenced fix
 
@@ -20,7 +20,7 @@ End-to-end walkthroughs for common tasks.
 
 1. Open **Chat**.
 2. Ask, e.g., "why is the payments deployment not ready?"
-3. VKE inspects the relevant pods/events and answers with citations.
+3. SRE inspects the relevant pods/events and answers with citations.
 
 ## Train a domain model
 
