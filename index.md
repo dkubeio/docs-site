@@ -30,7 +30,7 @@ Architecture and requirements, user and access management, the application catal
 :link: applications/index
 :link-type: doc
 
-User guides for Workspace, ModelStudio, MLflow, SecureLLM, RAGFlow, Langflow, and VKE.
+User guides for Workspace, ModelStudio, MLflow, SecureLLM, RAGFlow, Langflow, and SRE.
 :::
 
 :::{grid-item-card} Tutorials

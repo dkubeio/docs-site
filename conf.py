@@ -259,7 +259,7 @@ APPLICATION_DISPLAY_NAMES = {
 # Preferred order for applications in the list and sidebar. Slugs listed here
 # come first in this order; any others (e.g. apps only present in older
 # versions) follow alphabetically.
-APPLICATION_ORDER = ["workspace", "modelstudio", "mlflow", "securellm", "ragflow", "langflow", "vke"]
+APPLICATION_ORDER = ["workspace", "modelstudio", "mlflow", "securellm", "ragflow", "langflow", "sre"]
 
 
 def _ordered_app_slugs(slugs):

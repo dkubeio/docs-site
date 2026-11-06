@@ -1,12 +1,12 @@
-# VKE — Virtual Kubernetes Engineer
+# SRE — Site Reliability Engineer
 
-VKE is a self-improving SRE console that runs **inside** your cluster. It observes the
+SRE is a self-improving site reliability console that runs **inside** your cluster. It observes the
 workloads around it through its own read-only ServiceAccount, answers questions grounded
 in real cluster state via any OpenAI-compatible AI endpoint, proposes and (with approval)
 applies fenced remediations, and carries a Training Studio for fine-tuning domain models
 on your incident history — all behind a single tile-based console.
 
-![VKE console](media/screenshot-1.png)
+![SRE console](media/screenshot-1.png)
 
 ## Key features
 
@@ -20,7 +20,7 @@ on your incident history — all behind a single tile-based console.
 
 ## Tutorials
 
-- [Getting started](./getting-started.md) — Open VKE, log in with your PIN, and take the tour.
+- [Getting started](./getting-started.md) — Open SRE, log in with your PIN, and take the tour.
 - [Core features](./user-features.md) — Observe, Converse, and Act for everyday users.
 - [Administrator features](./admin-features.md) — Users, autonomy tiers, training, and audit.
 - [Workflows](./tutorials.md) — End-to-end walkthroughs for common tasks.

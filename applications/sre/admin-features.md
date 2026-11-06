@@ -12,7 +12,7 @@ Features available to admins and SRE leads.
 - **Autonomy Board** — see which learned fixes are eligible to run and at what tier.
 - **T0 master switch** — a single global control (admin-only) to enable or disable
   autonomous action across the cluster.
-- **RBAC fencing** — VKE's ServiceAccount is read-only by default. Write is opt-in:
+- **RBAC fencing** — SRE's ServiceAccount is read-only by default. Write is opt-in:
   - `rbac.write: true` grants the fenced verbs (scale, rollout-restart — never delete) cluster-wide.
   - `rbac.writeNamespaces: [...]` grants them in listed namespaces only; everything else stays read-only.
 
@@ -24,7 +24,7 @@ Features available to admins and SRE leads.
 
 ## Oversight
 
-- **Analytics / Flywheel** — how VKE's knowledge and success rate improve over time.
+- **Analytics / Flywheel** — how SRE's knowledge and success rate improve over time.
 - **Audit** — hash-chained event log; every action, approval, and denial is recorded and verifiable.
 
 ## Configuration
