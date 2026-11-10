@@ -109,7 +109,7 @@ From here, iterate with the same agent: describe a change in plain language and 
 app in place. Its tile keeps pointing at the running app, so your users always reach the latest
 version.
 
-### Step 4 — Delete the development app
+## Delete the development app
 
 When you have finished testing, remove the development app you built and hosted in your
 workspace before you publish it to the App Store. Use either of these options.
