@@ -109,6 +109,29 @@ From here, iterate with the same agent: describe a change in plain language and 
 app in place. Its tile keeps pointing at the running app, so your users always reach the latest
 version.
 
+### Step 4 — Delete the development app
+
+When you have finished testing, remove the development app you built and hosted in your
+workspace before you publish it to the App Store. Use either of these options.
+
+**Option 1 — Use the `d3x` command**
+
+1. Open the DKubeX workspace **Terminal**.
+2. Run:
+
+   ```bash
+   d3x app remove <app-name>
+   ```
+
+**Option 2 — Use your coding agent**
+
+1. Open the same coding agent you used to build the development app.
+2. Prompt the agent:
+
+   ```
+   Unregister the application and stop the development server.
+   ```
+
 ## Publish to the DKubeX App Store
 
 Building and hosting gets your app running in the workspace as a tile — a fast way to build and test.
@@ -203,36 +226,13 @@ access tokens → Tokens (classic)**).
 
 Your application now appears in the App Store under **Browse Catalog**, tagged with this repository.
 
-### Step 5 — Delete the development app
-
-Before you install the published app, remove the development app you built and hosted in your
-workspace. Use either of these options.
-
-**Option 1 — Use the `d3x` command**
-
-1. Open the DKubeX workspace **Terminal**.
-2. Run:
-
-   ```bash
-   d3x app remove <app-name>
-   ```
-
-**Option 2 — Use your coding agent**
-
-1. Open the same coding agent you used to build the development app.
-2. Prompt the agent:
-
-   ```
-   Unregister the application and stop the development server.
-   ```
-
-### Step 6 — Install the application
+### Step 5 — Install the application
 
 1. In the admin console → **Applications → Browse Catalog**, find your app and click **Install**
    (installing is an administrator action). DKubeX handles the port and adds the app's tile.
 2. Track the install on the **Applications** tab until it is **Ready**.
 
-### Step 7 — Give users access
+### Step 6 — Give users access
 
 1. On the **Applications** tab, open **Actions** on the installed app → **Manage Users & Roles**.
 2. Assign users and choose each user's role (**User** or **Admin**).
