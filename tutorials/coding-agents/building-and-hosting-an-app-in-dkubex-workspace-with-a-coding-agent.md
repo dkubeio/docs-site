@@ -170,7 +170,7 @@ The package-app skill creates the Helm chart and packages it — it generates th
 (`index.yaml`) and the packaged chart (`.tgz`), wiring in any platform resources the app uses. It does
 not build or push the container images; you do that next.
 
-#### Build and push the container images
+### Step 2 — Build and push the container images
 
 Prompt the agent to build and push the images to your registry:
 
@@ -178,61 +178,61 @@ Prompt the agent to build and push the images to your registry:
 build and push the docker images using gh to my ghcr
 ```
 
-#### Create the code repo and the Helm repo branch
+### Step 3 — Create the code repo and the Helm repo branch
 
 Prompt the agent to publish the code and the Helm chart:
 
 ```
-Also create a github repo and push this code. create a separate branch for helm repo index with the helm package.tgz file
+Also create a github repo and push this code. create a separate branch gh-pages for helm repo index with the helm package.tgz file
 ```
 
-This creates the code repository and a **`helm-repo`** branch that holds the Helm repository index
+This creates the code repository and a **`gh-pages`** branch that holds the Helm repository index
 (`index.yaml`) and the packaged chart (`.tgz`) file.
 
-### Step 2 — Copy the Helm repo raw URL
+### Step 4 — Copy the Helm repo raw URL
 
-1. In GitHub, open the app's repository and switch to the **`helm-repo`** branch — for example,
-   `https://github.com/<your-github-username>/document-extraction/tree/helm-repo`.
+1. In GitHub, open the app's repository and switch to the **`gh-pages`** branch — for example,
+   `https://github.com/<your-github-username>/document-extraction/tree/gh-pages`.
 2. Convert it to its **raw** URL. It must start with `https://raw.githubusercontent.com/…`, **not**
    `https://github.com/…`, and you must **remove the `tree` segment** from the path — for example:
 
    ```
-   https://raw.githubusercontent.com/<your-github-username>/document-extraction/helm-repo
+   https://raw.githubusercontent.com/<your-github-username>/document-extraction/gh-pages
    ```
 
 ```{note}
-Drop `tree` when you build the raw URL. The browser address has `.../tree/helm-repo`, but the raw URL
-removes it and reads `.../document-extraction/helm-repo`. Leaving `tree` in the URL stops DKubeX from
+Drop `tree` when you build the raw URL. The browser address has `.../tree/gh-pages`, but the raw URL
+removes it and reads `.../document-extraction/gh-pages`. Leaving `tree` in the URL stops DKubeX from
 resolving the repository.
 ```
 
-### Step 3 — Create a classic token for DKubeX
+### Step 5 — Create a classic token for DKubeX
 
 DKubeX uses a token to download and install the chart, so create a **classic** personal access token
 with **`repo`** and **`read:packages`** access (GitHub → **Settings → Developer settings → Personal
 access tokens → Tokens (classic)**).
 
-### Step 4 — Add the repository in DKubeX
+### Step 6 — Add the repository in DKubeX
 
 1. In the admin console, open **Applications → Manage Repositories → Add Repository**.
 2. Fill in:
    | Field | Value |
    |---|---|
    | **Name** | A name using lowercase letters, digits, and hyphens (used as the Helm repo name). |
-   | **Repository URL** | The **raw** `helm-repo` URL from Step 2. |
-   | **Token / Password** | The classic token from Step 3. |
+   | **Repository URL** | The **raw** `gh-pages` URL from Step 4. |
+   | **Token / Password** | The classic token from Step 5. |
    | **This repo's charts use private images** | Check this if your container images are private. |
 3. Click **Add & Verify**.
 
 Your application now appears in the App Store under **Browse Catalog**, tagged with this repository.
 
-### Step 5 — Install the application
+### Step 7 — Install the application
 
 1. In the admin console → **Applications → Browse Catalog**, find your app and click **Install**
    (installing is an administrator action). DKubeX handles the port and adds the app's tile.
 2. Track the install on the **Applications** tab until it is **Ready**.
 
-### Step 6 — Give users access
+### Step 8 — Give users access
 
 1. On the **Applications** tab, open **Actions** on the installed app → **Manage Users & Roles**.
 2. Assign users and choose each user's role (**User** or **Admin**).
