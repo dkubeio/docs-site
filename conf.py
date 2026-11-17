@@ -91,6 +91,8 @@ html_css_files = ["custom.css"]
 html_js_files = ["footer-dkube-link.js", "version-badge.js"]
 html_baseurl = "https://dkubex2.dkube.io/"
 html_favicon = "_static/DKube_Icon_512x512.svg"
+# favicon.ico at the site root for browsers and tools that only look there.
+html_extra_path = ["_extra"]
 
 
 import re
