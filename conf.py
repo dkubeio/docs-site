@@ -59,6 +59,8 @@ myst_enable_extensions = [
 	"colon_fence",
 ]
 
+myst_heading_anchors = 4
+
 myst_substitutions = {
 	"doc_version": doc_version,
 }
@@ -67,7 +69,6 @@ myst_substitutions = {
 suppress_warnings = [
 	"image.not_readable",
 	"toc.not_included",
-	"myst.xref_missing",
 	"misc.highlighting_failure",
 ]
 

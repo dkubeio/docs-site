@@ -16,7 +16,7 @@ Only three DKubeX applications are used in this tutorial: **Terminal**, **MLflow
 - Access to a DKubeX workspace with the **Terminal**, **MLflow**, and **Model Studio**
   applications enabled.
 - An MLflow tracking token. In a DKubeX workspace this is supplied automatically as a file
-  (see [Step 2](#step-2-configure-the-environment-variables)).
+  (see [Step 2](#step-2--configure-the-environment-variables)).
 
 ## The Example
 
