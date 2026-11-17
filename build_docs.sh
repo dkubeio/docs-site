@@ -125,6 +125,30 @@ def rewrite_version_labels(file_path: Path, text: str) -> str:
   )
   return text
 
+def add_old_version_banner(file_path: Path, text: str) -> str:
+  # On pages of an older version, say so and link to the same page in the
+  # latest docs (or the latest home page if that page no longer exists).
+  # Styles are inline because older versions don't load the current CSS.
+  version_dir = file_path.parts[0]
+  if version_dir == "docs" or version_dir == latest_dir or 'class="dkx-old-version"' in text:
+    return text
+  rel = file_path.relative_to(root / version_dir)
+  target = root / "docs" / rel
+  if not target.exists():
+    target = root / "docs" / "index.html"
+  href = Path(os.path.relpath(target.as_posix(), file_path.parent.as_posix())).as_posix()
+  old_tag = version_dir.removeprefix("docs-")
+  banner = (
+    '<div class="dkx-old-version" role="note" style="background:#efeaf7;color:#2b2140;'
+    'border-bottom:1px solid #d9d0ec;padding:10px 16px;text-align:center;'
+    'font:15px/1.5 system-ui,-apple-system,\'Segoe UI\',sans-serif">'
+    f'You’re viewing the docs for DKubeX <strong style="color:inherit">{old_tag}</strong>. '
+    f'The latest version is <strong style="color:inherit">{latest_tag}</strong>. '
+    f'<a href="{href}" style="color:#5b3fa0;font-weight:600;text-decoration:underline">'
+    'View this page in the latest version →</a></div>'
+  )
+  return re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + banner, text, count=1)
+
 html_files = [p for p in root.glob("docs*/**/*.html") if p.is_file()]
 for html in html_files:
   content = html.read_text(encoding="utf-8")
@@ -132,6 +156,7 @@ for html in html_files:
   if latest_root in html.parents:
     updated = rewrite_latest_self_link(html, updated)
   updated = rewrite_version_labels(html, updated)
+  updated = add_old_version_banner(html, updated)
 
   if updated != content:
     html.write_text(updated, encoding="utf-8")

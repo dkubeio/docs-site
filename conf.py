@@ -59,6 +59,8 @@ myst_enable_extensions = [
 	"colon_fence",
 ]
 
+myst_heading_anchors = 4
+
 myst_substitutions = {
 	"doc_version": doc_version,
 }
@@ -67,14 +69,13 @@ myst_substitutions = {
 suppress_warnings = [
 	"image.not_readable",
 	"toc.not_included",
-	"myst.xref_missing",
 	"misc.highlighting_failure",
 ]
 
 templates_path = ["_templates"]
 # specifications.md is intentionally kept in the repo but excluded from the
 # build/nav (retained for later use; folded content now lives on the homepage).
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "README.md", "specifications.md", "home-page-audit.md", "applications/ragflow/build-a-qa-assistant.md", "example-files/**"]
+exclude_patterns = ["_build", ".venv", ".venv-docs", ".multiversion", ".claude", "docs", "docs-v*", "phasedoc", "Thumbs.db", ".DS_Store", "README.md", "specifications.md", "home-page-audit.md", "CONTRIBUTING.md", "applications/ragflow/build-a-qa-assistant.md", "example-files/**"]
 
 html_theme = "shibuya"
 html_title = "DKubeX Documentation"
@@ -90,6 +91,8 @@ html_css_files = ["custom.css"]
 html_js_files = ["footer-dkube-link.js", "version-badge.js"]
 html_baseurl = "https://dkubex2.dkube.io/"
 html_favicon = "_static/DKube_Icon_512x512.svg"
+# favicon.ico at the site root for browsers and tools that only look there.
+html_extra_path = ["_extra"]
 
 
 import re
