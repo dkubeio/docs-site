@@ -2,7 +2,7 @@
 
 ModelStudio is a web application for discovering, deploying, and running inference on AI models within the DKubeX platform. It supports three categories of models:
 
-- **LLM models** — large language models deployed via [KubeAI](https://github.com/substratusai/kubeai), sourced from [HuggingFace Hub](https://huggingface.co)
+- **LLM models** — large language models deployed via [KubeAI](https://github.com/kubeai-project/kubeai), sourced from [HuggingFace Hub](https://huggingface.co)
 - **ML models** — traditional machine learning models (sklearn, XGBoost, PyTorch, etc.) deployed via [KServe](https://kserve.github.io/website/), sourced from an [MLflow](https://mlflow.org) registry or HuggingFace Hub
 - **NVIDIA NIM models** — production-optimized inference microservices from the NVIDIA NGC catalog, deployed in-cluster on GPU nodes via the k8s-nim-operator
 

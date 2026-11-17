@@ -1,6 +1,6 @@
 # ModelStudio
 
-ModelStudio is a web application for discovering, deploying, and running inference on AI models in the DKubeX platform. It supports three model tracks — large language models via [KubeAI](https://github.com/substratusai/kubeai), traditional machine-learning models via [KServe](https://kserve.github.io/website/), and production-optimized [NVIDIA NIM](https://docs.nvidia.com/nim/) microservices — all browsable, deployable, and testable from a single interface.
+ModelStudio is a web application for discovering, deploying, and running inference on AI models in the DKubeX platform. It supports three model tracks — large language models via [KubeAI](https://github.com/kubeai-project/kubeai), traditional machine-learning models via [KServe](https://kserve.github.io/website/), and production-optimized [NVIDIA NIM](https://docs.nvidia.com/nim/) microservices — all browsable, deployable, and testable from a single interface.
 
 ## Key features
 

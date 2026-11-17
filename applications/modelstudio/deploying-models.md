@@ -2,7 +2,7 @@
 
 ModelStudio supports three deployment paths:
 
-- **LLM models** — deployed as [KubeAI](https://github.com/substratusai/kubeai) `Model` CRDs, sourced from HuggingFace Hub
+- **LLM models** — deployed as [KubeAI](https://github.com/kubeai-project/kubeai) `Model` CRDs, sourced from HuggingFace Hub
 - **ML models** — deployed as [KServe](https://kserve.github.io/website/) `InferenceService` CRDs, sourced from MLflow or HuggingFace Hub
 - **NVIDIA NIM models** — registered from the NVIDIA NGC catalog and deployed in-cluster on GPU nodes via the k8s-nim-operator
 
