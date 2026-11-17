@@ -35,7 +35,11 @@ The Users page lets you set access policies for individual users — controlling
 3. Specify **Allowed Providers** and/or **Allowed Models** (comma-separated).
 4. Click **Save**.
 
-To remove all restrictions from a user (giving them full access), click **Remove** next to their policy.
+**Setting a spend limit:**
+
+In the same form, enter a **Spend Limit (USD)** and choose how often it **Resets** (never, daily, weekly, every 30 days or monthly). The limit covers the cost of all requests made with the user's API keys. Once the user's spend in the current period reaches the limit, their chat, completion and embedding requests are rejected with a `400` "budget exceeded" error until the period resets, or until you raise the limit or tick **Reset spend to $0 now**. A request that starts under the limit is allowed to finish, so spend can end slightly above it. Leave the field empty for no limit.
+
+To remove all restrictions and the spend limit from a user (giving them full access), click **Remove** next to their policy.
 
 ## Guardrails
 
