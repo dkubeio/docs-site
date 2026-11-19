@@ -22,7 +22,7 @@ your 4-digit PIN. Each role sees a different set of tiles:
 | Exec | Analytics, flywheel, reports |
 | Demo | Read-only: overview, topology, analytics |
 
-> After five failed PIN attempts the account locks; it resets on the next successful login.
+> After five failed PIN attempts, the account is locked. The lock is automatically cleared after the configured lockout period, after which the user can log in with the correct PIN.
 > Admins can reset any PIN from the **Users** tile.
 
 ## Take the tour
