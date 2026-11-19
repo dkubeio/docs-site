@@ -92,7 +92,7 @@ Run these commands in order.
    ```
 
 ````{note}
-The recommended setup is an **external NFS server** for storage with the **internal PostgreSQL**.
+The recommended setup is an **external NFS server** for storage with the **external PostgreSQL**.
 To install with an external NFS server and an external PostgreSQL, first export their values:
 
 ```bash
