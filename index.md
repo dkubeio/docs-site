@@ -1,3 +1,10 @@
+---
+og:description: "Documentation for DKubeX, a Kubernetes-native platform for deploying, managing and operating AI and ML applications from a single control plane."
+myst:
+  html_meta:
+    description: "Documentation for DKubeX, a Kubernetes-native platform for deploying, managing and operating AI and ML applications from a single control plane."
+---
+
 # DKubeX 2.0 Documentation
 
 *Version {{ doc_version }}*
