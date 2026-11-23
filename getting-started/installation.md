@@ -1,3 +1,10 @@
+---
+og:description: "Install DKubeX with its Helm chart: prerequisites, production recommendations, external PostgreSQL, GPU nodes, NVIDIA DGX and cloud-specific notes."
+myst:
+  html_meta:
+    description: "Install DKubeX with its Helm chart: prerequisites, production recommendations, external PostgreSQL, GPU nodes, NVIDIA DGX and cloud-specific notes."
+---
+
 # Installing DKubeX
 
 This guide installs DKubeX using the Helm chart.

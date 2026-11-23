@@ -44,6 +44,9 @@ extensions = [
 	"sphinx_multiversion",
 	"sphinxcontrib.video",
 	"sphinx_design",
+	"sphinx_sitemap",
+	"sphinxext.opengraph",
+	"notfound.extension",
 ]
 
 smv_tag_whitelist = r"^.+$"
@@ -93,6 +96,26 @@ html_baseurl = "https://dkubex2.dkube.io/"
 html_favicon = "_static/DKube_Icon_512x512.svg"
 # favicon.ico at the site root for browsers and tools that only look there.
 html_extra_path = ["_extra"]
+
+# sitemap.xml lists the latest pages only, at root URLs (old versions canonicalize to these).
+sitemap_url_scheme = "{link}"
+sitemap_excludes = ["search.html", "genindex.html", "404.html"]
+
+# Page description (from the first paragraph) and preview image for search results and shared links.
+ogp_site_url = html_baseurl
+ogp_site_name = "DKubeX Documentation"
+ogp_description_length = 160
+ogp_image = "_static/dkubex-docs-card.png"
+ogp_image_alt = "DKubeX Documentation"
+ogp_social_cards = {"enable": False}
+
+# Custom 404 page; absolute asset paths so it renders at any URL depth.
+notfound_urls_prefix = "/"
+notfound_context = {
+	"title": "Page not found",
+	"body": "<h1>Page not found</h1><p>This page doesn't exist or has moved. "
+	"Go to the <a href=\"/\">DKubeX documentation home</a> or use search.</p>",
+}
 
 
 import re

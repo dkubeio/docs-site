@@ -5,3 +5,6 @@ sphinx-copybutton
 sphinx-multiversion
 sphinxcontrib-video
 sphinx-design
+sphinx-sitemap
+sphinxext-opengraph
+sphinx-notfound-page
