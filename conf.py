@@ -85,7 +85,6 @@ html_title = "DKubeX Documentation"
 html_static_path = ["_static"]
 html_logo = "_static/DKube_Icon_512x512.svg"
 html_theme_options = {
-	"logo_target": "index.html",
 	"github_url": "https://github.com/dkubeio/docs-site/",
 	"youtube_url": "https://www.youtube.com/@DKube_OC",
 }
