@@ -13,7 +13,9 @@ This guide installs DKubeX using the Helm chart.
 
 ### Hardware requirements
 
-DKubeX runs on a single Kubernetes cluster.
+DKubeX runs on a single Kubernetes cluster. The minimum is a single node running all services. The
+recommended size gives comfortable headroom for all applications plus a few user workspaces on a
+single node.
 
 | Resource | Minimum | Recommended |
 |---|---|---|

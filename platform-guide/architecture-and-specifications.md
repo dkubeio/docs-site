@@ -33,34 +33,8 @@ The platform is organized into a few coordinated subsystems, all running on a si
 DKubeX runs on a single Kubernetes cluster. The core platform is entirely CPU-based — you only need
 GPUs if you intend to deploy and serve your own models on-premises.
 
-### Minimum
-
-A single node running all services:
-
-| Resource | Minimum |
-|---|---|
-| CPU | 8 cores |
-| Memory | 32 GB RAM |
-| Storage | 200 GB SSD |
-| Nodes | 1 |
-
-### Recommended
-
-Comfortable headroom for all applications plus a few user workspaces on a single node:
-
-| Resource | Recommended |
-|---|---|
-| CPU | 16 cores |
-| Memory | 64 GB RAM |
-| Storage | 500 GB SSD |
-| Nodes | 1 |
-
-### Sizing notes
-
-- **Per additional user workspace**, add **1 CPU core, 8 GB RAM, and 20 GB storage**.
-- **GPUs are optional and model-dependent.** The core platform runs on CPU only. GPUs are required
-  only when you want to deploy and serve your own models on-premises.
-- An **external NFS server** is required in every configuration for shared and per-user storage.
-
-Once your cluster meets these requirements, follow [Installation](../getting-started/installation.md)
+The minimum and recommended CPU, memory, storage and node counts, the extra resources for each user
+workspace, and the external NFS server are listed in one place:
+[Installation › Hardware requirements](../getting-started/installation.md#hardware-requirements).
+Once your cluster meets them, follow the rest of [Installation](../getting-started/installation.md)
 to deploy DKubeX.

@@ -30,8 +30,9 @@ coordinated subsystems.
 DKubeX 2.0 platform architecture at a glance.
 ```
 
-For the full breakdown of subsystems, components, and hardware requirements, see
-[Architecture & Specifications](../platform-guide/architecture-and-specifications.md).
+For the full breakdown of subsystems and components, see
+[Architecture & Specifications](../platform-guide/architecture-and-specifications.md). Hardware
+requirements are in [Installation](installation.md#hardware-requirements).
 
 ## The applications
 
