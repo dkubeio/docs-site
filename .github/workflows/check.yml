@@ -2,11 +2,16 @@ name: Check docs build
 
 # On every pull request to main, build the current pages only and fail on any
 # Sphinx warning (broken link, missing image, page not in a toctree), so the
-# problem shows on the pull request before it goes live. This never publishes
-# and is separate from build.yml, so a failed check cannot stop a deploy.
+# problem shows on the pull request before it goes live. It also runs on every
+# push to main, because the app guides arrive as bot pushes from the app repos
+# (push-docs), not as pull requests. This never publishes and is separate from
+# build.yml, so a failed check cannot stop a deploy.
 
 on:
   pull_request:
+    branches:
+      - main
+  push:
     branches:
       - main
 
