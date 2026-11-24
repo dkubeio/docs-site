@@ -96,18 +96,6 @@ html_favicon = "_static/DKube_Icon_512x512.svg"
 # favicon.ico at the site root for browsers and tools that only look there.
 html_extra_path = ["_extra"]
 
-# "Edit this page" link (Shibuya, right sidebar) to the page's file in this repo.
-html_context = {
-	"source_type": "github",
-	"source_user": "dkubeio",
-	"source_repo": "docs-site",
-	"source_version": "main",
-	"source_docs_path": "/",
-}
-# App guides synced from each app's own (private) repo: no edit link, since the
-# copy here is overwritten on every sync. SRE's guide lives only in this repo.
-SYNCED_APP_DIRS = ("langflow", "mlflow", "modelstudio", "ragflow", "securellm", "workspace")
-
 # sitemap.xml lists the latest pages only, at root URLs (old versions canonicalize to these).
 sitemap_url_scheme = "{link}"
 sitemap_excludes = ["search.html", "genindex.html", "404.html"]
@@ -357,17 +345,10 @@ def auto_app_toctree(app, docname, source):
 	source[0] = source[0].rstrip() + "\n" + "\n".join(lines)
 
 
-def hide_edit_link_on_synced_app_pages(app, pagename, templatename, context, doctree):
-	parts = pagename.split("/")
-	if len(parts) > 2 and parts[0] == "applications" and parts[1] in SYNCED_APP_DIRS:
-		context["edit_source_link"] = lambda filename: None
-
-
 # Register context and post-build normalization hooks.
 def setup(app):
 	app.connect("source-read", auto_app_toctree)
 	app.connect("html-page-context", format_version)
 	# High priority => runs after sphinx-multiversion's own context handler.
 	app.connect("html-page-context", prepare_nav_versions, priority=900)
-	app.connect("html-page-context", hide_edit_link_on_synced_app_pages, priority=900)
 	app.connect("build-finished", fix_version_html)
