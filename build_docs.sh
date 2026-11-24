@@ -149,6 +149,15 @@ def add_old_version_banner(file_path: Path, text: str) -> str:
   )
   return re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + banner, text, count=1)
 
+DOCS_SCRIPT = '<script src="https://www.dkube.io/docs.js" defer></script>'
+
+def add_docs_script(text: str) -> str:
+  # Analytics + "Was this page helpful?" on every page of every version. The script
+  # lives on dkube.io (dkube-io-site public/docs.js), shared with docs.dkube.io.
+  if DOCS_SCRIPT in text:
+    return text
+  return re.sub(r'</head>', DOCS_SCRIPT + '</head>', text, count=1)
+
 html_files = [p for p in root.glob("docs*/**/*.html") if p.is_file()]
 for html in html_files:
   content = html.read_text(encoding="utf-8")
@@ -157,6 +166,7 @@ for html in html_files:
     updated = rewrite_latest_self_link(html, updated)
   updated = rewrite_version_labels(html, updated)
   updated = add_old_version_banner(html, updated)
+  updated = add_docs_script(updated)
 
   if updated != content:
     html.write_text(updated, encoding="utf-8")
