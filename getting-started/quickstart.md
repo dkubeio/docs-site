@@ -35,7 +35,7 @@ deploy a small language model from the LLM Catalog.
 
 :::{tip}
 Start with a small model the first time. Larger models need more memory or a GPU node, and take
-longer to pull and start. See [Architecture & Specifications](../platform-guide/architecture-and-specifications.md#system-requirements)
+longer to pull and start. See [Hardware requirements](installation.md#hardware-requirements)
 for sizing guidance.
 :::
 
