@@ -8,7 +8,7 @@ On DKubeX you get all of these from the built-in **DKubeX** model provider, whic
 
 1. Click your avatar in the top-right of the page and open the **Model providers** page.
 2. In the **Available models** column on the right, find the built-in **DKubeX** provider and click **Add**.
-3. RAGFlow registers the chat, embedding, and rerank models you have access to (the ones deployed in Model Studio). They appear under **Added models**.
+3. RAGFlow registers the chat, embedding, and rerank models you have access to (the ones deployed in ModelStudio). They appear under **Added models**.
 
 ## Refresh models
 
