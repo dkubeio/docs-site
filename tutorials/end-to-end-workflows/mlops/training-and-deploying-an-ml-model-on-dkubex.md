@@ -2,18 +2,18 @@
 
 This tutorial walks through the end-to-end machine learning workflow on DKubeX:
 training a model from the **Terminal**, tracking and registering it in **MLflow**, and
-deploying and testing it in **Model Studio**.
+deploying and testing it in **ModelStudio**.
 
 The example predicts insurance charges. The model takes six inputs — age, sex, BMI,
 number of children, smoker status, and region — and predicts the insurance charges
 (premium) for a policyholder.
 
 Only three DKubeX applications are used in this tutorial: **Terminal**, **MLflow**, and
-**Model Studio**.
+**ModelStudio**.
 
 ## Prerequisites
 
-- Access to a DKubeX workspace with the **Terminal**, **MLflow**, and **Model Studio**
+- Access to a DKubeX workspace with the **Terminal**, **MLflow**, and **ModelStudio**
   applications enabled.
 - An MLflow tracking token. In a DKubeX workspace this is supplied automatically as a file
   (see [Step 2](#step-2--configure-the-environment-variables)).
@@ -156,9 +156,9 @@ Open the **MLflow** application.
 - On the **Models** tab, under **Registered Models**, open `ins_model`. The **Versions** section
   lists **Version 1**, which was registered by the training run.
 
-## Step 5 — Deploy the model in Model Studio
+## Step 5 — Deploy the model in ModelStudio
 
-Open the **Model Studio** application.
+Open the **ModelStudio** application.
 
 1. In the top navigation bar, go to **ML Registry**.
 2. Locate `ins_model` and expand it to see its versions.

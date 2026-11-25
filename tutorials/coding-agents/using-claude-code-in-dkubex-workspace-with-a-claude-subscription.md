@@ -23,7 +23,7 @@ To run Claude Code against a DKubeX-deployed model or an OpenRouter model instea
 
 ## Prerequisites
 
-- DKubeX Workspace, installed from the app catalog.
+- DKubeX Workspace, installed from the **App Store**.
 - A Claude subscription (Pro, Max, Team, or Enterprise), or an Anthropic Console account for
   API-usage billing.
 - A browser you can use to complete the Claude sign-in.

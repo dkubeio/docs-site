@@ -10,12 +10,12 @@ The **ML Registry** and **ML Models** pages appear only when KServe is enabled o
 
 ## Prerequisites
 
-- Access to **Model Studio** with KServe enabled.
+- Access to **ModelStudio** with KServe enabled.
 - A model to deploy — either registered in **MLflow**, or a text-based **HuggingFace ML** model.
 
 ## Find a model
 
-1. In Model Studio, open **ML Registry**.
+1. In ModelStudio, open **ML Registry**.
 2. Choose the source tab:
    - **MLflow** — your registered models and their versions/stages (None, Staging, Production,
      Archived). All MLflow flavors are supported.

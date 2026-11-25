@@ -1,18 +1,18 @@
 # Deploying a Model on CPU
 
-Deploy a language model that runs on CPU using Model Studio's **LLM Catalog**. The CPU path uses the
+Deploy a language model that runs on CPU using ModelStudio's **LLM Catalog**. The CPU path uses the
 **Ollama** engine with a quantized GGUF model, so it runs without a GPU.
 
 ## Prerequisites
 
-- Access to **Model Studio**.
+- Access to **ModelStudio**.
 - A CPU resource profile — the built-in **`cpu`** profile works, or create one (see
   [Deploying a Model on GPU](deploying-a-model-on-gpu.md#create-a-resource-profile) for the profile
   form; set GPU **Count** to 0 for a CPU profile).
 
 ## Steps
 
-1. In Model Studio, open **LLM Catalog**.
+1. In ModelStudio, open **LLM Catalog**.
 2. Find a model — browse **Trending / Most Downloaded / Recent**, or search HuggingFace (or paste a
    `author/model` slug). Choose a small instruct model for a first deployment.
 3. Click the model card, then click **Deploy**.

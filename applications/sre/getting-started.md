@@ -4,7 +4,7 @@ This guide gets you into SRE and oriented in a few minutes.
 
 ## Open SRE
 
-From the DKubeX application catalog, install **SRE**, then open it. SRE is served at
+Install **SRE** from the **App Store**, then open it. SRE is served at
 `/vke` behind the platform gateway, so you first pass DKubeX single sign-on, then SRE's
 own login screen appears.
 

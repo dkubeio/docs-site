@@ -1,7 +1,7 @@
 # Building a Legal Contract Q&A Assistant on DKubeX
 
 This tutorial shows how to build a document Q&A assistant on DKubeX. You deploy a chat model
-and an embedding model in **Model Studio**, route all requests and responses through the
+and an embedding model in **ModelStudio**, route all requests and responses through the
 **SecureLLM** gateway, and use them in **RAGFlow** to turn a set of documents into a chat assistant
 that answers questions with citations.
 
@@ -22,7 +22,7 @@ works the same way.
 
 ## Prerequisites
 
-- A DKubeX deployment with the **Model Studio**, **SecureLLM**, and **RAGFlow** applications
+- A DKubeX deployment with the **ModelStudio**, **SecureLLM**, and **RAGFlow** applications
   installed. To add an application, a user requests access to it from the dashboard's **Add app**
   section, and an administrator approves the request.
 - The documents you want to query, downloaded and unzipped **on your computer** — RAGFlow uploads
@@ -31,19 +31,19 @@ works the same way.
   from the [dataset download page](https://stanfordnlp.github.io/contract-nli/#download)) and
   unzip it on your computer.
 
-## Step 1 — Deploy the models in Model Studio
+## Step 1 — Deploy the models in ModelStudio
 
 RAGFlow needs two models: a **chat** model to write answers and an **embedding** model to index
-and retrieve document chunks. Deploy both in Model Studio, each on a **GPU** resource profile for
+and retrieve document chunks. Deploy both in ModelStudio, each on a **GPU** resource profile for
 good extraction and query quality.
 
-1. In **Model Studio**, deploy a **chat** model (this example uses `qwen3-8b`).
+1. In **ModelStudio**, deploy a **chat** model (this example uses `qwen3-8b`).
 2. Deploy an **embedding** model the same way (this example uses `bge-m3`).
 3. Wait until both reach the **running** state under **LLM Models**.
 
 For the full deployment walkthrough — creating a resource profile, choosing the inference engine,
 and setting deployment arguments — see
-[Deploying Models on DKubeX Using Model Studio](../model-management/index.md).
+[Deploying Models on DKubeX Using ModelStudio](../model-management/index.md).
 
 ## Step 2 — Connect the models in RAGFlow
 
@@ -52,7 +52,7 @@ every model you have access to appears automatically.
 
 1. Open **RAGFlow**, click the profile icon in the top-right, and open **Model Providers**.
 2. In the **Available models** column on the right, find the built-in **DKubeX** provider and click
-   **Add**. The chat and embedding models you deployed in Model Studio are registered automatically.
+   **Add**. The chat and embedding models you deployed in ModelStudio are registered automatically.
 3. In the **Set default models** column, select the models you just added:
    - **LLM** — your chat model (`qwen3-8b`)
    - **Embedding** — your embedding model (`bge-m3`)

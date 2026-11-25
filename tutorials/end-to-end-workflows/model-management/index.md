@@ -1,10 +1,10 @@
 # Model Management
 
-Deploy and run models on DKubeX with **Model Studio**. These tutorials cover deploying language models
+Deploy and run models on DKubeX with **ModelStudio**. These tutorials cover deploying language models
 on CPU, on GPU, and across multiple GPUs, testing them in the Playground, and deploying classic machine
 learning models.
 
-Open Model Studio from your DKubeX dashboard. Its top navigation has **Dashboard, LLM Catalog, ML
+Open ModelStudio from your DKubeX dashboard. Its top navigation has **Dashboard, LLM Catalog, ML
 Registry, LLM Models, ML Models, Resource Profiles, Playground,** and **Settings**.
 
 ```{toctree}

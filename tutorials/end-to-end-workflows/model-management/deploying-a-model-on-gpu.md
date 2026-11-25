@@ -1,17 +1,17 @@
 # Deploying a Model on GPU
 
-Deploy a language model on a GPU using Model Studio. GPU deployments use the **vLLM** engine with a
+Deploy a language model on a GPU using ModelStudio. GPU deployments use the **vLLM** engine with a
 **GPU resource profile**. The GPU is requested entirely through the resource profile you select.
 
 ## Prerequisites
 
-- Access to **Model Studio**.
+- Access to **ModelStudio**.
 - At least one GPU node in the cluster.
 - A GPU resource profile — a built-in `nvidia-gpu-*` profile, or a custom one (below).
 
 ## Deploy the model
 
-1. In Model Studio, open **LLM Catalog** and select a model → **Deploy**.
+1. In ModelStudio, open **LLM Catalog** and select a model → **Deploy**.
 2. On the **Deploy** tab:
    | Field | Set to |
    |---|---|
@@ -29,7 +29,7 @@ Deploy a language model on a GPU using Model Studio. GPU deployments use the **v
 Resource profiles are reusable CPU / memory / GPU shapes. Built-in profiles are read-only; create your
 own on the **Resource Profiles** page.
 
-1. In Model Studio, open **Resource Profiles** → **New Profile**.
+1. In ModelStudio, open **Resource Profiles** → **New Profile**.
 2. Fill in the form:
    | Field | Set to |
    |---|---|
