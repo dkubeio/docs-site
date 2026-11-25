@@ -32,4 +32,6 @@ Day-to-day features for everyday users, grouped by lane.
 - **Knowledge Base** — shadow-mode fixes SRE has learned, with success/failure counts.
 - **Datasets / Models** — training data and the models served to the chat dropdown.
 
-> What you can do in each lane depends on your role — see [Getting started](./getting-started.md).
+:::{note}
+What you can do in each lane depends on your role — see [Getting started](./getting-started.md).
+:::
