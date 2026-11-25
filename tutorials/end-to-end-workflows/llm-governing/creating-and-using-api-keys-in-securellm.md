@@ -41,15 +41,16 @@ Examples:
 ### Step 1: Open API Keys
 
 1. Log into SecureLLM.
-2. From the sidebar, select **API Keys**.
+2. From the top menu, open **Gateway**, then **API Keys**.
 3. Review existing keys or create a new one.
 
 ---
 
 ### Step 2: Create an API Key
 
-1. Click **Create Key**.
-2. Enter a descriptive name.
+1. Find the **Create New Key** card.
+2. Enter a descriptive name in **Key Name**. Names must be unique. Administrators can also limit the key
+   with **Allowed Providers** and **Allowed Models**.
 
 Example:
 
@@ -57,8 +58,9 @@ Example:
 my-vscode-plugin
 ```
 
-3. Click **Create**.
-4. Copy the generated API key immediately.
+3. Click **+ Create Key**.
+4. Copy the generated API key immediately: the **New Key Created** card has a **Copy** button. Keys start
+   with `sk-`.
 
 > Note: The key is shown only once. Store it securely.
 
@@ -102,8 +104,9 @@ Verify:
 
 ### Step 5: Monitor Key Activity
 
-1. Open **Usage**.
-2. Filter by API key name.
+1. From the top menu, open **Logs**, then **Request Logs**.
+2. Type the API key name in **Search**. (There is no separate key filter; Search matches the model, key
+   name, user and prompt.) Click a row to see the request's tokens, cost and latency.
 3. Review:
 
 - Request volume  
@@ -123,7 +126,8 @@ If a key is no longer needed or may be compromised:
 1. Return to **API Keys**.
 2. Locate the key.
 3. Click **Revoke**.
-4. Confirm the action.
+4. Confirm the action with **Yes, Revoke**. You can revoke your own keys; only an administrator can
+   revoke the key named **Default**.
 
 Revoked keys can no longer be used for requests.
 
