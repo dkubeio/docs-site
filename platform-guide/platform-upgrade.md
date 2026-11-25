@@ -21,26 +21,6 @@ A platform upgrade changes the running control plane. Run it during a maintenanc
 to recover before you start.
 :::
 
-## If an upgrade fails
-
-A failed upgrade leaves the platform on the version that was already running, and the **Platform** page
-keeps showing that version.
-
-1. Read the error output shown on the **Platform** page. The cause is often in the installer job's log:
-
-   ```bash
-   kubectl logs job/dkubex-installer -n dkubex
-   ```
-
-2. Fix the cause, select the version in **Upgrade To** again, and click **Upgrade Platform**. A failed
-   upgrade can be retried directly; it does not need a rollback first.
-
-:::{note}
-Upgrade from the **Platform** page rather than running `helm upgrade dkubex-installer` by hand. The
-settings you change under **Config** are stored with the platform, and the **Platform** page upgrade
-reuses them.
-:::
-
 ## Recover a stuck upgrade
 
 If an upgrade is interrupted and leaves the platform in a stuck state, run the following in the

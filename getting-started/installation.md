@@ -166,62 +166,12 @@ helm install -n dkubex --create-namespace dkubex-installer dkubeio/dkubex-instal
 ```
 ````
 
-## Verify the installation
-
-The `helm install` command starts an installer job that deploys the rest of the platform; it can take
-several minutes.
-
-1. Wait for the installer job to complete (`COMPLETIONS` shows `1/1`):
-
-   ```bash
-   kubectl get job dkubex-installer -n dkubex
-   kubectl logs -f job/dkubex-installer -n dkubex
-   ```
-
-2. Check that every pod in the `dkubex` namespace is `Running` or `Completed`. These include the
-   `dkubex` pod (containers `chart-server`, `backend`, `ui` and `controller`), PostgreSQL (unless you use
-   an external one), Traefik, MinIO and Redis:
-
-   ```bash
-   kubectl get pods -n dkubex
-   ```
-
-3. Check the first application. SecureLLM is installed automatically on a new platform, into the
-   `dkubex-apps` namespace:
-
-   ```bash
-   kubectl get applications -n dkubex-apps
-   ```
-
-## Open DKubeX and sign in
-
-1. Find the platform URL:
-   - If you set `domain`, it is `https://<domain>`.
-   - Otherwise it is `https://<address>`, where `<address>` is the external address of the Traefik
-     service:
-
-     ```bash
-     kubectl get svc traefik -n dkubex
-     ```
-
-   HTTPS is on by default. Without your own certificate (`tls.cert` and `tls.key`), DKubeX uses a
-   self-signed certificate, so the browser shows a certificate warning the first time.
-2. Sign in with the admin email and password from [Admin account](#admin-account). If you did not set
-   `admin.password`, read the generated password from the `dkubex-secret` secret:
-
-   ```bash
-   kubectl get secret dkubex-secret -n dkubex -o jsonpath='{.data.first-superuser-password}' | base64 -d
-   ```
-
-No license is needed to install. Each application starts a 30-day trial; see
-[Licensing](../platform-guide/licensing.md) to add licenses.
-
 ## External PostgreSQL
 
 When `postgres.enabled=false`, DKubeX connects to the server in `db_url`. On every install and
 upgrade, the installer creates the `dkubex` and `prefect` databases on that server if they are missing.
-Applications installed on DKubeX, whether from the **App Store** or from **Browse Catalog** in the admin
-console, also get their own databases provisioned on the same server.
+Applications you install from the **App Store** also get their own databases provisioned on the same
+server.
 
 The user in `db_url` therefore needs **privileges to create databases**. Use a superuser or a user
 with `CREATEDB`:
