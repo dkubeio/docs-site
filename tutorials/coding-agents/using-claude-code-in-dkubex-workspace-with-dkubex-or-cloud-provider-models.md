@@ -3,7 +3,7 @@
 DKubeX Workspace ships with several coding agents built in — including **Claude Code**, **Codex**,
 **Copilot CLI**, **OpenCode**, **Antigravity**, and **Mistral Vibe**. Instead of a Claude
 subscription, you can run Claude Code in DKubeX Workspace against a model served through the
-platform — either a model you **deployed in Model Studio** or a model from a **cloud provider
+platform — either a model you **deployed in ModelStudio** or a model from a **cloud provider
 (such as Anthropic, OpenAI, or OpenRouter) added in SecureLLM**. The workspace injects your chosen
 model into the coding agent, and all requests are governed and billed through the platform.
 
@@ -30,9 +30,9 @@ drive a coding agent with a locally-deployed model, use a different agent such a
 
 ## Prerequisites
 
-- DKubeX Workspace, installed from the app catalog.
+- DKubeX Workspace, installed from the **App Store**.
 - At least one model available to your DKubeX user key, provided by either:
-  - a model **deployed in Model Studio**, or
+  - a model **deployed in ModelStudio**, or
   - a **cloud provider added in SecureLLM** (such as Anthropic, OpenAI, or OpenRouter), which
     exposes that provider's models to you.
 
@@ -40,9 +40,9 @@ drive a coding agent with a locally-deployed model, use a different agent such a
 
 Choose one of the following so a model shows up under your key:
 
-- **Deploy a model in Model Studio** — deploy a coding-capable model and wait until it reaches the
+- **Deploy a model in ModelStudio** — deploy a coding-capable model and wait until it reaches the
   running state. See
-  [Deploying models on DKubeX using Model Studio](../end-to-end-workflows/model-management/index.md).
+  [Deploying models on DKubeX using ModelStudio](../end-to-end-workflows/model-management/index.md).
 - **Add a cloud provider in SecureLLM** — add a provider such as Anthropic, OpenAI, or OpenRouter so
   its models become available to your key. See
   [Configuring and enabling AI providers in SecureLLM](../end-to-end-workflows/llm-governing/configuring-and-enabling-ai-providers-in-securellm.md).
@@ -110,7 +110,7 @@ Code returns to your original Claude subscription login. See
 
 ## Troubleshooting
 
-- No models in the dropdown: confirm a model is deployed and running in Model Studio, or that a
+- No models in the dropdown: confirm a model is deployed and running in ModelStudio, or that a
   cloud provider is added in SecureLLM, so a model is available to your key.
 - `/model` still shows the old model: make sure you clicked **Apply and restart** and waited for the
   workspace pod to finish restarting.

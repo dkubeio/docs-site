@@ -1,6 +1,6 @@
 # Testing a Model in the Playground
 
-The **Playground** is Model Studio's inference workbench for testing your deployed models — chat,
+The **Playground** is ModelStudio's inference workbench for testing your deployed models — chat,
 document-grounded chat (RAG), embeddings, reranking, and text-to-speech.
 
 ## Prerequisites
@@ -11,7 +11,7 @@ document-grounded chat (RAG), embeddings, reranking, and text-to-speech.
 
 ## Select a model
 
-1. In Model Studio, open **Playground**.
+1. In ModelStudio, open **Playground**.
 2. In the left panel, pick a model from the **Model** dropdown (use the **Type** filter to narrow it).
    The dropdown only lists models that support the current tab's capability.
 3. Optionally set the parameters: **System Prompt**, **Temperature**, **Max Tokens**, **Context

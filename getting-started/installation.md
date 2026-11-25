@@ -170,8 +170,8 @@ helm install -n dkubex --create-namespace dkubex-installer dkubeio/dkubex-instal
 
 When `postgres.enabled=false`, DKubeX connects to the server in `db_url`. On every install and
 upgrade, the installer creates the `dkubex` and `prefect` databases on that server if they are missing.
-Applications you install from the **App Store** also get their own databases provisioned on the same
-server.
+Applications installed on DKubeX, whether from the **App Store** or from **Browse Catalog** in the admin
+console, also get their own databases provisioned on the same server.
 
 The user in `db_url` therefore needs **privileges to create databases**. Use a superuser or a user
 with `CREATEDB`:

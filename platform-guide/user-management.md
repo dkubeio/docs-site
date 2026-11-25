@@ -49,7 +49,7 @@ Give a user a role in the platform tools, workspace apps, and coding agents:
 3. Save.
 
 :::{note}
-To grant access to an **installed catalog application** (Model Studio, SecureLLM, RAGFlow, and so on),
+To grant access to an **installed catalog application** (ModelStudio, SecureLLM, RAGFlow, and so on),
 assign the user from the application instead — see
 [Application Management → Manage users and roles](application-management.md#manage-users-and-roles-for-an-application).
 :::

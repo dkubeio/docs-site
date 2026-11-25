@@ -1,7 +1,7 @@
 # Deploying a Model on Multiple GPUs on the Same Host
 
 A large model that does not fit on a single GPU can be deployed across several GPUs on one node in
-Model Studio. This takes **two settings**, and you set **both**:
+ModelStudio. This takes **two settings**, and you set **both**:
 
 1. A **resource profile** that requests **N GPUs** — this places N GPUs on a single node for the
    deployment.
@@ -11,12 +11,12 @@ Keep **replicas at 1** — replicas are separate copies of the model, which is n
 
 ## Prerequisites
 
-- Access to **Model Studio**.
+- Access to **ModelStudio**.
 - A node with **N GPUs** available.
 
 ## Step 1 — Create a resource profile with N GPUs
 
-1. In Model Studio, open **Resource Profiles** → **New Profile**.
+1. In ModelStudio, open **Resource Profiles** → **New Profile**.
 2. Set:
    | Field | Set to |
    |---|---|

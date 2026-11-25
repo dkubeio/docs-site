@@ -224,12 +224,15 @@ access tokens → Tokens (classic)**).
    | **This repo's charts use private images** | Check this if your container images are private. |
 3. Click **Add & Verify**.
 
-Your application now appears in the App Store under **Browse Catalog**, tagged with this repository.
+Your application now appears in the admin console under **Applications → Browse Catalog**, tagged with
+this repository, and in every user's **App Store**.
 
 ### Step 7 — Install the application
 
-1. In the admin console → **Applications → Browse Catalog**, find your app and click **Install**
-   (installing is an administrator action). DKubeX handles the port and adds the app's tile.
+1. In the admin console → **Applications → Browse Catalog**, find your app and click **Install**.
+   DKubeX handles the port and adds the app's tile. Installing from Browse Catalog is the admin route,
+   and only an administrator can edit the app's values at install time. Any user can also install the
+   app from the **App Store**; it is then assigned to that user.
 2. Track the install on the **Applications** tab until it is **Ready**.
 
 ### Step 8 — Give users access
@@ -237,7 +240,7 @@ Your application now appears in the App Store under **Browse Catalog**, tagged w
 1. On the **Applications** tab, open **Actions** on the installed app → **Manage Users & Roles**.
 2. Assign users and choose each user's role (**User** or **Admin**).
 
-The app is listed in the **App Store** (Browse Catalog) for everyone regardless of these assignments —
+The app is listed in the **App Store** for everyone regardless of these assignments —
 the App Store shows every available app. Assigning users and roles is what makes the app appear on
 those users' **Apps** page in their workspace: a user sees it there only after an admin grants them
 access.
