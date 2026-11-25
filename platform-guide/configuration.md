@@ -1,8 +1,7 @@
 # Configuration
 
 Enable and configure platform components from the admin console under **Config**. The page has six
-tabs — **Auth & Certs, Storage, Services, Telemetry, Workspace, Credentials** — a **Apply** button, and a
-**Recent Deployments** history. The **Credentials** tab holds the **Helm Repository Token** (used to pull
+tabs — **Auth & Certs, Storage, Services, Telemetry, Workspace, Credentials** — and an **Apply** button. The **Credentials** tab holds the **Helm Repository Token** (used to pull
 application charts from the built-in dkubeio repository) and the **Container Registry Token** (used by
 the cluster to pull platform and application images).
 
@@ -68,7 +67,10 @@ The remaining tabs enable and configure the platform's built-in components:
 
 Change the settings on a tab and click **Apply**.
 
-## Review configuration history
+## Follow a deployment
 
-The **Recent Deployments** section lists past configuration applies with their timestamp, status, and
-what changed (for example, *Enabled: nfs, clickstack, otel, minio, redis, tls*).
+Clicking **Apply** (shown as **Save & Apply** while a tab has unsaved changes) opens a dialog that follows
+the deployment. It shows **Applying configuration** ("Processing… This can take a few minutes. Closing
+this window does not stop the deployment."), then **Deployment completed** ("The configuration was
+applied successfully.") or **Deployment failed** ("The deployment did not complete. See the logs
+below.").
