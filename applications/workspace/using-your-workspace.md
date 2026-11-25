@@ -4,14 +4,15 @@ Once your workspace is **Running**, its apps appear in **Apps**, and you can wor
 
 ## Using Apps
 
-Your workspace ships twelve apps. Each one appears as its own tile in **Apps** while the workspace is running.
+Your workspace ships sixteen apps. Each one appears as its own tile in **Apps** while the workspace is running.
 
-![The Apps page, where the workspace's twelve apps appear as tiles alongside the other applications you have access to](./media/workspace-apps.png)
+![The Apps page, where the workspace's sixteen apps appear as tiles alongside the other applications you have access to](./media/workspace-apps.png)
 
 | App | What it is |
 |---|---|
 | **JupyterLab** | Notebooks and interactive Python |
 | **VS Code** | code-server IDE in the browser |
+| **RStudio** | R IDE for statistics and data science |
 | **Terminal** | Interactive bash shell |
 | **FileBrowser** | Browse and manage your files |
 | **Claude Code** | Anthropic's agentic coding CLI |
@@ -22,7 +23,9 @@ Your workspace ships twelve apps. Each one appears as its own tile in **Apps** w
 | **Mistral Vibe** | Mistral's coding agent CLI |
 | **OpenClaw** | Multi-model agent gateway and web UI |
 | **Hermes** | Nous Research's agent |
+| **Unsloth Studio** | Fast LLM fine-tuning that uses less memory |
 | **Pi** | Minimal, extensible coding agent harness |
+| **TestForge** | Analyzes code quality and suggests AI-generated fixes that are checked by running tests |
 
 The nine coding agents have their own page — see [Working with AI agents](./working-with-agents.md).
 

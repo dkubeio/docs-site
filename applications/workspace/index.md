@@ -6,7 +6,7 @@ DKubeX Workspace is your personal, on-demand development environment in the clus
 
 - **One-click install** — Install your workspace from the App Store; no configuration wizard and nothing to size up front.
 - **Single sign-on** — Log in with your organization's existing credentials; no separate account or password.
-- **Twelve apps, ready to use** — JupyterLab, VS Code, Terminal and FileBrowser, plus eight AI coding agents.
+- **Sixteen apps, ready to use** — JupyterLab, VS Code, RStudio, Terminal, FileBrowser, Unsloth Studio and TestForge, plus nine AI coding agents.
 - **Two ways to configure models** — Point every coding agent at the platform's own models by choosing a default model in workspace settings, or leave the default model set to none and sign in to the agents with your own subscriptions.
 - **Apps start on demand** — An app starts the first time you open it, so an idle workspace uses almost nothing.
 - **Persistent home directory** — Everything in your home directory survives restarts, and survives uninstalling and reinstalling.

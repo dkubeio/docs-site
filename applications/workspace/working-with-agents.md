@@ -16,7 +16,7 @@ Your workspace ships nine AI coding agents, and you choose how they get their mo
 | **OpenClaw** | Multi-model agent gateway and web UI |
 | **Antigravity** | Google's terminal coding agent (`agy`) — see the exception below |
 
-Eight of them run as terminal apps: open the tile in **Apps** and you land in the agent's CLI, ready for a prompt. **OpenClaw** is a web UI rather than a terminal.
+Seven of them run as terminal apps: open the tile in **Apps** and you land in the agent's CLI, ready for a prompt. **OpenClaw** and **Hermes** are web UIs rather than terminals.
 
 You can also run the agents from a shell — open the **Terminal** app and run `claude`, `opencode`, `codex`, `copilot`, `vibe`, `hermes` or `pi` directly. They read the same configuration.
 
