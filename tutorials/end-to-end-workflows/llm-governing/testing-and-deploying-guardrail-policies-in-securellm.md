@@ -34,7 +34,7 @@ Before you begin, ensure:
 ### Step 1: Open Guardrails
 
 1. Log into SecureLLM.
-2. From the top menu, open **Governance**, then **Guardrails**.
+2. From the sidebar, select **Guardrails**.
 3. Review available guardrail types:
    - Content Filter  
    - Prompt Injection  
@@ -101,7 +101,7 @@ Once validated:
 
 ### Step 6: Monitor Guardrail Activity
 
-1. From the top menu, open **Logs**, then **Guardrail Logs**.
+1. Open **Guardrail Logs**.
 2. Filter triggered events.
 3. Review:
    - Flagged requests  

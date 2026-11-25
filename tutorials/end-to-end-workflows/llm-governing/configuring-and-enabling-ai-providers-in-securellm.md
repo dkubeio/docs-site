@@ -40,7 +40,7 @@ Examples of provider types:
 ### Step 1: Open Providers
 
 1. Log into SecureLLM.
-2. From the top menu, open **Gateway**, then **Providers**.
+2. From the sidebar, select **Providers**.
 3. Review configured providers or add a new one.
 
 ---
@@ -103,7 +103,7 @@ Once enabled, SecureLLM can route requests to this provider.
 
 ### Step 5: Verify Model Availability
 
-1. From the top menu, open **Gateway**, then **Models**.
+1. Open **Models**.
 2. Search or filter by the provider.
 3. Verify configured models appear in the list.
 

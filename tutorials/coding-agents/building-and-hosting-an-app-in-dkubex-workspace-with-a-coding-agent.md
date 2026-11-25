@@ -6,7 +6,7 @@ takes one app end to end: first the agent **builds and hosts** it in your worksp
 test, then you **publish** it as a first-class DKubeX application that any user can install from the
 App Store.
 
-Both halves use the same **dkubex-app skill** that ships with every coding agent in the workspace, so
+Both halves use the same **dkubex-app skill** that ships with every coding agent in the workspace except Antigravity, so
 the flow is the same whichever agent you prefer. The worked example is a **document data-extraction
 app**, but the same flow builds and publishes any app.
 

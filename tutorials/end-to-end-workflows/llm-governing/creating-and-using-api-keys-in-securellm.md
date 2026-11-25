@@ -41,7 +41,7 @@ Examples:
 ### Step 1: Open API Keys
 
 1. Log into SecureLLM.
-2. From the top menu, open **Gateway**, then **API Keys**.
+2. From the sidebar, select **API Keys**.
 3. Review existing keys or create a new one.
 
 ---
@@ -104,7 +104,7 @@ Verify:
 
 ### Step 5: Monitor Key Activity
 
-1. From the top menu, open **Logs**, then **Request Logs**.
+1. Open **Usage**.
 2. Type the API key name in **Search**. (There is no separate key filter.)
 3. Review:
 
