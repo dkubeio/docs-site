@@ -57,6 +57,17 @@ Clicking **Deploy** on a model card opens the deploy modal.
 
 Resource profiles are cluster-defined presets. The list is fetched dynamically from `/api/resource-profiles` based on the nodes available in your cluster. Contact your cluster admin to add custom profiles.
 
+#### Share a GPU between models
+
+You can deploy more than one model on a single GPU. To do this, set **GPU Memory (GiB)** in the **Resources** part of the deploy form.
+
+| GPU Memory (GiB) | What happens |
+|------------------|--------------|
+| `0` | The model takes the whole GPU, so only this one model can be deployed on it. |
+| A value, such as `15` | The model takes 15 GiB of the GPU's total memory. The rest of the GPU's memory is left for other models on the same GPU. |
+
+The form's hint reads: *"Leave 0 for standard GPU allocation. Set a value to enable HAMi memory-based GPU sharing."*
+
 ---
 
 ### LLM Deployment Lifecycle
