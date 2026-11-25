@@ -17,7 +17,7 @@ Deploy a language model on a GPU using ModelStudio. GPU deployments use the **vL
    |---|---|
    | **Deployment Name** | Optional. |
    | **Inference Engine** | **vLLM** (Safetensors · GPU required). |
-   | **Resource profile** | Check **Use GPU** (shown only when the cluster has GPUs), then pick a GPU profile (for example `nvidia-gpu-l4`, `nvidia-gpu-a100-80gb`). Selecting vLLM auto-selects the first GPU profile. |
+   | **Resource profile** | Check **Use GPU**, then pick a GPU profile (for example `nvidia-gpu-l4`, `nvidia-gpu-a100-80gb`). Selecting vLLM auto-selects the first GPU profile. |
    | **Replicas** | Set **Min** and **Max**. Set **Min = 0** to enable scale-to-zero (the model scales down when idle and scales back up on the next request). |
 3. Click **Deploy**.
 4. Open **LLM Deployments** and wait for **Running** (or **Scaled-to-zero** if Min replicas is 0 and it is
