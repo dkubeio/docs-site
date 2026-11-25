@@ -1,8 +1,8 @@
 # Configuration
 
-Enable and configure platform components from the admin console under **Config**. The page has five
-tabs — **Auth & Certs, Storage, Services, Telemetry, Workspace** — a **Apply** button, and a **Recent
-Deployments** history. A sixth tab, **Credentials**, holds the **Helm Repository Token** (used to pull
+Enable and configure platform components from the admin console under **Config**. The page has six
+tabs — **Auth & Certs, Storage, Services, Telemetry, Workspace, Credentials** — a **Apply** button, and a
+**Recent Deployments** history. The **Credentials** tab holds the **Helm Repository Token** (used to pull
 application charts from the built-in dkubeio repository) and the **Container Registry Token** (used by
 the cluster to pull platform and application images).
 
@@ -61,7 +61,12 @@ The change applies in place, with no reinstall.
    images; the card shows the **Registry** and **Username**), paste the new token in **New token**. It
    updates the image pull secret, and managed namespaces pick it up from there. Pods stuck pulling images
    retry with the new token.
-4. Leave a **New token** field blank to keep that token, then click **Apply**.
+4. Click **Apply** to save the changes.
+
+```{note}
+You can rotate one token or both: leave the **New token** field empty for any token you do not want to
+update. Then click **Apply** to save the changes.
+```
 
 ## Configure other components
 
