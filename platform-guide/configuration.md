@@ -16,8 +16,8 @@ a time.
 
 1. Open **Config** → **Auth & Certs**.
 2. Turn on **OAuth2 Proxy**.
-3. Enter the provider details — provider (**GitHub** or **SSO**/OIDC), client ID, client secret,
-   organization, and the OAuth redirect URL.
+3. Enter the provider details — **Auth Provider** (**GitHub** or **OIDC**), **Client ID**, **Client
+   Secret**, **GitHub Organization** (GitHub only), and **OAuth Redirect URL**.
 4. Click **Apply**.
 
 While OAuth is enabled, new users are provisioned automatically on first sign-in and admins do not
