@@ -47,6 +47,22 @@ a password, because the login page always offers **Sign in with email and passwo
 
 The ingress serves over HTTPS once the certificate is provisioned.
 
+## Rotate credentials
+
+The **Credentials** tab rotates the tokens DKubeX uses to pull application charts and container images.
+The change applies in place, with no reinstall.
+
+1. Open **Config** → **Credentials**. Each token shows **Configured** or **Not set**.
+2. To rotate the **Helm Repository Token** (used to pull application charts from the built-in dkubeio
+   repository; the card shows the **Repository URL**), paste the new token in **New token**. The token is
+   verified against the repository before anything is saved. Applying it restarts the backend, which may
+   be briefly unavailable.
+3. To rotate the **Container Registry Token** (used by the cluster to pull platform and application
+   images; the card shows the **Registry** and **Username**), paste the new token in **New token**. It
+   updates the image pull secret, and managed namespaces pick it up from there. Pods stuck pulling images
+   retry with the new token.
+4. Leave a **New token** field blank to keep that token, then click **Apply**.
+
 ## Configure other components
 
 The remaining tabs enable and configure the platform's built-in components:
@@ -57,6 +73,7 @@ The remaining tabs enable and configure the platform's built-in components:
 | **Services** | Platform services. |
 | **Telemetry** | Observability components. |
 | **Workspace** | Developer-workspace defaults. |
+| **Credentials** | The Helm repository and container registry tokens (see [Rotate credentials](#rotate-credentials)). |
 
 Change the settings on a tab and click **Apply**.
 
