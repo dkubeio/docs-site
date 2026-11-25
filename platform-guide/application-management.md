@@ -34,6 +34,24 @@ Search installed applications by name with the search box.
 If an install fails, the application appears under the **Failed** filter, where you can review the
 reason and retry.
 
+### If an install fails
+
+1. Open the **App Store** and click **View logs** on the failed application (shown to administrators
+   only). It lists the failure condition and the pods' logs.
+2. Fix the cause. The most common conditions are:
+
+   | Condition | What it means | What to do |
+   |---|---|---|
+   | `ProvisioningFailed` | DKubeX could not create the app's database, Redis or image pull secret. | With an external PostgreSQL, check that the user in `db_url` can create databases (see [Installation](../getting-started/installation.md#external-postgresql)). |
+   | `HelmInstallFailed` | The app's Helm chart failed to install; the Helm error is shown. | For an image pull error, check the tokens in **Config → Credentials**. For a values error, correct the values and install again. |
+   | `RoutingSetupFailed` or `RouteMissing` | The app was installed but its route could not be set up. | Install again. |
+
+3. Click **Install** on the application again. A new install is refused while the previous one is still
+   being removed; wait for it to finish.
+
+From the command line, `kubectl describe app <application-name> -n dkubex-apps` shows the same
+conditions.
+
 (manage-users-and-roles-for-an-application)=
 ## Manage users and roles for an application
 
