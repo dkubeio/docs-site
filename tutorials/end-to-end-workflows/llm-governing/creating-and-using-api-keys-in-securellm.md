@@ -49,8 +49,7 @@ Examples:
 ### Step 2: Create an API Key
 
 1. Find the **Create New Key** card.
-2. Enter a descriptive name in **Key Name**. Names must be unique. Administrators can also limit the key
-   with **Allowed Providers** and **Allowed Models**.
+2. Enter a descriptive name in **Key Name**.
 
 Example:
 
@@ -59,8 +58,7 @@ my-vscode-plugin
 ```
 
 3. Click **+ Create Key**.
-4. Copy the generated API key immediately: the **New Key Created** card has a **Copy** button. Keys start
-   with `sk-`.
+4. Copy the generated API key immediately.
 
 :::{note}
 The key is shown only once. Store it securely.
@@ -107,8 +105,7 @@ Verify:
 ### Step 5: Monitor Key Activity
 
 1. From the top menu, open **Logs**, then **Request Logs**.
-2. Type the API key name in **Search**. (There is no separate key filter; Search matches the model, key
-   name, user and prompt.) Click a row to see the request's tokens, cost and latency.
+2. Type the API key name in **Search**. (There is no separate key filter.)
 3. Review:
 
 - Request volume  
@@ -128,8 +125,7 @@ If a key is no longer needed or may be compromised:
 1. Return to **API Keys**.
 2. Locate the key.
 3. Click **Revoke**.
-4. Confirm the action with **Yes, Revoke**. You can revoke your own keys; only an administrator can
-   revoke the key named **Default**.
+4. Confirm the action with **Yes, Revoke**.
 
 Revoked keys can no longer be used for requests.
 
