@@ -62,7 +62,9 @@ my-vscode-plugin
 4. Copy the generated API key immediately: the **New Key Created** card has a **Copy** button. Keys start
    with `sk-`.
 
-> Note: The key is shown only once. Store it securely.
+:::{note}
+The key is shown only once. Store it securely.
+:::
 
 ---
 
