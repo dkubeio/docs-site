@@ -7,7 +7,8 @@ myst:
 
 # Installing DKubeX
 
-This guide installs DKubeX using the Helm chart.
+This guide installs DKubeX using the Helm chart. Every chart value is listed in the
+[Helm Values Reference](helm-values.md).
 
 ## Prerequisites
 
