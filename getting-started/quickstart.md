@@ -12,11 +12,8 @@ By the end you will have logged in, deployed a language model onto the cluster, 
    `https://192.168.2.45/`.
    For how to find the URL and the first admin password, see
    [Open DKubeX and sign in](installation.md#open-dkubex-and-sign-in).
-2. On the login page, sign in with your credentials:
-   - If your organization uses OAuth, click the provider button: **Sign in with Github** for GitHub, or
-     **Sign in with SSO** for an OIDC provider. Your account is created the first time you sign in.
-   - To use an email and password instead, enter them and click **Log In**. When OAuth is on, first
-     click **Sign in with email and password** below the provider button.
+2. On the login page, sign in with your credentials — either **email and password**, or **Sign in with
+   Github** (**Sign in with SSO** for an OIDC provider) if your organization uses OAuth.
 3. You land on your dashboard. The **Work** section lists the applications assigned to you.
 
 You are now authenticated across every DKubeX application through single sign-on — you will not be

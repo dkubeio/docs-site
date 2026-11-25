@@ -17,17 +17,12 @@ a time.
 
 1. Open **Config** → **Auth & Certs**.
 2. Turn on **OAuth2 Proxy**.
-3. Enter the provider details: the **Auth Provider** (**GitHub** or **OIDC**), **Client ID**, **Client
-   Secret**, **GitHub Organization**, and **OAuth Redirect URL**
-   (`https://<your-platform>/oauth2/callback`). **GitHub Organization** applies to GitHub only: when
-   set, only members of that organization can sign in.
+3. Enter the provider details — **Auth Provider** (**GitHub** or **OIDC**), **Client ID**, **Client
+   Secret**, **GitHub Organization** (GitHub only), and **OAuth Redirect URL**.
 4. Click **Apply**.
 
 While OAuth is enabled, new users are provisioned automatically on first sign-in and admins do not
-create accounts by hand (see [User Management](user-management.md)). The login page shows the provider
-button, **Sign in with Github** for GitHub or **Sign in with SSO** for OIDC, and below it **Sign in with
-email and password** for accounts that have a DKubeX password. With OAuth2 Proxy off, the login page
-offers email and password only.
+create accounts by hand (see [User Management](user-management.md)).
 
 ### Recover from a bad authentication change
 

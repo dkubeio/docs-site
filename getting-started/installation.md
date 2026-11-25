@@ -206,8 +206,7 @@ several minutes.
 
    HTTPS is on by default. Without your own certificate (`tls.cert` and `tls.key`), DKubeX uses a
    self-signed certificate, so the browser shows a certificate warning the first time.
-2. Sign in with the admin email and password from [Admin account](#admin-account). If the login page
-   shows an OAuth provider button, click **Sign in with email and password** first. If you did not set
+2. Sign in with the admin email and password from [Admin account](#admin-account). If you did not set
    `admin.password`, read the generated password from the `dkubex-secret` secret:
 
    ```bash
