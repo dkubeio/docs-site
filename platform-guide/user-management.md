@@ -9,6 +9,13 @@ DKubeX supports two sign-in modes, which changes how accounts are created:
 - **OAuth (GitHub / SSO)** — accounts are created automatically the first time a user signs in. In this
   mode **Add User** is disabled ("Users are managed via OAuth provider").
 
+In OAuth mode, a new account is matched to the user by email and created without admin access; promote
+it with **Edit User** if needed. Accounts that already have a password, such as the first administrator,
+can still sign in with **Sign in with email and password** on the login page.
+
+For programmatic access, each user has a personal API key under **Settings → API Key**. Send it in the
+`X-API-Key` header to authenticate API requests as that user.
+
 ## Add a user
 
 *(Local password mode.)*
