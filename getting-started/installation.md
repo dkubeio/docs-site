@@ -565,3 +565,57 @@ To find the `gpumem` value for an instance type, start one node and read what HA
 ```bash
 kubectl get node <node> -o jsonpath='{.status.capacity.nvidia\.com/gpumem}'
 ```
+
+## Uninstall DKubeX
+
+Uninstall the platform with:
+
+```bash
+helm uninstall dkubex-installer -n dkubex --timeout 20m
+```
+
+Always pass `--timeout 20m`. The uninstall job first waits for the DKubeX controller to remove every
+installed application, then removes the platform. Together this takes longer than Helm's default
+timeout of 5 minutes. If Helm hits its timeout, it reports a failure and keeps the release, while the
+job goes on removing the platform.
+
+The uninstall job, in order:
+
+1. Deletes every installed application and waits (up to 300 seconds by default) for the controller to
+   uninstall each one.
+2. Stops the `dkubex` deployment and deletes the user namespaces DKubeX created, together with each
+   user's workspace and its storage.
+3. Removes the platform components (`helmfile destroy`) and the in-cluster PostgreSQL release.
+4. Deletes the `Application` CRD.
+5. If the previous steps succeeded, removes the installer's own resources, including its ConfigMap,
+   the `dkubex-registry-secret` secret and the ClickStack volumes.
+
+The job can be run again safely. If Helm timed out, or the removal failed partway, run the same
+`helm uninstall` command again.
+
+### What uninstall keeps
+
+Some data is kept on purpose, so that a new install in the same cluster reuses it instead of starting
+empty:
+
+- The PostgreSQL volume (`data-postgresql-0`) and the MinIO volume, in the `dkubex` namespace.
+- The `dkubex-secret` secret, which holds the platform's generated credentials. A new install reuses
+  it, so data encrypted with its keys stays readable.
+
+Users' home data depends on the storage class:
+
+- With NFS enabled (`nfs.enabled=true`), the `nfs` storage class keeps the volumes (`reclaimPolicy:
+  Retain`). The NFS share still holds every user's home directory, and the released volumes are left
+  to clean up by hand.
+- With the default `nfs.enabled=false`, user storage uses the cluster's default storage class (for
+  example `local-path` on k3s, which deletes the volume with its claim).
+
+A namespace that existed before DKubeX used it is not deleted; only the resources DKubeX created in it
+are removed.
+
+```{note}
+The drain wait and the job's time limit are set by `uninstall.drainTimeoutSeconds` (default `300`)
+and `uninstall.jobDeadlineSeconds` (default `1200`). They are read when the installer is installed or
+upgraded, not when you uninstall. Keep `jobDeadlineSeconds` at or below the `--timeout` you pass to
+`helm uninstall`.
+```

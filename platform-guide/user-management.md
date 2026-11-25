@@ -60,3 +60,44 @@ assign the user from the application instead — see
 2. Confirm.
 
 You cannot delete your own account, so the option does not appear on your own row.
+
+## Roles and permissions
+
+DKubeX has two kinds of role:
+
+- A **platform role**: every account is either a superuser (administrator) or a regular user. The
+  **Is superuser?** checkbox sets it.
+- An **application role**: for each application a user is assigned to, the role is **User** or
+  **Admin**.
+
+### Platform roles
+
+| Action | Superuser | Regular user |
+|---|---|---|
+| Open the admin console (**Dashboard, Applications, Workspaces, Users, Licenses, Config, Platform**) | Yes | No |
+| Install an application from the App Store | Yes | Yes. When the install is ready, the application is assigned to the user who installed it, with the **Admin** role. |
+| Edit an application's Helm values when installing it | Yes | No |
+| Cancel an install that is still in progress | Yes, any install | Only an install they started |
+| Upgrade, reconfigure (**Edit Values & Update**) or uninstall an installed application | Yes | No |
+| View an application's install logs | Yes | No |
+| Assign users to an application and set their roles | Yes | No |
+| Request access to an application | Not needed (superusers can open every application) | Yes (see [Access Requests](access-requests.md)) |
+| Approve or dismiss access requests | Yes | No |
+| Add, edit and delete users | Yes | No |
+| Upload, view and delete licenses | Yes | No |
+| Change the platform configuration and credentials (**Config**) | Yes | No |
+| Upgrade the platform (**Platform**) | Yes | No |
+| Manage Helm repositories | Yes | No |
+| Manage all users' workspaces | Yes | No |
+| Install or remove their own workspace | Yes | Yes |
+| Open a workspace | Any user's workspace | Only their own |
+
+### Application roles
+
+- A user can open an application only when they are assigned to it. Without an assignment, DKubeX
+  denies access, and the user can request it (see [Access Requests](access-requests.md)).
+- DKubeX passes the user's application role to the application in the `X-Auth-Request-Role` header,
+  as `user` or `admin`. If no role is set, the value is `user`.
+- Superusers can open every application and are always sent as `admin`.
+- DKubeX does not decide what **Admin** allows inside an application. Each application uses the role
+  in its own way.

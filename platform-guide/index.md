@@ -10,7 +10,7 @@ Platform**.
 ## In this section
 
 - **[Architecture & Specifications](architecture-and-specifications.md)** — subsystems and the hardware/software requirements.
-- **[User Management](user-management.md)** — add, edit, assign roles to, and remove users.
+- **[User Management](user-management.md)** — add, edit, assign roles to, and remove users, and what each role can do.
 - **[Access Requests](access-requests.md)** — approve or dismiss users' requests for application access.
 - **[Application Management](application-management.md)** — install, upgrade, and uninstall applications.
 - **[Configuration](configuration.md)** — authentication, TLS, storage, and platform components.
