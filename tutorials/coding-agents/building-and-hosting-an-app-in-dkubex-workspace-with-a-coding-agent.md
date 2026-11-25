@@ -6,7 +6,7 @@ takes one app end to end: first the agent **builds and hosts** it in your worksp
 test, then you **publish** it as a first-class DKubeX application that any user can install from the
 App Store.
 
-Both halves use the same **dkubex-app skill** that ships with every coding agent in the workspace, so
+Both halves use the same **dkubex-app skill** that ships with every coding agent in the workspace except Antigravity, so
 the flow is the same whichever agent you prefer. The worked example is a **document data-extraction
 app**, but the same flow builds and publishes any app.
 
@@ -233,9 +233,7 @@ this repository, and in every user's **App Store**.
 ### Step 7 — Install the application
 
 1. In the admin console → **Applications → Browse Catalog**, find your app and click **Install**.
-   DKubeX handles the port and adds the app's tile. Installing from Browse Catalog is the admin route,
-   and only an administrator can edit the app's values at install time. Any user can also install the
-   app from the **App Store**; it is then assigned to that user.
+   DKubeX handles the port and adds the app's tile.
 2. Track the install on the **Applications** tab until it is **Ready**.
 
 ### Step 8 — Give users access

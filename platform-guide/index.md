@@ -29,22 +29,6 @@ Platform**.
   nfs, otel, prefect, redis, tls) shown as Enabled or Disabled.
 - **App Role Distribution** — admin/user counts per application.
 
-The dashboard also has **Resource Usage** charts for CPU, memory and GPU.
-
-### If the dashboard shows failed pods
-
-**Pods Failed** counts pods in the `Failed` phase across every namespace, including pods of finished
-jobs that ended with an error and evicted pods. To see which pods they are:
-
-```bash
-kubectl get pods -A --field-selector=status.phase=Failed
-```
-
-Failed pods of a finished job and evicted pods are often harmless and can be deleted. For an
-application's pods, use **View logs** on the application in the App Store (see
-[Application Management](application-management.md)). A node that is not ready points to the cluster
-rather than DKubeX.
-
 ```{toctree}
 :hidden:
 
