@@ -4,6 +4,7 @@ New to DKubeX? Start here. This section takes you from an empty Kubernetes clust
 model you can chat with, and gives you a working mental model of how the platform fits together.
 
 - **[Installation](installation.md)** — install DKubeX on your cluster with Helm, and the hardware it needs.
+- **[Helm Values Reference](helm-values.md)** — every value of the installer chart, with its default.
 - **[Quickstart](quickstart.md)** — log in, deploy a model, and chat with it in a few minutes.
 - **[Platform Overview](platform-overview.md)** — what DKubeX is, how the pieces relate, and the model lifecycle it runs.
 - **[Troubleshooting](troubleshooting.md)** — every known problem in these docs, with a link to its fix.
@@ -12,6 +13,7 @@ model you can chat with, and gives you a working mental model of how the platfor
 :hidden:
 
 installation
+helm-values
 quickstart
 platform-overview
 troubleshooting

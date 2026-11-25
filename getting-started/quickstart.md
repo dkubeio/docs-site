@@ -11,7 +11,7 @@ By the end you will have logged in, deployed a language model onto the cluster, 
 1. Open your DKubeX platform URL in a web browser. The URL will be your node's IP address, for example:
    `https://192.168.2.45/`.
 2. On the login page, sign in with your credentials — either **email and password**, or **Sign in with
-   GitHub** if your organization uses OAuth.
+   Github** (**Sign in with SSO** for an OIDC provider) if your organization uses OAuth.
 3. You land on your dashboard. The **Work** section lists the applications assigned to you.
 
 You are now authenticated across every DKubeX application through single sign-on — you will not be
