@@ -31,7 +31,7 @@ Keep **replicas at 1** — replicas are separate copies of the model, which is n
 ## Step 2 — Deploy across the GPUs
 
 1. Open **LLM Catalog**, select the model → **Deploy**.
-2. On the **Deploy** tab, set **Inference Engine** to **vLLM**, turn **Use GPU** on, and select the
+2. On the **Deploy** tab, set **Inference Engine** to **vLLM**, check **Use GPU**, and select the
    profile you created. Keep **Min/Max replicas = 1**.
 3. Open the **Advanced** tab → **Additional args**.
 4. Add the following vLLM argument, setting the value to your GPU count (**N**):
@@ -40,7 +40,7 @@ Keep **replicas at 1** — replicas are separate copies of the model, which is n
    ```
    This is an internal vLLM parameter that makes the model use all N GPUs in the profile.
 5. Click **Deploy**.
-6. Open **LLM Models** and wait for **Running**.
+6. Open **LLM Deployments** and wait for **Running**.
 
 :::{note}
 The profile's GPU **count** decides how many GPUs the deployment gets (all on one node); the argument
