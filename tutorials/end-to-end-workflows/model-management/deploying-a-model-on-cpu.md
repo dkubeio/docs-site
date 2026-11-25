@@ -21,12 +21,12 @@ Deploy a language model that runs on CPU using ModelStudio's **LLM Catalog**. Th
    |---|---|
    | **Deployment Name** | Leave blank to use the model's slug, or enter your own. |
    | **Inference Engine** | **Ollama** (GGUF models, CPU-friendly). |
-   | **GGUF Repository** | The auto-detected GGUF repo (required for Ollama). |
-   | **Quantization** | A GGUF quantization — **Q4_K_M** is a good default. |
-   | **Resource profile** | Leave the **Use GPU** toggle **off** and pick a CPU profile (for example `cpu` with a count). |
+   | **GGUF Model Repo** | The auto-detected GGUF repo (required for Ollama). |
+   | **Precision** | The GGUF quantization, chosen under **GGUF Model Repo** — **Q4_K_M** is a good default. |
+   | **Resource profile** | Leave the **Use GPU** checkbox **unchecked** (it is shown only when the cluster has GPUs) and pick a CPU profile (for example `cpu` with a count). |
    | **Replicas** | Set **Min** and **Max** (start with 1 and 1). |
 5. Click **Deploy**.
-6. Open **LLM Models** and wait for the model's status to become **Running**.
+6. Open **LLM Deployments** and wait for the model's status to become **Running**.
 
 ## Next steps
 

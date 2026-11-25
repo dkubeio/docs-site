@@ -5,7 +5,7 @@ an MLflow model) on DKubeX. ML models are served through **KServe**, from the **
 Studio.
 
 :::{note}
-The **ML Registry** and **ML Models** pages appear only when KServe is enabled on the platform.
+The **ML Registry** and **ML Deployments** pages appear only when KServe is enabled on the platform.
 :::
 
 ## Prerequisites
@@ -31,16 +31,18 @@ The **ML Registry** and **ML Models** pages appear only when KServe is enabled o
    |---|---|
    | **Model Name** | Auto-filled; edit if needed. |
    | **Model Format** | `sklearn`, `xgboost`, `lightgbm`, `tensorflow`, `pytorch`, `onnx`, `mlflow`, or `huggingface`. Leave as `mlflow` to auto-detect the flavor from the model's `MLmodel` file. |
-   | **Source** | `mlflow` or `huggingface`. |
+   | **Source** | `mlflow` or `huggingface`: set by the **ML Registry** tab you deploy from; the form has no separate field for it. |
+   | **MLflow Version** *(MLflow models)* | The registered version to deploy. |
+   | **Storage URI** | Where the model is stored (`s3://...` for MLflow, `hf://author/model-name` for HuggingFace); required. |
    | **Replicas** | Min and Max. |
-   | **CPU / Memory** | Request and Limit. |
+   | **CPU / Memory** | Request and Limit (**CPU Request** and **Memory Request**, with optional limits). |
    | **GPU** *(optional)* | Check **Request GPU**, then choose the GPU type and count (only shown when the cluster has GPU nodes). |
 3. Deploy. DKubeX selects the matching KServe runtime automatically (for example `sklearn` →
    `kserve-sklearnserver`, `mlflow` → `kserve-mlserver`).
-4. Open **ML Models** and wait for the model to become **Running**. It is served as a KServe
+4. Open **ML Deployments** and wait for the model to become **Ready**. It is served as a KServe
    `InferenceService`.
 
-You can delete models you own from the **ML Models** page.
+You can delete models you own from the **ML Deployments** page.
 
 ## Related
 
