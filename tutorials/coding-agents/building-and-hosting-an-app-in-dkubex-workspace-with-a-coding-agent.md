@@ -29,12 +29,14 @@ or
 ## Prerequisites
 
 - A running DKubeX Workspace.
-- A coding agent set up in the workspace — Claude Code, Codex, OpenCode, Copilot CLI, Antigravity,
-  Mistral Vibe, or Hermes. See the two tutorials linked above.
+- A coding agent set up in the workspace that carries the dkubex-app skill — Claude Code, Codex,
+  OpenCode, Copilot CLI, Mistral Vibe, Hermes, Pi, or OpenClaw. Antigravity is also a workspace agent,
+  but it has no skills support, so it cannot use the dkubex-app skill. See the two tutorials linked above.
 
 ## How it works — the dkubex-app skill
 
-Every coding agent in the workspace carries the **dkubex-app skill** — the platform's own knowledge of
+Every coding agent in the workspace that supports skills (all of them except Antigravity) carries the
+**dkubex-app skill** — the platform's own knowledge of
 how to host on DKubeX. When you ask it to build an app, it automatically allocates a port, configures
 routing so the app is reachable at its workspace URL, and registers the finished app as its own tile
 on the **Apps** page. You never configure any of that — you describe what the app should do, and the
@@ -46,8 +48,9 @@ than of any one agent, the flow is identical whichever coding agent you open.
 ### Step 1 — Open a coding agent
 
 From the workspace launcher, open a coding agent (for example, **Claude Code**). Any of the workspace's
-coding agents work — Claude Code, Codex, OpenCode, Copilot CLI, Antigravity, Mistral Vibe, and
-Hermes — and the dkubex-app skill behaves the same across all of them.
+coding agents that carry the skill work — Claude Code, Codex, OpenCode, Copilot CLI, Mistral Vibe,
+Hermes, Pi, and OpenClaw — and the dkubex-app skill behaves the same across all of them. Antigravity has
+no skills support, so it does not get the dkubex-app skill.
 
 ### Step 2 — Describe the app you want built
 
