@@ -23,6 +23,7 @@ stored in the installer ConfigMap, not in the Helm release values. Upgrade throu
 | Value | Default | What it does |
 |---|---|---|
 | `admin.email` | `admin@local.com` | Admin email. See [Admin account](installation.md#admin-account). |
+| `admin.password` | none | Admin password. Not in the chart's values file; if you omit it, the installer generates a random one. See [Admin account](installation.md#admin-account). |
 | `domain` | `""` | DKubeX domain. |
 | `auth.enabled` | `false` | Turns auth on or off. |
 | `auth.provider` | `github` | Auth provider. |
