@@ -11,7 +11,7 @@ RAGFlow on DKubeX is a retrieval-augmented generation (RAG) engine built on deep
 - **Team & sharing** — Share knowledge bases, assistants, agents, and models with your team.
 - **Platform SSO** — Automatically signed in via DKubeX; no separate RAGFlow login.
 
-## Tutorials
+## Guides
 
 - [Getting started](./getting-started.md) — Sign in, connect the DKubeX model provider, and build your first knowledge base and chat.
 - [Using models on DKubeX](./models.md) — Add the built-in DKubeX provider and set your default models.
