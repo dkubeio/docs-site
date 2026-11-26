@@ -37,7 +37,9 @@ Apps are **started on demand**: the first time you open one, it takes a few seco
 
 Every app you open keeps running while you use others, so switching between JupyterLab, a terminal and an agent does not lose your state.
 
-> **Note:** Apps are reached over a secure, authenticated route. You never manage ports or SSH tunnels to open them.
+:::{note}
+Apps are reached over a secure, authenticated route. You never manage ports or SSH tunnels to open them.
+:::
 
 ## Workspace Files
 
@@ -82,7 +84,9 @@ You can connect to your workspace from your own terminal or from an IDE's remote
 
 Access is by SSH key only — there is no password login. Because `~/.ssh/authorized_keys` is in your home directory, your key persists across restarts.
 
-> **Note:** If **Settings** → **SSH access** says SSH is not available, make sure your workspace is **Running**, then reload the page.
+:::{note}
+If **Settings** → **SSH access** says SSH is not available, make sure your workspace is **Running**, then reload the page.
+:::
 
 ## Environment Variables
 

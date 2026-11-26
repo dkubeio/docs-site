@@ -51,7 +51,9 @@ Two things to know:
 - **None is the starting state.** A freshly installed workspace has no default model, so the agents are on their own sign-in until you choose one. You can switch between **None** and a platform model whenever you like; each change takes effect once the workspace restarts.
 - **It is all-or-nothing.** The default model applies to every agent at once; you cannot put some agents on the platform's models and others on a personal subscription.
 
-> **Note:** If your administrator changes the organization-wide default model, your workspace restarts and **your saved model choice is replaced by the new default**. This is deliberate — it is how a model that is being retired gets rolled off every workspace. Just pick your preferred model again afterwards.
+:::{note}
+If your administrator changes the organization-wide default model, your workspace restarts and **your saved model choice is replaced by the new default**. This is deliberate — it is how a model that is being retired gets rolled off every workspace. Just pick your preferred model again afterwards.
+:::
 
 ## Your Configuration Edits Are Kept
 
@@ -73,7 +75,9 @@ Coverage is not uniform:
 - **Mistral Vibe**, **OpenCode** and **Pi** do not export telemetry, though their requests still pass through the gateway.
 - **Antigravity** is not covered at all, as described above.
 
-> **Note:** Agent telemetry is set up independently of the model gateway, so it is still collected when you run on your **own subscription**. Your organization does not see your personal billing, but the agents you use in the workspace remain visible to your administrator.
+:::{note}
+Agent telemetry is set up independently of the model gateway, so it is still collected when you run on your **own subscription**. Your organization does not see your personal billing, but the agents you use in the workspace remain visible to your administrator.
+:::
 
 ## Troubleshooting
 

@@ -69,21 +69,24 @@ The default `python` and `pip` on your `PATH` install **outside** your home dire
 
 ## Connect from your local editor over SSH
 
-> **Prerequisite:** You need an SSH key pair on your own machine, and you must paste its **public** key into the workspace before you can connect — the workspace accepts keys only, and rejects every connection until yours is in place.
->
-> Check whether you already have one, and print it to copy:
->
-> ```bash
-> cat ~/.ssh/id_ed25519.pub
-> ```
->
-> If that file does not exist, create the pair first, then print it again:
->
-> ```bash
-> ssh-keygen -t ed25519 -C "you@laptop"
-> ```
->
-> Copy the whole line, starting `ssh-ed25519` and ending with your comment. That is the value you paste in step 2. Never copy `id_ed25519` (no `.pub`) — that is your private key and must stay on your machine.
+:::{admonition} Prerequisite
+:class: note
+You need an SSH key pair on your own machine, and you must paste its **public** key into the workspace before you can connect — the workspace accepts keys only, and rejects every connection until yours is in place.
+
+Check whether you already have one, and print it to copy:
+
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
+If that file does not exist, create the pair first, then print it again:
+
+```bash
+ssh-keygen -t ed25519 -C "you@laptop"
+```
+
+Copy the whole line, starting `ssh-ed25519` and ending with your comment. That is the value you paste in step 2. Never copy `id_ed25519` (no `.pub`) — that is your private key and must stay on your machine.
+:::
 
 1. Go to **Settings** → **SSH access** and note the command, host, port and username. Each field has a copy button.
 

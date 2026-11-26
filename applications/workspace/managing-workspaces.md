@@ -56,7 +56,9 @@ python -c "import pandas"    # still installed
 
 Before uninstalling, make sure anything you want to keep lives under your home directory.
 
-> **Warning:** Uninstall is the only way for you to remove a workspace, and it is also the only way to recover from a **Stopped** workspace without an administrator.
+:::{warning}
+Uninstall is the only way for you to remove a workspace, and it is also the only way to recover from a **Stopped** workspace without an administrator.
+:::
 
 ## Getting Help
 

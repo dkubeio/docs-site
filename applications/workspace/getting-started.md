@@ -19,7 +19,9 @@ Your workspace is an app in the **App Store**, and you install it yourself. Ther
 
 Provisioning usually takes a minute or two on first install — the workspace image is large and has to be pulled onto the node.
 
-> **Note:** You get **one** workspace, and it is yours alone. Its CPU, memory and GPU allocation comes from defaults your administrator configures; there is nothing to choose during install and no compute-profile picker.
+:::{note}
+You get **one** workspace, and it is yours alone. Its CPU, memory and GPU allocation comes from defaults your administrator configures; there is nothing to choose during install and no compute-profile picker.
+:::
 
 ## Opening Your First App
 
@@ -33,7 +35,9 @@ Once the workspace is **Running**, the apps inside it appear as individual tiles
 
 Each app keeps running while you switch between others, so you can move between JupyterLab, a terminal and an agent without losing your place.
 
-> **Tip:** App tiles only appear while your workspace is **Running**. If **Apps** shows no workspace apps, check your workspace status in the App Store first.
+:::{tip}
+App tiles only appear while your workspace is **Running**. If **Apps** shows no workspace apps, check your workspace status in the App Store first.
+:::
 
 ## What You Get
 

@@ -33,7 +33,9 @@ DKubeX Workspace is your personal, on-demand development environment in the clus
 | Remove your workspace | **App Store** → **Workspace** → **Uninstall** |
 | Start or stop the pod | Ask your administrator — these are admin-only actions |
 
-> **Note:** You have one workspace. There is no workspace creation wizard, no compute-profile picker, and no workspace sharing — your administrator sets the CPU, memory and GPU defaults for everyone.
+:::{note}
+You have one workspace. There is no workspace creation wizard, no compute-profile picker, and no workspace sharing — your administrator sets the CPU, memory and GPU defaults for everyone.
+:::
 
 ```{toctree}
 :hidden:
