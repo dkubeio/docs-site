@@ -8,6 +8,7 @@ model you can chat with, and gives you a working mental model of how the platfor
 - **[Quickstart](quickstart.md)** — log in, deploy a model, and chat with it in a few minutes.
 - **[Platform Overview](platform-overview.md)** — what DKubeX is, how the pieces relate, and the model lifecycle it runs.
 - **[Troubleshooting](troubleshooting.md)** — every known problem in these docs, with a link to its fix.
+- **[Glossary](glossary.md)** — terms used across these docs, with a link to the page that explains each one.
 
 ```{toctree}
 :hidden:
@@ -17,4 +18,5 @@ helm-values
 quickstart
 platform-overview
 troubleshooting
+glossary
 ```
