@@ -64,7 +64,9 @@ Click any row (when not in Removing state) to open the detail panel:
 - **Description tab** — View or edit the deployment description.
 - **API Access tab** — Shows the API Access details to call this deployment, similar to the one available in the worklow canvas in development mode. Only available when that particular deployment's status is `Deployed`. The API Access tab also has an **Input Schema** containing the possible inputs to be added to the API request to the deployment. The inputs can be added, removed or altered to test the payload or cURL request to the deployment.
 
-> **Note:** The deployment endpoint (`*.dkubex-apps.svc.cluster.local`) is accessible from within the cluster only. For external access, contact your cluster administrator.
+:::{note}
+The deployment endpoint (`*.dkubex-apps.svc.cluster.local`) is accessible from within the cluster only. For external access, contact your cluster administrator.
+:::
 
 ![Deployment detail panel — API Access tab](./media/Langflow-api-access-tab.png)
 
@@ -85,7 +87,9 @@ Saving triggers a rolling restart. The existing pod continues serving requests u
 
 Click **⋯ → Remove Deployment** and confirm the prompt. The row transitions to `Removing` and disappears once Kubernetes finishes cleanup.
 
-> Removing a deployment does **not** delete the flow from Langflow — it only stops the standalone serving pod. You can re-deploy the same flow at any time.
+:::{note}
+Removing a deployment does **not** delete the flow from Langflow — it only stops the standalone serving pod. You can re-deploy the same flow at any time.
+:::
 
 ## Troubleshooting
 

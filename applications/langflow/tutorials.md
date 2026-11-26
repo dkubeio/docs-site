@@ -13,6 +13,11 @@ This walkthrough chains together the steps from [Getting started](./getting-star
 7. **Deploy the flow.** In **Development Mode**, open the three-dots **⋯** menu next to the flow name and click **Deploy**. In the **Deploy Workflow** modal, enter a **Name** (4–30 characters) and an optional **Description**, then click **Deploy**. You are switched to **Deployment Mode**, where the new deployment appears in the table.
 8. **Call the endpoint.** Once the deployment's status is **Deployed**, click its row and open the **API Access** tab for a ready-to-use call to your flow.
 
-> **Tip:** To reuse a secret across flows, store it once under **Settings → Global Variables** and reference it from the component. (Your SecureLLM key is managed for you and is included in deployments automatically.) If you deploy a flow that uses global variables, make sure those variables are defined before deploying — see [Building flows](./building-flows.md#variables-and-secrets).
+:::{tip}
+To reuse a secret across flows, store it once under **Settings → Global Variables** and reference it from the component. (Your SecureLLM key is managed for you and is included in deployments automatically.) If you deploy a flow that uses global variables, make sure those variables are defined before deploying — see [Building flows](./building-flows.md#variables-and-secrets).
+:::
 
-> **Extending to retrieval:** To ground a flow in your own documents, add an **Embedding Model** component with a SecureLLM embedding model and connect it to a **Vector Store** component to index and retrieve documents — see [Components](./components.md#securellm-models).
+:::{admonition} Extending to retrieval
+:class: note
+To ground a flow in your own documents, add an **Embedding Model** component with a SecureLLM embedding model and connect it to a **Vector Store** component to index and retrieve documents — see [Components](./components.md#securellm-models).
+:::

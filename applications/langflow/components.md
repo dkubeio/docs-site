@@ -38,7 +38,9 @@ On DKubeX, language and embedding models come from the **SecureLLM** service run
 3. In the component's model selector, pick a SecureLLM model — chat models appear in **Language Model**, embedding models in **Embedding Model**.
 4. Connect the component to your flow.
 
-> **Note:** If a model you expect is missing, enable it under **Settings → Model Providers → SecureLLM**. If SecureLLM lists no embedding models, ask your cluster administrator to add one in SecureLLM.
+:::{note}
+If a model you expect is missing, enable it under **Settings → Model Providers → SecureLLM**. If SecureLLM lists no embedding models, ask your cluster administrator to add one in SecureLLM.
+:::
 
 ## Configuring Any Component
 

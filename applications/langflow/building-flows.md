@@ -49,7 +49,9 @@ Use **Settings → Global Variables** (gear icon in the clickable button on the 
 - Referenced from any component field via the variable picker.
 - Resolved and injected as environment variables when a flow is [deployed](./deploying-flows.md).
 
-> **Important:** When deploying a flow that uses global variables, those variables must be defined in your settings before deployment. Missing variables will cause the deployment to fail with an error listing the undefined names.
+:::{important}
+When deploying a flow that uses global variables, those variables must be defined in your settings before deployment. Missing variables will cause the deployment to fail with an error listing the undefined names.
+:::
 
 
 ## Flow Properties
