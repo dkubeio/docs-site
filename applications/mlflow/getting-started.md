@@ -41,3 +41,8 @@ metric, and the stored artifact.
 - **Artifacts** (models, files, plots): the platform's MinIO bucket.
 
 Both are provisioned for you at install time — no separate setup required.
+
+## Next steps
+
+- [Core features](./user-features.md) — Experiments, Runs, Models, and Artifacts.
+- [Workflows](./tutorials.md) — track a training run, register a model, and deploy it.

@@ -18,7 +18,7 @@ via KServe.
 - **MLflow UI** — the full upstream MLflow web UI, served under `/mlflow` behind DKubeX single sign-on.
 - **ModelStudio integration** — deploy ML models (sklearn, XGBoost, PyTorch, …) directly from the MLflow registry through ModelStudio → KServe.
 
-## Tutorials
+## Guides
 
 - [Getting started](./getting-started.md) — open MLflow, point your code at it, and log your first run.
 - [Core features](./user-features.md) — Experiments, Runs, Models, and Artifacts.
