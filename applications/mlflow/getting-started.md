@@ -4,7 +4,7 @@ This guide gets you into MLflow and logging your first run in a few minutes.
 
 ## Open MLflow
 
-From the DKubeX application catalog, install **MLflow**, then open it. The MLflow UI is
+Install **MLflow** from the **App Store**, then open it. The MLflow UI is
 served at `/mlflow` behind DKubeX single sign-on — you'll pass the platform login first,
 then land on the MLflow experiments view.
 
