@@ -2,7 +2,7 @@
 
 This page covers the statuses your workspace can have, which actions are yours and which belong to an administrator, what survives a restart, and how to remove your workspace.
 
-## Workspace Statuses
+## Workspace statuses
 
 | Status | What it means |
 |---|---|
@@ -13,14 +13,14 @@ This page covers the statuses your workspace can have, which actions are yours a
 
 To see your workspace's status, open the **App Store** and click the **Workspace** card — the status is shown on its detail page.
 
-## What You Can Do
+## What you can do
 
 You have two actions, both on the **Workspace** page in the App Store:
 
 - **Install** — creates your workspace.
 - **Uninstall** — removes it (see below).
 
-## What Only an Administrator Can Do
+## What only an administrator can do
 
 The following are **admin-only** and are not available to you, even for your own workspace:
 
@@ -33,7 +33,7 @@ Administrators manage every workspace from the admin console, where they can see
 
 ![The admin console's Workspaces table, listing each user's workspace with its status and resources](./media/admin-workspaces.png)
 
-## What Persists
+## What persists
 
 This is the most important thing to know about your workspace.
 
@@ -60,6 +60,6 @@ Before uninstalling, make sure anything you want to keep lives under your home d
 Uninstall is the only way for you to remove a workspace, and it is also the only way to recover from a **Stopped** workspace without an administrator.
 :::
 
-## Getting Help
+## Getting help
 
 If your workspace stays in **Provisioning** for more than a few minutes, or reaches **Failed**, contact your platform administrator — they can look into what went wrong and restart or resize your workspace.

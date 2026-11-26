@@ -41,7 +41,7 @@ Every app you open keeps running while you use others, so switching between Jupy
 Apps are reached over a secure, authenticated route. You never manage ports or SSH tunnels to open them.
 :::
 
-## Workspace Files
+## Workspace files
 
 Your files live in your home directory, which is on persistent per-user storage. Anything you save there survives restarts, and survives uninstalling and reinstalling your workspace. See [What persists](./managing-workspaces.md#what-persists).
 
@@ -52,7 +52,7 @@ To move files between your laptop and the workspace:
 - Use **FileBrowser**'s upload and download buttons, or
 - Use `scp` or `rsync` over [SSH](#ssh-access).
 
-## Running Your Own Services
+## Running your own services
 
 If you start a server inside your workspace — a dev server, an API, a dashboard — you can reach it through your workspace URL by appending its port:
 
@@ -67,7 +67,7 @@ This works for any port you have listening, with no configuration. Two caveats:
 - The app must serve **relative** asset and redirect URLs, or be told it is running under a sub-path. Apps that assume they are at the root will load a blank or broken page.
 - Nothing is started for you here — if the port is not listening you get a gateway error.
 
-## SSH Access
+## SSH access
 
 You can connect to your workspace from your own terminal or from an IDE's remote-development feature.
 
@@ -88,7 +88,7 @@ Access is by SSH key only — there is no password login. Because `~/.ssh/author
 If **Settings** → **SSH access** says SSH is not available, make sure your workspace is **Running**, then reload the page.
 :::
 
-## Environment Variables
+## Environment variables
 
 To set environment variables for your workspace, go to **Settings** → **Workspace** → **Environment variables**, add name/value pairs, and click **Apply and restart**.
 
@@ -96,7 +96,7 @@ Names are upper-cased automatically. Applying **restarts your workspace**, so sa
 
 A few names are reserved by the workspace and rejected: `HOME`, `UUID`, `WORKSPACE_NAME`, `USERNAME`, `WORKSPACE_PUBLIC_PREFIX`, `WORKSPACE_SYSOVERLAY_DIR`, `DEFAULT_MODEL`, `SECURELLM_API_KEY`, and the `MLFLOW_*` variables.
 
-## Getting Access to Other Apps
+## Getting access to other apps
 
 Your workspace is private to you and cannot be shared. Other applications in the App Store are granted by an administrator.
 

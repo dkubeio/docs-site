@@ -2,7 +2,7 @@
 
 Your workspace ships nine AI coding agents, and you choose how they get their models. Pick a **default model** in your workspace settings and every agent is pointed at your organization's models automatically — nothing to paste, no account to sign into. Leave the default model unset and the agents keep their own sign-in, so you can use a personal subscription instead.
 
-## The Agents
+## The agents
 
 | Agent | What it is |
 |---|---|
@@ -20,7 +20,7 @@ Seven of them run as terminal apps: open the tile in **Apps** and you land in th
 
 You can also run the agents from a shell — open the **Terminal** app and run `claude`, `opencode`, `codex`, `copilot`, `vibe`, `hermes` or `pi` directly. They read the same configuration.
 
-## Using Your Organization's Models
+## Using your organization's models
 
 Set a default model and every agent is configured against your organization's model gateway automatically:
 
@@ -36,7 +36,7 @@ The models on offer are the ones your organization has enabled for your key. If 
 
 Within an agent you can usually switch models for a session using that agent's own model picker or `/model` command. The setting above is the default each agent starts from.
 
-## Using Your Own Subscription Instead
+## Using your own subscription instead
 
 If you have your own Claude, ChatGPT or other subscription, set **Default model** to **None**. Your workspace then injects no model settings at all, so each agent keeps its normal first-run behaviour — you sign in with your own account and your usage bills to your own subscription.
 
@@ -55,17 +55,17 @@ Two things to know:
 If your administrator changes the organization-wide default model, your workspace restarts and **your saved model choice is replaced by the new default**. This is deliberate — it is how a model that is being retired gets rolled off every workspace. Just pick your preferred model again afterwards.
 :::
 
-## Your Configuration Edits Are Kept
+## Your configuration edits are kept
 
 Each agent's config file lives in your home directory, so it persists across restarts and you are free to edit it. Your workspace only rewrites the parts that point the agent at the gateway — the provider and endpoint settings — and leaves everything else you have set alone: your permissions, hooks, custom commands and other preferences all survive.
 
-## Antigravity Is the Exception
+## Antigravity is the exception
 
 **Antigravity (`agy`) cannot use your organization's models.** Google publishes no supported way to point the CLI at a custom endpoint or supply your own key, so it stays on Google's own sign-in. To use it, log in with a Google account when it prompts you.
 
 This also means Antigravity's usage does not appear in your organization's model usage reporting at all, since its requests never reach the gateway.
 
-## Usage Is Recorded
+## Usage is recorded
 
 Requests the agents make through your organization's gateway are recorded and attributed to you and your workspace. Your administrator can see usage and cost per user — this is how model spend is tracked.
 

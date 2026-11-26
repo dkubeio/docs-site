@@ -2,11 +2,11 @@
 
 DKubeX Workspace gives you a personal development environment running in the cluster. This guide covers logging in, installing your workspace, and opening your first app.
 
-## Logging In
+## Logging in
 
 DKubeX uses your organization's single sign-on (SSO). Navigate to the DKubeX URL and you are logged in automatically with your existing credentials — no separate account or password needed.
 
-## Installing Your Workspace
+## Installing your workspace
 
 Your workspace is an app in the **App Store**, and you install it yourself. There is no setup wizard.
 
@@ -23,7 +23,7 @@ Provisioning usually takes a minute or two on first install — the workspace im
 You get **one** workspace, and it is yours alone. Its CPU, memory and GPU allocation comes from defaults your administrator configures; there is nothing to choose during install and no compute-profile picker.
 :::
 
-## Opening Your First App
+## Opening your first app
 
 Once the workspace is **Running**, the apps inside it appear as individual tiles in **Apps** — one tile per app, alongside any other applications you have access to.
 
@@ -39,7 +39,7 @@ Each app keeps running while you switch between others, so you can move between 
 App tiles only appear while your workspace is **Running**. If **Apps** shows no workspace apps, check your workspace status in the App Store first.
 :::
 
-## What You Get
+## What you get
 
 | App | What it is |
 |---|---|
@@ -59,7 +59,7 @@ App tiles only appear while your workspace is **Running**. If **Apps** shows no 
 
 The nine coding agents can be pointed at your organization's models by picking a default model in your workspace settings, or left on their own sign-in so you can use a personal subscription — see [Working with AI agents](./working-with-agents.md).
 
-## Next Steps
+## Next steps
 
 - Learn [what persists and how to manage your workspace](./managing-workspaces.md).
 - See how to [use apps, files, ports and SSH](./using-your-workspace.md).
