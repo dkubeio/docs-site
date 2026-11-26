@@ -23,14 +23,7 @@ The user interface is routed through ingress and authentication into the Kuberne
 control plane, application catalog, data and storage, observability, and admin tooling run as
 coordinated subsystems.
 
-```{figure} ../images/dkubex-architecture.png
-:alt: DKubeX 2.0 platform architecture — the user interface routed through ingress and authentication into the Kubernetes cluster, with the control plane, application store, data and storage, observability, and admin tooling.
-:width: 100%
-
-DKubeX 2.0 platform architecture at a glance.
-```
-
-For the full breakdown of subsystems and components, see
+For the architecture diagram and the full breakdown of subsystems and components, see
 [Architecture & Specifications](../platform-guide/architecture-and-specifications.md). Hardware
 requirements are in [Installation](installation.md#hardware-requirements).
 
