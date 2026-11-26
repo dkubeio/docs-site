@@ -41,3 +41,9 @@ The home screen groups tiles into lanes:
 SRE talks to any OpenAI-compatible endpoint (on DKubeX this is the SecureLLM gateway).
 The model powering chat and the `k8s-sre` alias is configured at install time; an admin
 can change it from the settings.
+
+## Next steps
+
+- [Core features](./user-features.md) — Observe, Converse, and Act for everyday users.
+- [Administrator features](./admin-features.md) — Users, autonomy tiers, training, and audit.
+- [Workflows](./tutorials.md) — End-to-end walkthroughs for common tasks.

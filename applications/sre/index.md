@@ -18,7 +18,7 @@ on your incident history — all behind a single tile-based console.
 - **Role-based access** — PIN login mapped to roles (admin, SRE lead, operator, ML engineer, exec, demo); tiles are gated per role.
 - **Read-only by default** — the cluster ServiceAccount carries no write verbs unless you explicitly opt in (cluster-wide or per-namespace).
 
-## Tutorials
+## Guides
 
 - [Getting started](./getting-started.md) — Open SRE, log in with your PIN, and take the tour.
 - [Core features](./user-features.md) — Observe, Converse, and Act for everyday users.
