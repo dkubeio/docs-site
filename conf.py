@@ -399,7 +399,9 @@ def _is_latest_build(app):
 	current = getattr(app.config, "smv_current_version", "") or ""
 	if not current:
 		return True
-	tags = subprocess.check_output(["git", "tag", "--list", "v*"], text=True).split()
+	tags = subprocess.check_output(
+		["git", "tag", "--list", "v*"], cwd=str(app.confdir), text=True
+	).split()
 	newest = max(tags, key=lambda name: _version_parts(name) or ())
 	return current == newest
 
