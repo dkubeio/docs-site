@@ -1,6 +1,8 @@
 # Administrator Features
 
-> **Note:** Admin pages are only visible if your account has been granted admin access. Contact your SecureLLM administrator if you believe you should have admin rights.
+:::{note}
+Admin pages are only visible if your account has been granted admin access. Contact your SecureLLM administrator if you believe you should have admin rights.
+:::
 
 Admins see all four user pages (with organization-wide data) plus six additional pages: **Providers**, **Users**, **Guardrails**, **Guardrail Logs**, **Audit Logs**, and **Performance**.
 
@@ -88,4 +90,6 @@ The Performance page shows how the gateway itself is behaving.
 - **Total Requests / 5xx Errors** — overall traffic and error counts
 - **Latency by Endpoint** — P50, P95, and P99 response times per API endpoint
 
-> **Tip:** P95 latency is the response time that 95% of requests fall under. A spike here usually means a specific provider is slow, not that SecureLLM itself is the bottleneck.
+:::{tip}
+P95 latency is the response time that 95% of requests fall under. A spike here usually means a specific provider is slow, not that SecureLLM itself is the bottleneck.
+:::

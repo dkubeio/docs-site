@@ -18,7 +18,9 @@ An API key is like a password that lets an application (a script, a tool, or an 
 4. Click **Create**.
 5. **Copy the key immediately** — it is only shown once. Store it somewhere safe (a password manager or `.env` file).
 
-> **Tip:** If you suspect a key has been leaked or is no longer needed, revoke it right away from the **API Keys** page. Revoking a key instantly stops any further requests made with it.
+:::{tip}
+If you suspect a key has been leaked or is no longer needed, revoke it right away from the **API Keys** page. Revoking a key instantly stops any further requests made with it.
+:::
 
 ## Next Steps
 

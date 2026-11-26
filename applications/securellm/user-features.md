@@ -13,7 +13,9 @@ The Dashboard gives you a snapshot of your AI usage at a glance.
 - **Total Cost** — estimated spend based on your requests
 - **By Provider / By Model** — tables showing which AI services and models you used most
 
-> **Note:** If you have admin access, the Dashboard shows usage for your entire organization, not just your own.
+:::{note}
+If you have admin access, the Dashboard shows usage for your entire organization, not just your own.
+:::
 
 ## API Keys
 
@@ -33,7 +35,9 @@ An API key is like a password that lets an application (a script, a tool, or an 
 2. Click **Revoke**.
 3. Confirm the action.
 
-> **Tip:** If you suspect a key has been leaked or is no longer needed, revoke it right away. Revoking a key instantly stops any further requests made with it.
+:::{tip}
+If you suspect a key has been leaked or is no longer needed, revoke it right away. Revoking a key instantly stops any further requests made with it.
+:::
 
 ## Models
 
@@ -43,7 +47,9 @@ The Models page lists every AI model available to you through SecureLLM.
 - Use the **Provider** and **Category** filters to narrow the list (e.g., Chat, Reasoning, Embedding).
 - Click the **copy icon** next to a model name to copy its identifier — paste this directly into your code or tool.
 
-> **Note:** If an admin has restricted your access, you will only see the models and providers your organization has made available to you.
+:::{note}
+If an admin has restricted your access, you will only see the models and providers your organization has made available to you.
+:::
 
 ## Usage (My Requests)
 
