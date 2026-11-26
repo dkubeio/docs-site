@@ -17,7 +17,10 @@ Select a model from the dropdown at the top, then choose a tab for the capabilit
 | Image Generation | Coming in a future KubeAI release | — |
 | Speech to Text | Coming in a future KubeAI release | — |
 
-> **Self-hosted NIM models that are still deploying:** A status banner appears above the input when a selected self-hosted NIM model is not yet Running. The input and Send button are disabled until the model becomes ready. The status updates automatically every 15 seconds.
+:::{admonition} Self-hosted NIM models that are still deploying
+:class: note
+A status banner appears above the input when a selected self-hosted NIM model is not yet Running. The input and Send button are disabled until the model becomes ready. The status updates automatically every 15 seconds.
+:::
 
 ---
 
@@ -49,7 +52,9 @@ Upload documents and have the model answer questions using content from them.
 3. When you send a message, the most relevant chunks are retrieved and injected into the model's context as grounding
 4. The response includes **source attribution** — which document passages were used
 
-> You need a deployed **embedding model** in addition to the text-generation model for RAG to work.
+:::{note}
+You need a deployed **embedding model** in addition to the text-generation model for RAG to work.
+:::
 
 ---
 

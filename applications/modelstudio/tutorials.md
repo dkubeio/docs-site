@@ -17,7 +17,9 @@ These end-to-end walkthroughs take you from the catalog to a running model for e
 
 ![Deploy model form](./media/deploy-modal.png)
 
-> **Tip:** Deploying takes a few minutes while the model image is pulled and pods start. Use the status column to track progress.
+:::{tip}
+Deploying takes a few minutes while the model image is pulled and pods start. Use the status column to track progress.
+:::
 
 ## Deploying Your First ML Model
 
@@ -30,7 +32,9 @@ These end-to-end walkthroughs take you from the catalog to a running model for e
 
 ## Your First NVIDIA NIM Model
 
-> Requires an NGC Personal API Key. Get one at [org.ngc.nvidia.com/setup/personal-keys](https://org.ngc.nvidia.com/setup/personal-keys).
+:::{note}
+Requires an NGC Personal API Key. Get one at [org.ngc.nvidia.com/setup/personal-keys](https://org.ngc.nvidia.com/setup/personal-keys).
+:::
 
 1. Go to **Settings → NGC API Keys** and click **Add Key**.
 2. Paste your NGC Personal API Key and give it a name. The key is saved securely and shown only as a masked hint.

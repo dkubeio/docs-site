@@ -57,7 +57,9 @@ Search HuggingFace and deploy LLM models directly.
 
 Each model card shows downloads, likes, task type, and an estimated inference cost. Click **Deploy** to open the deployment form.
 
-> **Note:** Filtering by modality or task for unsupported model types (Vision, Image Generation, STT) will show models in **LLM Catalog**, but KubeAI cannot yet serve them. Support is planned for future releases.
+:::{note}
+Filtering by modality or task for unsupported model types (Vision, Image Generation, STT) will show models in **LLM Catalog**, but KubeAI cannot yet serve them. Support is planned for future releases.
+:::
 
 ![LLM Catalog search results](./media/catalog-page.png)
 
@@ -99,7 +101,10 @@ A unified inference workbench for testing your deployed LLM models.
 
 Token usage (prompt, completion, total) is shown after each response. Responses can be copied to the clipboard.
 
-> **Coming in future KubeAI releases:** Vision (image + text), Image Generation, and Speech to Text will be supported once the corresponding KubeAI model types become available.
+:::{admonition} Coming in future KubeAI releases
+:class: note
+Vision (image + text), Image Generation, and Speech to Text will be supported once the corresponding KubeAI model types become available.
+:::
 
 ![Playground chat interface](./media/playground-chat.png)
 
@@ -131,7 +136,9 @@ A table of all your deployed KServe InferenceServices. Only visible when KServe 
 
 Create, edit, and delete named resource configurations (CPU, memory, GPU, replicas) that can be loaded into the deploy forms as shortcuts.
 
-> **Requires the database feature.** Resource Profiles are stored in the configured PostgreSQL database. If the database is not enabled, the page shows a banner with setup instructions.
+:::{note}
+**Requires the database feature.** Resource Profiles are stored in the configured PostgreSQL database. If the database is not enabled, the page shows a banner with setup instructions.
+:::
 
 Each profile captures:
 - CPU request and optional limit
@@ -152,7 +159,9 @@ Manage configuration for platform integrations. Currently contains **NGC API Key
 - **Add a key** — paste your NGC Personal API Key; it is stored securely and only shown as a masked hint (`nvapi-****xxxx`)
 - **Delete a key** — removes the saved credential; existing NIM registrations that reference it will stop working
 
-> The Settings page is only visible when NIM is enabled in the platform.
+:::{note}
+The Settings page is only visible when NIM is enabled in the platform.
+:::
 
 ---
 

@@ -51,7 +51,10 @@ Clicking **Deploy** on a model card opens the deploy modal.
 | **Replicas** | Number of serving pods | `1` |
 | **Scope** | `Private` (only you) or `Shared` (all workspace users) | `Private` |
 
-> **Supported features in the current KubeAI release:** `TextGeneration`, `TextEmbedding`, `Reranking`, `TextToSpeech`. Support for `SpeechToText`, `ImageText` (Vision), and `ImageGeneration` is planned for future KubeAI releases.
+:::{admonition} Supported features in the current KubeAI release
+:class: note
+`TextGeneration`, `TextEmbedding`, `Reranking`, `TextToSpeech`. Support for `SpeechToText`, `ImageText` (Vision), and `ImageGeneration` is planned for future KubeAI releases.
+:::
 
 #### Resource Profiles
 
@@ -113,7 +116,9 @@ Use the scope toggle button to move a model between **Private** and **Shared**:
 - **Promote to Shared** — the model becomes visible and usable by all workspace users
 - **Demote to Private** — the model is restricted back to your account
 
-> Note: promoting renames the CRD from `{username}--{model-id}` to `shared--{model-id}`.
+:::{note}
+promoting renames the CRD from `{username}--{model-id}` to `shared--{model-id}`.
+:::
 
 #### Open in Playground
 
@@ -134,7 +139,9 @@ Model IDs are sanitized to be Kubernetes-safe (lowercase alphanumeric and `-`, m
 
 ## ML Models (KServe)
 
-> ML model deployment requires KServe to be enabled in the platform. The **ML Registry** and **ML Models** pages are hidden when KServe is not available.
+:::{note}
+ML model deployment requires KServe to be enabled in the platform. The **ML Registry** and **ML Models** pages are hidden when KServe is not available.
+:::
 
 ### Discovering ML Models
 
@@ -183,7 +190,9 @@ ModelStudio automatically resolves the correct KServe runtime based on the model
 
 For MLflow-sourced models, leaving the format as `mlflow` enables auto-detection: the backend reads the `MLmodel` artifact file and selects the purpose-built runtime (e.g. `kserve-sklearnserver` for sklearn flavors) instead of the generic mlserver.
 
-> **HuggingFace ML models** are limited to text-based pipeline tasks by the current `kserve-huggingfaceserver` runtime. Attempting to deploy a vision, audio, or multimodal HuggingFace model is blocked in the UI with a **Coming Soon** indicator.
+:::{note}
+**HuggingFace ML models** are limited to text-based pipeline tasks by the current `kserve-huggingfaceserver` runtime. Attempting to deploy a vision, audio, or multimodal HuggingFace model is blocked in the UI with a **Coming Soon** indicator.
+:::
 
 ---
 
@@ -216,7 +225,9 @@ You can filter by format, source, status, and owner.
 
 Click the **Delete** icon. The KServe `InferenceService` CRD is removed. You can only delete models you own.
 
-> Shared ML models are visible to all workspace users but can only be deleted by the model owner.
+:::{note}
+Shared ML models are visible to all workspace users but can only be deleted by the model owner.
+:::
 
 ---
 
@@ -233,7 +244,9 @@ Model names are truncated and sanitized to fit Kubernetes naming constraints. Th
 
 ## NVIDIA NIM Models
 
-> NIM requires the NIM feature to be enabled in the platform. The **NIM** tab in Catalog and NGC API Keys in Settings are hidden when NIM is not available.
+:::{note}
+NIM requires the NIM feature to be enabled in the platform. The **NIM** tab in Catalog and NGC API Keys in Settings are hidden when NIM is not available.
+:::
 
 ### Prerequisites
 
@@ -292,7 +305,10 @@ Pending → Deploying (cache) → Deploying (service) → Running
 
 The Playground shows a status banner and disables inference for NIM models that are not yet Running.
 
-> **First-time deployment:** TRT engine compilation happens on the first start and takes 2–5 minutes. Subsequent restarts on the same node are faster because compiled engines are cached.
+:::{admonition} First-time deployment
+:class: note
+TRT engine compilation happens on the first start and takes 2–5 minutes. Subsequent restarts on the same node are faster because compiled engines are cached.
+:::
 
 ---
 
@@ -311,7 +327,10 @@ All registered NIM models are shown in the **NIM Models** section of the **Dashb
 | View events | Recent events from the deployment |
 | Unregister | Removes registration and all cluster resources |
 
-> **Unregister:** Unregistering removes the inference deployment and cached model weights from the cluster. This action cannot be undone.
+:::{admonition} Unregister
+:class: note
+Unregistering removes the inference deployment and cached model weights from the cluster. This action cannot be undone.
+:::
 
 ---
 
