@@ -2,7 +2,7 @@
 
 These end-to-end walkthroughs take you from the catalog to a running model for each of ModelStudio's three deployment tracks. For the full set of fields and options, see [Deploying Models](./deploying-models.md).
 
-## Deploying Your First LLM Model
+## Deploying your first LLM model
 
 1. Go to the **LLM Catalog** page.
 2. Search for a model (e.g. `qwen2`).
@@ -21,7 +21,7 @@ These end-to-end walkthroughs take you from the catalog to a running model for e
 Deploying takes a few minutes while the model image is pulled and pods start. Use the status column to track progress.
 :::
 
-## Deploying Your First ML Model
+## Deploying your first ML model
 
 1. Go to the **ML Registry** page.
 2. Select the **MLflow** tab (or **HuggingFace ML** for HuggingFace-sourced models).
@@ -30,7 +30,7 @@ Deploying takes a few minutes while the model image is pulled and pods start. Us
 5. Click **Deploy**.
 6. The model appears in **ML Models** with status `Pending`, then transitions to `Running`.
 
-## Your First NVIDIA NIM Model
+## Your first NVIDIA NIM model
 
 :::{note}
 Requires an NGC Personal API Key. Get one at [org.ngc.nvidia.com/setup/personal-keys](https://org.ngc.nvidia.com/setup/personal-keys).

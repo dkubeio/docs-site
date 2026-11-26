@@ -38,7 +38,7 @@ Stream responses from a text-generation model.
 
 ---
 
-## RAG (Document-Grounded Chat)
+## RAG (document-grounded chat)
 
 Upload documents and have the model answer questions using content from them.
 
@@ -91,11 +91,11 @@ Synthesize speech from text.
 
 ---
 
-## Coming in Future KubeAI Releases
+## Coming in future KubeAI releases
 
 The following tabs are present in the UI but require KubeAI model types that are not yet available. They will become functional once the corresponding KubeAI support ships.
 
-### Vision (Image + Text)
+### Vision (image + text)
 
 Send images alongside text to vision-capable models.
 

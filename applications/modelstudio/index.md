@@ -11,12 +11,25 @@ ModelStudio is a web application for discovering, deploying, and running inferen
 - Client-side document RAG with PDF, DOCX, TXT, and MD support — documents never leave your browser.
 - Real-time model status, resource-profile management, and an activity log of every deploy/undeploy action.
 
-## Tutorials
+## Guides
 
 - [Getting started](./getting-started.md) — an overview of every page.
 - [Workflows](./tutorials.md) — deploy your first LLM, ML, and NIM model, step by step.
 - [Deploying models](./deploying-models.md) — LLM, ML, and NIM deployment paths in depth.
 - [Playground guide](./playground.md) — every inference mode walked through end-to-end.
+
+## At a glance
+
+| Page | What it does |
+|---|---|
+| Dashboard | The landing page: a summary of your workspace — stats, deployed models, and an activity feed |
+| LLM Catalog | Search HuggingFace and deploy LLM models directly |
+| LLM Models | A table of the LLM models you have deployed (private), plus any models promoted to shared |
+| Playground | A unified inference workbench for testing your deployed LLM models |
+| ML Registry | Browse and deploy ML models (non-LLM); only visible when KServe is enabled |
+| ML Models | A table of your deployed KServe InferenceServices; only visible when KServe is enabled |
+| Resource Profiles | Create, edit, and delete named resource configurations (CPU, memory, GPU, replicas) to load into the deploy forms |
+| Settings | Manage the NGC API keys needed for NIM models; only visible when NIM is enabled |
 
 ```{toctree}
 :hidden:

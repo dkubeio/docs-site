@@ -6,7 +6,7 @@ ModelStudio is a web application for discovering, deploying, and running inferen
 - **ML models** — traditional machine learning models (sklearn, XGBoost, PyTorch, etc.) deployed via [KServe](https://kserve.github.io/website/), sourced from an [MLflow](https://mlflow.org) registry or HuggingFace Hub
 - **NVIDIA NIM models** — production-optimized inference microservices from the NVIDIA NGC catalog, deployed in-cluster on GPU nodes via the k8s-nim-operator
 
-## What You Can Do
+## What you can do
 
 - **LLM Catalog** — Search HuggingFace LLM models and deploy them with one click
 - **LLM Models** — View, edit, promote, or delete your deployed LLM models
@@ -20,7 +20,7 @@ ModelStudio is a web application for discovering, deploying, and running inferen
 
 ---
 
-## Overview: The Pages
+## Overview: the pages
 
 ### Dashboard
 
@@ -165,7 +165,7 @@ The Settings page is only visible when NIM is enabled in the platform.
 
 ---
 
-## Next Steps
+## Next steps
 
 - [Workflows](./tutorials.md) — deploy your first LLM, ML, and NVIDIA NIM model, step by step
 - [Deploying Models](./deploying-models.md) — advanced deployment options for both LLM and ML models

@@ -8,9 +8,9 @@ ModelStudio supports three deployment paths:
 
 ---
 
-## LLM Models (KubeAI)
+## LLM models (KubeAI)
 
-### Discovering LLM Models
+### Discovering LLM models
 
 Use the **LLM Catalog** page to search HuggingFace. Models are shown across four tabs:
 
@@ -33,7 +33,7 @@ You can filter by:
 
 ---
 
-### The LLM Deploy Form
+### The LLM deploy form
 
 Clicking **Deploy** on a model card opens the deploy modal.
 
@@ -56,7 +56,7 @@ Clicking **Deploy** on a model card opens the deploy modal.
 `TextGeneration`, `TextEmbedding`, `Reranking`, `TextToSpeech`. Support for `SpeechToText`, `ImageText` (Vision), and `ImageGeneration` is planned for future KubeAI releases.
 :::
 
-#### Resource Profiles
+#### Resource profiles
 
 Resource profiles are cluster-defined presets. The list is fetched dynamically from `/api/resource-profiles` based on the nodes available in your cluster. Contact your cluster admin to add custom profiles.
 
@@ -73,7 +73,7 @@ The form's hint reads: *"Leave 0 for standard GPU allocation. Set a value to ena
 
 ---
 
-### LLM Deployment Lifecycle
+### LLM deployment lifecycle
 
 After you click **Deploy**, the KubeAI `Model` CRD is created. KubeAI reconciles the resource:
 
@@ -93,11 +93,11 @@ Monitor progress in the **Dashboard** model table or the **LLM Models** page.
 
 ---
 
-### Managing Deployed LLM Models
+### Managing deployed LLM models
 
 All your LLM deployments are visible on the **LLM Models** page.
 
-#### Edit a Model
+#### Edit a model
 
 Click the **Edit** (pencil) icon to update:
 - Resource profile
@@ -105,11 +105,11 @@ Click the **Edit** (pencil) icon to update:
 
 The update is applied via a `PATCH /api/models/{id}` call and takes effect immediately.
 
-#### Delete a Model
+#### Delete a model
 
 Click the **Delete** (trash) icon. The KubeAI CRD is removed and all pods are terminated. This action cannot be undone.
 
-#### Promote / Demote Scope
+#### Promote / demote scope
 
 Use the scope toggle button to move a model between **Private** and **Shared**:
 
@@ -126,7 +126,7 @@ Click the **Playground** icon on any running model to jump directly to the infer
 
 ---
 
-### LLM CRD Naming Convention
+### LLM CRD naming convention
 
 | Scope | CRD Name Pattern | Example |
 |-------|-----------------|---------|
@@ -137,13 +137,13 @@ Model IDs are sanitized to be Kubernetes-safe (lowercase alphanumeric and `-`, m
 
 ---
 
-## ML Models (KServe)
+## ML models (KServe)
 
 :::{note}
 ML model deployment requires KServe to be enabled in the platform. The **ML Registry** and **ML Models** pages are hidden when KServe is not available.
 :::
 
-### Discovering ML Models
+### Discovering ML models
 
 Use the **ML Registry** page. It has two tabs:
 
@@ -160,7 +160,7 @@ Click **Deploy** on any supported model card to open the ML deploy form.
 
 ---
 
-### The ML Deploy Form
+### The ML deploy form
 
 #### Fields
 
@@ -196,7 +196,7 @@ For MLflow-sourced models, leaving the format as `mlflow` enables auto-detection
 
 ---
 
-### ML Deployment Lifecycle
+### ML deployment lifecycle
 
 After clicking **Deploy**, a KServe `InferenceService` CRD is created:
 
@@ -215,13 +215,13 @@ Monitor progress in the **ML Models** table.
 
 ---
 
-### Managing Deployed ML Models
+### Managing deployed ML models
 
 All your KServe deployments are visible on the **ML Models** page.
 
 You can filter by format, source, status, and owner.
 
-#### Delete a Model
+#### Delete a model
 
 Click the **Delete** icon. The KServe `InferenceService` CRD is removed. You can only delete models you own.
 
@@ -231,7 +231,7 @@ Shared ML models are visible to all workspace users but can only be deleted by t
 
 ---
 
-### KServe InferenceService Naming
+### KServe InferenceService naming
 
 | Scope | Name Pattern | Example |
 |-------|-------------|---------|
@@ -242,7 +242,7 @@ Model names are truncated and sanitized to fit Kubernetes naming constraints. Th
 
 ---
 
-## NVIDIA NIM Models
+## NVIDIA NIM models
 
 :::{note}
 NIM requires the NIM feature to be enabled in the platform. The **NIM** tab in Catalog and NGC API Keys in Settings are hidden when NIM is not available.
@@ -255,7 +255,7 @@ NIM requires the NIM feature to be enabled in the platform. The **NIM** tab in C
 
 ---
 
-### Discovering NIM Models
+### Discovering NIM models
 
 Go to the **Catalog** page and select the **NIM** tab. The NIM catalog shows models available from NVIDIA NGC, organized by category:
 
@@ -271,7 +271,7 @@ Use the search bar to find a specific model by name.
 
 ---
 
-### Registering a NIM Model
+### Registering a NIM model
 
 Click **Register** on any NIM catalog card to open the registration form.
 
@@ -288,7 +288,7 @@ NIM inference runs on your cluster's GPU nodes. The NGC API Key saved in **Setti
 
 ---
 
-### NIM Deployment Lifecycle
+### NIM deployment lifecycle
 
 After registering a NIM model, the deployment goes through several phases:
 
@@ -312,11 +312,11 @@ TRT engine compilation happens on the first start and takes 2–5 minutes. Subse
 
 ---
 
-### Managing Registered NIM Models
+### Managing registered NIM models
 
 All registered NIM models are shown in the **NIM Models** section of the **Dashboard** and on the **LLM Models** page.
 
-#### Available Actions
+#### Available actions
 
 | Action | Description |
 |--------|-------------|
@@ -334,7 +334,7 @@ Unregistering removes the inference deployment and cached model weights from the
 
 ---
 
-### NIM Model Availability
+### NIM model availability
 
 Registered NIM models are visible to all authenticated workspace users, but inference is only available once the deployment reaches Running status.
 
