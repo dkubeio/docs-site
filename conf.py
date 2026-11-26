@@ -349,7 +349,9 @@ def auto_app_toctree(app, docname, source):
 # Each old path gets a small page that sends the browser to the new one, keeping
 # any #anchor and query string. It says noindex and points its canonical link at
 # the new page, and it is not a Sphinx page, so it stays out of sitemap.xml.
-# Older docs versions build from their own tags and keep their own pages.
+# sphinx-multiversion builds every version with this conf.py, so a redirect is
+# written only where the new page exists and the old one doesn't: older
+# versions keep their own pages.
 REDIRECTS = {
 	"getting-started/installation": "install/installation",
 	"getting-started/helm-values": "reference/helm-values",
@@ -379,8 +381,8 @@ def write_redirects(app, exception):
 	if exception is not None or app.builder.format != "html":
 		return
 	for old, new in REDIRECTS.items():
-		if new not in app.env.all_docs:
-			raise RuntimeError(f"redirect target {new} does not exist")
+		if new not in app.env.all_docs or old in app.env.all_docs:
+			continue
 		rel = os.path.relpath(new + ".html", os.path.dirname(old))
 		path = os.path.join(app.outdir, old + ".html")
 		os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -391,8 +393,19 @@ def write_redirects(app, exception):
 # llms.txt (https://llmstxt.org) at the site root: every page in navigation
 # order, grouped by top-level section, with a link to its Markdown source, so
 # coding agents (for example in a DKubeX workspace) can read the docs directly.
+def _is_latest_build(app):
+	# Outside sphinx-multiversion (a plain build of the current pages) there is
+	# no current version: treat it as the latest.
+	current = getattr(app.config, "smv_current_version", "") or ""
+	if not current:
+		return True
+	tags = subprocess.check_output(["git", "tag", "--list", "v*"], text=True).split()
+	newest = max(tags, key=lambda name: _version_parts(name) or ())
+	return current == newest
+
+
 def write_llms_txt(app, exception):
-	if exception is not None or app.builder.format != "html":
+	if exception is not None or app.builder.format != "html" or not _is_latest_build(app):
 		return
 	env = app.env
 	title = lambda doc: env.titles[doc].astext()
