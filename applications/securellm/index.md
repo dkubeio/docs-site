@@ -12,7 +12,7 @@ SecureLLM is your organization's secure gateway to AI. Instead of everyone conne
 - **Guardrails** — Automatic safety filters for sensitive content, PII, and prompt-injection attempts (configured by admins).
 - **Administrator controls** — Manage providers, per-user access policies, guardrails, audit logs, and gateway performance.
 
-## Tutorials
+## Guides
 
 - [Getting started](./getting-started.md) — Log in and create your first API key.
 - [Core features](./user-features.md) — Dashboard, API Keys, Models, and Usage for everyday users.
