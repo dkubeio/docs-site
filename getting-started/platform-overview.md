@@ -24,8 +24,8 @@ control plane, application catalog, data and storage, observability, and admin t
 coordinated subsystems.
 
 For the architecture diagram and the full breakdown of subsystems and components, see
-[Architecture & Specifications](../platform-guide/architecture-and-specifications.md). Hardware
-requirements are in [Installation](installation.md#hardware-requirements).
+[Architecture & Specifications](architecture-and-specifications.md). Hardware
+requirements are in [Installation](../install/installation.md#hardware-requirements).
 
 ## The applications
 
@@ -57,6 +57,7 @@ DKubeX covers the full path from training to governed inference:
 
 ## Where to go next
 
-- **[Installation](installation.md)** — stand up DKubeX on your cluster.
+- **[Installation](../install/installation.md)** — stand up DKubeX on your cluster.
 - **[Quickstart](quickstart.md)** — deploy and chat with a model in minutes.
-- **[Platform Guide](../platform-guide/index.md)** — architecture, access management, the catalog, and licensing.
+- **[Administer DKubeX](../platform-guide/index.md)** — access management, the catalog, and licensing.
+- **[Architecture & Specifications](architecture-and-specifications.md)** — the platform's subsystems and requirements.

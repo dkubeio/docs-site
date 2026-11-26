@@ -227,6 +227,15 @@ the words your page already uses, and link to the page that explains it. Glossar
 docs say; they never add new facts. App-repo authors without access to docs-site can ask the docs team to
 add the entry.
 
+### Moving a docs-site page or adding a docs version
+
+- **Moving or renaming a page** in docs-site (not under `applications/`, whose paths the app repos'
+  push-docs workflow owns): add the old path and the new one to `REDIRECTS` in `conf.py`, and update every
+  link to it. The build then writes a small page at the old URL that sends readers to the new one,
+  keeping any `#anchor`.
+- **Publishing a new docs version**: add it to the table on `support/docs-versions.md`
+  (https://dkubex2.dkube.io/support/docs-versions.html), with its address and its GitHub release.
+
 ---
 
 ## Notes

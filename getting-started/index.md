@@ -1,22 +1,23 @@
-# Getting Started
+# Get started
 
-New to DKubeX? Start here. This section takes you from an empty Kubernetes cluster to a running
-model you can chat with, and gives you a working mental model of how the platform fits together.
+New to DKubeX? Start here. This section gives you a working mental model of how the platform fits
+together and takes you to a running model you can chat with.
 
-- **[Installation](installation.md)** — install DKubeX on your cluster with Helm, and the hardware it needs.
-- **[Helm Values Reference](helm-values.md)** — every value of the installer chart, with its default.
-- **[Quickstart](quickstart.md)** — log in, deploy a model, and chat with it in a few minutes.
 - **[Platform Overview](platform-overview.md)** — what DKubeX is, how the pieces relate, and the model lifecycle it runs.
-- **[Troubleshooting](troubleshooting.md)** — every known problem in these docs, with a link to its fix.
+- **[Architecture & Specifications](architecture-and-specifications.md)** — subsystems and the hardware/software requirements.
+- **[Quickstart](quickstart.md)** — log in, deploy a model, and chat with it in a few minutes.
 - **[Glossary](glossary.md)** — terms used across these docs, with a link to the page that explains each one.
+
+Installing DKubeX on your cluster? See [Install and upgrade](../install/index.md):
+[Installation](../install/installation.md) covers installing DKubeX with Helm and the hardware it needs.
+The [Helm Values Reference](../reference/helm-values.md) and [Troubleshooting](../reference/troubleshooting.md)
+are under [Reference](../reference/index.md).
 
 ```{toctree}
 :hidden:
 
-installation
-helm-values
-quickstart
 platform-overview
-troubleshooting
+architecture-and-specifications
+quickstart
 glossary
 ```

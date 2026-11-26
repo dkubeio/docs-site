@@ -35,12 +35,12 @@ GPUs if you intend to deploy and serve your own models on-premises.
 
 The minimum and recommended CPU, memory, storage and node counts, the extra resources for each user
 workspace, and the external NFS server are listed in one place:
-[Installation › Hardware requirements](../getting-started/installation.md#hardware-requirements).
-Once your cluster meets them, follow the rest of [Installation](../getting-started/installation.md)
+[Installation › Hardware requirements](../install/installation.md#hardware-requirements).
+Once your cluster meets them, follow the rest of [Installation](../install/installation.md)
 to deploy DKubeX.
 
 ## Next steps
 
-- [Installation](../getting-started/installation.md): install DKubeX on your cluster
-- [Helm Values Reference](../getting-started/helm-values.md): the installer chart's values
-- [Configuration](configuration.md): enable and configure platform components
+- [Installation](../install/installation.md): install DKubeX on your cluster
+- [Helm Values Reference](../reference/helm-values.md): the installer chart's values
+- [Configuration](../platform-guide/configuration.md): enable and configure platform components

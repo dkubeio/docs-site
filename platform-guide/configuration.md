@@ -78,5 +78,5 @@ below.").
 ## Next steps
 
 - [User Management](user-management.md): manage user accounts and sign-in modes
-- [Platform Upgrade](platform-upgrade.md): upgrade DKubeX in place; component toggles are preserved
+- [Platform Upgrade](../install/platform-upgrade.md): upgrade DKubeX in place; component toggles are preserved
 - [Application Management](application-management.md): install and manage applications

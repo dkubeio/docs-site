@@ -1,7 +1,7 @@
 # Platform Upgrade
 
 Upgrade DKubeX in place from the admin console under **Platform** — no reinstall. Post-install
-component toggles (from [Configuration](configuration.md)) are preserved across upgrades.
+component toggles (from [Configuration](../platform-guide/configuration.md)) are preserved across upgrades.
 
 The **Installer** card shows the current and available versions of the `dkubex-installer` chart.
 
@@ -32,6 +32,6 @@ helm rollback dkubex-installer -n dkubex
 
 ## Next steps
 
-- [Configuration](configuration.md): enable and configure platform components
-- [Helm Values Reference](../getting-started/helm-values.md): the installer chart's values
-- [Architecture & Specifications](architecture-and-specifications.md): system requirements
+- [Configuration](../platform-guide/configuration.md): enable and configure platform components
+- [Helm Values Reference](../reference/helm-values.md): the installer chart's values
+- [Architecture & Specifications](../getting-started/architecture-and-specifications.md): system requirements

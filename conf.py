@@ -345,6 +345,77 @@ def auto_app_toctree(app, docname, source):
 	source[0] = source[0].rstrip() + "\n" + "\n".join(lines)
 
 
+# Old URLs of pages moved to another section (audit C12, seven-section navigation).
+# Each old path gets a small page that sends the browser to the new one, keeping
+# any #anchor and query string. It says noindex and points its canonical link at
+# the new page, and it is not a Sphinx page, so it stays out of sitemap.xml.
+# Older docs versions build from their own tags and keep their own pages.
+REDIRECTS = {
+	"getting-started/installation": "install/installation",
+	"getting-started/helm-values": "reference/helm-values",
+	"getting-started/troubleshooting": "reference/troubleshooting",
+	"platform-guide/platform-upgrade": "install/platform-upgrade",
+	"platform-guide/architecture-and-specifications": "getting-started/architecture-and-specifications",
+}
+
+REDIRECT_PAGE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Page moved</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="{url}">
+<meta http-equiv="refresh" content="0; url={rel}">
+<script>location.replace("{rel}" + location.search + location.hash);</script>
+</head>
+<body>
+<p>This page has moved to <a href="{rel}">{url}</a>.</p>
+</body>
+</html>
+"""
+
+
+def write_redirects(app, exception):
+	if exception is not None or app.builder.format != "html":
+		return
+	for old, new in REDIRECTS.items():
+		if new not in app.env.all_docs:
+			raise RuntimeError(f"redirect target {new} does not exist")
+		rel = os.path.relpath(new + ".html", os.path.dirname(old))
+		path = os.path.join(app.outdir, old + ".html")
+		os.makedirs(os.path.dirname(path), exist_ok=True)
+		with open(path, "w", encoding="utf-8") as f:
+			f.write(REDIRECT_PAGE.format(rel=rel, url=html_baseurl + new + ".html"))
+
+
+# llms.txt (https://llmstxt.org) at the site root: every page in navigation
+# order, grouped by top-level section, with a link to its Markdown source, so
+# coding agents (for example in a DKubeX workspace) can read the docs directly.
+def write_llms_txt(app, exception):
+	if exception is not None or app.builder.format != "html":
+		return
+	env = app.env
+	title = lambda doc: env.titles[doc].astext()
+	suffix = lambda doc: os.path.splitext(env.doc2path(doc, False))[1]
+	lines = [
+		"# DKubeX Documentation",
+		"",
+		"> Documentation for DKubeX, a Kubernetes-native platform for deploying, managing and "
+		"operating AI and ML applications from a single control plane.",
+		"",
+		f"Each link is the Markdown source of a page; the page itself is at {html_baseurl}<path>.html.",
+	]
+	def walk(doc):
+		lines.append(f"- [{title(doc)}]({html_baseurl}_sources/{doc}{suffix(doc)}.txt)")
+		for child in env.toctree_includes.get(doc, []):
+			walk(child)
+	for section in env.toctree_includes.get(app.config.root_doc, []):
+		lines += ["", f"## {title(section)}", ""]
+		walk(section)
+	with open(os.path.join(app.outdir, "llms.txt"), "w", encoding="utf-8") as f:
+		f.write("\n".join(lines) + "\n")
+
+
 # Register context and post-build normalization hooks.
 def setup(app):
 	app.connect("source-read", auto_app_toctree)
@@ -352,3 +423,5 @@ def setup(app):
 	# High priority => runs after sphinx-multiversion's own context handler.
 	app.connect("html-page-context", prepare_nav_versions, priority=900)
 	app.connect("build-finished", fix_version_html)
+	app.connect("build-finished", write_redirects)
+	app.connect("build-finished", write_llms_txt)

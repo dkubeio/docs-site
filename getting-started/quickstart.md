@@ -1,7 +1,7 @@
 # Quickstart
 
 This quickstart takes you from a fresh login to chatting with a live model in a few minutes. It
-assumes DKubeX is already [installed](installation.md) and that an administrator has given you access
+assumes DKubeX is already [installed](../install/installation.md) and that an administrator has given you access
 to **ModelStudio**.
 
 By the end you will have logged in, deployed a language model onto the cluster, and sent it a prompt.
@@ -35,7 +35,7 @@ deploy a small language model from the LLM Catalog.
 
 :::{tip}
 Start with a small model the first time. Larger models need more memory or a GPU node, and take
-longer to pull and start. See [Hardware requirements](installation.md#hardware-requirements)
+longer to pull and start. See [Hardware requirements](../install/installation.md#hardware-requirements)
 for sizing guidance.
 :::
 

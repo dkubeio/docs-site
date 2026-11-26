@@ -23,4 +23,4 @@ Use this to check a user's workspace status and resource usage across the cluste
 ## Next steps
 
 - [User Management](user-management.md): manage user accounts
-- [Troubleshooting](../getting-started/troubleshooting.md#workspace-and-coding-agents): workspace and coding agent problems
+- [Troubleshooting](../reference/troubleshooting.md#workspace-and-coding-agents): workspace and coding agent problems
