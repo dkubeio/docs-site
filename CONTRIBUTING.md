@@ -218,6 +218,15 @@ Supported options include `:autoplay:`, `:loop:`, `:muted:`, `:poster:`, `:width
 
 Recommended video formats: `.mp4` (H.264) for broad browser support, or `.webm`.
 
+### Terms and the Glossary
+
+The docs site has a Glossary page (`getting-started/glossary.md`, live at
+https://dkubex2.dkube.io/getting-started/glossary.html). When a page you add or change introduces a term
+or abbreviation that is not already in the Glossary, add it there in the same change: give its meaning in
+the words your page already uses, and link to the page that explains it. Glossary entries restate what the
+docs say; they never add new facts. App-repo authors without access to docs-site can ask the docs team to
+add the entry.
+
 ---
 
 ## Notes
