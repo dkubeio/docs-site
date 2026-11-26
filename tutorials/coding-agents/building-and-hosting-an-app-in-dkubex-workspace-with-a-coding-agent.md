@@ -24,7 +24,7 @@ or
 </div>
 ```
 
-> 📺 Prefer to watch? See the walkthrough on YouTube: <https://youtu.be/fq3Kubvw_wc>
+> 📺 Video walkthrough on YouTube: <https://youtu.be/fq3Kubvw_wc>
 
 ## Prerequisites
 
@@ -45,14 +45,14 @@ than of any one agent, the flow is identical whichever coding agent you open.
 
 ## Build and host in your workspace
 
-### Step 1 — Open a coding agent
+### Step 1: Open a coding agent
 
 From the workspace launcher, open a coding agent (for example, **Claude Code**). Any of the workspace's
 coding agents that carry the skill work — Claude Code, Codex, OpenCode, Copilot CLI, Mistral Vibe,
 Hermes, Pi, and OpenClaw — and the dkubex-app skill behaves the same across all of them. Antigravity has
 no skills support, so it does not get the dkubex-app skill.
 
-### Step 2 — Describe the app you want built
+### Step 2: Describe the app you want built
 
 Give the agent a prompt describing what the app should do — because it already has the dkubex-app
 skill, the agent takes care of hosting and publishing.
@@ -72,7 +72,7 @@ reference `@document_extraction_specs.md`:
 
 Then give the agent this prompt:
 
-```
+```text
 Build a dkubex app for PDF document extraction using the specification in
 `@document_extraction_specs.md`. Implement the complete application described
 in the specification.
@@ -102,7 +102,7 @@ easy to review or hand off. But it's optional — for a small app you can descri
 the prompt and the flow is the same.
 :::
 
-### Step 3 — Open your app from the Apps page
+### Step 3: Open your app from the Apps page
 
 When the build finishes, the app is already live and published. Go to the DKubeX **Apps** page and
 you'll find a new tile with your app's name, alongside the platform's built-in apps. Click it to open
@@ -131,7 +131,7 @@ workspace before you publish it to the App Store. Use either of these options.
 1. Open the same coding agent you used to build the development app.
 2. Prompt the agent:
 
-   ```
+   ```text
    Unregister the application and stop the development server.
    ```
 
@@ -161,11 +161,11 @@ same **document data-extraction app** as the worked example.
   gh auth refresh -h github.com -s write:packages,read:packages
   ```
 
-### Step 1 — Package the app
+### Step 1: Package the app
 
 With the app built and GitHub authenticated, package it with the package-app skill. Prompt the agent:
 
-```
+```text
 /package-app package this app
 ```
 
@@ -173,33 +173,33 @@ The package-app skill creates the Helm chart and packages it — it generates th
 (`index.yaml`) and the packaged chart (`.tgz`), wiring in any platform resources the app uses. It does
 not build or push the container images; you do that next.
 
-### Step 2 — Build and push the container images
+### Step 2: Build and push the container images
 
 Prompt the agent to build and push the images to your registry:
 
-```
+```text
 build and push the docker images using gh to my ghcr
 ```
 
-### Step 3 — Create the code repo and the Helm repo branch
+### Step 3: Create the code repo and the Helm repo branch
 
 Prompt the agent to publish the code and the Helm chart:
 
-```
+```text
 Also create a github repo and push this code. create a separate branch gh-pages for helm repo index with the helm package.tgz file
 ```
 
 This creates the code repository and a **`gh-pages`** branch that holds the Helm repository index
 (`index.yaml`) and the packaged chart (`.tgz`) file.
 
-### Step 4 — Copy the Helm repo raw URL
+### Step 4: Copy the Helm repo raw URL
 
 1. In GitHub, open the app's repository and switch to the **`gh-pages`** branch — for example,
    `https://github.com/<your-github-username>/document-extraction/tree/gh-pages`.
 2. Convert it to its **raw** URL. It must start with `https://raw.githubusercontent.com/…`, **not**
    `https://github.com/…`, and you must **remove the `tree` segment** from the path — for example:
 
-   ```
+   ```text
    https://raw.githubusercontent.com/<your-github-username>/document-extraction/gh-pages
    ```
 
@@ -209,13 +209,13 @@ removes it and reads `.../document-extraction/gh-pages`. Leaving `tree` in the U
 resolving the repository.
 ```
 
-### Step 5 — Create a classic token for DKubeX
+### Step 5: Create a classic token for DKubeX
 
 DKubeX uses a token to download and install the chart, so create a **classic** personal access token
 with **`repo`** and **`read:packages`** access (GitHub → **Settings → Developer settings → Personal
 access tokens → Tokens (classic)**).
 
-### Step 6 — Add the repository in DKubeX
+### Step 6: Add the repository in DKubeX
 
 1. In the admin console, open **Applications → Manage Repositories → Add Repository**.
 2. Fill in:
@@ -230,13 +230,13 @@ access tokens → Tokens (classic)**).
 Your application now appears in the admin console under **Applications → Browse Catalog**, tagged with
 this repository, and in every user's **App Store**.
 
-### Step 7 — Install the application
+### Step 7: Install the application
 
 1. In the admin console → **Applications → Browse Catalog**, find your app and click **Install**.
    DKubeX handles the port and adds the app's tile.
 2. Track the install on the **Applications** tab until it is **Ready**.
 
-### Step 8 — Give users access
+### Step 8: Give users access
 
 1. On the **Applications** tab, open **Actions** on the installed app → **Manage Users & Roles**.
 2. Assign users and choose each user's role (**User** or **Admin**).

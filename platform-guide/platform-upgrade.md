@@ -29,3 +29,9 @@ installer namespace (`dkubex`), then retry the upgrade:
 ```bash
 helm rollback dkubex-installer -n dkubex
 ```
+
+## Next steps
+
+- [Configuration](configuration.md): enable and configure platform components
+- [Helm Values Reference](../getting-started/helm-values.md): the installer chart's values
+- [Architecture & Specifications](architecture-and-specifications.md): system requirements

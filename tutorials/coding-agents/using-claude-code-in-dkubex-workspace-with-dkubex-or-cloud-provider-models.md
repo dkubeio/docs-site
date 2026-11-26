@@ -26,7 +26,7 @@ drive a coding agent with a locally-deployed model, use a different agent such a
 </div>
 ```
 
-> 📺 Prefer to watch? See the walkthrough on YouTube: <https://youtu.be/5DJhP9rYS6o>
+> 📺 Video walkthrough on YouTube: <https://youtu.be/5DJhP9rYS6o>
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ drive a coding agent with a locally-deployed model, use a different agent such a
   - a **cloud provider added in SecureLLM** (such as Anthropic, OpenAI, or OpenRouter), which
     exposes that provider's models to you.
 
-## Step 1 — Make a model available
+## Step 1: Make a model available
 
 Choose one of the following so a model shows up under your key:
 
@@ -47,7 +47,7 @@ Choose one of the following so a model shows up under your key:
   its models become available to your key. See
   [Configuring and enabling AI providers in SecureLLM](../end-to-end-workflows/llm-governing/configuring-and-enabling-ai-providers-in-securellm.md).
 
-## Step 2 — Set the workspace default model
+## Step 2: Set the workspace default model
 
 The workspace default model is what the coding agent uses. Open **Profile → Settings → Workspace**.
 The **Default model** starts at **None**, which injects no model settings and lets each agent use
@@ -83,7 +83,7 @@ model settings take effect.
 The selected default model. Click Apply and restart to roll it out.
 ```
 
-## Step 3 — Open Claude Code and confirm the model
+## Step 3: Open Claude Code and confirm the model
 
 Wait for the workspace pod to finish restarting, then open **Claude Code**. Run the `/model` command
 to confirm which model the agent is using — you should see your default model listed as the active

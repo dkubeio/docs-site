@@ -23,3 +23,9 @@ The user is assigned to the application with the chosen role and can open it on 
 2. Click **Dismiss**.
 
 The request is closed without granting access. The user is not assigned to the application.
+
+## Next steps
+
+- [Application Management](application-management.md#manage-users-and-roles-for-an-application): manage users and roles for an application
+- [User Management](user-management.md#assign-application-roles-to-a-user): assign application roles to a user
+- [Licensing](licensing.md#view-license-details-and-seats): view license details and seats

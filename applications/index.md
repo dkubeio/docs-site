@@ -1,22 +1,7 @@
 # Applications
 
-The Applications section provides user documentation for applications integrated with DKubeX.
+User guides for the applications integrated with DKubeX. Each guide covers the application's overview and capabilities, getting started and deployment, day-to-day workflows, integration and configuration references, and troubleshooting and operational notes.
 
-These guides are focused on practical usage, including setup, configuration, common workflows, and operational best practices for each integrated application.
-
-## What You Will Find
-
-- Application overviews and capabilities
-- Getting started and deployment guidance
-- Day-to-day usage workflows
-- Integration and configuration references
-- Troubleshooting and operational notes
-
-## How to Use This Section
-
-1. Start with the application you are currently using.
-2. Read the overview page to understand scope and supported workflows.
-3. Follow getting-started and user-guide pages in sequence.
-4. Use architecture, deployment, and API pages as needed for advanced scenarios.
+Start with the application you are using: read its overview page to understand its scope and supported workflows, follow its getting-started and user-guide pages in sequence, and use its architecture, deployment and API pages as needed for advanced scenarios.
 
 ## Contents

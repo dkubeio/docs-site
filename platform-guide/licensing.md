@@ -54,3 +54,9 @@ Resolving a request acknowledges it; grant the user access or free a seat separa
 |---|---|
 | Per license | **active**, **expiring soon** (≤ 30 days left), **expired** |
 | Per application | **trial**, **licensed**, **expired**, **none** |
+
+## Next steps
+
+- [Application Management](application-management.md): install and manage applications
+- [User Management](user-management.md#assign-application-roles-to-a-user): assign application roles to a user
+- [Access Requests](access-requests.md): approve or dismiss requests for access to an application

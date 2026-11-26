@@ -60,3 +60,10 @@ assign the user from the application instead — see
 2. Confirm.
 
 You cannot delete your own account, so the option does not appear on your own row.
+
+## Next steps
+
+- [Application Management](application-management.md#manage-users-and-roles-for-an-application): manage users and roles for an application
+- [Access Requests](access-requests.md): approve or dismiss requests for access to an application
+- [Licensing](licensing.md#view-license-details-and-seats): view license details and seats
+- [Workspaces](workspaces.md): view and manage per-user developer workspaces

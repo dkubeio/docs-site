@@ -6,7 +6,7 @@ to **ModelStudio**.
 
 By the end you will have logged in, deployed a language model onto the cluster, and sent it a prompt.
 
-## 1. Log in
+## Step 1: Log in
 
 1. Open your DKubeX platform URL in a web browser. The URL will be your node's IP address, for example:
    `https://192.168.2.45/`.
@@ -17,14 +17,14 @@ By the end you will have logged in, deployed a language model onto the cluster, 
 You are now authenticated across every DKubeX application through single sign-on — you will not be
 asked to log in again when you open an app.
 
-## 2. Open ModelStudio
+## Step 2: Open ModelStudio
 
 Click the **ModelStudio** tile in your **Work** section. It opens in place, already authenticated.
 
 ModelStudio is where you discover, deploy, and run inference on models. For this quickstart you will
 deploy a small language model from the LLM Catalog.
 
-## 3. Deploy a model
+## Step 3: Deploy a model
 
 1. Go to the **LLM Catalog**.
 2. Browse the **Trending** or **Most Downloaded** tabs, or search HuggingFace for a small
@@ -39,7 +39,7 @@ longer to pull and start. See [Hardware requirements](installation.md#hardware-r
 for sizing guidance.
 :::
 
-## 4. Chat with it
+## Step 4: Chat with it
 
 1. Open the **Playground**.
 2. Select your deployed model from the dropdown at the top.

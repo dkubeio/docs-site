@@ -14,7 +14,7 @@ Keep **replicas at 1** — replicas are separate copies of the model, which is n
 - Access to **ModelStudio**.
 - A node with **N GPUs** available.
 
-## Step 1 — Create a resource profile with N GPUs
+## Step 1: Create a resource profile with N GPUs
 
 1. In ModelStudio, open **Resource Profiles** → **New Profile**.
 2. Set:
@@ -28,14 +28,14 @@ Keep **replicas at 1** — replicas are separate copies of the model, which is n
    | **GPU node target** *(optional)* | Pin the node type if the cluster has mixed GPU hardware. |
 3. Click **Save Profile** (KubeAI restarts briefly).
 
-## Step 2 — Deploy across the GPUs
+## Step 2: Deploy across the GPUs
 
 1. Open **LLM Catalog**, select the model → **Deploy**.
 2. On the **Deploy** tab, set **Inference Engine** to **vLLM**, check **Use GPU**, and select the
    profile you created. Keep **Min/Max replicas = 1**.
 3. Open the **Advanced** tab → **Additional args**.
 4. Add the following vLLM argument, setting the value to your GPU count (**N**):
-   ```
+   ```text
    --tensor-parallel-size=2
    ```
    This is an internal vLLM parameter that makes the model use all N GPUs in the profile.
