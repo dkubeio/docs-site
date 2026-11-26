@@ -16,7 +16,7 @@ Only three DKubeX applications are used in this tutorial: **Terminal**, **MLflow
 - Access to a DKubeX workspace with the **Terminal**, **MLflow**, and **ModelStudio**
   applications enabled.
 - An MLflow tracking token. In a DKubeX workspace this is supplied automatically as a file
-  (see [Step 2](#step-2--configure-the-environment-variables)).
+  (see [Step 2](#step-2-configure-the-environment-variables)).
 
 ## The Example
 
@@ -34,7 +34,7 @@ before training.
 | `region` | categorical | `0` = southwest, `1` = southeast, `2` = northwest, `3` = northeast |
 | `charges` | numeric | target (predicted value) |
 
-## Step 1 — Get the example and set up the environment
+## Step 1: Get the example and set up the environment
 
 Open the **Terminal** application in your workspace. You start in your home directory with a
 prompt similar to `admin@workspace-0:~$`.
@@ -55,7 +55,7 @@ source myenv/bin/activate
 
 Creating the environment reports the Python version and location, for example:
 
-```
+```text
 Using CPython 3.11.15
 Creating virtual environment at: myenv
 Activate with: source myenv/bin/activate
@@ -71,7 +71,7 @@ cd docs-site/insurance
 ls
 ```
 
-```
+```text
 deploy.py       deploy_snow.py         pre_processed.csv  predict.sh
 preprocess.py   preprocessing_snow.py  train.py           training_snow.py
 ```
@@ -87,7 +87,7 @@ uv pip install mlflow==2.22.4 scikit-learn
 
 MLflow is pinned to `2.22.4` for compatibility with the tracking server.
 
-## Step 2 — Configure the environment variables
+## Step 2: Configure the environment variables
 
 `train.py` reads three environment variables. Export them before running the script:
 
@@ -108,11 +108,11 @@ export MLFLOW_TRACKING_TOKEN=$(cat $MLFLOW_TOKEN_PATH)
   echo $MLFLOW_TOKEN_PATH
   ```
 
-  ```
+  ```text
   /mnt/secrets/mlflow/token
   ```
 
-## Step 3 — Train the model
+## Step 3: Train the model
 
 Run the training script:
 
@@ -123,7 +123,7 @@ python train.py
 The script loads the dataset, creates the MLflow experiment, trains the model, logs the metrics
 and the model artifact to MLflow, and registers a new model version. Sample output:
 
-```
+```text
 Loading: ./pre_processed.csv
 Creating MLflow experiment: ins_demo_exp
 Training started...
@@ -146,7 +146,7 @@ The two evaluation metrics reported are:
 The model is registered automatically as version `1` of `ins_model`. Running the script again
 creates the next version.
 
-## Step 4 — Inspect the run in MLflow
+## Step 4: Inspect the run in MLflow
 
 Open the **MLflow** application.
 
@@ -156,7 +156,7 @@ Open the **MLflow** application.
 - On the **Models** tab, under **Registered Models**, open `ins_model`. The **Versions** section
   lists **Version 1**, which was registered by the training run.
 
-## Step 5 — Deploy the model in ModelStudio
+## Step 5: Deploy the model in ModelStudio
 
 Open the **ModelStudio** application.
 
@@ -173,12 +173,12 @@ Open the **ModelStudio** application.
      memory if you need more.
 5. Click **Deploy**.
 
-## Step 6 — Confirm the deployment
+## Step 6: Confirm the deployment
 
 In the top navigation bar, go to **ML Models**. The new deployment
 `ins_model-v1` appears in the list. Wait until its status is **Ready** with **1/1 replicas**.
 
-## Step 7 — Run inference
+## Step 7: Run inference
 
 In the top navigation bar, go to **Playground**.
 

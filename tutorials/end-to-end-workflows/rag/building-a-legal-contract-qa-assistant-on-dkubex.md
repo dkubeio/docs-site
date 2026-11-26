@@ -18,7 +18,7 @@ works the same way.
 </div>
 ```
 
-> 📺 Prefer to watch? See the walkthrough on YouTube: <https://youtu.be/z8aAHbcDO5A>
+> 📺 Video walkthrough on YouTube: <https://youtu.be/z8aAHbcDO5A>
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@ works the same way.
   from the [dataset download page](https://stanfordnlp.github.io/contract-nli/#download)) and
   unzip it on your computer.
 
-## Step 1 — Deploy the models in ModelStudio
+## Step 1: Deploy the models in ModelStudio
 
 RAGFlow needs two models: a **chat** model to write answers and an **embedding** model to index
 and retrieve document chunks. Deploy both in ModelStudio, each on a **GPU** resource profile for
@@ -45,7 +45,7 @@ For the full deployment walkthrough — creating a resource profile, choosing th
 and setting deployment arguments — see
 [Deploying Models on DKubeX Using ModelStudio](../model-management/index.md).
 
-## Step 2 — Connect the models in RAGFlow
+## Step 2: Connect the models in RAGFlow
 
 RAGFlow reaches the models through the SecureLLM gateway using your default DKubeX user key, so
 every model you have access to appears automatically.
@@ -57,7 +57,7 @@ every model you have access to appears automatically.
    - **LLM** — your chat model (`qwen3-8b`)
    - **Embedding** — your embedding model (`bge-m3`)
 
-## Step 3 — Create the knowledge base
+## Step 3: Create the knowledge base
 
 1. Go to **Dataset** and create a dataset. Give it a name (for example, `legal-contracts`), select
    your **embedding model** (`bge-m3`), and choose a **chunking method** (**General** works well for
@@ -69,7 +69,7 @@ every model you have access to appears automatically.
    uploading, then **Save**. Otherwise, select the uploaded files and click **Parse**.
 4. When parsing completes, open a file to review its **chunks**.
 
-## Step 4 — Create the chat assistant
+## Step 4: Create the chat assistant
 
 1. Go to **Chat** and click **Create chat**. Name the assistant (for example, `legal-chat`), then
    open its settings.
@@ -116,7 +116,7 @@ FORMAT RULES:
 </context>
 ```
 
-## Step 5 — Try some questions
+## Step 5: Try some questions
 
 Ask a few questions in the chat and check that each answer cites specific legal contracts:
 
@@ -127,7 +127,7 @@ Ask a few questions in the chat and check that each answer cites specific legal 
 5. What is the difference between a unilateral and mutual NDA?
 6. What are some common exceptions to confidential information clauses?
 
-## Step 6 — Monitor usage in SecureLLM
+## Step 6: Monitor usage in SecureLLM
 
 Every request the assistant makes is routed through SecureLLM and recorded there.
 

@@ -74,3 +74,9 @@ the deployment. It shows **Applying configuration** ("Processing… This can tak
 this window does not stop the deployment."), then **Deployment completed** ("The configuration was
 applied successfully.") or **Deployment failed** ("The deployment did not complete. See the logs
 below.").
+
+## Next steps
+
+- [User Management](user-management.md): manage user accounts and sign-in modes
+- [Platform Upgrade](platform-upgrade.md): upgrade DKubeX in place; component toggles are preserved
+- [Application Management](application-management.md): install and manage applications

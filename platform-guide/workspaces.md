@@ -19,3 +19,8 @@ Each workspace row shows:
 3. Open the **⋮** menu on the row to act on that workspace.
 
 Use this to check a user's workspace status and resource usage across the cluster.
+
+## Next steps
+
+- [User Management](user-management.md): manage user accounts
+- [Troubleshooting](../getting-started/troubleshooting.md#workspace-and-coding-agents): workspace and coding agent problems

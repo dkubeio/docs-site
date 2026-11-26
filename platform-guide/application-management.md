@@ -65,3 +65,9 @@ The catalog aggregates applications from the registered Helm repositories.
 
 Newly added repositories' applications appear in **Browse Catalog** (the catalog refreshes
 periodically; use the refresh control to update immediately).
+
+## Next steps
+
+- [Access Requests](access-requests.md): approve or dismiss requests for access to an application
+- [Licensing](licensing.md): add and manage the licenses applications need
+- [Configuration](configuration.md#rotate-credentials): rotate the Helm Repository Token used to pull application charts
