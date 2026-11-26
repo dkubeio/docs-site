@@ -1,4 +1,4 @@
-# Applications
+# Use DKubeX
 
 User guides for the applications integrated with DKubeX. Each guide covers the application's overview and capabilities, getting started and deployment, day-to-day workflows, integration and configuration references, and troubleshooting and operational notes.
 

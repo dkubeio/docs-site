@@ -7,14 +7,14 @@ myst:
 
 # Helm Values Reference
 
-These are the values of the `dkubex-installer` chart you install in [Installation](installation.md).
+These are the values of the `dkubex-installer` chart you install in [Installation](../install/installation.md).
 Pass them with `--set key=value` (or `--set-file` for certificates) on `helm install`. The defaults
 below are the chart's own.
 
 ```{note}
 Components an admin toggles in the admin UI (NFS, cert-manager, TLS, auth and others) are
 stored in the installer ConfigMap, not in the Helm release values. Upgrade through the admin UI
-(see [Platform Upgrade](../platform-guide/platform-upgrade.md)): a bare
+(see [Platform Upgrade](../install/platform-upgrade.md)): a bare
 `helm upgrade dkubex-installer` resets the ConfigMap to the release values and loses those toggles.
 ```
 
@@ -22,8 +22,8 @@ stored in the installer ConfigMap, not in the Helm release values. Upgrade throu
 
 | Value | Default | What it does |
 |---|---|---|
-| `admin.email` | `admin@local.com` | Admin email. See [Admin account](installation.md#admin-account). |
-| `admin.password` | none | Admin password. Not in the chart's values file; if you omit it, the installer generates a random one. See [Admin account](installation.md#admin-account). |
+| `admin.email` | `admin@local.com` | Admin email. See [Admin account](../install/installation.md#admin-account). |
+| `admin.password` | none | Admin password. Not in the chart's values file; if you omit it, the installer generates a random one. See [Admin account](../install/installation.md#admin-account). |
 | `domain` | `""` | DKubeX domain. |
 | `auth.enabled` | `false` | Turns auth on or off. |
 | `auth.provider` | `github` | Auth provider. |
@@ -40,8 +40,8 @@ stored in the installer ConfigMap, not in the Helm release values. Upgrade throu
 |---|---|---|
 | `registry.server` | `ghcr.io` | Registry server. |
 | `registry.username` | `dkubeio` | Registry username. |
-| `registry.token` | `""` | Registry token. Without it no pull secret is created and the installer Job sits in `ImagePullBackOff`. See [Tokens](installation.md#tokens). |
-| `dkubex.env.helm_token` | `""` | GitHub token for helm-charts repository access. See [Tokens](installation.md#tokens). |
+| `registry.token` | `""` | Registry token. Without it no pull secret is created and the installer Job sits in `ImagePullBackOff`. See [Tokens](../install/installation.md#tokens). |
+| `dkubex.env.helm_token` | `""` | GitHub token for helm-charts repository access. See [Tokens](../install/installation.md#tokens). |
 | `dkubex.env.helm_url` | `https://raw.githubusercontent.com/dkubeio/helm-charts/main` | Helm repository URL. |
 | `kyverno.enabled` | `true` | Kyverno clones the registry pull secret into user and application namespaces labeled `dkubex.io/managed-by=dkubex`. When disabled, the backend copies the secret into user namespaces and the dkubex chart renders it directly into `dkubex-apps`. |
 
@@ -49,7 +49,7 @@ stored in the installer ConfigMap, not in the Helm release values. Upgrade throu
 
 | Value | Default | What it does |
 |---|---|---|
-| `postgres.enabled` | `true` | In-cluster PostgreSQL. Set `false` to use an external server instead and point `db_url` at it; see [External PostgreSQL](installation.md#external-postgresql). |
+| `postgres.enabled` | `true` | In-cluster PostgreSQL. Set `false` to use an external server instead and point `db_url` at it; see [External PostgreSQL](../install/installation.md#external-postgresql). |
 | `postgres.db_user`, `postgres.db_password` | `postgres`, `postgrespassword` | Credentials of the in-cluster server. Keep `db_url` in sync with them. |
 | `postgres.image.repository`, `postgres.image.tag` | `dkubex123/bitnami-pgvector`, `pg16` | In-cluster PostgreSQL image. |
 | `postgres.tls.enabled` | `true` | Serves TLS with a chart-generated self-signed certificate. `db_url`'s `sslmode=require` makes DKubeX refuse plaintext; drop it from `db_url` if you disable this. |
@@ -72,7 +72,7 @@ stored in the installer ConfigMap, not in the Helm release values. Upgrade throu
 
 ## GPUs
 
-See [GPU nodes](installation.md#gpu-nodes) for when to change these.
+See [GPU nodes](../install/installation.md#gpu-nodes) for when to change these.
 
 | Value | Default | What it does |
 |---|---|---|
@@ -82,7 +82,7 @@ See [GPU nodes](installation.md#gpu-nodes) for when to change these.
 | `hami.devicePlugin.runtimeClassName` | `nvidia` | Runtime class name of the HAMi device plugin. |
 | `hami.devicePlugin.reportNodeCapacity` | `true` | Reports each node's total GPU memory and GPU cores in its capacity. Required wherever Karpenter provisions GPU nodes; also lets cluster-autoscaler size scale-ups from a live node. Unused with static pools. |
 | `gpuOperator.enabled` | `false` | GPU Operator. |
-| `cloudProvider` | `""` | Managed Kubernetes platform: empty (generic or on-premises), `aks`, `eks` or `gke`. Enables platform-specific workarounds in the installed charts. See [Cloud-specific notes](installation.md#cloud-specific-notes). |
+| `cloudProvider` | `""` | Managed Kubernetes platform: empty (generic or on-premises), `aks`, `eks` or `gke`. Enables platform-specific workarounds in the installed charts. See [Cloud-specific notes](../install/installation.md#cloud-specific-notes). |
 
 ## Observability and services
 
