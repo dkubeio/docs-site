@@ -2,7 +2,7 @@
 
 Langflow on DKubeX lets you promote any flow from the canvas into a standalone, always-on API endpoint running in the cluster. Each deployment gets its own Kubernetes pod, internal DNS name, and a ready-to-use cURL command.
 
-## How It Works
+## How it works
 
 When you deploy a flow, DKubeX:
 
@@ -11,9 +11,9 @@ When you deploy a flow, DKubeX:
 - Resolves any [Global Variables](./building-flows.md#variables-and-secrets) referenced by the flow and injects them as environment variables in the pod Secret.
 - Runs the same Langflow image as the main instance, so the deployed flow behaves identically.
 
-## Deploying a Flow
+## Deploying a flow
 
-### From the Flow Canvas (quickest)
+### From the flow canvas (quickest)
 
 
 ![Deploy flow button](./media/Langflow-flow-deploy-button.png)
@@ -35,7 +35,7 @@ When you deploy a flow, DKubeX:
 1. Click **Deployment** in the header tab switcher to open the Deployments table.
 2. Previously deployed flows are listed here. To deploy a new flow, return to the canvas and use the method above — there is no separate "new deployment" button in the table view.
 
-## The Deployments Table
+## The deployments table
 
 **Deployment Mode** shows a live table of all your deployments, updating every 5 seconds.
 
@@ -48,7 +48,7 @@ When you deploy a flow, DKubeX:
 | Status | Current state (see below) |
 | Actions | Three-dots menu: Logs, Edit Resources, Remove |
 
-### Deployment Status
+### Deployment status
 
 | Status | Meaning |
 |--------|---------|
@@ -57,7 +57,7 @@ When you deploy a flow, DKubeX:
 | **Failed** | Pod failed to start. Check logs via **⋯ → Logs**. |
 | **Removing** | Deletion in progress. Row disappears once Kubernetes finishes cleanup. |
 
-## Viewing Deployment Details
+## Viewing deployment details
 
 Click any row (when not in Removing state) to open the detail panel:
 
@@ -70,11 +70,11 @@ The deployment endpoint (`*.dkubex-apps.svc.cluster.local`) is accessible from w
 
 ![Deployment detail panel — API Access tab](./media/Langflow-api-access-tab.png)
 
-## Deployment Logs
+## Deployment logs
 
 Click **⋯** → **Logs** on any deployment row to view the last 500 lines of the pod's logs. Use this to diagnose `Failed` deployments.
 
-## Editing Resources and Environment Variables
+## Editing resources and environment variables
 
 Click **⋯** → **Edit Resources** (only available when `Deployed`) to:
 
@@ -83,7 +83,7 @@ Click **⋯** → **Edit Resources** (only available when `Deployed`) to:
 
 Saving triggers a rolling restart. The existing pod continues serving requests until the new one is ready.
 
-## Removing a Deployment
+## Removing a deployment
 
 Click **⋯ → Remove Deployment** and confirm the prompt. The row transitions to `Removing` and disappears once Kubernetes finishes cleanup.
 

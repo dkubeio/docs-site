@@ -2,7 +2,7 @@
 
 Flows are directed graphs of components. Each component performs a unit of work — loading data, calling an LLM, parsing output, etc. — and passes its result to the next component via typed connections.
 
-## The Canvas
+## The canvas
 
 
 ![Canvas overview](./media/Langflow-canvas.png)
@@ -13,7 +13,7 @@ Flows are directed graphs of components. Each component performs a unit of work 
 - **Multi-select** — Hold `Shift` and drag to select multiple components at once. Use `Ctrl/Cmd+C` and `Ctrl/Cmd+V` to duplicate a selection.
 - **Pan and zoom** — Scroll to zoom; click and drag the canvas background to pan. Use the minimap in the bottom corner for large flows.
 
-## Running a Flow
+## Running a flow
 
 
 ![Run component button](./media/Langflow-run-component.png) 
@@ -25,7 +25,7 @@ Flows are directed graphs of components. Each component performs a unit of work 
 ![API Access modal](./media/Langflow-api-access.png)
 
 
-## Configuring Components
+## Configuring components
 
 
 ![Component side panel](./media/Langflow-side_panel-global_variables.png)
@@ -39,7 +39,7 @@ Some fields support **Global Variable** references — click the globe icon in a
 
 ![Component code](./media/Langflow-component-code.png)
 
-## Variables and Secrets
+## Variables and secrets
 
 ![Global variables](./media/Langflow-global-variables.png) 
 
@@ -54,7 +54,7 @@ When deploying a flow that uses global variables, those variables must be define
 :::
 
 
-## Flow Properties
+## Flow properties
 
 ![Flow menu](./media/Langflow-flow-menu.png) 
 
@@ -65,7 +65,7 @@ When deploying a flow that uses global variables, those variables must be define
 
 ![Export flow](./media/Langflow-export-flow.png)
 
-## Organizing Flows into Projects
+## Organizing flows into projects
 
 Flows live inside **projects** (folders). Create a project from the main flows page. 
 

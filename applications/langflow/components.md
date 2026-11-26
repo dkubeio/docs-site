@@ -20,7 +20,7 @@ Components are the building blocks of a flow. Langflow ships with a wide catalog
 
 ![Component categories](./media/Langflow-component-categories.png)
 
-## SecureLLM Models
+## SecureLLM models
 
 On DKubeX, language and embedding models come from the **SecureLLM** service running in the same cluster. Use them through Langflow's standard model components:
 
@@ -42,12 +42,12 @@ On DKubeX, language and embedding models come from the **SecureLLM** service run
 If a model you expect is missing, enable it under **Settings → Model Providers → SecureLLM**. If SecureLLM lists no embedding models, ask your cluster administrator to add one in SecureLLM.
 :::
 
-## Configuring Any Component
+## Configuring any component
 
 1. Fill in required fields (marked with `*`).
 2. Use the **Code** tab to view or customize the underlying Python code.
 3. Click a component on the canvas to open its side panel, containing the advanced options.
 
-## Custom Components
+## Custom components
 
 You can create your own component by either modifying the code of an existing component, or by clicking on **New Custom Component** to build a custom component from scratch.

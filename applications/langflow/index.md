@@ -14,7 +14,7 @@ Langflow on DKubeX is a visual AI workflow builder integrated directly into the 
 - **Version history** — Every save is a revision. Roll back to any previous version at any time.
 - **Theme sync** — Follows your DKubeX platform theme (light, dark, or system).
 
-## Tutorials
+## Guides
 
 - [Getting started](./getting-started.md) — Launch Langflow, build your first flow, and use SecureLLM models.
 - [Building flows](./building-flows.md) — Canvas navigation, component configuration, variables, and version control.

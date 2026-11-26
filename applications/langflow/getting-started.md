@@ -14,7 +14,7 @@ Langflow is a visual workflow builder for AI-powered agents and pipelines. On DK
 3. The Langflow canvas loads with the DKubeX header pinned to the top.
 
 
-## The DKubeX Header
+## The DKubeX header
 
 The header at the top of every page provides:
 
@@ -25,7 +25,7 @@ The header at the top of every page provides:
 
 ![Langflow with the DKubeX header](./media/Langflow-ss-1.png)
 
-## Creating Your First Flow
+## Creating your first flow
 
 1. Click **New Flow** from the projects list.
 2. Choose a blank canvas or a starter template.
@@ -36,7 +36,7 @@ The header at the top of every page provides:
 
 ![Simple flow on the canvas](./media/Langflow-canvas.png)
 
-## Using SecureLLM Models
+## Using SecureLLM models
 
 DKubeX connects Langflow to the cluster-local **SecureLLM** service. Your SecureLLM API key is set up automatically from your DKubeX account the first time you open Langflow — there is nothing to enter.
 
@@ -46,7 +46,7 @@ DKubeX connects Langflow to the cluster-local **SecureLLM** service. Your Secure
 
 See [Components](./components.md#securellm-models) for details.
 
-## Next Steps
+## Next steps
 
 - Learn [canvas basics and flow authoring](./building-flows.md).
 - Browse the full [component catalog](./components.md).
