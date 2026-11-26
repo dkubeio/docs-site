@@ -45,7 +45,9 @@ An embedding model converts chunks into embeddings. On DKubeX, choose an embeddi
 
 The embedding model **cannot be changed once the dataset has chunks** — to switch, you must first delete all existing chunks in the dataset. This ensures every file in a dataset is embedded in the same embedding space.
 
-> **Note:** Some embedding models are optimized for specific languages, so performance may be compromised if you use them to embed documents in other languages.
+:::{note}
+Some embedding models are optimized for specific languages, so performance may be compromised if you use them to embed documents in other languages.
+:::
 
 ### Select a PDF parser
 
@@ -61,13 +63,17 @@ The **PDF parser** dropdown appears only when you select a chunking method compa
 - **Docling** — (Experimental) An open-source document processing tool for gen AI.
 - A third-party visual model from a model provider.
 
-> **Note:** To use a third-party visual model, set a default VLM under **Set default models** on the **Model providers** page. Third-party visual models are marked **Experimental**.
+:::{note}
+To use a third-party visual model, set a default VLM under **Set default models** on the **Model providers** page. Third-party visual models are marked **Experimental**.
+:::
 
 ### Enable Excel to HTML
 
 When using the **General** chunking method, enable the **Excel to HTML** toggle to convert spreadsheet files into HTML tables. If disabled, spreadsheet tables are represented as key-value pairs. For complex tables (multiple columns, merged cells, or multiple tables in one sheet) that cannot be represented that way, enable this feature.
 
-> **Warning:** This feature is disabled by default and applies only to spreadsheet files (XLSX or XLS). If your dataset has complex tables and you do not enable it, RAGFlow will not error, but your tables are likely to be garbled. When enabled, spreadsheet tables with more than 12 rows are split into chunks of 12 rows each.
+:::{warning}
+This feature is disabled by default and applies only to spreadsheet files (XLSX or XLS). If your dataset has complex tables and you do not enable it, RAGFlow will not error, but your tables are likely to be garbled. When enabled, spreadsheet tables with more than 12 rows are split into chunks of 12 rows each.
+:::
 
 ### Set a parent-child chunking strategy
 
@@ -91,7 +97,9 @@ If you want information from certain datasets to take precedence during retrieva
 
 On the **Configuration** page, drag the **Page rank** slider (or type a value in the field next to it).
 
-> **Note:** Page rank operates at the level of the entire dataset, not individual files. The value must be an integer in the range [0, 100] — `0` disables it (default), a specific value enables it.
+:::{note}
+Page rank operates at the level of the entire dataset, not individual files. The value must be an integer in the range [0, 100] — `0` disables it (default), a specific value enables it.
+:::
 
 **Scoring:** If a chat assistant's **similarity threshold** is 0.2, only chunks with a hybrid score above 0.2 × 100 = 20 are retrieved. If dataset A has page rank 1 and dataset B has 0, a chunk from A with an initial score of 50 gets a boost of 1 × 100 = 100, for a final score of 150 — so chunks from A always precede chunks from B.
 
@@ -100,7 +108,9 @@ On the **Configuration** page, drag the **Page rank** slider (or type a value in
 - RAGFlow's File system lets you link one file to multiple datasets, where each dataset holds a *reference* to the file.
 - In a dataset you can also upload a single file or a folder (bulk upload) from your local machine, in which case the dataset holds file *copies*.
 
-> We recommend uploading files to RAGFlow's File system and then linking them to your datasets. That way you can delete parsed files or a whole dataset without permanently losing the originals.
+:::{note}
+We recommend uploading files to RAGFlow's File system and then linking them to your datasets. That way you can delete parsed files or a whole dataset without permanently losing the originals.
+:::
 
 File parsing does two things: chunking files based on layout, and building embedding and full-text (keyword) indexes on those chunks. After selecting the chunking method and embedding model, start parsing:
 
@@ -123,7 +133,9 @@ RAGFlow lets you view chunking results and intervene where necessary:
 
 4. In **Retrieval testing**, ask a quick question in **Test text** to confirm your configuration works.
 
-> **Note:** Adding keywords to a chunk increases its keyword weight and can improve its position in the search list for queries containing those keywords.
+:::{note}
+Adding keywords to a chunk increases its keyword weight and can improve its position in the search list for queries containing those keywords.
+:::
 
 ## Manage metadata
 
@@ -138,7 +150,9 @@ From v0.23.0 onward, you can manage metadata at the dataset level and for indivi
 
    ![set metadata](./media/set_metadata.jpg)
 
-   > **Note:** Metadata must be in JSON format, otherwise your updates will not be applied.
+   :::{note}
+   Metadata must be in JSON format, otherwise your updates will not be applied.
+   :::
 
 4. Use the **Filter** button in a dataset to see how many files are linked to each metadata value and to display those files.
 
@@ -156,7 +170,9 @@ From v0.23.0 onward, you can manage metadata at the dataset level and for indivi
 
 A **tag set** automatically maps user-defined tags to relevant chunks based on similarity — an extra layer of domain knowledge, useful when many chunks are so similar that the intended ones are hard to distinguish (e.g. a few chunks about "iPhone" among many about "iPhone case").
 
-> **Important:** A tag set is *not* involved in indexing or retrieval directly. Do not select a tag set when configuring a chat assistant or agent.
+:::{important}
+A tag set is *not* involved in indexing or retrieval directly. Do not select a tag set when configuring a chat assistant or agent.
+:::
 
 **1. Create a tag set.** Prepare a tag table file (XLSX, CSV, or TXT) with two columns — **Description** (example chunks or queries; similarity is computed against each chunk) and **Tag** (tags to apply, comma-separated for multiple). Then:
 
@@ -189,20 +205,26 @@ The weight of vector similarity in the composite score. Default: **0.3**, making
 - If left empty, RAGFlow combines weighted keyword similarity with weighted vector cosine similarity.
 - If a rerank model is selected, weighted keyword similarity is combined with the weighted vector reranking score.
 
-> **Important:** Using a rerank model significantly increases response time.
+:::{important}
+Using a rerank model significantly increases response time.
+:::
 
 ### Cross-language search
 
 Select one or more target languages from the dropdown to have the default chat model translate your query into those languages, ensuring accurate semantic matching across languages.
 
-> **Note:** Ensure the selected languages are present in the dataset. If no target language is selected, the system searches only in the language of your query.
+:::{note}
+Ensure the selected languages are present in the dataset. If no target language is selected, the system searches only in the language of your query.
+:::
 
 ### Test text and procedure
 
 1. On the **Retrieval testing** page, enter your query in **Test text** and click **Testing**.
 2. If results are unsatisfactory, tune the options above and rerun.
 
-> **Warning:** Changes you make here (such as keyword similarity weight or similarity threshold) are not saved automatically. Apply them to your chat assistant settings or the **Retrieval** agent component settings.
+:::{warning}
+Changes you make here (such as keyword similarity weight or similarity threshold) are not saved automatically. Apply them to your chat assistant settings or the **Retrieval** agent component settings.
+:::
 
 ## Manage files
 
@@ -214,7 +236,9 @@ RAGFlow's file management lets you upload files individually or in bulk and link
 - **Link a file to datasets** — creates a reference in each target dataset. Deleting a file in file management automatically removes all related references across datasets.
 - **Move, search, rename, and delete** files or folders (search matches names in the current directory only).
 
-> Deleting files that have been linked to datasets **automatically removes** all associated references across those datasets.
+:::{note}
+Deleting files that have been linked to datasets **automatically removes** all associated references across those datasets.
+:::
 
 ## Search for and delete a dataset
 

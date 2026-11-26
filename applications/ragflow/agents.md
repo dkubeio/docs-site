@@ -23,7 +23,9 @@ RAGFlow also provides templates for different business scenarios. You can build 
 3. Click the **+** button on the **Begin** component to add the components you want in your workflow.
 4. Click **Save** to apply your changes.
 
-> Agents can use a **Memory** module to accumulate context across interactions — configured through the agent's **Retrieval** and **Message** components. Memory can also be shared with your team (see [Team & sharing](./team-and-sharing.md)).
+:::{note}
+Agents can use a **Memory** module to accumulate context across interactions — configured through the agent's **Retrieval** and **Message** components. Memory can also be shared with your team (see [Team & sharing](./team-and-sharing.md)).
+:::
 
 ## Quickstart: an e-commerce customer support agent
 

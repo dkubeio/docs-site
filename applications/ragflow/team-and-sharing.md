@@ -28,7 +28,9 @@ You are the owner of your own team and the only person who can invite or remove 
 
 When you receive an invitation, you are notified in the top-right corner of the page. Open the **Team** page (avatar → **Team**) to accept or decline it. After accepting, you can view and update the team owner's datasets whose **Permissions** are set to **Team**. You can also leave a team you have joined from the same page.
 
-> You cannot invite users to a team unless you are its owner.
+:::{note}
+You cannot invite users to a team unless you are its owner.
+:::
 
 ## Share your work
 
@@ -52,4 +54,6 @@ Nothing is shared automatically — you enable sharing per item by switching its
 2. Click **Configurations**.
 3. Change **Permissions** from **Only me** to **Team**, then **Save**.
 
-> Sharing chat assistants and sharing models are currently exclusive to RAGFlow's Enterprise edition.
+:::{note}
+Sharing chat assistants and sharing models are currently exclusive to RAGFlow's Enterprise edition.
+:::

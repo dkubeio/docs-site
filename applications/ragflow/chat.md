@@ -43,9 +43,11 @@ Then start chatting:
 
 ![chat assistant](./media/chat_thermal_solution.jpg)
 
-> **Tip:** Click the light-bulb icon above an answer to view the expanded system prompt (available for the current dialogue only), and scroll down it to see the time consumed for each task.
->
-> ![prompt display](./media/prompt_display.jpg)
+:::{tip}
+Click the light-bulb icon above an answer to view the expanded system prompt (available for the current dialogue only), and scroll down it to see the time consumed for each task.
+
+![prompt display](./media/prompt_display.jpg)
+:::
 
 ## Update an existing chat assistant
 
@@ -62,7 +64,9 @@ Variables let you dynamically adjust the system prompt.
 - **`{knowledge}`** — the system's reserved variable, representing the chunks retrieved from the datasets selected under **Assistant settings**. Keep it if your assistant is associated with datasets. From v0.17.0 onward you can chat without specifying datasets — in that case, remove `{knowledge}` and keep **Empty response** blank to avoid errors.
 - **Custom variables** — variables you define to pair with the system prompt. The **Optional** toggle controls whether a variable is required (disabled = mandatory, enabled = optional).
 
-> **Important:** Variables are closely linked to the system prompt. When you add a variable, include it in the system prompt; when you delete one, remove it from the prompt too, otherwise an error occurs.
+:::{important}
+Variables are closely linked to the system prompt. When you add a variable, include it in the system prompt; when you delete one, remove it from the prompt too, otherwise an error occurs.
+:::
 
 ## Deep research
 
@@ -86,4 +90,6 @@ An **AI search** is a single-turn conversation using a predefined retrieval stra
 
 Before using it, ensure your default models are set on the **Model providers** page (see [Using models on DKubeX](./models.md)) and that your datasets are configured and parsed.
 
-> **Tip:** When debugging a chat assistant, use AI search as a reference to verify your model settings and retrieval strategy. The key difference: a chat is multi-turn with configurable retrieval and model choice (and retrieved chunks are not shown alongside the answer), whereas an AI search is single-turn with a fixed strategy that lists the retrieved chunks.
+:::{tip}
+When debugging a chat assistant, use AI search as a reference to verify your model settings and retrieval strategy. The key difference: a chat is multi-turn with configurable retrieval and model choice (and retrieved chunks are not shown alongside the answer), whereas an AI search is single-turn with a fixed strategy that lists the retrieved chunks.
+:::
