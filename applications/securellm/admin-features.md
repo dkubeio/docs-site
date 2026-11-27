@@ -88,7 +88,7 @@ The **Guardrails** tab lists each guardrail's **ID**, **Name**, **Provider** (th
 4. Click **▶ Run Test**.
 5. Results show whether the guardrail triggered, what action it took (block / mask / warn), and how long it took to run.
 
-![SecureLLM Test Guardrails tab: the Select Guardrails list with prompt-injection, content-filter and output-content-filter and their modes, the Test Input box and the Run Test button](./media/securellm-test-guardrails.png)
+![SecureLLM Test Guardrails tab: the Select Guardrails list with prompt-injection, content-filter and output-content-filter and their modes, the Test Input box and the Run Test button](./media/securellm-guardrails-test.png)
 
 ## Guardrail Logs
 
