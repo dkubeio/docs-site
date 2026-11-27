@@ -41,11 +41,15 @@ If you suspect a key has been leaked or is no longer needed, revoke it right awa
 
 ## Models
 
-The Models page lists every AI model available to you through SecureLLM.
+The Models page lists every AI model available to you through SecureLLM: "Unique models across all configured providers. When multiple providers expose the same model it appears once, with all providers listed."
 
-- Use the **search bar** to find a specific model by name.
-- Use the **Provider** and **Category** filters to narrow the list (e.g., Chat, Reasoning, Embedding).
-- Click the **copy icon** next to a model name to copy its identifier — paste this directly into your code or tool.
+![SecureLLM Models page: Unique Models, Providers and Chat cards, the Search models box with the All providers and All categories filters, and the Chat group listing each model ID with its provider chips and price per 1M tokens](./media/securellm-models.png)
+
+- Cards at the top show the number of **Unique Models**, **Providers**, and models per category (for example **Chat**).
+- Use **Search models…** to find a specific model by name.
+- Use the **All providers** and **All categories** filters to narrow the list (e.g., Chat, Reasoning, Embedding). Models are grouped by category, each group with its model count.
+- Each row shows the **Model ID**, a chip for each provider that serves it (for example `dkubex/qwen2-5-7b-instruct`), and the **Price per 1M tokens (input / output)**.
+- Click the **copy icon** on a provider chip to copy the model's identifier — paste this directly into your code or tool.
 
 :::{note}
 If an admin has restricted your access, you will only see the models and providers your organization has made available to you.

@@ -32,11 +32,14 @@ Providers are the AI services SecureLLM connects to (e.g., OpenAI, Anthropic, or
 
 **Adding a provider:**
 
-1. Click **Providers** → **+ Add Provider**.
-2. Select the provider type from the dropdown.
-3. Enter the provider's **API Key** and, if needed, a custom **Base URL**.
-4. Optionally list **Allowed Models** (leave blank to allow all models from this provider).
-5. Click **Save**.
+1. Click **Providers** → **+ Add Provider**. The **Add Provider** form opens.
+2. Enter a **Name** (for example `openai`, `my-anthropic` or `llama-local`).
+3. Select the provider **Type** from the dropdown (the default is **OpenAI**).
+4. Enter the provider's **API Key** and, if needed, a custom **Base URL**. (The form shows no Base URL field for the OpenAI type.)
+5. Optionally list **Allowed Models**, comma-separated (leave blank to allow all models from this provider).
+6. Click **Add Provider**.
+
+![SecureLLM Add Provider form with the Name, Type (OpenAI), API Key and Allowed Models fields and the Cancel and Add Provider buttons](./media/securellm-add-provider.png)
 
 **Enabling / disabling a provider:**
 
@@ -80,10 +83,12 @@ The **Guardrails** tab lists each guardrail's **ID**, **Name**, **Provider** (th
 **Testing a guardrail:**
 
 1. Click the **Test Guardrails** tab.
-2. Select one or more guardrails to test.
-3. Paste sample text into the input box.
-4. Click **Run Test**.
+2. Under **Select Guardrails**, tick one or more guardrails to test (each shows its mode, such as `pre_call`), or click **All** or **None**.
+3. Paste sample text into **Test Input**.
+4. Click **▶ Run Test**.
 5. Results show whether the guardrail triggered, what action it took (block / mask / warn), and how long it took to run.
+
+![SecureLLM Test Guardrails tab: the Select Guardrails list with prompt-injection, content-filter and output-content-filter and their modes, the Test Input box and the Run Test button](./media/securellm-test-guardrails.png)
 
 ## Guardrail Logs
 
