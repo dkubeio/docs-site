@@ -44,8 +44,7 @@ The change applies in place, with no reinstall.
    be briefly unavailable.
 3. To rotate the **Container Registry Token** (used by the cluster to pull platform and application
    images; the card shows the **Registry** and **Username**), paste the new token in **New token**. It
-   updates the image pull secret, and managed namespaces pick it up from there. Pods stuck pulling images
-   retry with the new token.
+   updates the image pull secret.
 4. Click **Apply** to save the changes.
 
 ```{note}
