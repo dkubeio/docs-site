@@ -2,7 +2,7 @@
 
 ModelStudio supports three deployment paths:
 
-- **LLM models** — deployed as [KubeAI](https://github.com/kubeai-project/kubeai) `Model` CRDs, sourced from HuggingFace Hub
+- **LLM models** — deployed with [KubeAI](https://github.com/kubeai-project/kubeai) (as `Model` CRDs) or NVIDIA Dynamo, sourced from HuggingFace Hub
 - **ML models** — deployed as [KServe](https://kserve.github.io/website/) `InferenceService` CRDs, sourced from MLflow or HuggingFace Hub
 - **NVIDIA NIM models** — registered from the NVIDIA NGC catalog and deployed in-cluster on GPU nodes via the k8s-nim-operator
 
@@ -49,7 +49,8 @@ Clicking **Deploy** on a model card opens the deploy modal.
 | **Features** | Inference capabilities to enable | `TextGeneration`, `TextEmbedding`, `Reranking`, `TextToSpeech` |
 | **Resource Profile** | CPU/GPU/memory allocation preset | `cpu-4c-8g` |
 | **Replicas** | Number of serving pods | `1` |
-| **Scope** | `Private` (only you) or `Shared` (all workspace users) | `Private` |
+
+Deployed models are visible to all users.
 
 :::{admonition} Supported features in the current KubeAI release
 :class: note
@@ -68,8 +69,6 @@ You can deploy more than one model on a single GPU. To do this, set **GPU Memory
 |------------------|--------------|
 | `0` | The model takes the whole GPU, so only this one model can be deployed on it. |
 | A value, such as `15` | The model takes 15 GiB of the GPU's total memory. The rest of the GPU's memory is left for other models on the same GPU. |
-
-The form's hint reads: *"Leave 0 for standard GPU allocation. Set a value to enable HAMi memory-based GPU sharing."*
 
 ---
 
@@ -99,26 +98,15 @@ All your LLM deployments are visible on the **LLM Models** page.
 
 #### Edit a model
 
-Click the **Edit** (pencil) icon to update:
-- Resource profile
-- Replica count
+Click **Edit Resources** to change the resource profile and advanced settings.
+
+To change the replica count, click **Scale**.
 
 The update is applied via a `PATCH /api/models/{id}` call and takes effect immediately.
 
 #### Delete a model
 
 Click the **Delete** (trash) icon. The KubeAI CRD is removed and all pods are terminated. This action cannot be undone.
-
-#### Promote / demote scope
-
-Use the scope toggle button to move a model between **Private** and **Shared**:
-
-- **Promote to Shared** — the model becomes visible and usable by all workspace users
-- **Demote to Private** — the model is restricted back to your account
-
-:::{note}
-promoting renames the CRD from `{username}--{model-id}` to `shared--{model-id}`.
-:::
 
 #### Open in Playground
 
@@ -127,11 +115,6 @@ Click the **Playground** icon on any running model to jump directly to the infer
 ---
 
 ### LLM CRD naming convention
-
-| Scope | CRD Name Pattern | Example |
-|-------|-----------------|---------|
-| Private | `{username}--{model-id}` | `alice--qwen2-0-5b` |
-| Shared | `shared--{model-id}` | `shared--qwen2-0-5b` |
 
 Model IDs are sanitized to be Kubernetes-safe (lowercase alphanumeric and `-`, max 63 characters). Colons, slashes, underscores, and dots in the original HuggingFace model ID are converted to `-`.
 

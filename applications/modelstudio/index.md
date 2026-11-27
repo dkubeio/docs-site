@@ -1,6 +1,6 @@
 # ModelStudio
 
-ModelStudio is a web application for discovering, deploying, and running inference on AI models in the DKubeX platform. It supports three model tracks — large language models via [KubeAI](https://github.com/kubeai-project/kubeai), traditional machine-learning models via [KServe](https://kserve.github.io/website/), and production-optimized [NVIDIA NIM](https://docs.nvidia.com/nim/) microservices — all browsable, deployable, and testable from a single interface.
+ModelStudio is a web application for discovering, deploying, and running inference on AI models in the DKubeX platform. It supports three model tracks — large language models via [KubeAI](https://github.com/kubeai-project/kubeai) or NVIDIA Dynamo, traditional machine-learning models via [KServe](https://kserve.github.io/website/), and production-optimized [NVIDIA NIM](https://docs.nvidia.com/nim/) microservices — all browsable, deployable, and testable from a single interface.
 
 ## Key features
 
@@ -24,11 +24,11 @@ ModelStudio is a web application for discovering, deploying, and running inferen
 |---|---|
 | Dashboard | The landing page: a summary of your workspace — stats, deployed models, and an activity feed |
 | LLM Catalog | Search HuggingFace and deploy LLM models directly |
-| LLM Models | A table of the LLM models you have deployed (private), plus any models promoted to shared |
+| LLM Models | A table of the deployed LLM models |
 | Playground | A unified inference workbench for testing your deployed LLM models |
 | ML Registry | Browse and deploy ML models (non-LLM); only visible when KServe is enabled |
 | ML Models | A table of your deployed KServe InferenceServices; only visible when KServe is enabled |
-| Resource Profiles | Create, edit, and delete named resource configurations (CPU, memory, GPU, replicas) to load into the deploy forms |
+| Resource Profiles | Create, edit, and delete named resource configurations (CPU, memory, GPU) to load into the deploy forms |
 | Settings | Manage the NGC API keys needed for NIM models; only visible when NIM is enabled |
 
 ```{toctree}

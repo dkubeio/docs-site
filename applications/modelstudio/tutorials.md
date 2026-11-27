@@ -11,8 +11,7 @@ These end-to-end walkthroughs take you from the catalog to a running model for e
    - **Quantization** (e.g. `Q4_K_M` for smaller footprint)
    - **Resource Profile** (CPU or GPU tier)
    - **Replicas** (number of serving instances)
-   - **Scope** — `Private` (only you) or `Shared` (all workspace users)
-5. Click **Deploy**.
+5. Click **Deploy**. Deployed models are visible to all users.
 6. The model appears in **LLM Models** with status `Pending`, then progresses to `Running`.
 
 ![Deploy model form](./media/deploy-modal.png)

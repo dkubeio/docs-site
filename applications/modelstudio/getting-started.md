@@ -2,19 +2,19 @@
 
 ModelStudio is a web application for discovering, deploying, and running inference on AI models within the DKubeX platform. It supports three categories of models:
 
-- **LLM models** — large language models deployed via [KubeAI](https://github.com/kubeai-project/kubeai), sourced from [HuggingFace Hub](https://huggingface.co)
+- **LLM models** — large language models deployed with [KubeAI](https://github.com/kubeai-project/kubeai) or NVIDIA Dynamo, sourced from [HuggingFace Hub](https://huggingface.co)
 - **ML models** — traditional machine learning models (sklearn, XGBoost, PyTorch, etc.) deployed via [KServe](https://kserve.github.io/website/), sourced from an [MLflow](https://mlflow.org) registry or HuggingFace Hub
 - **NVIDIA NIM models** — production-optimized inference microservices from the NVIDIA NGC catalog, deployed in-cluster on GPU nodes via the k8s-nim-operator
 
 ## What you can do
 
 - **LLM Catalog** — Search HuggingFace LLM models and deploy them with one click
-- **LLM Models** — View, edit, promote, or delete your deployed LLM models
+- **LLM Models** — View, edit, or delete your deployed LLM models
 - **ML Registry** — Browse registered MLflow models or HuggingFace ML models and deploy them to KServe
 - **ML Models** — View and delete your deployed KServe InferenceServices
 - **NIM Catalog** — Discover NVIDIA NIM models and deploy them in-cluster on your GPU nodes
 - **Resource Profiles** — Create and manage reusable CPU/memory/GPU configurations for model deployments
-- **Settings** — Manage NGC API keys for NIM access
+- **Settings** — Manage NGC API keys (for NIM) and HuggingFace API keys
 - **Run Inference** — Chat with models, upload documents for RAG, test vision/embeddings/reranking/image-gen/speech features
 - **Track Activity** — See a log of all deploy/undeploy actions across your workspace
 
@@ -27,7 +27,7 @@ ModelStudio is a web application for discovering, deploying, and running inferen
 The landing page shows a summary of your workspace:
 
 - **Stats bar** — count of deployed models and recent activity
-- **Models by Type** — breakdown of deployed capabilities (Chat, Embeddings, Reranking, TTS)
+- **Models by Type** — breakdown of deployed capabilities (Chat, Embeddings, Reranking, Text-to-Speech)
 - **Model status table** — all deployed LLM models with their status, engine, features, scope, and resource profile; filterable by type, status, profile, owner, and replicas
 - **ML models tab** — (visible when KServe is enabled) same view for deployed ML InferenceServices
 - **Activity feed** — timestamped log of recent actions (deploys, deletes, scope changes)
@@ -67,7 +67,7 @@ Filtering by modality or task for unsupported model types (Vision, Image Generat
 
 ### LLM Models
 
-A table of all LLM models you have deployed (private) plus any models promoted to shared.
+A table of all deployed LLM models.
 
 **Columns:** Name · Engine · Status · Resource Profile · Replicas · Scope · Created At
 
@@ -76,7 +76,6 @@ A table of all LLM models you have deployed (private) plus any models promoted t
 |--------|-------------|
 | Edit | Change resource profile or replica count |
 | Delete | Remove the model deployment |
-| Promote / Demote | Move between private and shared scope |
 | Open Playground | Jump straight to inference for this model |
 
 Use the filter bar to narrow by type, status, profile, owner, or replicas.
@@ -134,7 +133,7 @@ A table of all your deployed KServe InferenceServices. Only visible when KServe 
 
 ### Resource Profiles
 
-Create, edit, and delete named resource configurations (CPU, memory, GPU, replicas) that can be loaded into the deploy forms as shortcuts.
+Create, edit, and delete named resource configurations (CPU, memory, GPU) that can be loaded into the deploy forms as shortcuts.
 
 :::{note}
 **Requires the database feature.** Resource Profiles are stored in the configured PostgreSQL database. If the database is not enabled, the page shows a banner with setup instructions.
@@ -144,7 +143,8 @@ Each profile captures:
 - CPU request and optional limit
 - Memory request and optional limit
 - Optional GPU type and count
-- Min and max replica counts
+- GPU node target (optional)
+- Tolerations
 
 Once created, profiles appear in a **"Load from Profile"** dropdown at the top of both the LLM deploy modal and the ML deploy modal. Selecting a profile pre-fills the resource fields — fields remain editable after loading.
 
@@ -154,7 +154,7 @@ Profiles are workspace-wide: all users can see, load, edit, and delete any profi
 
 ### Settings
 
-Manage configuration for platform integrations. Currently contains **NGC API Keys** — the credentials needed to access the NVIDIA NGC catalog and inference APIs for NIM models.
+Manage configuration for platform integrations. Contains **NGC API Keys** — the credentials needed to access the NVIDIA NGC catalog and inference APIs for NIM models — and **HuggingFace API Keys**.
 
 - **Add a key** — paste your NGC Personal API Key; it is stored securely and only shown as a masked hint (`nvapi-****xxxx`)
 - **Delete a key** — removes the saved credential; existing NIM registrations that reference it will stop working
