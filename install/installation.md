@@ -432,7 +432,7 @@ kubectl get node <node> -o jsonpath='{.status.capacity.nvidia\.com/gpumem}'
 ### AWS (EKS)
 
 - **EKS.** Set `cloudProvider=eks`.
-- **Create the `nvidia` RuntimeClass.** As on AKS, DKubeX needs a RuntimeClass named `nvidia`,
+- **Create the `nvidia` RuntimeClass.** DKubeX needs a RuntimeClass named `nvidia`,
   because HAMi adds it to every pod that requests a GPU. Check whether it exists:
 
   ```bash

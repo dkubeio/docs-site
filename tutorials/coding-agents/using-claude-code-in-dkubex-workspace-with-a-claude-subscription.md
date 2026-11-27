@@ -1,7 +1,7 @@
 # Using Claude Code in DKubeX Workspace with a Claude Subscription
 
-DKubeX Workspace ships with several coding agents built in — including **Claude Code**, **Codex**,
-**Copilot CLI**, **OpenCode**, **Antigravity**, and **Mistral Vibe**. This tutorial shows how
+DKubeX Workspace ships with nine coding agents built in: **Claude Code**, **Codex**,
+**Copilot CLI**, **OpenCode**, **Antigravity**, **Mistral Vibe**, **OpenClaw**, **Hermes**, and **Pi**. This tutorial shows how
 to run Claude Code in DKubeX Workspace against your own **Claude subscription** (Pro, Max, Team, or
 Enterprise), so the agent is billed through your Anthropic account rather than through a
 platform-served model.
