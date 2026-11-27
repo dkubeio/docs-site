@@ -6,7 +6,7 @@ Admin pages are only visible if your account has been granted admin access. Cont
 
 Admins see all four user pages (with organization-wide data) plus six additional pages: **Providers**, **Users**, **Guardrails**, **Guardrail Logs**, **Audit Logs**, and **Performance**.
 
-## Dashboard (Admin View)
+## Dashboard (admin view)
 
 Identical to the user dashboard, but all numbers reflect the **entire organization** — every user's requests, tokens, and costs. Use this to monitor overall AI spend and identify which teams or models drive the most usage.
 

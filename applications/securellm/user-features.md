@@ -51,7 +51,7 @@ The Models page lists every AI model available to you through SecureLLM.
 If an admin has restricted your access, you will only see the models and providers your organization has made available to you.
 :::
 
-## Usage (My Requests)
+## Usage (my requests)
 
 The Usage page shows your request history — everything you or your keys have sent to SecureLLM.
 
