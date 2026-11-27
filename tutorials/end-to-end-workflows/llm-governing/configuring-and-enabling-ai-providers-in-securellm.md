@@ -47,13 +47,13 @@ Examples of provider types:
 
 ### Step 2: Add a Provider
 
-1. Click **+ Add Provider**.
-2. Select the provider **Type**.
+1. Click **+ Add Provider**. The **Add Provider** form opens.
+2. Select the provider **Type** (the default is **OpenAI**).
 3. Enter required configuration details:
 
 - **API Key**  
-- **Base URL** (if applicable)  
-- **Name** (the provider name)  
+- **Base URL** (if applicable; the form shows no Base URL field for the OpenAI type)  
+- **Name** (the provider name, for example `openai`, `my-anthropic` or `llama-local`)  
 - Authentication settings: the form has no separate field for these; the API key above is the
   credential  
 
@@ -70,14 +70,14 @@ Base URL: https://api.example.com/v1
 
 ### Step 3: Configure Allowed Models
 
-Optionally restrict which models are exposed through this provider.
+Optionally restrict which models are exposed through this provider, in the **Allowed Models** field of
+the same **Add Provider** form (comma-separated; leave it empty to allow all models). Fill it in before
+you click **Add Provider**.
 
 Example:
 
 ```text
-gpt-4
-claude-sonnet
-embedding-model-v1
+gpt-4, claude-sonnet, embedding-model-v1
 ```
 
 You can:
@@ -103,8 +103,8 @@ Once enabled, SecureLLM can route requests to this provider.
 
 ### Step 5: Verify Model Availability
 
-1. Open **Models**.
-2. Search or filter by the provider.
+1. Open **Models** in the top menu.
+2. Type in **Search models…**, or pick the provider in the **All providers** filter.
 3. Verify configured models appear in the list.
 
 Confirm users can discover models from the provider.
@@ -180,7 +180,7 @@ Verify:
 
 - Provider is enabled  
 - Allowed models are configured correctly  
-- Model list was refreshed  
+- Model list was refreshed (**Refresh** on the Models page)  
 - User access restrictions are not blocking visibility  
 
 ---
