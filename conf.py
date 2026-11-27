@@ -87,6 +87,8 @@ html_logo = "_static/DKube_Icon_512x512.svg"
 html_theme_options = {
 	"github_url": "https://github.com/dkubeio/docs-site/",
 	"youtube_url": "https://www.youtube.com/@DKube_OC",
+	# Open every top-level sidebar section one level on every page; still collapsible.
+	"globaltoc_expand_depth": 1,
 }
 
 html_css_files = ["custom.css"]
