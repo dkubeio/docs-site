@@ -18,7 +18,7 @@ date.
 
 - [Helm Values Reference](../reference/helm-values.md): every value of the installer chart, with its default.
 - [Architecture & Specifications](../getting-started/architecture-and-specifications.md): the platform's subsystems.
-- [Administer DKubeX](../platform-guide/index.md): configure the platform and manage users, applications and licenses once it is installed.
+- [Platform Guide](../platform-guide/index.md): configure the platform and manage users, applications and licenses once it is installed.
 - [Troubleshooting](../reference/troubleshooting.md): every known problem in these docs, with a link to its fix.
 
 ```{toctree}
