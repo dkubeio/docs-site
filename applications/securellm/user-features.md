@@ -1,12 +1,12 @@
 # Core Features
 
-Once you log in, the sidebar shows four pages available to every user: **Dashboard**, **API Keys**, **Models**, and **Usage**.
+Once you log in, the top menu shows four pages available to every user: **Dashboard**, **API Keys**, **Models**, and **Usage**.
 
 ## Dashboard
 
 The Dashboard gives you a snapshot of your AI usage at a glance.
 
-![Admin Dashboard view](./media/screenshot-1.png)
+![SecureLLM Dashboard in the admin view: Total Requests, Input Tokens, Output Tokens and Total Cost cards above the By Provider and By Model tables](./media/screenshot-1.png)
 
 - **Total Requests** — how many AI calls you have made
 - **Input / Output Tokens** — a measure of how much text was sent and received (tokens ≈ words)
@@ -23,10 +23,10 @@ An API key is like a password that lets an application (a script, a tool, or an 
 
 **Creating a key:**
 
-1. Click **API Keys** in the sidebar.
-2. Click **Create Key**.
-3. Enter a descriptive name (e.g., `my-vscode-plugin` or `data-pipeline`).
-4. Click **Create**.
+1. Click **API Keys** in the top menu.
+2. Find the **Create New Key** card.
+3. Enter a descriptive name in **Key Name** (e.g., `my-vscode-plugin` or `data-pipeline`).
+4. Click **+ Create Key**.
 5. **Copy the key immediately** — it is only shown once. Store it somewhere safe (a password manager or `.env` file).
 
 **Revoking a key:**
@@ -53,11 +53,11 @@ If an admin has restricted your access, you will only see the models and provide
 
 ## Usage (my requests)
 
-The Usage page shows your request history — everything you or your keys have sent to SecureLLM.
+The **Usage** menu item opens the **Usage Logs** page, which shows your request history — everything you or your keys have sent to SecureLLM.
 
 ![Request Detail modal](./media/screenshot-2.png)
 
-- Use the **filters** at the top to narrow by provider, model, status, or API key name.
+- Use the **filters** at the top to narrow by provider, status, date and more, or type a model or API key name in **Search**.
 - Click any row to open the **Request Detail** panel, which shows:
   - The exact messages sent and the AI's response
   - Request status, cost, token counts, and latency

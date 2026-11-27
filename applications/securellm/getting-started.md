@@ -6,16 +6,16 @@ SecureLLM is your organization's secure gateway to AI — one central hub that a
 
 SecureLLM uses your company's single sign-on (SSO). Navigate to the app URL and you are logged in automatically using your existing credentials — no separate account or password needed.
 
-Once logged in, you will see a sidebar with four pages: **Dashboard**, **API Keys**, **Models**, and **Usage**. Administrators see additional pages — see [Administrator features](./admin-features.md).
+Once logged in, you will see a menu across the top of the page with four pages: **Dashboard**, **API Keys**, **Models**, and **Usage**. Administrators see additional pages, some of them under **More** — see [Administrator features](./admin-features.md).
 
 ## Creating your first API key
 
 An API key is like a password that lets an application (a script, a tool, or an IDE plugin) talk to SecureLLM on your behalf. You create keys here and paste them into whichever tool needs them.
 
-1. Click **API Keys** in the sidebar.
-2. Click **Create Key**.
-3. Enter a descriptive name (e.g., `my-vscode-plugin` or `data-pipeline`).
-4. Click **Create**.
+1. Click **API Keys** in the top menu.
+2. Find the **Create New Key** card.
+3. Enter a descriptive name in **Key Name** (e.g., `my-vscode-plugin` or `data-pipeline`).
+4. Click **+ Create Key**.
 5. **Copy the key immediately** — it is only shown once. Store it somewhere safe (a password manager or `.env` file).
 
 :::{tip}

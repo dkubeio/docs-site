@@ -10,13 +10,13 @@ SecureLLM is your organization's secure gateway to AI. Instead of everyone conne
 - **Model browser** — Search and filter every model available to you, and copy its identifier for use in your code.
 - **Usage tracking** — Review your request history with token counts, cost, latency, and any guardrail events.
 - **Guardrails** — Automatic safety filters for sensitive content, PII, and prompt-injection attempts (configured by admins).
-- **Administrator controls** — Manage providers, per-user access policies, guardrails, audit logs, and gateway performance.
+- **Administrator controls** — Manage providers, per-user access policies, guardrails, audit logs, gateway performance, and usage-log retention.
 
 ## Guides
 
 - [Getting started](./getting-started.md) — Log in and create your first API key.
 - [Core features](./user-features.md) — Dashboard, API Keys, Models, and Usage for everyday users.
-- [Administrator features](./admin-features.md) — Providers, Users, Guardrails, logs, and Performance.
+- [Administrator features](./admin-features.md) — Providers, User Policies, Guardrails, logs, Performance, and Settings.
 - [Workflows](./tutorials.md) — End-to-end walkthroughs for common setup tasks.
 
 ## At a glance
@@ -28,11 +28,12 @@ SecureLLM is your organization's secure gateway to AI. Instead of everyone conne
 | Models | Browse available models | Browse + manually refresh list |
 | Usage | Own request history | All users' request history |
 | Providers | — | Add / edit / enable / disable |
-| Users | — | Set per-user access policies |
+| User Policies | — | Set per-user access policies |
 | Guardrails | — | Configure, toggle, and test |
 | Guardrail Logs | — | View and filter |
 | Audit Logs | — | View and filter |
 | Performance | — | View gateway metrics |
+| Settings | — | Set usage-log retention |
 
 ```{toctree}
 :hidden:
