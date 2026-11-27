@@ -45,6 +45,7 @@ App tiles only appear while your workspace is **Running**. If **Apps** shows no 
 |---|---|
 | **JupyterLab** | Notebooks and interactive Python |
 | **VS Code** | code-server IDE in the browser |
+| **RStudio** | R IDE for statistics and data science |
 | **Terminal** | Interactive bash shell |
 | **FileBrowser** | Browse and manage your files |
 | **Claude Code** | Anthropic's agentic coding CLI |
@@ -55,7 +56,9 @@ App tiles only appear while your workspace is **Running**. If **Apps** shows no 
 | **Mistral Vibe** | Mistral's coding agent CLI |
 | **OpenClaw** | Multi-model agent gateway and web UI |
 | **Hermes** | Nous Research's agent |
+| **Unsloth Studio** | Fast LLM fine-tuning that uses less memory |
 | **Pi** | Minimal, extensible coding agent harness |
+| **TestForge** | Analyzes code quality and suggests AI-generated fixes that are checked by running tests |
 
 The nine coding agents can be pointed at your organization's models by picking a default model in your workspace settings, or left on their own sign-in so you can use a personal subscription — see [Working with AI agents](./working-with-agents.md).
 
