@@ -57,8 +57,9 @@ Enable the **prompt-injection** guardrail (type Prompt Injection) to identify at
 ### Step 3: Test the Guardrail
 
 1. Open the **Test Guardrails** tab.
-2. Select the guardrail you enabled.
-3. Paste sample test content.
+2. Under **Select Guardrails**, tick the guardrail you enabled (each shows its mode, such as
+   `pre_call`).
+3. Paste sample test content into **Test Input**.
 
 Example test prompt:
 
