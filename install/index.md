@@ -10,9 +10,9 @@ myst:
 This section is for the administrator who installs DKubeX on a Kubernetes cluster and keeps it up to
 date.
 
-- **[Installation](installation.md)**: install DKubeX on your cluster with Helm, the hardware it needs,
-  and how to [uninstall it](installation.md#uninstall-dkubex).
+- **[Installation](installation.md)**: install DKubeX on your cluster with Helm, and the hardware it needs.
 - **[Platform Upgrade](platform-upgrade.md)**: upgrade the DKubeX installer, and recover a stuck upgrade.
+- **[Uninstall DKubeX](uninstall.md)**: remove DKubeX from the cluster: the command, what the uninstall job removes, and what it keeps.
 
 ## Related pages
 
@@ -26,4 +26,5 @@ date.
 
 installation
 platform-upgrade
+uninstall
 ```
