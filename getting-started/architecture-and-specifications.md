@@ -22,8 +22,8 @@ The platform is organized into a few coordinated subsystems, all running on a si
   Kubernetes resource with a live status and access URL.
 - **Model & compute plane** — LLM/embedding serving (KubeAI) and classic-ML serving (KServe), backed by
   the MLflow model registry, with optional GPU acceleration.
-- **Data & storage** — the platform database, object storage, and shared NFS-backed storage for the
-  cluster and per-user volumes.
+- **Data & storage** — the platform database, object storage, and shared storage for the cluster and
+  per-user volumes (an NFS server or a StorageClass that supports `ReadWriteMany`).
 - **Observability & admin tooling** — cluster telemetry and the operational dashboards administrators
   use to run the platform.
 
@@ -34,7 +34,7 @@ DKubeX runs on a single Kubernetes cluster. The core platform is entirely CPU-ba
 GPUs if you intend to deploy and serve your own models on-premises.
 
 The minimum and recommended CPU, memory, storage and node counts, the extra resources for each user
-workspace, and the external NFS server are listed in one place:
+workspace, and the shared RWX storage are listed in one place:
 [Installation › Hardware requirements](../install/installation.md#hardware-requirements).
 Once your cluster meets them, follow the rest of [Installation](../install/installation.md)
 to deploy DKubeX.

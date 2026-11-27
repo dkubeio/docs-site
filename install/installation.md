@@ -29,7 +29,9 @@ single node.
 - **Per additional user workspace**, add **1 CPU core, 8 GB RAM, and 20 GB storage**.
 - **GPUs are optional and model-dependent.** The core platform runs on CPU only. GPUs are required
   only when you want to deploy and serve your own models on-premises.
-- An **external NFS server** is required in every configuration for shared and per-user storage, with **1 TB** of storage recommended.
+- **Shared storage with `ReadWriteMany` (RWX) access** is required in every configuration, for shared and
+  per-user storage: an **external NFS server** or a **StorageClass that supports RWX** (see
+  [Production recommendations](#production-recommendations)), with **1 TB** of storage recommended.
 ```
 
 ### Additional requirements
@@ -139,7 +141,7 @@ Run these commands in order.
    ```
 
 ````{note}
-For production, use an **external NFS server** for storage and an **external PostgreSQL** (see
+For production, use an **external NFS server** (or an RWX StorageClass) for storage and an **external PostgreSQL** (see
 [Production recommendations](#production-recommendations)). To install with both, first export their values:
 
 ```bash
