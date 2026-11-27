@@ -30,7 +30,7 @@ to the task it belongs to, so you also get the surrounding steps.
 | A user was assigned to an app, but it doesn't appear on their Apps page | [Application Management › Manage users and roles](../platform-guide/application-management.md#manage-users-and-roles-for-an-application) |
 | An App Store install shows Failed | [Application Management › Install an application](../platform-guide/application-management.md#install-an-application) |
 | The **Admin** link is missing from the header | [User Management › Edit a user](../platform-guide/user-management.md#edit-a-user) |
-| The SecureLLM admin pages (Providers, Users, Guardrails) are missing | [SecureLLM › Administrator features](../applications/securellm/admin-features.md#administrator-features) |
+| The SecureLLM admin pages (Providers, User Policies, Guardrails) are missing | [SecureLLM › Administrator features](../applications/securellm/admin-features.md#administrator-features) |
 
 ## Models (ModelStudio)
 
@@ -110,7 +110,7 @@ to the task it belongs to, so you also get the surrounding steps.
 | A guardrail does not trigger | [Guardrail policies › Guardrail does not trigger](../tutorials/end-to-end-workflows/llm-governing/testing-and-deploying-guardrail-policies-in-securellm.md#guardrail-does-not-trigger) |
 | A guardrail gives too many false positives | [Guardrail policies › Too many false positives](../tutorials/end-to-end-workflows/llm-governing/testing-and-deploying-guardrail-policies-in-securellm.md#too-many-false-positives) |
 | Legitimate requests are being blocked | [Guardrail policies › Legitimate requests blocked](../tutorials/end-to-end-workflows/llm-governing/testing-and-deploying-guardrail-policies-in-securellm.md#legitimate-requests-are-being-blocked) |
-| Requests fail with a `400` "budget exceeded" error | [SecureLLM › Administrator features › Users](../applications/securellm/admin-features.md#users) |
+| Requests fail with a `400` "budget exceeded" error | [SecureLLM › Administrator features › User Policies](../applications/securellm/admin-features.md#user-policies) |
 | An API key was leaked | [SecureLLM › Core features › API Keys](../applications/securellm/user-features.md#api-keys) |
 
 ## MLflow

@@ -41,7 +41,7 @@ Examples:
 ### Step 1: Open API Keys
 
 1. Log into SecureLLM.
-2. From the sidebar, select **API Keys**.
+2. From the top menu, select **API Keys**.
 3. Review existing keys or create a new one.
 
 ---
@@ -104,7 +104,7 @@ Verify:
 
 ### Step 5: Monitor Key Activity
 
-1. Open **Usage**.
+1. Open **Usage** in the top menu. The **Usage Logs** page opens.
 2. Type the API key name in **Search**. (There is no separate key filter.)
 3. Review:
 
@@ -160,7 +160,7 @@ Check:
 Verify:
 
 - Requests are actually routed through SecureLLM  
-- Correct API key filter is selected in Usage  
+- The correct API key name is typed in **Search** on the Usage Logs page  
 - Requests completed successfully  
 
 ---
