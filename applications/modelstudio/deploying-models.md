@@ -12,7 +12,7 @@ ModelStudio supports three deployment paths:
 
 ### Discovering LLM models
 
-Use the **LLM Catalog** page to search HuggingFace. Models are shown across four tabs:
+Use the **LLM Catalog** page. Its source tabs are **HuggingFace**, **NVIDIA NIM**, and **Local**; search HuggingFace by name or paste a HuggingFace URL / slug (`author/model`). Models are shown across four list tabs:
 
 - **Trending** — models gaining momentum
 - **Most Downloaded** — sorted by all-time download count
@@ -23,11 +23,11 @@ You can filter by:
 
 | Filter | Options |
 |--------|---------|
-| Task | Text Generation, Embeddings, Reranking, Text to Speech *(Speech Recognition and Image Generation — coming in future KubeAI releases)* |
-| Precision | GGUF (quantized), Safetensors, PyTorch |
-| Quantization | Q4_K_M, Q4_0, Q5_K_M, Q6_K, Q8_0, FP16, BF16 |
-| Input modality | Text, Image, Audio, Video, File |
-| Output modality | Text, Image, Audio, Embeddings, Video |
+| Task (**All Tasks**) | Text Generation, Embeddings, Reranking, Text to Speech *(Speech Recognition and Image Generation — coming in future KubeAI releases)* |
+| Format (**All Formats**) | GGUF (quantized), Safetensors, PyTorch |
+| Quantization (**All Quantizations**) | Q4_K_M, Q4_0, Q5_K_M, Q6_K, Q8_0, FP16, BF16 |
+| Input modality (**Input**) | Text, Image, Audio, Video, File |
+| Output modality (**Output**) | Text, Image, Audio, Embeddings, Video |
 
 ![LLM Catalog filters](./media/catalog-filters.png)
 
@@ -35,20 +35,27 @@ You can filter by:
 
 ### The LLM deploy form
 
-Clicking **Deploy** on a model card opens the deploy modal.
+Click a model card to open its side panel, then click **Deploy** to open the **Deploy Model** form. The form has two tabs, **Deploy** and **Advanced**, and its header shows the model you chose from the LLM Catalog (for example `Qwen/Qwen2.5-0.5B-Instruct`).
 
-![Deploy modal form](./media/deploy-modal.png)
+![The top of the Deploy Model form: Deployment Name, the Deployer choice (KubeAI, CPU or GPU · all engines; NVIDIA Dynamo, vLLM), and the Inference Engine choice (vLLM, OLlama, Infinity, FasterWhisper)](./media/deploy-modal.png)
 
 #### Fields
 
 | Field | Description | Example |
 |-------|-------------|---------|
-| **Model** | Pre-filled from the LLM Catalog card | `Qwen/Qwen2.5-0.5B-Instruct` |
-| **Quantization** | Weight precision level; lower = smaller, faster, slightly less accurate | `Q4_K_M` |
-| **Engine** | Inference runtime (auto-selected based on model type) | `OLlama`, `vLLM`, `Infinity`, `FasterWhisper` |
-| **Features** | Inference capabilities to enable | `TextGeneration`, `TextEmbedding`, `Reranking`, `TextToSpeech` |
-| **Resource Profile** | CPU/GPU/memory allocation preset | `cpu-4c-8g` |
-| **Replicas** | Number of serving pods | `1` |
+| **Deployment Name** | Name of the deployment. Leave it empty to use the name derived from the model. | `sulphur-3` |
+| **Deployer** | What serves the model: **KubeAI** (*CPU or GPU · all engines*) or **NVIDIA Dynamo** (*vLLM*) | `KubeAI` |
+| **Inference Engine** | Inference runtime (auto-selected based on model type): **vLLM** (*Safetensors · GPU required*), **OLlama** (*GGUF models via Ollama*), **Infinity** (*Embeddings & reranking*), or **FasterWhisper** (*Speech to text (Whisper)*) | `vLLM` |
+| **Context length** | Maximum context length in tokens. Each option shows an estimate of the VRAM it needs; the form also shows the size of the model weights. | `64K tokens · ~317.5 GiB VRAM` |
+| **Resources → Use GPU** | Run the model on a GPU | checked |
+| **Resources → Resource profile** | CPU/GPU/memory allocation profile (see [Resource profiles](#resource-profiles)) | `nvidia-gpu` |
+| **GPU Memory (GiB)** | Optional HAMi virtual GPU memory (see [Share a GPU between models](#share-a-gpu-between-models)) | `0` |
+| **Replicas → Min / Max** | Minimum and maximum number of serving pods | `1` / `1` |
+| **Model Type** | Inference capability to enable, available for the vLLM engine: **Text Generation**, **Text Embedding**, **Reranking**, **Vision (Image+Text)**, **Image Generation**, or **Text to Speech** | `Text Generation` |
+
+![The Resources part of the Deploy Model form: Context length with its VRAM estimate, Use GPU, the Resource profile list, and GPU Memory (GiB)](./media/deploy-form-resources.png)
+
+![The bottom of the Deploy Model form: GPU Memory (GiB) with its hints and per-GPU maxima, Replicas Min and Max, and the Model Type choices](./media/deploy-form-replicas-model-type.png)
 
 Deployed models are visible to all users.
 
@@ -59,7 +66,7 @@ Deployed models are visible to all users.
 
 #### Resource profiles
 
-Resource profiles are cluster-defined presets. The list is fetched dynamically from `/api/resource-profiles` based on the nodes available in your cluster. Contact your cluster admin to add custom profiles.
+The **Resource profile** list offers the bundled KubeAI profiles and your custom profiles from the **Resource Profiles** page. The list is fetched dynamically from `/api/resource-profiles` based on the nodes available in your cluster. The bundled profiles are read-only and admin-managed via Helm values; contact your cluster admin to change them.
 
 #### Share a GPU between models
 
@@ -69,6 +76,8 @@ You can deploy more than one model on a single GPU. To do this, set **GPU Memory
 |------------------|--------------|
 | `0` | The model takes the whole GPU, so only this one model can be deployed on it. |
 | A value, such as `15` | The model takes 15 GiB of the GPU's total memory. The rest of the GPU's memory is left for other models on the same GPU. |
+
+The form says: *Leave 0 for standard GPU allocation. Set a value to enable HAMi memory-based GPU sharing.* It also suggests a value for the chosen context length and lists the maximum memory of each GPU type.
 
 ---
 
@@ -88,29 +97,42 @@ Pending → Downloading → Starting → Running
 | `Running` | Model ready to serve requests |
 | `Failed` | Pod could not start — check cluster logs |
 
-Monitor progress in the **Dashboard** model table or the **LLM Models** page.
+Monitor progress in the **Dashboard** model table or the **LLM Deployments** page.
 
 ---
 
 ### Managing deployed LLM models
 
-All your LLM deployments are visible on the **LLM Models** page.
+All your LLM deployments are visible on the **LLM Deployments** page, with their source, deployer, engine, status, replicas, who deployed them, and when. Use the search box and the **Source** filter (**All**, **HF**, **NIM**) to narrow the list.
+
+#### The deployment detail page
+
+Open a deployment to see its detail page. The header shows the deployment's name, status, replicas ready, and engine, with a link back to **LLM Deployments**. The page has five tabs: **Overview**, **Config**, **Pods**, **Logs**, and **Events**.
+
+**Overview** shows:
+
+- **Endpoint URL** — `/modelstudio/api/inference/v1`. The page notes: *OpenAI-compatible API — use as `base_url` in any OpenAI SDK client.*
+- **Engine**, **Modality**, **Resources**, **Replicas**, **Owner**, and **Deployed at**
+
+The **Actions** menu (top right) has **Open in Playground**, **Edit Resources**, **Scale**, and **Delete**.
+
+![A deployment's detail page with the Actions menu open (Open in Playground, Edit Resources, Scale, Delete) above the Overview tab's Endpoint URL, Engine, Modality, Resources, Replicas, Owner and Deployed at](./media/deployment-detail-actions.png)
 
 #### Edit a model
 
-Click **Edit Resources** to change the resource profile and advanced settings.
+Click **Actions → Edit Resources** to change the resource profile and advanced settings.
 
-To change the replica count, click **Scale**.
+To change the replica count, click **Actions → Scale**.
 
 The update is applied via a `PATCH /api/models/{id}` call and takes effect immediately.
 
 #### Delete a model
 
-Click the **Delete** (trash) icon. The KubeAI CRD is removed and all pods are terminated. This action cannot be undone.
+Click **Actions → Delete**. The KubeAI CRD is removed and all pods are terminated. This action cannot be undone.
 
 #### Open in Playground
 
-Click the **Playground** icon on any running model to jump directly to the inference workbench with that model pre-selected.
+Click **Actions → Open in Playground** on any running model to jump directly to the inference workbench with that model pre-selected.
 
 ---
 
@@ -123,14 +145,14 @@ Model IDs are sanitized to be Kubernetes-safe (lowercase alphanumeric and `-`, m
 ## ML models (KServe)
 
 :::{note}
-ML model deployment requires KServe to be enabled in the platform. The **ML Registry** and **ML Models** pages are hidden when KServe is not available.
+ML model deployment requires KServe to be enabled in the platform. The **ML Registry** and **ML Deployments** pages are hidden when KServe is not available.
 :::
 
 ### Discovering ML models
 
 Use the **ML Registry** page. It has two tabs:
 
-- **MLflow** — lists registered models from your connected MLflow model registry. Each model shows its registered versions and lifecycle stages (`None`, `Staging`, `Production`, `Archived`). Requires MLflow to be configured in the platform. All MLflow model formats (sklearn, XGBoost, LightGBM, TensorFlow, PyTorch, ONNX, MLflow pyfunc, HuggingFace) are deployable.
+- **MLflow Registry** — lists registered models from your connected MLflow model registry. Each model shows its registered versions and lifecycle stages (`None`, `Staging`, `Production`, `Archived`). Requires MLflow to be configured in the platform. All MLflow model formats (sklearn, XGBoost, LightGBM, TensorFlow, PyTorch, ONNX, MLflow pyfunc, HuggingFace) are deployable.
 - **HuggingFace ML** — HuggingFace models filtered to ML-oriented task types. **Only text-based pipeline tasks are currently supported** by `kserve-huggingfaceserver`. Models with vision, audio, tabular, or multimodal pipeline tags show a **Coming Soon** badge and cannot be deployed yet.
 
   **Supported HuggingFace ML pipeline tasks:**
@@ -139,23 +161,28 @@ Use the **ML Registry** page. It has two tabs:
   **Coming Soon (not yet deployable):**
   `image-classification`, `object-detection`, `tabular-classification`, `tabular-regression`, `image-segmentation`, `audio-classification`, and other vision/audio/multimodal tasks
 
-Click **Deploy** on any supported model card to open the ML deploy form.
+Click **Deploy via KServe** on any supported model card to open the ML deploy form.
 
 ---
 
 ### The ML deploy form
 
+For a HuggingFace model the form is titled **Deploy ML Model** — *Deploy a HuggingFace ML model via KServe*.
+
+![The Deploy ML Model form for a HuggingFace model: Model Name, Storage URI with the hf:// prefix, Model Format fixed to huggingface, and the Resources section with CPU Request and Memory Request](./media/ml-deploy-form.png)
+
 #### Fields
 
 | Field | Description | Example |
 |-------|-------------|---------|
-| **Model Name** | Auto-filled from MLflow model name or HuggingFace model ID | `my-classifier` |
-| **Model Format** | Framework used to train the model | `sklearn`, `xgboost`, `lightgbm`, `tensorflow`, `pytorch`, `onnx`, `mlflow`, `huggingface` |
+| **Model Name** | Name used to identify the deployed model in the cluster; auto-filled from MLflow model name or HuggingFace model ID | `my-classifier` |
+| **Storage URI** | For HuggingFace models, the HuggingFace model ID with the `hf://` prefix | `hf://BAAI/bge-reranker-v2-m3` |
+| **Model Format** | Framework used to train the model; fixed to `huggingface` for HuggingFace models | `sklearn`, `xgboost`, `lightgbm`, `tensorflow`, `pytorch`, `onnx`, `mlflow`, `huggingface` |
 | **Source** | Where the model artifact lives | `mlflow`, `huggingface` |
 | **Min Replicas** | Minimum number of serving pods | `1` |
 | **Max Replicas** | Maximum pods for autoscaling | `3` |
-| **CPU Request / Limit** | Pod CPU allocation | `500m` / `2` |
-| **Memory Request / Limit** | Pod memory allocation | `512Mi` / `4Gi` |
+| **CPU Request / Limit** | Pod CPU allocation; the limit is optional | `500m` / `2` |
+| **Memory Request / Limit** | Pod memory allocation; the limit is optional | `512Mi` / `4Gi` |
 | **GPU** | Optional GPU resource key and count | `nvidia.com/gpu: 1` |
 
 ModelStudio automatically resolves the correct KServe runtime based on the model format:
@@ -194,13 +221,13 @@ Pending → Running
 | `Running` | Model loaded and ready to serve requests |
 | `Failed` | Pod could not start or model failed to load |
 
-Monitor progress in the **ML Models** table.
+Monitor progress in the **ML Deployments** table.
 
 ---
 
 ### Managing deployed ML models
 
-All your KServe deployments are visible on the **ML Models** page.
+All your KServe deployments are visible on the **ML Deployments** page.
 
 You can filter by format, source, status, and owner.
 
@@ -208,39 +235,30 @@ You can filter by format, source, status, and owner.
 
 Click the **Delete** icon. The KServe `InferenceService` CRD is removed. You can only delete models you own.
 
-:::{note}
-Shared ML models are visible to all workspace users but can only be deleted by the model owner.
-:::
-
 ---
 
 ### KServe InferenceService naming
 
-| Scope | Name Pattern | Example |
-|-------|-------------|---------|
-| Private | `ml-p-{model_name}-{user_hash8}` | `ml-p-myclassifier-a1b2c3d4` |
-| Shared | `ml-s-{model_name}-{user_hash8}` | `ml-s-myclassifier-a1b2c3d4` |
-
-Model names are truncated and sanitized to fit Kubernetes naming constraints. The 8-character user hash ensures uniqueness when multiple users deploy the same model name.
+Model names are truncated and sanitized to fit Kubernetes naming constraints.
 
 ---
 
 ## NVIDIA NIM models
 
 :::{note}
-NIM requires the NIM feature to be enabled in the platform. The **NIM** tab in Catalog and NGC API Keys in Settings are hidden when NIM is not available.
+NIM requires the NIM feature to be enabled in the platform. The **NVIDIA NIM** tab in the LLM Catalog is hidden when NIM is not available.
 :::
 
 ### Prerequisites
 
-- An [NGC Personal API Key](https://org.ngc.nvidia.com/setup/personal-keys) — add it in **Settings → NGC API Keys**
+- An [NGC Personal API Key](https://org.ngc.nvidia.com/setup/personal-keys) — add it as the **NVIDIA NIM** token in **Settings**
 - GPU-enabled nodes and the k8s-nim-operator installed by your cluster admin. Contact your admin to confirm availability.
 
 ---
 
 ### Discovering NIM models
 
-Go to the **Catalog** page and select the **NIM** tab. The NIM catalog shows models available from NVIDIA NGC, organized by category:
+Go to the **LLM Catalog** page and select the **NVIDIA NIM** tab. The NIM catalog shows models available from NVIDIA NGC, organized by category:
 
 | Category | Examples |
 |----------|---------|
@@ -267,7 +285,7 @@ Click **Register** on any NIM catalog card to open the registration form.
 | **Replicas** | Number of serving instances | `1` |
 | **Inference Engine** *(advanced)* | `auto` (vLLM for LLMs, operator picks for non-LLMs), `vllm`, or `tensorrt_llm` | `auto` |
 
-NIM inference runs on your cluster's GPU nodes. The NGC API Key saved in **Settings** is used for both NGC catalog metadata and the in-cluster image-pull secret. Click **Register** to create the registration.
+NIM inference runs on your cluster's GPU nodes. The NGC API Key saved as your **NVIDIA NIM** token in **Settings** is used for both NGC catalog metadata and the in-cluster image-pull secret. Click **Register** to create the registration.
 
 ---
 
@@ -297,7 +315,7 @@ TRT engine compilation happens on the first start and takes 2–5 minutes. Subse
 
 ### Managing registered NIM models
 
-All registered NIM models are shown in the **NIM Models** section of the **Dashboard** and on the **LLM Models** page.
+All registered NIM models are counted on the **Dashboard** (the **NIM MODELS** card and the **NVIDIA NIM** views) and listed on the **LLM Deployments** page (**Source** filter **NIM**).
 
 #### Available actions
 
@@ -321,4 +339,4 @@ Unregistering removes the inference deployment and cached model weights from the
 
 Registered NIM models are visible to all authenticated workspace users, but inference is only available once the deployment reaches Running status.
 
-There is no private/shared scope toggle for NIM models — all registered NIM models are workspace-wide.
+All registered NIM models are workspace-wide.

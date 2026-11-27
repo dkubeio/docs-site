@@ -6,15 +6,15 @@ These end-to-end walkthroughs take you from the catalog to a running model for e
 
 1. Go to the **LLM Catalog** page.
 2. Search for a model (e.g. `qwen2`).
-3. Click **Deploy** on a model card.
+3. Click a model card, then click **Deploy** in its side panel.
 4. In the deploy form, choose:
-   - **Quantization** (e.g. `Q4_K_M` for smaller footprint)
-   - **Resource Profile** (CPU or GPU tier)
-   - **Replicas** (number of serving instances)
+   - **Deployer** (**KubeAI** or **NVIDIA Dynamo**) and **Inference Engine**
+   - **Resource profile** under **Resources** (CPU or GPU tier)
+   - **Replicas** **Min** and **Max** (number of serving instances)
 5. Click **Deploy**. Deployed models are visible to all users.
-6. The model appears in **LLM Models** with status `Pending`, then progresses to `Running`.
+6. The model appears in **LLM Deployments** with status `Pending`, then progresses to `Running`.
 
-![Deploy model form](./media/deploy-modal.png)
+![The top of the Deploy Model form: Deployment Name, the Deployer choice (KubeAI or NVIDIA Dynamo), and the Inference Engine choice (vLLM, OLlama, Infinity, FasterWhisper)](./media/deploy-modal.png)
 
 :::{tip}
 Deploying takes a few minutes while the model image is pulled and pods start. Use the status column to track progress.
@@ -23,11 +23,11 @@ Deploying takes a few minutes while the model image is pulled and pods start. Us
 ## Deploying your first ML model
 
 1. Go to the **ML Registry** page.
-2. Select the **MLflow** tab (or **HuggingFace ML** for HuggingFace-sourced models).
-3. Click **Deploy** on a model.
+2. Select the **MLflow Registry** tab (or **HuggingFace ML** for HuggingFace-sourced models).
+3. Click **Deploy via KServe** on a model.
 4. In the ML deploy form, confirm or set the model format, resource requests, and replica counts.
 5. Click **Deploy**.
-6. The model appears in **ML Models** with status `Pending`, then transitions to `Running`.
+6. The model appears in **ML Deployments** with status `Pending`, then transitions to `Running`.
 
 ## Your first NVIDIA NIM model
 
@@ -35,9 +35,9 @@ Deploying takes a few minutes while the model image is pulled and pods start. Us
 Requires an NGC Personal API Key. Get one at [org.ngc.nvidia.com/setup/personal-keys](https://org.ngc.nvidia.com/setup/personal-keys).
 :::
 
-1. Go to **Settings → NGC API Keys** and click **Add Key**.
-2. Paste your NGC Personal API Key and give it a name. The key is saved securely and shown only as a masked hint.
-3. Go to the **Catalog** page and select the **NIM** tab.
+1. Go to **Settings** and click **Add** on the **NVIDIA NIM** row.
+2. Paste your NGC Personal API Key. The key is saved securely and shown only as a masked hint.
+3. Go to the **LLM Catalog** page and select the **NVIDIA NIM** tab.
 4. Browse or search for a model (e.g. `llama`).
 5. Click **Register** on a model card.
 6. In the registration form, set GPU count and replicas (defaults are usually fine). Model weights are downloaded to cluster storage on first registration — expect 15–30 min for LLM models.
