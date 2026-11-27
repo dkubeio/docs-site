@@ -1,4 +1,4 @@
-# Tutorials and how-to guides
+# Tutorials
 
 Hands-on, end-to-end guides for completing real tasks on DKubeX. Where the Applications section
 explains what each component does, the tutorials show you how to put those components together to

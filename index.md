@@ -50,7 +50,7 @@ Configuration, user and access management, the application catalog, workspaces, 
 User guides for Workspace, ModelStudio, MLflow, SecureLLM, RAGFlow, Langflow, and SRE.
 :::
 
-:::{grid-item-card} Tutorials and how-to guides
+:::{grid-item-card} Tutorials
 :link: tutorials/index
 :link-type: doc
 
@@ -64,7 +64,7 @@ End-to-end workflows across model management, LLM governance, RAG, and MLOps —
 The Helm values of the installer chart, and Troubleshooting: every known problem with a link to its fix.
 :::
 
-:::{grid-item-card} Release notes and support
+:::{grid-item-card} Versions and help
 :link: support/index
 :link-type: doc
 
