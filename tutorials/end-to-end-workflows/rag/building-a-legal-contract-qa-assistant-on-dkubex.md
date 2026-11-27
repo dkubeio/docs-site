@@ -39,7 +39,7 @@ good extraction and query quality.
 
 1. In **ModelStudio**, deploy a **chat** model (this example uses `qwen3-8b`).
 2. Deploy an **embedding** model the same way (this example uses `bge-m3`).
-3. Wait until both reach the **running** state under **LLM Models**.
+3. Wait until both reach the **running** state under **LLM Deployments**.
 
 For the full deployment walkthrough — creating a resource profile, choosing the inference engine,
 and setting deployment arguments — see

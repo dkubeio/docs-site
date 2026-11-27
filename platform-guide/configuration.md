@@ -5,6 +5,13 @@ tabs — **Auth & Certs, Storage, Services, Telemetry, Workspace, Credentials** 
 application charts from the built-in dkubeio repository) and the **Container Registry Token** (used by
 the cluster to pull platform and application images).
 
+```{figure} ../images/admin-config-auth.png
+:alt: The admin console Config page on the Auth & Certs tab — the tab bar (Auth & Certs, Storage, Services, Telemetry, Workspace, Credentials), the OAuth2 Proxy toggle, and the HTTPS / TLS Certificate section with Certificate (PEM) and Private Key (PEM) boxes, each with an Upload file button.
+:width: 100%
+
+**Config** → **Auth & Certs**.
+```
+
 :::{warning}
 Clicking **Apply** redeploys the affected components in the background. Applying an authentication
 change can affect every user's ability to sign in — confirm your values before applying, and apply

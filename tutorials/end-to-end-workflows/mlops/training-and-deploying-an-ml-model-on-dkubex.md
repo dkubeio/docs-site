@@ -175,7 +175,7 @@ Open the **ModelStudio** application.
 
 ## Step 6: Confirm the deployment
 
-In the top navigation bar, go to **ML Models**. The new deployment
+In the top navigation bar, go to **ML Deployments**. The new deployment
 `ins_model-v1` appears in the list. Wait until its status is **Ready** with **1/1 replicas**.
 
 ## Step 7: Run inference
