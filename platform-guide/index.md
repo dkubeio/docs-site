@@ -25,12 +25,21 @@ subsystems and requirements are in
 
 **Dashboard** is the console landing page. It is read-only and shows:
 
-- **Users** — total users and superusers.
-- **Deployments** — total, successful, failed, and last deployment date.
-- **Cluster Overview** — nodes (ready/total), pods (running/pending/failed), and per-node details.
-- **Platform Status** — each platform component (auth, cert-manager, clickstack, filebrowser, minio,
-  nfs, otel, prefect, redis, tls) shown as Enabled or Disabled.
-- **App Role Distribution** — admin/user counts per application.
+- **Cluster Overview** — Kubernetes cluster status: **Nodes** (ready/total), **Pods Running**, **Pods
+  Pending**, and **Pods Failed**.
+- **Resource Usage** — cluster-wide CPU, memory, and GPU usage. Usage history needs the ClickStack and
+  OpenTelemetry components; until they are on, the section reads "Usage history needs the ClickStack and
+  OpenTelemetry components. Enable them under Config → Telemetry." See
+  [Configuration](configuration.md#configure-other-components).
+- **Node Details** — capacity and status per cluster node: the node name, CPU, memory, and status (for
+  example **Ready**).
+
+```{figure} ../images/admin-dashboard.png
+:alt: The admin console Dashboard — Cluster Overview cards for Nodes (1/1 ready), Pods Running, Pods Pending and Pods Failed; Resource Usage with the note that usage history needs the ClickStack and OpenTelemetry components; and Node Details listing one node with its CPU, memory and Ready status.
+:width: 100%
+
+The admin dashboard.
+```
 
 ```{toctree}
 :hidden:

@@ -29,9 +29,9 @@ deploy a small language model from the LLM Catalog.
 1. Go to the **LLM Catalog**.
 2. Browse the **Trending** or **Most Downloaded** tabs, or search HuggingFace for a small
    text-generation model (a compact instruct model is a good first choice).
-3. On the model card, click **Deploy** to open the deployment form.
+3. Click the model card, then click **Deploy** in its side panel to open the deployment form.
 4. Choose a **resource profile** that fits the model, then confirm the deployment.
-5. Watch the model in **LLM Models** — it moves through its status states until it is **Running**.
+5. Watch the model in **LLM Deployments** — it moves through its status states until it is **Running**.
 
 :::{tip}
 Start with a small model the first time. Larger models need more memory or a GPU node, and take
