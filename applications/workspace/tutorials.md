@@ -90,9 +90,9 @@ Copy the whole line, starting `ssh-ed25519` and ending with your comment. That i
 
 1. Go to **Settings** → **SSH access** and note the command, host, port and username. Each field has a copy button.
 
-   ![Settings → SSH access, showing the connection command, host, port and username](./media/settings-ssh-access.png)
+   ![Settings → SSH access, showing the connection command, host, port and username, each with a copy button, and the note on adding your public key from the Terminal app](./media/settings-ssh-access.png)
 
-2. Open the **Terminal** app and paste your public key into your home directory:
+2. Open the **Terminal** app and append your public key to `~/.ssh/authorized_keys` in your home directory (`/home/<user>/.ssh/authorized_keys`):
 
    ```bash
    echo "ssh-ed25519 AAAA... you@laptop" >> ~/.ssh/authorized_keys

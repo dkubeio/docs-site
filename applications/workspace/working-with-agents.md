@@ -25,7 +25,7 @@ You can also run the agents from a shell — open the **Terminal** app and run `
 Set a default model and every agent is configured against your organization's model gateway automatically:
 
 1. Go to **Settings** → **Workspace**.
-2. Under **Default model**, pick one of the models available to you.
+2. Under **Default model**, pick one of the models available to your key.
 3. Click **Apply and restart**.
 
 ![The Default model picker open, listing None and the models available to your key](./media/settings-default-model.png)
@@ -44,7 +44,7 @@ If you have your own Claude, ChatGPT or other subscription, set **Default model*
 2. Open **Default model** and choose **None**.
 3. Click **Apply and restart**.
 
-![Settings → Workspace with Default model set to None](./media/settings-workspace.png)
+![Settings → Workspace: the Default model picker (shown here set to a platform model; choose None from the same list), Environment variables, and the Apply and restart button](./media/settings-workspace.png)
 
 Two things to know:
 

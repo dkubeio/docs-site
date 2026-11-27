@@ -31,7 +31,7 @@ Once the workspace is **Running**, the apps inside it appear as individual tiles
 2. Click the tile for the app you want — for example **JupyterLab**.
 3. The app opens inside DKubeX. The first time you open it, it takes a few seconds to start and shows a loading screen; after that it opens immediately.
 
-![The Apps page, where the workspace's sixteen apps appear as tiles alongside the other applications you have access to](./media/workspace-apps.png)
+![The Apps page filtered by the Workspace chip, showing the workspace's sixteen apps as tiles: JupyterLab, VS Code, RStudio, Terminal, FileBrowser, Claude Code, OpenCode, Antigravity, Codex, Copilot CLI, Mistral Vibe, OpenClaw, Hermes, Unsloth Studio, Pi and TestForge](./media/workspace-apps.png)
 
 Each app keeps running while you switch between others, so you can move between JupyterLab, a terminal and an agent without losing your place.
 

@@ -31,7 +31,7 @@ If your workspace is **Stopped** and you need it running again, ask your adminis
 
 Administrators manage every workspace from the admin console, where they can see its status and resources and start or stop it:
 
-![The admin console's Workspaces table, listing each user's workspace with its status and resources](./media/admin-workspaces.png)
+![The admin console's Workspaces page: Total Workspaces, Running, Stopped and Failed counts above a searchable table of each user's workspace with its status, resources and version](./media/admin-workspaces.png)
 
 ## What persists
 

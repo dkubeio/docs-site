@@ -6,7 +6,7 @@ Once your workspace is **Running**, its apps appear in **Apps**, and you can wor
 
 Your workspace ships sixteen apps. Each one appears as its own tile in **Apps** while the workspace is running.
 
-![The Apps page, where the workspace's sixteen apps appear as tiles alongside the other applications you have access to](./media/workspace-apps.png)
+![The Apps page filtered by the Workspace chip, showing the workspace's sixteen apps as tiles: JupyterLab, VS Code, RStudio, Terminal, FileBrowser, Claude Code, OpenCode, Antigravity, Codex, Copilot CLI, Mistral Vibe, OpenClaw, Hermes, Unsloth Studio, Pi and TestForge](./media/workspace-apps.png)
 
 | App | What it is |
 |---|---|
@@ -72,7 +72,7 @@ This works for any port you have listening, with no configuration. Two caveats:
 You can connect to your workspace from your own terminal or from an IDE's remote-development feature.
 
 1. Go to **Settings** → **SSH access**. It shows a ready-made **command**, plus the **host**, **port** and **username** individually.
-2. Add your own public key. Open the **Terminal** app and append it to `~/.ssh/authorized_keys` in your home directory:
+2. Add your own public key. Open the **Terminal** app and append it to `~/.ssh/authorized_keys` in your home directory (`/home/<user>/.ssh/authorized_keys`):
 
    ```bash
    echo "ssh-ed25519 AAAA... you@laptop" >> ~/.ssh/authorized_keys
@@ -80,7 +80,7 @@ You can connect to your workspace from your own terminal or from an IDE's remote
 
 3. Connect using the command shown on the settings page.
 
-![Settings → SSH access, showing the connection command, host, port and username](./media/settings-ssh-access.png)
+![Settings → SSH access, showing the connection command, host, port and username, each with a copy button, and the note on adding your public key from the Terminal app](./media/settings-ssh-access.png)
 
 Access is by SSH key only — there is no password login. Because `~/.ssh/authorized_keys` is in your home directory, your key persists across restarts.
 
@@ -90,9 +90,11 @@ If **Settings** → **SSH access** says SSH is not available, make sure your wor
 
 ## Environment variables
 
-To set environment variables for your workspace, go to **Settings** → **Workspace** → **Environment variables**, add name/value pairs, and click **Apply and restart**.
+Environment variables are injected into your workspace pod. To set them, go to **Settings** → **Workspace** → **Environment variables**, click **Add variable** for each name/value pair, and click **Apply and restart**.
 
-Names are upper-cased automatically. Applying **restarts your workspace**, so save your work first.
+Names are upper-cased automatically. Changes to the default model or environment variables only take effect once applied, and applying **restarts your workspace**, so save your work first.
+
+![Settings → Workspace: the Default model picker set to a platform model, Environment variables with an Add variable button, and the Apply and restart button](./media/settings-workspace.png)
 
 A few names are reserved by the workspace and rejected: `HOME`, `UUID`, `WORKSPACE_NAME`, `USERNAME`, `WORKSPACE_PUBLIC_PREFIX`, `WORKSPACE_SYSOVERLAY_DIR`, `DEFAULT_MODEL`, `SECURELLM_API_KEY`, and the `MLFLOW_*` variables.
 
