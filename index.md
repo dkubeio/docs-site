@@ -16,7 +16,7 @@ lifecycle, from training to governed inference, on their own infrastructure.
 
 ## Where to start
 
-Administrators start with **Install and upgrade**, then **Administer DKubeX**. Once DKubeX is running and
+Administrators start with **Install and upgrade**, then the **Platform Guide**. Once DKubeX is running and
 an administrator has given you access, start with the **Quickstart** under **Get started**.
 
 ::::{grid} 1 1 2 2
@@ -36,21 +36,21 @@ What DKubeX is and how it fits together, the Quickstart to run your first model,
 For administrators: install DKubeX on your cluster with Helm, the hardware it needs, upgrade, and uninstall.
 :::
 
-:::{grid-item-card} Administer DKubeX
+:::{grid-item-card} Platform Guide
 :link: platform-guide/index
 :link-type: doc
 
 Configuration, user and access management, the application catalog, workspaces, and licensing.
 :::
 
-:::{grid-item-card} Use DKubeX
+:::{grid-item-card} Applications
 :link: applications/index
 :link-type: doc
 
 User guides for Workspace, ModelStudio, MLflow, SecureLLM, RAGFlow, Langflow, and SRE.
 :::
 
-:::{grid-item-card} Tutorials and how-to guides
+:::{grid-item-card} Tutorials
 :link: tutorials/index
 :link-type: doc
 
@@ -64,7 +64,7 @@ End-to-end workflows across model management, LLM governance, RAG, and MLOps —
 The Helm values of the installer chart, and Troubleshooting: every known problem with a link to its fix.
 :::
 
-:::{grid-item-card} Release notes and support
+:::{grid-item-card} Versions and help
 :link: support/index
 :link-type: doc
 

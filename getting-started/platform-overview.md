@@ -59,5 +59,5 @@ DKubeX covers the full path from training to governed inference:
 
 - **[Installation](../install/installation.md)** — stand up DKubeX on your cluster.
 - **[Quickstart](quickstart.md)** — deploy and chat with a model in minutes.
-- **[Administer DKubeX](../platform-guide/index.md)** — access management, the catalog, and licensing.
+- **[Platform Guide](../platform-guide/index.md)** — access management, the catalog, and licensing.
 - **[Architecture & Specifications](architecture-and-specifications.md)** — the platform's subsystems and requirements.

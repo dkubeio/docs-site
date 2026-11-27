@@ -1,6 +1,6 @@
-# Administer DKubeX
+# Platform Guide
 
-This section covers administering DKubeX itself — the control plane underneath every
+The Platform Guide covers administering DKubeX itself — the control plane underneath every
 application. All the tasks here are performed from the **admin console**, which an administrator opens
 from the **Admin** link in the top-right header (`/admin/dashboard`).
 
