@@ -24,7 +24,7 @@ Before you begin, ensure:
 
 - You have administrator access in SecureLLM  
 - At least one provider is configured  
-- Guardrails are available in the SecureLLM admin menu  
+- **Guardrails** appears in the SecureLLM top menu  
 - You have sample prompt content available for testing  
 
 ---
@@ -34,7 +34,7 @@ Before you begin, ensure:
 ### Step 1: Open Guardrails
 
 1. Log into SecureLLM.
-2. From the sidebar, select **Guardrails**.
+2. From the top menu, select **Guardrails**.
 3. Review available guardrail types:
    - Content Filter  
    - Prompt Injection  
@@ -44,13 +44,13 @@ Before you begin, ensure:
 
 ### Step 2: Enable a Guardrail
 
-1. Select a guardrail to configure.
-2. Use the toggle to enable it.
+1. Select a guardrail to configure on the **Guardrails** tab.
+2. Use the **Enabled** toggle in its row to enable it.
 3. Save or apply the policy if prompted.
 
 Example:
 
-Enable **Prompt Injection Detection** to identify attempts to override system instructions.
+Enable the **prompt-injection** guardrail (type Prompt Injection) to identify attempts to override system instructions.
 
 ---
 
@@ -94,7 +94,8 @@ Once validated:
 
 1. Keep the guardrail enabled.
 2. Confirm it applies to live requests: edit the guardrail and turn on **Always On**. A guardrail that
-   is enabled but not Always On runs only on requests that ask for it.
+   is enabled but not Always On runs only on requests that ask for it. The **Default On** column on
+   the Guardrails tab shows **Yes** for a guardrail that is Always On.
 3. New requests routed through SecureLLM are now inspected by the policy.
 
 ---

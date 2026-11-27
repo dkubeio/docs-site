@@ -40,8 +40,8 @@ Examples of provider types:
 ### Step 1: Open Providers
 
 1. Log into SecureLLM.
-2. From the sidebar, select **Providers**.
-3. Review configured providers or add a new one.
+2. From the top menu, select **Providers**.
+3. Review the **Configured Providers** table or add a new one.
 
 ---
 
@@ -92,8 +92,8 @@ Save configuration changes.
 
 ### Step 4: Enable the Provider
 
-1. Locate the provider in the Providers page.
-2. Use the toggle switch to enable it. A new provider is enabled as soon as it is added, so this step
+1. Locate the provider in the **Configured Providers** table on the Providers page.
+2. Use the **Enabled** toggle in its row to enable it. A new provider is enabled as soon as it is added, so this step
    is needed only if it was turned off.
 3. Confirm the provider is active.
 
@@ -130,7 +130,7 @@ Providers can be enabled or disabled without deleting configuration.
 
 ### Disable a Provider
 
-Use the provider toggle to temporarily stop routing requests.
+Use the provider's **Enabled** toggle to temporarily stop routing requests.
 
 Common reasons:
 
